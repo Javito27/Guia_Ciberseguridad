@@ -1,0 +1,32 @@
+Es una herramienta de hacking ético usada para interceptar, analizar y manipular tráfico de red en una red local (LAN).
+
+Se usa sobre todo para hacer ataques Man-in-the-Middle (MITM).
+
+Ataques típicos con Ettercap
+
+    - ARP Spoofing
+    - MITM
+    - Sniffing de tráfico
+    - SSL stripping (si la web no está bien protegida)
+    - DNS spoofing
+    - Robo de cookies
+
+Con Ettercap se puede:
+
+    - Capturar tráfico de otros equipos
+    - Suplantar dispositivos (MAC / ARP)
+    - Redirigir comunicaciones
+    - Modificar paquetes en tiempo real
+    - Robar credenciales si no hay cifrado
+
+Cómo funciona (Esto ocurre en capa 2 (frames / ARP)).
+
+    El ataque más típico con Ettercap es ARP poisoning:
+
+    1. La víctima cree que el atacante es el router
+    2. El router cree que el atacante es la víctima
+    3. Todo el tráfico pasa por el atacante
+    4. El atacante:
+        - observa
+        - modifica
+        - redirige datos

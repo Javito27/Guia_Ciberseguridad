@@ -1,0 +1,98 @@
+{
+    "21": {
+        "titulo": "FTP 21/TCP"
+    },
+    "22": {
+        "titulo": "Secure Shell - SSH 22/TCP"
+    },
+    "23": {
+        "titulo": "Telnet 23/TCP"
+    },
+    "25": {
+        "titulo": "SMTP 25/TCP"
+    },
+    "53": {
+        "titulo": "DNS 53/TCP/UDP"
+    },
+    "69": {
+        "titulo": "TFTP 69/UDP"
+    },
+    "80": {
+        "titulo": "HTTP 80/TCP"
+    },
+    "88": {
+        "titulo": "Kerberos 88/TCP/UDP"
+    },
+    "135": {
+        "titulo": "RPC 135/TCP"
+    },
+    "139": {
+        "titulo": "NetBIOS 139/TCP"
+    },
+    "161": {
+        "titulo": "SNMP 161/UDP"
+    },
+    "389": {
+        "titulo": "LDAP 389/TCP"
+    },
+    "443": {
+        "titulo": "HTTPS 443/TCP"
+    },
+    "445": {
+        "titulo": "SMB 445/TCP"
+    },
+    "465": {
+        "titulo": "SMTPS 465/TCP"
+    },
+    "587": {
+        "titulo": "SMTP Submission 587/TCP"
+    },
+    "636": {
+        "titulo": "LDAPS 636/TCP"
+    },
+    "873": {
+        "titulo": "rsync 873/TCP"
+    },
+    "1433": {
+        "titulo": "MS SQL Server 1433/TCP"
+    },
+    "2525": {
+        "titulo": "SMTP alternativo 2525/TCP"
+    },
+    "3268": {
+        "titulo": "LDAP GC 3268/TCP"
+    },
+    "3269": {
+        "titulo": "LDAP GC SSL 3269/TCP"
+    },
+    "3306": {
+        "titulo": "MySQL 3306/TCP "
+    },
+    "3389": {
+        "titulo": "RDP 3389/TCP"
+    },
+    "5432": {
+        "titulo": "PostgreSQL 5432/TCP"
+    },
+    "5985": {
+        "titulo": "WinRM 5985/5986 TCP"
+    },
+    "6379": {
+        "titulo": "Redis 6379/TCP"
+    },
+    "8080": {
+        "titulo": "HTTP alternativo 8080/TCP"
+    },
+    "8443": {
+        "titulo": "HTTPS alternativo 8443/TCP "
+    },
+    "8500": {
+        "titulo": "8500/TCP (verificar servicio)"
+    },
+    "27017": {
+        "titulo": "MongoDB 27017-27018/TCP"
+    },
+    "61616": {
+        "titulo": "ActiveMQ 61616/TCP "
+    }
+}

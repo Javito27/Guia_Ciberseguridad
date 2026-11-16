@@ -1,0 +1,54 @@
+WPScan es una herramienta de seguridad enfocada en WordPress.
+
+Está escrita en Ruby y se utiliza para escanear sitios WordPress en busca de vulnerabilidades conocidas.
+
+¿Para qué se usa?
+
+    > Detectar versiones de WordPress y plugins activos.
+    > Encontrar temas instalados y si son vulnerables.
+    > Detectar usuarios de WordPress.
+    > Buscar archivos de configuración sensibles.
+    > Comprobar vulnerabilidades conocidas usando la base de datos de WPScan.
+    
+    Es muy usada en pentesting, auditorías de seguridad y bug bounty de sitios WordPress.
+
+Instalación
+
+    sudo gem install wpscan
+	
+Sintaxis básica
+
+    wpscan --url http://objetivo.com [opciones]
+
+Opciones más usadas con WPScan
+
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |  Opción                |  Descripción                                                                                                   |  Ejemplo de Uso                                                 |
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |  --enumerate           |  Enumerar elementos específicos:                                                                               |  wpscan --url http://ejemplo.com --enumerate u,p,t              |
+    |  u                     |  Usuarios                                                                                                      |                                                                 |
+    |  p                     |  Plugins                                                                                                       |                                                                 |
+    |  t                     |  Temas                                                                                                         |                                                                 |
+    |  vp                    |  Plugins vulnerables                                                                                           |                                                                 |
+    |  vt                    |  Temas vulnerables                                                                                             |                                                                 |
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |  --api-token           |  Token para acceder a la base de datos de vulnerabilidades de WPScan (recomendado para resultados completos)   |  wpscan --url http://ejemplo.com --api-token TU_TOKEN           |
+    |  --user-agent          |  Cambiar User-Agent (útil para evadir filtros)                                                                 |  wpscan --url http://ejemplo.com --user-agent "Mozilla/5.0"     |
+    |  --proxy               |  Usar proxy (ej: Burp Suite, Zap)                                                                              |  wpscan --url http://ejemplo.com --proxy http://127.0.0.1:8080  |
+    |  --passwords           |  Lista de contraseñas para ataques de fuerza bruta en usuarios encontrados                                     |  wpscan --url http://ejemplo.com --passwords passwords.txt      |
+    |  --plugins-detection   |  Método de detección de plugins (passive, mixed, aggressive)                                                   |                                                                 |
+    |  --disable-tls-checks  |  Desactivar verificación TLS/SSL si hay problemas con HTTPS                                                    |                                                                 |
+    |  -o                    |  Guardar resultados en un archivo                                                                              |  wpscan --url http://ejemplo.com -o resultados.txt              |
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Ejemplo completo
+
+    wpscan --url http://ejemplo.com --enumerate u,p,vt --api-token TU_TOKEN --proxy http://127.0.0.1:8080 -o reporte.txt
+
+    Esto hará:
+
+        > Escanear el sitio WordPress ejemplo.com
+        > Enumerar usuarios, plugins y temas vulnerables
+        > Usar la base de datos de WPScan para detectar vulnerabilidades conocidas
+        > Pasar el tráfico por el proxy
+        > Guardar el reporte en reporte.txt

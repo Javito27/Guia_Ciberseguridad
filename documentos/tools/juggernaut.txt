@@ -1,0 +1,51 @@
+Juggernaut es una herramienta histórica de seguridad de redes usada para el secuestramiento de sesiones TCP (session hijacking). Fue una de las primeras herramientas en su 
+categoría y se ejecuta en sistemas Linux desde la terminal. Solo se encontró documentación en contextos históricos y técnicos de seguridad clásica.
+
+Más detalles:
+
+    > Permite observar todo el tráfico de red o centrarse en tokens específicos (como “login”) para capturar contraseñas u otros datos sensibles que se transmiten en una sesión.
+    > Funciona listando las conexiones TCP activas, analizando las sesiones en curso, y posibilitándote intervenirlas o reiniciarlas.
+
+
+¿Para qué se usa Juggernaut?
+
+    ---------------------------------------------------------------------------------------------------------------------
+    |  Actor                          |  Uso principal                                                                  |
+    ---------------------------------------------------------------------------------------------------------------------
+    |  Pentesters / Atacantes         |  Capturar credenciales, secuestrar sesiones TCP o analizar tráfico en vivo.     |
+    |  Defensores / Administradores   |  Detectar sesiones activas sospechosas, realizar análisis de seguridad de red.  |
+    ---------------------------------------------------------------------------------------------------------------------
+
+    Esencialmente, permite tanto intervenir comunicaciones como monitorear sesiones para analizar posibles brechas de seguridad o actividades maliciosas.
+
+
+¿Opciones o comandos disponibles?
+
+    La documentación que encontré no incluye comandos detallados como --help o parámetros específicos, ya que los detalles están en fuentes técnicas antiguas, como en Phrack Magazine de 1997.
+
+    Sin embargo, basándonos en su funcionamiento típico, se espera algo así:
+
+        > Instalación:
+
+            tar zxvf juggernaut-1.2.tar.gz
+            cd juggernaut-1.2
+            make
+
+        > Uso (típico):
+
+            juggernaut [opciones]
+
+            Donde podrías especificar:
+
+                - Monitorización general de tráfico
+                - Filtrar por palabras clave
+                - Ejecutar acciones desde una terminal en vivo para intervenir conexiones
+
+    Pero, repito, estos son supuestos a partir del comportamiento común de herramientas similares, no comandos oficiales.
+
+
+En resumen
+
+    > Juggernaut es una herramienta clásica de sicurezza, enfocada en el secuestro de sesiones TCP en Linux.
+    > Puede ser útil tanto ofensiva como defensivamente, para capturar o monitorear sesiones de red.
+    > La información accesible hoy es limitada y más bien histórica; los comandos exactos no están documentados ampliamente en fuentes actuales.

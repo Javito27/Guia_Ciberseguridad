@@ -1,0 +1,42 @@
+En informática y ciberseguridad, x64dbg es un depurador (debugger) de código para sistemas Windows, diseñado principalmente para análisis y reversión de software.
+
+1. Qué es
+
+	> x64dbg es un programa que permite ejecutar otro programa paso a paso, inspeccionar cómo funciona internamente y modificar su comportamiento en tiempo real.
+	> Está pensado para arquitecturas de 32 bits (x86) y 64 bits (x64), de ahí su nombre.
+
+2. Para qué sirve
+
+	Principalmente se usa en ciberseguridad, ingeniería inversa y análisis de malware:
+
+		1. Depuración de software:
+
+			> Permite a los desarrolladores encontrar errores o comportamientos inesperados en su código.
+
+		2. Análisis de malware:
+
+			> Los analistas pueden ejecutar un programa sospechoso paso a paso sin que haga daño al sistema, para entender qué hace internamente.
+
+		3. Ingeniería inversa:
+
+			> Ayuda a descubrir cómo funciona un programa cuando no se tiene acceso al código fuente, por ejemplo para:
+
+				> Encontrar vulnerabilidades.
+				> Crear parches o crackers (en contextos legales, solo con fines educativos o de seguridad).
+
+		4. Educación en seguridad informática:
+			
+			> Permite estudiar cómo se ejecuta el código a nivel de ensamblador y cómo interactúa con el sistema operativo.
+
+3. Funcionalidades principales
+
+	> Breakpoints: detener la ejecución en un punto específico.
+	> Step-by-step execution: ejecutar instrucción por instrucción.
+	> Visualización de registros y memoria: ver el estado interno del CPU y la memoria.
+	> Análisis de llamadas a funciones: ver qué funciones se llaman y con qué parámetros.
+	> Plugins y scripts: para automatizar análisis o añadir funciones.
+
+Ejemplo práctico:
+
+	Si un malware intenta enviar datos a Internet, x64dbg permite detener la ejecución justo antes de esa acción y ver qué datos envía y a qué servidor, sin que el malware realmente se ejecute 
+	en tu sistema de manera dañina.

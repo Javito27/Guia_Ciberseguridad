@@ -1,0 +1,33 @@
+En informática y ciberseguridad, el término PID generalmente significa Process ID (Identificador de Proceso). Es un número único que el sistema operativo asigna a cada proceso en ejecución para poder identificarlo 
+y gestionarlo.
+
+Para qué sirve el PID:
+
+	1. Gestión de procesos:
+	
+		> Permite al sistema operativo o al administrador saber qué procesos están activos y controlarlos (detenerlos, pausarlos, reiniciarlos, etc.).
+
+	2. Monitorización y análisis:
+	
+		> Herramientas de seguridad y monitoreo (como antivirus o sistemas de detección de intrusos) usan el PID para rastrear el comportamiento de procesos específicos y detectar actividades sospechosas.
+
+	3. Depuración y troubleshooting:
+	
+		> En desarrollo o ciberseguridad, conocer el PID de un proceso facilita identificar qué aplicación o servicio está causando problemas, consumiendo recursos excesivos o comportándose de forma maliciosa.
+
+Ejemplo práctico:
+
+	> En Linux, puedes ver todos los PIDs con el comando:
+
+		ps aux
+
+	O matar un proceso específico con:
+
+		kill <PID>
+
+	> En Windows, el Administrador de tareas también muestra los PIDs y se pueden usar con el comando taskkill /PID <PID> para terminar un proceso.
+
+Tip de ciberseguridad: 
+
+	Algunos malware se esconde detrás de procesos aparentemente legítimos, por lo que analizar los PIDs y su relación con ejecutables confiables es un paso clave en la investigación de incidentes.
+

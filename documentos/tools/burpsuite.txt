@@ -1,0 +1,81 @@
+Burp Suite es una plataforma integrada para pruebas de seguridad en aplicaciones web, desarrollada por PortSwigger.
+
+Se usa para analizar, interceptar, modificar y explotar el tráfico HTTP/S entre el navegador y el servidor web.
+
+¿Para qué se usa?
+
+    1. Interceptar tráfico web
+        |
+        |> Captura y analiza las solicitudes y respuestas HTTP/S en tiempo real.
+    
+    2. Pruebas de seguridad web
+        |    
+        |> Identificación de vulnerabilidades como:
+            |
+            |> SQL Injection
+            |> Cross-Site Scripting (XSS)
+            |> Cross-Site Request Forgery (CSRF)
+            |> Inyecciones de archivo, autenticación rota, etc.
+    
+    3. Automatización de pruebas
+        |       
+        |> Burp Scanner (solo versión Pro) permite escanear automáticamente aplicaciones web en busca de vulnerabilidades.
+    
+    4. Manipulación de peticiones y respuestas
+        |       
+        |> Permite modificar parámetros, cookies, headers, tokens y ver cómo responde la aplicación.
+    
+    5. Fuzzing
+        |       
+        |> Pruebas de fuerza bruta sobre parámetros y rutas para encontrar directorios o inputs vulnerables.
+    
+    6. Análisis de contenido web
+        |       
+        |> Revisión de cabeceras, cookies, parámetros GET/POST, y APIs REST o SOAP.
+
+Versiones de Burp Suite
+
+    1. Burp Suite Community (gratuita)
+        |
+        |> Interceptor y repeater básicos
+        |> Sin escaneo automático
+        |> Limitado en funcionalidades avanzadas
+    
+    2. Burp Suite Professional (de pago)
+        |
+        |> Escaneo automático avanzado
+        |> Fuzzing profesional
+        |> Extensiones y macros
+        |> Colaboración con otros pentesters
+    
+    3. Burp Suite Enterprise
+        |
+        |> Orientada a automatización en empresas y auditorías de gran escala
+    
+Opciones y módulos principales
+
+    -------------------------------------------------------------------------------------
+    |  Módulo    |  Opción                                                              |
+    -------------------------------------------------------------------------------------
+    |  Proxy     |  Intercepta y modifica el tráfico HTTP/S entre navegador y servidor  |
+    |  Target    |  Muestra la estructura del sitio, URLs y parámetros detectados       |
+    |  Scanner   |  Escaneo automático de vulnerabilidades (Pro)                        |
+    |  Intruder  |  Fuzzing y pruebas automatizadas sobre parámetros                    |
+    |  Repeater  |  Reenvía peticiones y permite modificarlas manualmente               |
+    |  Sequencer |  Analiza la aleatoriedad de tokens y cookies                         |
+    |  Decoder   |  Codifica y decodifica datos en Base64, URL, Hex, etc.               |
+    |  Comparer  |  Compara respuestas o contenido web para encontrar diferencias       |
+    |  Extender  |  Añade extensiones y scripts personalizados (BApps, API de Burp)     |
+    -------------------------------------------------------------------------------------
+
+Ejemplo de uso básico
+
+    1. Configurar el navegador para usar el proxy de Burp (por defecto: 127.0.0.1:8080)
+    2. Abrir Burp Suite → módulo Proxy → Intercept On
+    3. Navegar por la web objetivo y capturar las solicitudes HTTP
+    4. Mandar una solicitud al Repeater y modificar parámetros para probar vulnerabilidades
+    5. (Opcional) Usar Intruder para hacer fuzzing o fuerza bruta de parámetros
+
+Dato clave
+
+    Burp Suite no es solo para “hackers”; también es ampliamente usado en seguridad corporativa, pruebas internas, auditorías de aplicaciones y bug bounty.

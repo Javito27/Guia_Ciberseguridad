@@ -1,0 +1,46 @@
+¿Qué es WhatWeb?
+
+    WhatWeb es una herramienta de código abierto diseñada para identificar las tecnologías utilizadas por un sitio web. Mediante el análisis de encabezados HTTP, contenido HTML, cookies 
+    y otros elementos, WhatWeb puede determinar:
+    
+        > Sistemas de gestión de contenido (CMS) como WordPress, Joomla, Drupal.
+        > Frameworks como Ruby on Rails, Django, Laravel.
+        > Bibliotecas JavaScript como jQuery, AngularJS.
+        > Servidores web como Apache, Nginx, IIS.
+        > Tecnologías de análisis y estadísticas como Google Analytics, Piwik.
+        > Plugins y extensiones específicos.
+    
+    Esta herramienta es ampliamente utilizada en auditorías de seguridad y pruebas de penetración para comprender mejor la infraestructura de un sitio web y detectar posibles vulnerabilidades.
+	
+Instalación
+
+    sudo apt install whatweb
+
+Uso básico
+
+    whatweb http://ejemplo.com
+
+Opciones comunes
+
+    ---------------------------------------------------------------------------
+    |  Opción        |  Descripción                                           | 
+    ---------------------------------------------------------------------------
+    |  -v            |  Modo detallado (verbose).                             |
+    |  -a <nivel>    |  Establece el nivel de agresividad del escaneo (0-3).  |
+    |  -p <plugin>   |  Especifica un plugin para la detección.               |
+    |  -t <tiempo>   |  Establece el tiempo de espera en segundos.            |
+    |  -i <archivo>  |  Lee las URL desde un archivo.                         |
+    |  -o <formato>  |  Especifica el formato de salida (json, xml, etc.).    |
+    |  --help        |  Obtener una lista completa de opciones.               |
+    ---------------------------------------------------------------------------
+	
+Ejemplos prácticos	
+	
+    ------------------------------------------------------------------------------------------
+    |  Descripción                                   |  Ejemplo                              | 
+    ------------------------------------------------------------------------------------------
+    |  Escaneo básico                                | whatweb http://ejemplo.com            |
+    |  Escaneo detallado con nivel de agresividad 2  | whatweb -v -a 2 http://ejemplo.com    |
+    |  Escaneo de múltiples sitios desde un archivo  | whatweb -i lista_urls.txt             |
+    |  Escaneo con salida en formato JSON            | whatweb -o json http://ejemplo.com    |
+    ------------------------------------------------------------------------------------------

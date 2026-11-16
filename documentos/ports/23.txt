@@ -1,0 +1,37 @@
+📌 Es un protocolo que permite la conexión remota a un sistema para ejecutar comandos, igual que SSH… pero con una gran diferencia: NO cifra la comunicación. 
+
+⚠️ Problema de seguridad
+
+    Todo viaja en texto plano:
+
+        Usuario
+        Contraseña
+        Comandos
+        Respuestas del sistema
+
+    En una red interna, un atacante podría capturar credenciales fácilmente con herramientas como tcpdump o Wireshark. Por eso hoy en día está prácticamente obsoleto.
+
+🔐 Sustituto moderno
+
+    Hoy en día se ha sustituido por el puerto SSH 22.
+
+🧪 En pentesting
+
+    Si encuentras el puerto 23 abierto:
+
+        1. Es una mala práctica de seguridad
+        2. Puede permitir acceso con credenciales débiles
+        3. Suele aparecer en:
+
+            Dispositivos antiguos
+            Routers mal configurados
+            IoT vulnerables   
+
+🎯 Ejemplo de uso básico
+	
+    ************************
+    **   telnet <IP> 23   **
+    ************************
+
+	User -> root 
+	Pass -> root

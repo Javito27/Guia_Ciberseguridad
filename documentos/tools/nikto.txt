@@ -1,0 +1,75 @@
+Nikto es una herramienta de escaneo de vulnerabilidades web de código abierto, escrita en Perl.
+
+Se utiliza en informática y ciberseguridad para identificar problemas de seguridad en servidores web y aplicaciones web.
+
+
+¿Para qué se usa?
+
+    Nikto permite detectar:
+    
+        1. Archivos y directorios inseguros en un servidor web (/admin, /backup, /test, etc.).
+        
+        2. Configuraciones incorrectas del servidor web (ejemplo: Apache, Nginx, IIS).
+        
+        3. Versiones vulnerables de software (servidores, módulos, plugins).
+        
+        4. Problemas conocidos de seguridad como:
+        
+            > Cross-site scripting (XSS) básico
+            > SQL Injection (solo detecta patrones comunes)
+            > Archivos sensibles expuestos (.htaccess, .git, .env)
+        
+        5. Cabeceras HTTP inseguras o ausentes (ej: sin X-Frame-Options, Content-Security-Policy).
+    
+    En resumen: Nikto hace un mapeo de vulnerabilidades comunes en servidores web.
+
+
+Descarga / Instalación
+
+    git clone https://github.com/sullo/nikto.git
+
+
+Sintaxis básica
+
+    perl nikto.pl -h <host> [opciones]
+
+
+Opciones principales de Nikto
+
+    -------------------------------------------------------------------------------------------------------------------------------------------------------
+    |  Opción      |  Descripción                                                         |  Ejemplo de Uso                                               | 
+    -------------------------------------------------------------------------------------------------------------------------------------------------------
+    |  -h          |  Host objetivo                                                       |  perl nikto.pl -h http://ejemplo.com                          |
+    |  -p          |  Puerto del servidor web (por defecto 80 o 443)                      |  perl nikto.pl -h http://ejemplo.com -p 8080                  |
+    |  -ssl        |  Forzar conexión HTTPS                                               |  perl nikto.pl -h https://ejemplo.com -ssl                    |
+    |  -Tuning     |  Tipo de pruebas que quieres ejecutar (1 a 9, según vulnerabilidad)  |  perl nikto.pl -h ejemplo.com -Tuning 1                       |
+    |  -o          |  Guardar resultados en un archivo                                    |  perl nikto.pl -h ejemplo.com -o resultado.html -Format htm   |
+    |  -Format     |  Formato de salida: txt, html, csv, xml, json                        |  perl nikto.pl -h ejemplo.com -o reporte.csv -Format csv      |
+    |  -Display    |  Nivel de información a mostrar (1 a 9)                              |  perl nikto.pl -h ejemplo.com -Display V                      | 
+    |  -Cgidirs    |  Escanear directorios CGI específicos                                |  perl nikto.pl -h ejemplo.com -Cgidirs /cgi-bin               | 
+    |  -useragent  |  Usar un User-Agent personalizado                                    |  perl nikto.pl -h ejemplo.com -useragent "Mozilla/5.0"        | 
+    |  -maxtime    |  Tiempo máximo del escaneo en segundos                               |                                                               | 
+    |  -config     |  Usar archivo de configuración alternativo                           |                                                               |
+    -------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Ejemplo práctico
+
+    Escaneo completo de un sitio con HTTPS, guardando resultados en HTML:
+    
+        perl nikto.pl -h https://objetivo.com -ssl -o reporte.html -Format htm
+    
+    Esto hará:
+    
+        1. Escanear el sitio HTTPS
+        2. Probar directorios y archivos comunes
+        3. Detectar configuraciones inseguras
+        4. Generar un reporte en HTML
+
+
+Ventajas de Nikto
+
+    > Código abierto y gratuito
+    > Gran base de datos de vulnerabilidades conocidas
+    > Compatible con casi todos los servidores web
+    > Permite integrarlo en auditorías automáticas de seguridad

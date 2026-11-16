@@ -1,0 +1,47 @@
+cURL (Client URL) es una herramienta de línea de comandos para transferir datos desde o hacia un servidor usando distintos protocolos, principalmente HTTP, HTTPS, FTP, SFTP, SMTP, y más.
+
+Es multiplataforma y muy usada en desarrollo, pruebas de APIs y pentesting.
+
+¿Para qué se usa?
+
+    > Hacer peticiones HTTP/HTTPS: GET, POST, PUT, DELETE.
+    > Probar APIs REST o servicios web.
+    > Descargar archivos desde servidores remotos.
+    > Enviar datos en formularios (POST data).
+    > Automatizar solicitudes web en scripts.
+    > En pentesting, para probar cabeceras HTTP, cookies, autenticación y fuzzing.
+
+Opciones básicas de cURL
+
+    -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |   Opción                               |   Ejemplo de Uso                                                                                                           |
+    -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |   Petición GET simple                  |   curl http://example.com                                                                                                  |
+    |   Descargar un archivo                 |   curl -O http://example.com/archivo.zip                                                                                   |
+    |   Guardar la respuesta en un archivo   |   curl http://example.com -o salida.html                                                                                   |
+    |   Hacer POST con datos                 |   curl -X POST -d "usuario=admin&clave=1234" http://example.com/login                                                      |
+    |   Enviar JSON                          |   curl -X POST -H "Content-Type: application/json" -d '{"usuario":"admin","clave":"1234"}' http://example.com/api/login    |
+    |   Incluir cabeceras personalizadas     |   curl -H "Authorization: Bearer TOKEN123" http://example.com/api/data                                                     |
+    |   Seguir redirecciones                 |   curl -L http://example.com                                                                                               |
+    |   Mostrar solo las cabeceras HTTP      |   curl -I http://example.com                                                                                               |
+    |   Autenticación básica                 |   curl -u usuario:password http://example.com                                                                              |
+    |   Usar proxy                           |   curl -x http://127.0.0.1:8080 http://example.com                                                                         |
+    -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Opciones avanzadas útiles
+
+    --------------------------------------------------------------------------------------------------
+    |   Opción                      |   Descripción                                                  |  
+    --------------------------------------------------------------------------------------------------
+    |   -v                          |   Modo verbose, muestra detalle de la solicitud y respuesta.   |
+    |   --cookie "nombre=valor"     |   Enviar cookies.                                              |
+    |   --max-time 10               |   Tiempo máximo de espera en segundos.                         |
+    |   --user-agent "Mozilla/5.0"  |   Cambiar user-agent.                                          |
+    |   --insecure                  |   Ignorar errores de certificado SSL (solo pruebas).           |
+    --------------------------------------------------------------------------------------------------
+
+Ejemplo práctico en pentesting
+
+    curl -v -H "User-Agent: Mozilla/5.0" -H "Authorization: Bearer TOKEN123" -X GET https://objetivo.com/api/usuarios
+
+    Esto permite ver la respuesta completa del servidor, con cabeceras y autenticación, muy útil para pruebas de seguridad.

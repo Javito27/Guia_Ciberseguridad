@@ -1,0 +1,35 @@
+En informática, TTL significa Time To Live (tiempo de vida). Es un valor que se incluye en los paquetes de datos de red o en ciertos registros DNS, y su función es controlar cuánto 
+tiempo o cuántos "saltos" puede existir un paquete o un dato antes de ser descartado.
+
+TTL en redes (paquetes IP)
+
+	> Cada paquete IP que viaja por Internet tiene un campo llamado TTL.
+	> Este valor normalmente es un número (por ejemplo, 64, 128, 255).
+	> Cada vez que el paquete pasa por un router, el TTL se reduce en 1.
+	> Si llega a 0, el paquete se descarta y no sigue viajando.
+
+Esto evita que los paquetes queden atrapados en un bucle infinito en la red.
+
+En ciberseguridad, el TTL puede dar pistas sobre el sistema operativo de un dispositivo, ya que distintos sistemas usan un valor inicial distinto. Herramientas como ping o traceroute 
+usan el TTL para diagnosticar rutas y detectar problemas o ataques. Los valores TTL por defecto según el sistema operativo:
+
+	> TTL ≈ 64 → Linux/macOS
+	> TTL ≈ 128 → Windows
+	> TTL ≈ 254 → Cisco (routers y switches)
+	> TTL ≈ 255 → Unix/Solaris/FreeBSD
+
+TTL en DNS
+
+En el contexto de servidores DNS (los que traducen dominios como google.com a direcciones IP):
+
+	> El TTL indica cuánto tiempo un registro DNS puede almacenarse en caché por otros servidores.
+	> Ejemplo: si un registro tiene un TTL de 3600 segundos (1 hora), cualquier cambio en la IP de ese dominio tardará hasta 1 hora en propagarse por Internet.
+
+En resumen:
+
+	> En redes IP, TTL controla cuántos routers puede atravesar un paquete antes de expirar.
+	> En DNS, TTL indica cuánto tiempo se puede guardar en caché una respuesta antes de volver a consultarla.
+
+Como realizar PING
+
+	ping <IP> -c 5  (-c signifiga los paquetes que se quieren enviar)

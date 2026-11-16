@@ -1,0 +1,31 @@
+El 3-Way Handshake es el proceso que utiliza el protocolo TCP para establecer una conexión entre dos dispositivos antes de comenzar a intercambiar datos por la red.
+
+🔑 Se realiza en tres pasos:
+
+    1️⃣ SYN: el cliente solicita iniciar la conexión TCP.
+
+        Cliente → Servidor
+
+    2️⃣ SYN-ACK: el servidor responde aceptando la solicitud.
+
+        Servidor → Cliente
+
+    3️⃣ ACK: el cliente confirma que ha recibido la respuesta.
+
+        Cliente → Servidor
+    
+💡 Significado de cada sigla
+
+      Bandera  |  Significado     |  Función
+    -------------------------------------------------------
+      SYN      |  Synchronize     |  Iniciar conexión
+      ACK      |  Acknowledgment  |  Confirmar recepción
+      SYN-ACK  |  SYN + ACK       |  Aceptar y confirmar
+    -------------------------------------------------------
+
+🔬 Cuando se realiza un pentesting en ciberseguridad
+
+    · Nmap: utiliza conexiones TCP para descubrir puertos abiertos.
+    · SYN Scan (-sS): envía un SYN y analiza la respuesta sin completar normalmente el handshake.
+    · SYN Flood: ataque DoS que envía multitud de solicitudes SYN intentando agotar los recursos del servidor.
+    · Wireshark: permite capturar y analizar los tres paquetes del handshake.

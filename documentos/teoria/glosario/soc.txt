@@ -1,0 +1,78 @@
+Es un Centro de Operaciones de Seguridad: un equipo (y también el espacio físico o virtual) encargado de vigilar, detectar, analizar y responder a ciberataques en tiempo real.
+
+Es el “centro de mando” de la ciberseguridad de una empresa.
+
+
+Funciones principales:
+
+    🔎 Monitorización 24/7
+
+        Revisa logs, alertas y actividad sospechosa.
+
+    🚨 Detección de amenazas
+
+        Malware
+        Phishing
+        Intrusiones
+        Movimientos laterales
+
+    🧪 Análisis de incidentes
+
+        Determina si la alerta es real o falso positivo.
+
+    🛠️ Respuesta a incidentes
+
+        Aísla equipos
+        Bloquea IPs
+        Elimina malware
+        Escala el incidente
+
+    📊 Mejora continua
+
+        Ajusta reglas
+        Documenta incidentes
+        Refuerza la seguridad
+
+
+Herramientas que usa un SOC
+
+    SIEM (como Splunk o IBM QRadar)
+    EDR (como CrowdStrike)
+    Firewalls
+    IDS/IPS
+    Plataformas de threat intelligence
+
+
+Ejemplo sencillo
+
+    Un empleado hace clic en un email malicioso. El SOC:
+
+        Detecta actividad rara.
+        Revisa logs.
+        Confirma que es malware.
+        Aísla el ordenador.
+        Bloquea la IP atacante.
+        Documenta el incidente.
+
+
+Perfiles dentro de un SOC
+
+    🔹 SOC Analyst Nivel 1 (Junior)
+
+        · Revisa alertas básicas
+        · Filtra falsos positivos
+        · Escala incidentes
+
+    🔹 SOC Analyst Nivel 2
+
+        · Investiga incidentes complejos
+        · Analiza malware
+        · Responde técnicamente
+
+    🔹 SOC Analyst Nivel 3
+
+        · Threat hunting
+        · Análisis forense
+        · Mejora reglas del SIEM
+
+El SOC es defensivo, por lo que corresponde al Blue Team, ya que monitoriza, detecta y responde a ataques.

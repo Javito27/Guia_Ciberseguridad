@@ -1,0 +1,72 @@
+CrackMapExec (CME) es una herramienta de post-explotación y administración de redes muy usada en pentesting y red team. Fue diseñada para facilitar ataques y movimientos laterales en 
+redes basadas en Windows/Active Directory, aunque también tiene módulos para otras tecnologías.
+
+¿Qué es CrackMapExec?
+
+	> Un Swiss Army knife (navaja suiza) para pentesters que trabajan con SMB, RDP, WinRM, LDAP, MSSQL, etc.
+	> Permite automatizar tareas comunes en auditorías de seguridad sobre redes corporativas.
+	> Muy usada para explotación post-inicial y recolección de credenciales.
+
+¿Para qué se usa?
+
+	> Enumerar información de dominios, usuarios, máquinas y políticas de red.
+	> Autenticación masiva contra múltiples hosts con credenciales conocidas.
+	> Detección de qué credenciales funcionan en qué máquinas.
+	> Movimiento lateral (ejecutar comandos de forma remota).
+	> Dump de hashes SAM y LSASS.
+	> Enumeración de shares y acceso a recursos.
+
+Opciones y comandos más usados en CrackMapExec
+
+    La sintaxis general es:
+	
+        cme <protocolo> <objetivo(s)> [opciones]
+
+    Protocolos soportados
+    ----------------------------------------------------
+    |   Protocolo  |   Descripción                     |
+    ----------------------------------------------------
+    |   smb        |   SMB/Windows file sharing        |
+    |   rdp        |   Escritorio remoto               |
+    |   winrm      |   Windows Remote Management       |
+    |   ldap       |   Active Directory LDAP           |
+    |   mssql      |   Microsoft SQL Server            |
+    ----------------------------------------------------
+
+    Opciones comunes
+    -----------------------------------------------------------------------------
+    |   Opción           |   Descripción                                        |
+    -----------------------------------------------------------------------------	
+    |   -u               | Usuario                                              |
+    |   -p               | Contraseña                                           |
+    |   -H               | Hash NTLM en lugar de password                       |
+    |   -d               | Dominio (para Active Directory)                      |
+    |   --local-auth     | Indicar autenticación local en lugar de dominio      |
+    |   -x               | Ejecutar un comando remoto                           |
+    |   -X               | Ejecutar un script de PowerShell remoto              |
+    |   --shares         | Listar recursos compartidos (SMB)                    |
+    |   --sam            | Dumpear hashes de la SAM                             |
+    |   --lsa            | Dumpear credenciales en memoria (LSASS)              |
+    |   --sessions       | Enumerar sesiones activas                            |
+    |   --users          | Enumerar usuarios de dominio                         |
+    |   --groups         | Enumerar grupos de dominio                           |
+    |   --pwd-last-set   | Ver cuándo un usuario cambió su contraseña           |
+    -----------------------------------------------------------------------------
+
+Ejemplos prácticos
+
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------                                                  
+    |   Descripción                                             |   Ejemplo                                                                                                      |
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------               
+    |   Enumerar información de un host SMB                     |   cme smb 192.168.1.10                                                                                         |
+    |   Probar credenciales contra varios hosts                 |   cme smb 192.168.1.0/24 -u admin -p Password123                                                               |
+    |   Usar hash NTLM en lugar de password (Pass-the-Hash)     |   cme smb 192.168.1.10 -u Administrator -H aad3b435b51404eeaad3b435b51404ee:cc36cf7a8514893efccd332446158b1a   |
+    |   Ejecutar un comando remoto en Windows                   |   cme smb 192.168.1.10 -u admin -p Passw0rd! -x "ipconfig"                                                     |
+    |   Enumerar shares accesibles:mssql                        |   cme smb 192.168.1.10 -u usuario -p clave --shares                                                            |
+    |   Dump de SAM (hashes locales)                            |   cme smb 192.168.1.10 -u admin -p clave --sam                                                                 |
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Resumen rápido:
+
+	> CrackMapExec = herramienta de post-explotación y auditoría de redes Windows.
+	> Facilita autenticación, movimiento lateral, extracción de credenciales y enumeración de recursos.

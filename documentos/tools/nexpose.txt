@@ -1,0 +1,78 @@
+¿Qué es Nexpose?
+
+    Nexpose es una herramienta de gestión de vulnerabilidades desarrollada por Rapid7 (la misma empresa detrás de Metasploit).
+	
+    Actualmente, se integra en la plataforma InsightVM, aunque el nombre Nexpose sigue siendo muy usado en el mundo del pentesting.
+
+
+¿Para qué se usa?
+
+    Nexpose se utiliza en seguridad informática para:
+    
+        > Escaneo de vulnerabilidades en redes, sistemas, aplicaciones y dispositivos.
+        > Evaluación de seguridad continua: detecta configuraciones débiles, servicios inseguros o software vulnerable.
+        > Priorización de riesgos: asigna un CVSS (Common Vulnerability Scoring System) y una puntuación propia (RS²: Real Risk Score) para indicar qué vulnerabilidades son más críticas.
+        > Cumplimiento normativo: ayuda a cumplir con PCI-DSS, HIPAA, ISO 27001, GDPR, etc.
+        > Integración con Metasploit: permite validar vulnerabilidades explotándolas en entornos controlados.
+        > Generación de reportes: exporta informes técnicos y ejecutivos.
+    
+    Es una pieza clave en programas de gestión de parches, Red Team y Blue Team.
+
+
+Opciones y características disponibles
+
+    Tipos de análisis
+    
+        > Escaneo de red: descubre hosts, puertos abiertos y servicios expuestos.
+        > Escaneo de aplicaciones web: detecta directorios, inyecciones, configuraciones inseguras.
+        > Escaneo autenticado: ingresa con credenciales para identificar vulnerabilidades internas.
+        > Escaneo de sistemas operativos: parches faltantes, configuraciones incorrectas.
+        > Escaneo de bases de datos y middleware.
+
+
+Opciones destacadas
+
+    1. Descubrimiento automático de activos
+    
+        > Detecta nuevos dispositivos en la red en tiempo real.
+    
+    2. Integración con SIEMs y herramientas DevOps
+    
+        > Se conecta con Jenkins, Jira, Splunk, ServiceNow, etc.
+    
+    3. Gestión de riesgos en tiempo real
+    
+        > Calcula el riesgo real (RS²) considerando la explotación en el mundo real.
+    
+    4. Escaneo programado y continuo
+    
+        > Se pueden agendar escaneos recurrentes en segmentos de red o aplicaciones críticas.
+    
+    5. Dashboards personalizables
+    
+        > Visualización clara de vulnerabilidades y métricas de seguridad.
+    
+    6. Soporte para entornos híbridos
+    
+        > Compatible con on-premise, cloud (AWS, Azure, GCP) y entornos virtuales (VMware, Hyper-V).
+    
+    7. Opciones de informes
+    
+        > Reportes técnicos detallados para el equipo de seguridad.
+        > Reportes ejecutivos simplificados para gerencia.
+
+
+Ejemplo de uso en un flujo de trabajo
+
+    1. Un analista lanza un escaneo a la red corporativa.
+    2. Nexpose detecta vulnerabilidades críticas en servidores Windows con parches faltantes.
+    3. Se generan reportes automáticos con prioridad de remediación.
+    4. El equipo de IT aplica los parches sugeridos.
+    5. Nexpose reescanea y verifica que los problemas han sido solucionados.
+
+
+Resumen
+
+    > Nexpose = solución de gestión de vulnerabilidades de Rapid7.
+    > Se usa para descubrir, analizar, priorizar y remediar vulnerabilidades en redes y sistemas.
+    > Opciones: escaneo autenticado/no autenticado, integración con Metasploit, dashboards, informes personalizables, escaneo en la nube, gestión de riesgos en tiempo real.

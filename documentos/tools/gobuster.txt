@@ -1,0 +1,108 @@
+Gobuster es una herramienta escrita en Go (Golang), diseñada para hacer fuerza bruta muy rápida de:
+
+    > Directorios y archivos en servidores web
+    > Subdominios en un dominio
+    > Buckets de Amazon S3 y Virtual Host fuzzing
+
+Es más ligero y mucho más rápido que DirBuster o Dirsearch, porque aprovecha el paralelismo de Go.
+
+¿Para qué se usa Gobuster?
+
+    > Descubrir directorios ocultos (/admin, /backup, /uploads, etc.).
+    > Enumerar archivos sensibles (config.php, index.bak, .git/).
+    > Encontrar subdominios de un dominio (dev.example.com, test.example.com).
+    > Hacer fuzzing de vhosts (virtual hosts).
+    > Reconocimiento en pentesting y bug bounty.
+
+Instalación
+
+    sudo apt install gobuster
+
+Sintaxis básica
+
+    gobuster <modo> [opciones]
+
+Modos principales
+
+    -------------------------------------------------
+    |   Modo     |   Descripción                    |
+    -------------------------------------------------
+    |   dir      |   Buscar directorios/archivos    |
+    |   dns      |   Buscar subdominios             |
+    |   vhost    |   Buscar virtual hosts           |
+    |   s3       |   Buscar buckets S3              |
+    -------------------------------------------------
+
+Opciones más usadas por modo 
+
+    Modo directoios (dir)
+        --------------------------------------------------------------
+        |   Opción  |   Descripción                                  |
+        --------------------------------------------------------------	
+        |   -u      |   URL objetivo                                 |
+        |   -w      |   Diccionario (wordlist)                       |
+        |   -t      |   Número de hilos (threads)                    |
+        |   -x      |   Extensiones a probar (php,html,txt)          |
+        |   -o      |   Guardar resultados en archivo                |
+        |   -b      |   Ignorar ciertos códigos HTTP (404,403,500)   |
+        --------------------------------------------------------------
+        Ejemplo: gobuster dir -u http://objetivo.com -w /usr/share/seclists/Discovery/Web-Content/common.txt -x php,html,txt -t 50 -o resultado.txt
+
+	
+    Modo DNS (dns)
+        --------------------------------------------------------------
+        |   Opción  |   Descripción                                  |
+        --------------------------------------------------------------		
+        |   -d      |   Dominio                                      |
+        |   -w      |   Wordlist de subdominios                      |
+        |   -t      |   Número de hilos                              |
+        |   -o      |   Guardar salida                               |
+        |   -r      |   Resolver con un servidor DNS específico      |
+        --------------------------------------------------------------
+        Ejemplo: gobuster dns -d ejemplo.com -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt -t 100 -o subdominios.txt
+
+
+    Modo Virtual Host (vhost)
+        --------------------------------------------------------------
+        |   Opción  |   Descripción                                  |
+        --------------------------------------------------------------		
+        |   -u      |   URL                                          |
+        |   -w      |   Wordlist de subdominios                      |
+        |   -o      |   Guardar salida                               |
+        --------------------------------------------------------------	
+	    Ejemplo: gobuster vhost -u http://ejemplo.com -w /usr/share/seclists/Discovery/DNS/namelist.txt
+	
+	
+    Modo S3 (s3)
+
+        --------------------------------------------------------------
+        |   Opción  |   Descripción                                  |
+        --------------------------------------------------------------		
+        |   s3      |   Busca buckets de Amazon S3 expuestos.        |
+        --------------------------------------------------------------
+        Ejemplo: gobuster s3 -w wordlist.txt
+
+
+Ejemplo completo de uso
+
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |   Descripción                                  |   Ejemplo                                                                                                                       |
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |   Enumeración de directorios con extensiones   |   gobuster dir -u http://objetivo.com -w /usr/share/seclists/Discovery/Web-Content/raft-medium-words.txt -x php,html,txt -t 60  |        
+    |   Enumeración de subdominios                   |   gobuster dns -d ejemplo.com -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt -t 80                       |
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
+
+Ventajas de Gobuster
+
+    > Súper rápido gracias a Go.
+    > Ideal para automatización en scripts.
+    > Más confiable en entornos con recursos limitados (mejor que DirBuster).
+    > Tiene múltiples modos (dir, dns, vhost, s3).
+
+
+
+
+
+
+
+

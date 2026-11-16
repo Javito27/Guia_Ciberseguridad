@@ -1,0 +1,87 @@
+Es una vulnerabilidad web que permite a un atacante inyectar código (normalmente JavaScript) en una página web para que se ejecute en el navegador de otros usuarios.
+
+    👉 El servidor sirve la web
+    👉 El navegador del usuario ejecuta el código malicioso
+    👉 La víctima es el usuario, no el servidor
+
+Con XSS un atacante puede:
+
+    🍪 Robar cookies de sesión
+    👤 Secuestrar cuentas
+    📤 Redirigir a webs falsas
+    🧠 Manipular lo que ve el usuario
+    🔑 Robar credenciales
+
+Tipos de XSS
+
+    1️⃣ XSS Reflejado
+
+        El código malicioso viaja en la petición (URL o formulario) y el servidor lo devuelve tal cual en la respuesta.
+
+        Funcionamiento: 
+
+            URL → https://web.com/buscar?q=hola
+
+            La web responde → Resultados para: hola
+
+            Si no valida bien, un atacante envía un enlace con código → https://web.com/buscar?q=<script>alert(1)</script>
+
+            Si al abrirlo salta algo inesperado, entonces se trata de un XSS reflejado. 
+
+
+    2️⃣ XSS Almacenado (Stored)
+
+        El código malicioso se guarda en la base de datos y se ejecuta cada vez que alguien ve la página.
+
+        Funcionamiento: 
+
+            Usuario escribe un comentario → <script>alert("Hola")</script>
+
+            No hace falta clicar nada → se ejecuta solo.
+
+        Dónde aparece
+
+            Comentarios
+            Foros
+            Reviews
+            Perfiles de usuario
+            Chats
+
+
+    3️⃣ XSS DOM (DOM-based XSS)
+
+        El problema está en el JavaScript del navegador, no en el servidor.
+
+        Funcionamiento:
+        
+            URL → https://web.com/#hola (funciona bien)
+
+            Pero si se usa → https://web.com/#<script>alert(1)</script>
+
+            El navegador ejecuta eso directamente. Todo ocurre en el navegador. 
+ 
+        Suele aparecer en: 
+
+            SPAs (React, Angular, Vue)
+            Apps modernas
+            Uso inseguro de innerHTML y document.write
+
+
+Buenas prácticas pare prevenir XSS:
+
+    ✅ Validar y sanitizar entradas 
+    ✅ Escapar correctamente la salida (output encoding)
+    ✅ Usar Content Security Policy (CSP)
+    ❌ No confiar nunca en input del usuario
+    ✅ Frameworks actualizados
+
+Diferencia entre XSS vs SSTI
+
+    ------------------------------------------------------------------
+    | XSS                            | SSTI                          |
+    ------------------------------------------------------------------
+    | Se ejecuta en el **navegador** | Se ejecuta en el **servidor** |
+    | Variable                       | Muy crítica                   |
+    | Normalmente roba datos         | Puede llevar a RCE            |
+    | Frontend                       | Backend                       |
+    ------------------------------------------------------------------

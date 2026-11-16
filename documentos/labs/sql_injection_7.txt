@@ -1,0 +1,30 @@
+➡️  This lab contains a SQL injection vulnerability in the product category filter. 
+
+The results from the query are returned in the application's response, so you can use a UNION attack to retrieve data from other tables. 
+
+The first step of such an attack is to determine the number of columns that are being returned by the query. 
+
+You will then use this technique in subsequent labs to construct the full attack.
+
+To solve the lab, determine the number of columns returned by the query by performing a SQL injection UNION attack that returns an additional row containing null values. 
+
+
+🎯 SOLUCIÓN DEL LABORATORIO
+
+    1️⃣ Seleccionar FoxyProxy
+
+        En el navegador seleccionamos la opción BURP en FoxyProxy para que BurpSuite intercepte las peticiones. 
+
+    2️⃣ Abrir BurpSuite
+
+        Se abre BurpSuite y vamos a Proxy > HTTP history
+
+    3️⃣ Para determinar el numero de columnas que devuelve la consulta y cuáles contienen datos de texto, hay que realizar la siguiente request: 
+
+        · Seleccionamos una categoría, por ejemplo all
+        · En HTTP History buscamos la request y la enviamos a Repeater para modificar la request
+        · En el parámetro category, se sustituye por el siguiente payload: 
+
+            '+UNION+SELECT+NULL,NULL,NULL--
+
+        · Esa query comprueba cuántas columnas tiene la consulta original, probando con 3 columnas de tipo NULL.

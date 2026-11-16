@@ -1,0 +1,63 @@
+Navegación y Archivos
+-----------------------------------------------------------------------------------------
+  Comando                           |  Descripción                                       
+-----------------------------------------------------------------------------------------
+  cd                                | Cambiar de directorio (ej. cd C:\Users)            
+  dir                               | Listar archivos y carpetas del directorio actual   
+  md / mkdir                        | Crear un nuevo directorio                          
+  rd / rmdir                        | Eliminar un directorio vacío                       
+  del                               | Eliminar archivos                                  
+  copy                              | Copiar archivos de un lugar a otro                 
+  move                              | Mover archivos o renombrarlos                      
+  ren / rename                      | Cambiar nombre de archivos o carpetas              
+  findstr                           |                                                    
+  type                              |                                                    
+  where /r C:\ nombre.txt           | Buscar la ubicación de un fichero en Windows       
+-----------------------------------------------------------------------------------------
+
+Sistema y Configuración
+-----------------------------------------------------------------------------------------------------
+  Comando                           |  Descripción                                                   
+-----------------------------------------------------------------------------------------------------      
+ systeminfo                         | Mostrar información del sistema                                
+ tasklist                           | Mostrar procesos en ejecución                                  
+ taskkill                           | Terminar un proceso (ej. taskkill /PID 1234)                   
+ chkdsk                             | Verificar y reparar errores en discos                          
+ sfc /scannow                       | Escanear y reparar archivos protegidos de Windows              
+-----------------------------------------------------------------------------------------------------
+
+Redes
+--------------------------------------------------------------------------------------------------------------------------------------
+  Comando                           |  Descripción                                                   
+--------------------------------------------------------------------------------------------------------------------------------------
+ ipconfig                           | Mostrar información de la red, IP, máscara, puerta de enlace   
+ ping                               | Probar conectividad con otro host (-cx siendo x el número de paquetes que quieren enviarse                             
+ tracert                            | Rastrear la ruta que sigue un paquete hasta un host      
+ netstat -ano | find ":xx"          | Comprobar los puertos abiertos en el equipo
+--------------------------------------------------------------------------------------------------------------------------------------
+
+Administración
+-----------------------------------------------------------------------------------------------
+  Comando                           |  Descripción                                             
+-----------------------------------------------------------------------------------------------
+ net user                           | Administrar cuentas de usuario                           
+ netstat                            | Ver conexiones de red activas                            
+ hostname                           | Mostrar el nombre del equipo                             
+ shutdown                           | Apagar o reiniciar el sistema (shutdown /s /t 0)         
+ shutdown -h now                    | Apagar el sistema ahora                                  
+ cls                                | Limpiar la pantalla                                      
+ echo                               | Mostrar mensajes o activar/desactivar eco de comandos    
+ set                                | Configurar variables de entorno                          
+-----------------------------------------------------------------------------------------------
+
+Ayuda
+-----------------------------------------------------------------------------------------------
+  Comando                           |  Descripción                                             
+-----------------------------------------------------------------------------------------------
+ help                               | Mostrar lista de comandos disponibles                    
+ comando /?                         | Mostrar la ayuda específica de un comando (ej. dir /?)   
+-----------------------------------------------------------------------------------------------
+
+Tip:
+   · Los path en Windows siempre están en es mayúsculas o mixtas. Si están en minúsculas corresponden al Sistema Operativo Linux. 
+   · dir /s /b (/s → busca en subdirectorios | /b → formato simple sin encabezados)

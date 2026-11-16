@@ -1,0 +1,49 @@
+Una API es una interfaz que permite que dos aplicaciones o sistemas diferentes se comuniquen entre sí e intercambien información.
+
+💡 Dicho de forma sencilla: una API es un intermediario que permite que un programa solicite información o servicios a otro programa.
+
+🔑 Ejemplo de una API en el móvil 
+
+	· Abres la aplicación.
+	· La aplicación solicita a una API la información meteorológica de Madrid.
+	· La API consulta el servidor que contiene los datos.
+	· El servidor devuelve la información.
+	· La aplicación muestra la temperatura, humedad y previsión.
+
+🚀 Tipos de peticiones HTTP 
+
+	   Método	  Función                    Ejemplo
+	--------------------------------------------------------------
+	   GET     |  Obtener información     |  Consultar usuarios
+	   POST    |  Crear información       |  Registrar usuario
+	   PUT     |  Actualizar información  |  Modificar usuario
+	   PATCH   |  Modificar parcialmente  |  Cambiar email
+	   DELETE  |  Eliminar información    |  Borrar usuario
+	--------------------------------------------------------------
+
+🧩 Tipos comunes de APIs
+
+	· APIs web: Permiten la comunicación entre aplicaciones a través de Internet (ej. REST, GraphQL, SOAP).
+	· APIs de sistema operativo: Permiten que las apps usen funciones del sistema (ej. API de Windows, API de Android).
+	· APIs de librerías/frameworks: Ofrecen funciones listas para reutilizar en el desarrollo de software.
+
+🛠️ Herramientas para trabajar con APIs
+
+	· BurpSuite
+	· Postman
+	· Swagger
+	· SoapUI
+
+🧪 Vulnerabilidades en ciberseguridad
+
+	  Vulnerabilidad            Descripción
+	---------------------------------------------------------------------------------------------
+	  BOLA / IDOR            |  Acceder a datos de otros usuarios modificando identificadores.
+	  Broken Authentication  |  Fallos en la autenticación.
+	  Broken Authorization   |  Permisos mal configurados.
+	  SQL Injection          |  Inyección de consultas SQL.
+	  Exposición de datos    |  La API devuelve información sensible.
+	  Rate Limiting          |  Ausencia de límites de peticiones, facilitando abusos.
+	---------------------------------------------------------------------------------------------
+
+En resumen: una API es como un menú en un restaurante. Tú no ves cómo se cocina la comida, pero el menú (la API) te dice qué puedes pedir y el camarero (el sistema) te trae lo que pediste.

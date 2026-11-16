@@ -1,0 +1,1 @@
+Técnica para obtener acceso remoto a un sistema objetivo. La vícitma es quien inicia la conexión con el atacante. 

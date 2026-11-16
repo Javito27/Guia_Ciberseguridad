@@ -1,0 +1,98 @@
+🛠️ Pyrit es una herramienta de auditoría de seguridad Wi-Fi que se utiliza para comprobar la seguridad de contraseñas en redes WPA y WPA2.
+
+    Su función principal es acelerar el proceso de comprobación de contraseñas usando la tarjeta gráfica (GPU) o varios procesadores a la vez.
+
+🎯 Pyrit se utiliza para:
+
+        · Comprobar la seguridad de contraseñas Wi-Fi
+        · Trabajar con capturas de autenticación (handshake)
+        · Acelerar pruebas de contraseñas usando GPU
+        · Realizar auditorías de seguridad en redes inalámbricas
+
+    Normalmente se usa en tests de seguridad para ver si una red es vulnerable.
+
+⚙️ Cómo funciona (idea básica)
+
+    1️⃣ Se captura el handshake Wi-Fi (intercambio de autenticación entre router y dispositivo).
+    2️⃣ Pyrit utiliza ese handshake para probar muchas contraseñas posibles.
+    3️⃣ Si alguna contraseña coincide con la correcta, la herramienta lo detecta.
+
+💡 Por qué es rápido
+
+    Pyrit es rápido porque aprovecha:
+
+        🖥️ CPU (procesador)
+        🎮 GPU (tarjeta gráfica)
+
+    Las GPU pueden hacer muchos cálculos en paralelo, lo que acelera el proceso de prueba de contraseñas.
+
+📚 Ejemplo simple
+
+    En una auditoría Wi-Fi:
+
+        · Se captura el tráfico de la red.
+        · Se obtiene el handshake WPA/WPA2.
+        · Pyrit prueba miles o millones de contraseñas posibles.
+        · Se comprueba si la contraseña es segura o fácil de romper.
+
+🧪 Ejemplos prácticos
+
+    1. Ataque rápido con diccionario:
+    
+          pyrit -r captura.cap -i rockyou.txt attack_passthrough
+    
+    2. Crear una base de datos de contraseñas precalculadas:
+    
+          pyrit -i rockyou.txt import_passwords
+          pyrit -e "MiRedWiFi" create_essid
+          pyrit batch
+    
+    3. Ataque usando base de datos precalculada:
+    
+          pyrit -r captura.cap attack_db
+
+📖 Opciones disponibles en Pyrit
+
+    Principales modos de ataque
+    -------------------------------------------------------------------------------------------------
+    |  Opción               |  Descripción                                                          | 
+    -------------------------------------------------------------------------------------------------
+    |  -r                   |  Cargar archivo de captura (.cap) con el handshake.                   |
+    |  -i                   |  Especificar diccionario de contraseñas.                              |
+    |  attack_passthrough   |  Probar el diccionario directamente contra el handshake.              |
+    |  attack_db            |  Usar contraseñas precalculadas en la base de datos interna de Pyrit. |
+    -------------------------------------------------------------------------------------------------
+
+    Gestión de diccionarios y contraseñas                                                          
+    --------------------------------------------------------------------------------------
+    |  Opción             |  Descripción                                                 | 
+    --------------------------------------------------------------------------------------
+    |  import_passwords   |  Importar diccionarios a la base de datos de Pyrit.          |
+    |  export_passwords   |  Exportar contraseñas de la base de datos.                   |
+    |  eval               |  Ver estadísticas sobre las contraseñas en la base de datos. |
+    --------------------------------------------------------------------------------------
+	
+    Configuración de la base de datos
+    ----------------------------------------------------------------------------------------------------
+    |  Opción                 |  Descripción                                                           | 
+    ----------------------------------------------------------------------------------------------------
+    |  create_essid <nombre>  |  Crear una red en la base de datos.                                    |
+    |  batch                  |  Calcular y almacenar hashes WPA para una ESSID usando un diccionario. |
+    |  eval                   |  Revisar el progreso de la base de datos.                              |
+    ----------------------------------------------------------------------------------------------------	
+     Pyrit puede trabajar con SQLite o MySQL para almacenar claves precalculadas.
+
+    Optimización
+    ---------------------------------------------------------------------------------
+    |  Opción   |  Descripción                                                      |
+    ---------------------------------------------------------------------------------
+    | analyze   |  Ver información sobre GPUs/CPUs disponibles para procesamiento.  |
+    ---------------------------------------------------------------------------------
+     Soporte para CUDA (NVIDIA) y OpenCL (AMD, Intel).
+
+🧠 Resumen
+
+    > Pyrit = herramienta de auditoría Wi-Fi WPA/WPA2.
+    > Permite ataques de fuerza bruta/diccionario con soporte para CPU multinúcleo y GPU.
+    > Muy útil en pentesting de redes inalámbricas.
+    > Opciones principales: importar diccionarios, precalcular hashes, atacar handshakes directamente.

@@ -1,0 +1,66 @@
+Wfuzz es una herramienta de fuzzing web escrita en Python, usada en pentesting y ciberseguridad para descubrir y enumerar:
+
+    > Directorios y archivos ocultos en un sitio web.
+    > Parámetros GET/POST en aplicaciones web.
+    > Usuarios y contraseñas (ataques de fuerza bruta en formularios de login).
+    > Cabeceras HTTP y cookies vulnerables.
+    > Inyecciones y fallos en validación de entradas (XSS, SQLi, LFI, etc.).
+
+En resumen: sirve para automatizar ataques de fuerza bruta y fuzzing en aplicaciones web.
+
+
+¿Para qué se usa en informática y ciberseguridad?
+
+    > Enumeración de contenido web (descubrir directorios ocultos).
+    > Descubrimiento de parámetros en URLs.
+    > Bypass de autenticación (probando contraseñas/usuarios).
+    > Testeo de seguridad en cabeceras HTTP y cookies.
+    > Inyección de payloads para detectar vulnerabilidades como:
+
+        - XSS (Cross-Site Scripting)
+        - SQL Injection
+        - Path Traversal / LFI
+        - RCE (Remote Code Execution)
+
+
+Sintaxis general
+
+    wfuzz [opciones] -z <payload> <objetivo>
+
+
+Opciones principales de Wfuzz
+
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |  Opción   |  Descripción                                                               |  Ejemplo de Uso                                                                                |  
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |  -z       |  Especificar el diccionario/payload (wordlist).                            |  wfuzz -z file,/usr/share/seclists/Discovery/Web-Content/common.txt http://objetivo.com/FUZZ   |
+    |  -c       |  Colorear la salida en consola.                                            |                                                                                                |
+    |  --hc     |  Ocultar resultados con ciertos códigos de estado HTTP (ej: ocultar 404).  |  --hc 404                                                                                      |
+    |  --hl     |  Ocultar resultados con cierta longitud en la respuesta.                   |                                                                                                |
+    |  --hh     |  Ocultar resultados según número de cabeceras.                             |                                                                                                |
+    |  --hw     |  Ocultar resultados según número de palabras.                              |                                                                                                |
+    |  -u       |  URL objetivo.                                                             |  wfuzz -z file,wordlist.txt -u http://objetivo.com/FUZZ                                        |
+    |  -d       |  Enviar datos en el cuerpo (para fuzzing en POST).                         |  wfuzz -z file,wordlist.txt -d "usuario=FUZZ&password=1234" http://objetivo.com/login.php      |
+    |  -H       |  Añadir cabeceras personalizadas.                                          |  -H "User-Agent: FUZZ"                                                                         |
+    |  --ss     |  Mostrar solo respuestas que contengan una cadena específica.              |                                                                                                |
+    |  -o       |  Exportar resultados en diferentes formatos (json, csv).                   |                                                                                                |
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Ejemplos prácticos
+
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------
+    |  Descripción                          |  Ejemplo de Uso                                                                                                |  
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------
+    |  Enumerar directorios ocultos         |  wfuzz -c -z file,/usr/share/seclists/Discovery/Web-Content/common.txt --hc 404 http://objetivo.com/FUZZ       |
+    |  Fuzzing en parámetros GET            |  wfuzz -c -z file,params.txt http://objetivo.com/index.php?FUZZ=test                                           |
+    |  Fuzzing en POST (brute force login)  |  wfuzz -c -z file,usuarios.txt -z file,passwords.txt -d "user=FUZZ&pass=FUZ2Z" http://objetivo.com/login.php   |
+    |  Fuzzing en cabeceras HTTP            |  wfuzz -c -z file,wordlist.txt -H "X-Forwarded-For: FUZZ" http://objetivo.com/                                 |
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Ventajas de Wfuzz
+
+    > Muy flexible (parámetros, cabeceras, POST, cookies, etc.)
+    > Ideal para pruebas personalizadas (no solo directorios como DirBuster o Gobuster)
+    > Soporta múltiples diccionarios y payloads en una misma ejecución
+    > Open source y ampliamente usado en pentesting y bug bounty

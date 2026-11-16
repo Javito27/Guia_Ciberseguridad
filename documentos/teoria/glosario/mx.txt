@@ -1,0 +1,48 @@
+Es un tipo de registro DNS que indica qué servidor recibe los correos electrónicos de un dominio.
+
+Como funciona: 
+
+    Si mandas un correo a: ana@empresa.com, el proceso es:
+
+        1. El servidor que envía el email pregunta al DNS → “¿Cuál es el MX de empresa.com?”
+
+        2. El DNS responde → mail.empresa.com
+
+        3. El correo se entrega a ese servidor 📩
+
+
+Ejemplo real:
+
+    empresa.com.   MX   10 mail1.empresa.com.
+    empresa.com.   MX   20 mail2.empresa.com.
+
+    Esto significa:
+
+        - 10 y 20 → prioridad (cuanto más bajo, más prioridad)
+        - mail1 → servidor principal
+        - mail2 → servidor de respaldo
+
+        📌 Si el de prioridad 10 falla, se usa el 20.
+
+
+Para qué sirve MX
+
+    - Recibir correos electrónicos
+    - Definir servidores principales y de backup
+    - Gestionar alta disponibilidad del correo
+
+    ⚠️ Sin MX → El dominio no puede recibir correos correctamente
+
+
+Los MX son importantes porque:
+
+    Permiten identificar:
+
+        servidores de correo reales
+        proveedores (Google, Microsoft, etc.)
+
+    Son objetivo de:
+
+        phishing
+        spoofing
+        ataques al correo

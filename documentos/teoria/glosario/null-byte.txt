@@ -1,0 +1,43 @@
+¿Qué es un Null Byte?
+
+	Un Null Byte es un carácter especial cuyo valor en ASCII es 0 (hexadecimal 0x00). Se usa principalmente para indicar el fin de una cadena de texto en muchos lenguajes de programación antiguos o de 
+	bajo nivel, como C y C++.
+
+	Ejemplo:
+	
+		char palabra[5] = "hola";
+
+	En memoria, esto se guarda como:
+	
+		'h' 'o' 'l' 'a' '\0'
+
+	Ese \0 es el null byte, que le dice al programa “aquí termina la cadena”.
+	
+¿Por qué es importante en ciberseguridad?
+
+	En seguridad informática, los null bytes pueden ser explotados en ataques cuando un sistema no maneja bien ese carácter especial.	
+	
+	Ejemplo típico: Ataques de Null Byte Injection
+	
+		> Muchos programas antiguos leen archivos hasta encontrar \0.
+
+		> Si un atacante introduce un null byte en una entrada, puede engañar al sistema.
+
+		> Por ejemplo, en lugar de imagen.jpg, alguien podría subir imagen.jpg\0.php.
+
+			- El sistema podría ver solo imagen.jpg y aceptarlo.
+
+			- Pero el servidor realmente guarda imagen.jpg\0.php, lo que puede ser interpretado como un script PHP malicioso.
+	
+	Esto fue un problema común en aplicaciones web en PHP, Java y C antes de que modernizaran sus manejos de strings.
+	
+Otros usos
+
+	> Análisis forense: un null byte puede ser usado para ocultar datos dentro de archivos.
+	> Exploits: usado en buffer overflows y manipulación de cadenas.
+	> Ciberseguridad defensiva: entenderlos ayuda a detectar intentos de evasión en logs o cargas maliciosas.
+		
+En resumen:
+
+	Un null byte (\0) es un carácter especial que marca el final de una cadena. En ciberseguridad, es importante porque, si no se gestiona bien, puede permitir evasiones, inyecciones o explotación de 
+	vulnerabilidades en aplicaciones.

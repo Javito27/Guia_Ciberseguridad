@@ -1,0 +1,116 @@
+Listado de máquinas por puertos: 
+
+ Puerto       | Protocolo | Servicio             | Máquina HTB     | Dificultad  
+----------------------------------------------------------------------------------------
+ 21           | TCP       | FTP                  | Lame            | 🟢 Fácil ✅
+              | TCP       | FTP                  | Devel           | 🟢 Fácil ✅
+              | TCP       | FTP                  | Irked           | 🟢 Fácil 
+----------------------------------------------------------------------------------------
+ 22           | TCP       | SSH                  | Nibbles         | 🟢 Fácil ✅
+              | TCP       | SSH                  | Cap             | 🟢 Fácil ✅
+              | TCP       | SSH                  | Validation      | 🟡 Fácil-Medio 
+----------------------------------------------------------------------------------------
+ 23           | TCP       | Telnet               | Haystack        | 🟠 Medio 
+----------------------------------------------------------------------------------------
+ 25           | TCP       | SMTP                 | Admirer         | 🟡 Fácil-Medio 
+----------------------------------------------------------------------------------------
+ 53           | TCP/UDP   | DNS                  | Forest          | 🟢 Fácil ✔️
+              | TCP/UDP   | DNS                  | Active          | 🟢 Fácil 
+              | TCP/UDP   | DNS                  | Sauna           | 🟢 Fácil 
+----------------------------------------------------------------------------------------
+ 69           | UDP       | TFTP                 | Access          | 🟢 Fácil 
+----------------------------------------------------------------------------------------
+ 80           | TCP       | HTTP                 | Vaccine         | 🟢 Fácil ✅
+              | TCP       | HTTP                 | Bashed          | 🟢 Fácil ✅
+              | TCP       | HTTP                 | Shocker         | 🟢 Fácil 
+----------------------------------------------------------------------------------------
+ 88           | TCP/UDP   | Kerberos             | Forest          | 🟢 Fácil 
+              | TCP/UDP   | Kerberos             | Sauna           | 🟢 Fácil 
+              | TCP/UDP   | Kerberos             | Monteverde      | 🟠 Medio 
+              | TCP/UDP   | Kerberos             | Sizzle          | 🔴 Difícil 
+----------------------------------------------------------------------------------------
+ 135          | TCP       | RPC                  | Lame            | 🟢 Fácil 
+              | TCP       | RPC                  | Legacy          | 🟢 Fácil 
+              | TCP       | RPC                  | Blue            | 🟢 Fácil 
+----------------------------------------------------------------------------------------
+ 139          | TCP       | NetBIOS              | Lame            | 🟢 Fácil 
+              | TCP       | NetBIOS              | Granny          | 🟡 Fácil-Medio 
+              | TCP       | NetBIOS              | Grandpa         | 🟡 Fácil-Medio 
+----------------------------------------------------------------------------------------
+ 161          | UDP       | SNMP                 | Networked       | 🟡 Fácil-Medio 
+              | UDP       | SNMP                 | Haystack        | 🟠 Medio 
+----------------------------------------------------------------------------------------
+ 389          | TCP       | LDAP                 | Forest          | 🟢 Fácil 
+              | TCP       | LDAP                 | Active          | 🟢 Fácil 
+              | TCP       | LDAP                 | Sauna           | 🟢 Fácil 
+              | TCP       | LDAP                 | Multimaster     | 🔴 Difícil 
+----------------------------------------------------------------------------------------
+ 443          | TCP       | HTTPS                | Bastion         | 🟡 Fácil-Medio 
+              | TCP       | HTTPS                | Admirer         | 🟡 Fácil-Medio 
+              | TCP       | HTTPS                | Postman         | 🟢 Fácil 
+----------------------------------------------------------------------------------------
+ 445          | TCP       | SMB                  | Lame            | 🟢 Fácil 
+              | TCP       | SMB                  | Blue            | 🟢 Fácil 
+              | TCP       | SMB                  | Legacy          | 🟢 Fácil 
+              | TCP       | SMB                  | Granny          | 🟡 Fácil-Medio 
+              | TCP       | SMB                  | Grandpa         | 🟡 Fácil-Medio 
+----------------------------------------------------------------------------------------
+ 465          | TCP       | SMTPS                | Admirer         | 🟡 Fácil-Medio 
+----------------------------------------------------------------------------------------
+ 587          | TCP       | SMTP                 | Admirer         | 🟡 Fácil-Medio 
+----------------------------------------------------------------------------------------
+ 636          | TCP       | LDAPS                | Sizzle          | 🔴 Difícil 
+----------------------------------------------------------------------------------------
+ 873          | TCP       | rsync                | —               | — 
+----------------------------------------------------------------------------------------
+ 1433         | TCP       | MS SQL Server        | Arctic          | 🟢 Fácil 
+              | TCP       | MS SQL Server        | Bastion         | 🟠 Medio 
+              | TCP       | MS SQL Server        | Intelligence    | 🔴 Difícil 
+----------------------------------------------------------------------------------------
+ 2525         | TCP       | SMTP alternativo     | —               | — 
+----------------------------------------------------------------------------------------
+ 3268         | TCP       | LDAP Global Catalog  | Sizzle          | 🔴 Difícil 
+              | TCP       | LDAP Global Catalog  | Multimaster     | 🔴 Difícil 
+----------------------------------------------------------------------------------------
+ 3269         | TCP       | LDAP GC SSL          | Sizzle          | 🔴 Difícil 
+----------------------------------------------------------------------------------------
+ 3306         | TCP       | MySQL                | Haircut         | 🟠 Medio 
+----------------------------------------------------------------------------------------
+ 3389         | TCP       | RDP                  | Blue            | 🟢 Fácil 
+              | TCP       | RDP                  | Devel           | 🟢 Fácil 
+              | TCP       | RDP                  | Resolute        | 🟠 Medio 
+              | TCP       | RDP                  | Forest          | 🟢 Fácil 
+----------------------------------------------------------------------------------------
+ 5432         | TCP       | PostgreSQL           | Cascade         | 🟠 Medio 
+----------------------------------------------------------------------------------------
+ 5985/5986    | TCP       | WinRM                | Forest          | 🟢 Fácil 
+              | TCP       | WinRM                | Resolute        | 🟠 Medio 
+              | TCP       | WinRM                | Monteverde      | 🟠 Medio 
+----------------------------------------------------------------------------------------
+ 6379         | TCP       | Redis                | Postman         | 🟢 Fácil 
+----------------------------------------------------------------------------------------
+ 8080         | TCP       | HTTP alternativo     | Jerry           | 🟢 Fácil 
+              | TCP       | HTTP alternativo     | Nineveh         | 🟡 Fácil-Medio 
+----------------------------------------------------------------------------------------
+ 8443         | TCP       | HTTPS alternativo    | Trick           | 🟠 Medio      
+---------------------------------------------------------------------------------------- 
+ 8500         | TCP       | Consul               | Mantis          | 🔴 Difícil       
+----------------------------------------------------------------------------------------
+ 27017-27018  | TCP       | MongoDB              | Mango           | 🟠 Medio         
+----------------------------------------------------------------------------------------
+ 61616        | TCP       | ActiveMQ             | CVE-2023-46604  | 🟠 Medio-Difícil 
+----------------------------------------------------------------------------------------
+
+Leyenda: 🟢 Fácil · 🟡 Fácil-Medio · 🟠 Medio · 🔴 Difícil.
+
+*****************************************************************************************
+
+Sitio Web → https://app.hackthebox.com/home
+
+*****************************************************************************************
+
+Para ejecutar la imagen en Kali e iniciar la máquina, hay que introducir el siguiente comando: 
+
+    sudo openvpn machines_eu-dedivip-5.ovpn
+
+Y después desde la web de HTB, se pulsa el botón "Start Machine" para que genere la IP con la que se va a trabajar. 

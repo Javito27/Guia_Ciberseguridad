@@ -1,0 +1,29 @@
+¿Qué es Traceroute?
+
+	traceroute es una herramienta de red que sirve para rastrear la ruta que siguen los paquetes desde tu máquina hasta un destino (por ejemplo, un sitio web o una IP).
+
+	Muestra cada salto intermedio (routers y nodos) que atraviesan los paquetes, junto con el tiempo de respuesta (latencia) de cada uno.
+
+¿Para qué se usa?
+
+	> Diagnóstico de problemas de red (latencia, caídas, rutas largas).
+	> Identificar dónde se corta la comunicación.
+	> Ver la ruta física o lógica que sigue la conexión hacia un servidor.
+	> Reconocimiento en ciberseguridad y pentesting para conocer infraestructura de red.
+
+Opciones principales 
+	---------------------------------------------------------------------------------------------------------------
+	|  Opción    |	Descripción                                           |  Ejemplo de Uso                       |
+	---------------------------------------------------------------------------------------------------------------
+	|            |	Mostrará todos los saltos entre tu equipo y Google    |  traceroute google.com                |
+	|    -m      |	Número máximo de saltos                               |  traceroute -m 15 google.com          |
+	|    -p      |	Definir puerto                                        |  traceroute -p 80 google.com          |
+	|    -I      |	Protocolo ICMP                                        |  traceroute -I google.com             |
+	|    -T      |	Protocolo TCP                                         |  traceroute -T -p 443 google.com      |
+	|    -w      |	Tiempo máximo de espera                               |  traceroute -w 2 google.com           |
+	|    -q      |	Número de intentos por salto                          |  traceroute -q 1 google.com           |
+	---------------------------------------------------------------------------------------------------------------
+	
+En Windows, el comando equivalente es tracert. Un ejemplo de su uso es:
+
+	tracert google.com

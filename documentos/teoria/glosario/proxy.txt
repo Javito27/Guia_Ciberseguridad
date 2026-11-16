@@ -1,0 +1,9 @@
+Es un servidor intermediario que se coloca entre Internet y el usuario. Oculta tu IP real, filtra tráfico, bloquea contenido malicioso y controla accesos (empresas, escuelas). 
+	
+	Tipos:
+	
+		- Forward proxy → el usuario sale a Internet
+		- Reverse proxy → protege servidores (Cloudflare, Nginx)
+		- Transparent proxy → no lo notas
+		- Anonymous / Elite proxy
+		- SOCKS proxy → más flexible (no solo web)

@@ -1,0 +1,71 @@
+Qué es Nmap?
+
+	Nmap (Network Mapper) es una herramienta de código abierto usada para exploración de redes y auditoría de seguridad.
+	
+	Permite descubrir hosts activos, puertos abiertos, servicios en ejecución e incluso sistemas operativos.
+
+¿Para qué se usa Nmap?
+
+	> Descubrir equipos conectados en una red.
+	> Escanear puertos abiertos y servicios activos.
+	> Identificar versiones de software.
+	> Detectar sistema operativo del objetivo.
+	> Encontrar vulnerabilidades conocidas (con scripts NSE).
+	> Monitorear seguridad en redes empresariales.
+
+	Es ampliamente utilizada en pentesting, hacking ético, análisis forense y administración de redes.
+
+Opciones de escaneo 
+
+	---------------------------------------------------------------------------------------------------------------------------------------------------
+	|  Opción              |  Descripción                                                                                                             |
+	---------------------------------------------------------------------------------------------------------------------------------------------------
+	|  <ip>/24             |  Escanea varios hosts, rangos o toda la subred                                                                           |
+	|  -sS                 |  Escaneo SYN (escaneo sigiloso), no completa la conexión TCP (Evita exceder ruido)                                       |
+	|  -sC                 |  Ejecuta los scripts de nmap para detección de versiones, info del sistema y pruebas básicas. (Enum)                     |
+	|  -sV                 |  Detecta las versiones de los servicios (Enum)                                                                           |
+	|  -sVC                |  Combinación de los comandos sC y sV                                                                                     |
+	|  -sU                 |  Escaneo UDP (TFTP usa UDP)                                                                                              |
+	|  -sn                 |  Escaneo simple para determinar si el host está activo, pero sin escanear puertos. Se conoce como Ping Scan              |
+	|  --min-rate <TIME>   |  Define el mínimo de mtu (Unidad Máxima de Transmisión). Aumenta la velocidad del escaneo                                |
+	|  -Pn                 |  Desactiva el envío de ping previo (Evita exceder ruido)                                                                 |
+	|  -p                  |  Escanea los puertos específicos que escribamos                                                                          |
+	|  -p-                 |  Escanea los 65535 puertos                                                                                               |
+	|  --open              |  Solo muestra los puertos que están abiertos                                                                             |
+	|  --top-ports 100     |  Escanea los 100 puertos más comunes                                                                                     |
+	|  -oN ports.txt       |  Crea un fichero con la sálida del nmap en formato de texto                                                              |
+	|  -oX ports.xml       |  Crea un fichero con la sálida del nmap en otros formatos                                                                |
+	|  -oG Escaneo         |  Especifica el formato de salida y el nombre del archivo donde se guardarán los resultados del escaneo                   |
+	|  -vvv                |  Verbose o modo detallado. Mientras más v se ponga, más detalle nos devolverá                                            |
+	|  -n                  |  Indica que no resuelva nombres de dominio (DNS)                                                                         |
+	|  -w                  |  Diccionario                                                                                                             |
+	|  -R                  |  Habilita la opción de registro de rutas (Record Route). Permite rastrear la ruta completa de ida y vuelta del paquete   |
+	|  -A                  |  Habilita la detección de SO, versiones, escaneo de scripts y el traceroute                                              |
+	|  -O                  |  Intenta identificar el sistema operativo del host                                                                       |
+	|  -t                  |  Hilos (Threads)                                                                                                         |
+	|  --no-error          |  Para que no aparezca errores                                                                                            |
+	|  --script vuln       |  Ejecuta scripts para encontrar vulnerabilidades conocidas                                                               |
+	---------------------------------------------------------------------------------------------------------------------------------------------------
+		
+Ejemplo de uso
+
+   Protocolo TCP (Transmission Control Protocol)
+   
+   	   sudo nmap -sVC -vvv <IP> -Pn
+	   
+   	   sudo nmap <IP>
+   	   
+   	   sudo nmap -sS -sVC <IP> --min-rate=1500 -Pn
+   	   
+   	   nmap -sC -sV -p- --min-rate 10000 -oN nmap.txt <IP> -vvv
+   	   
+   	   nmap -p- -sC -sV -Pn -oN full-scan.txt <IP>
+   	   
+   	   sudo nmap -T5 -A -v <IP>
+   
+   
+   Protocolo UDP (User Datagram Protocol)
+   
+   	   sudo nmap -sU --min-rate 10000 <IP> 
+	   
+   	   nmap -sU <IP>

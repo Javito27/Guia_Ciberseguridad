@@ -1,0 +1,79 @@
+¿Qué es Impacket?
+
+    Impacket es un conjunto de scripts y librerías en Python que permiten trabajar con protocolos de red de bajo nivel, principalmente en entornos Windows.	Es muy usado en 
+    pentesting, red teaming y auditorías de seguridad porque facilita la interacción con servicios de Microsoft como:
+
+        > SMB
+        > MSRPC
+        > LDAP
+        > Kerberos
+        > WMI
+        > RDP
+
+    En otras palabras: sirve para explotar, administrar y hacer reconocimiento en redes Windows.
+
+¿Para qué se usa?
+
+    Algunas tareas comunes que se pueden realizar con Impacket:
+
+        > Enumeración de usuarios y máquinas en Active Directory.
+        > Autenticación y ejecución remota en equipos Windows.
+        > Ataques a SMB (ejemplo: Pass-the-Hash, Pass-the-Ticket).
+        > Consultas a LDAP y manipulación de objetos en AD.
+        > Escaneo de recursos compartidos en la red.
+        > Extracción de hashes y credenciales.
+
+    Es una herramienta muy usada en CTFs y entornos reales de pentesting.
+
+Opciones y scripts disponibles
+
+    Autenticación / Kerberos
+    --------------------------------------------------------------------------------------------------
+    |   Script           |   Descripción                                                             |
+    --------------------------------------------------------------------------------------------------                           
+    |   GetNPUsers.py    |   Enumerar usuarios y obtener hashes AS-REP (Kerberos AS-REP roasting).   |
+    |   GetUserSPNs.py   |   Extrae hashes de SPN (Kerberoasting).                                   |
+    |   ticketer.py      |   Crear tickets Kerberos (TGT/TGS).                                       |
+    |   getTGT.py        |   Solicita un TGT para un usuario.                                        |
+    |   getST.py         |   Solicita un TGS con un TGT válido.                                      |
+    --------------------------------------------------------------------------------------------------
+	
+    SMB / Archivos
+    ---------------------------------------------------------------------------------
+    |   Script         |   Descripción                                              |
+    ---------------------------------------------------------------------------------
+    |   smbclient.py   |   Cliente SMB (similar a smbclient de Linux).              |
+    |   smbexec.py     |   Ejecutar comandos en remoto vía SMB.                     |
+    |   psexec.py      |   Similar a PsExec de Sysinternals (ejecución remota).     |
+    |   wmiexec.py     |   Ejecución remota de comandos usando WMI.                 |
+    |   atexec.py      |   Ejecución remota usando el programador de tareas (AT).   |
+    ---------------------------------------------------------------------------------
+
+    Enumeración / Reconocimiento
+    ------------------------------------------------------------------------------
+    |   Script          |   Descripción                                          |
+    ------------------------------------------------------------------------------
+    |   lookupsid.py    |   Enumerar usuarios y grupos mediante SID.             |
+    |   samrdump.py     |   Dumpea información de SAM (usuarios, grupos, etc).   |
+    |   rpcdump.py      |   Enumeración de endpoints RPC.                        |
+    |   reg.py          |   Leer / modificar el registro de Windows.             |
+    ------------------------------------------------------------------------------
+	
+    Ataques
+    ------------------------------------------------------------------------------
+    |   Script           |   Descripción                                         |
+    ------------------------------------------------------------------------------ 
+    |   secretsdump.py   | Extraer hashes de contraseñas (SAM, LSA, NTDS.dit).   |
+    |   ntlmrelayx.py    | Ataque de NTLM relay (muy usado en AD).               |
+    |   dcomexec.py      | Ejecución de comandos mediante DCOM.                  |
+    ------------------------------------------------------------------------------
+
+Descarga / Instalación 
+
+    git clone https://github.com/fortra/impacket.git
+	
+Ejemplo básico de uso
+
+    python3 wmiexec.py dominio/usuario:password@192.168.1.10
+
+    Ejecuta comandos en la máquina víctima a través de WMI.

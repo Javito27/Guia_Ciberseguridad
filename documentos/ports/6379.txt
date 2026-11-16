@@ -1,0 +1,59 @@
+📌 Es el puerto por defecto de Redis, una base de datos NoSQL en memoria muy rápida.
+
+    Redis es un sistema de almacenamiento clave-valor (key-value) usado para:
+
+        ⚡ Caché de aplicaciones web
+        📊 Almacenamiento temporal de sesiones
+        📬 Sistemas de colas
+        🔁 Mensajería interna
+        📈 Contadores y métricas
+
+    Es muy común en stacks web modernos (Node, Django, Laravel, etc.). Redis almacena datos en memoria RAM para máxima velocidad.
+
+⚙️ Instalación 
+
+    sudo apt update
+    sudo apt install redis-tools -y
+
+🔐 ¿Es seguro?
+
+    Por defecto ⚠️ NO. Redis históricamente:
+
+        · No requería autenticación
+        · No cifraba tráfico
+        · Estaba pensado para red interna
+
+    Hoy puede configurarse con:
+
+        🔑 Contraseña (requirepass)
+        🔐 TLS
+        🔒 Restricción por IP
+
+🧪 En pentesting
+
+    Si el 6379 está abierto hacia Internet ⚠️ es muy peligroso. Los posibles riesgos son:
+
+        · Acceso total a la base de datos
+        · Robo de sesiones
+        · Escritura de archivos en servidor
+        · Posible ejecución remota (en configuraciones débiles)
+
+💣 Riesgos reales
+
+    Redis mal configurado ha permitido:
+
+        · Minería de criptomonedas
+        · Backdoors en servidores
+        · Exfiltración de datos
+        · Escalada de privilegios
+
+🎯 Ejemplo de uso básico con la herramienta REDIS-CLI
+	
+    redis-cli -h <IP> -p 6379
+
+    Donde usamos los siguientes comandos: 
+	
+        > info → Muestra toda la información 
+        > select <POSITION> → Selecciona la posición que queremos acceder
+        > keys * → Muestra las tablas disponibles
+        > get <TABLE> → Seleccionamos la tabla a la que queremos acceder

@@ -1,0 +1,25 @@
+¿Qué es FPM?
+
+	> PHP-FPM (FastCGI Process Manager) es una implementación alternativa de PHP FastCGI que gestiona procesos PHP de forma más eficiente.	
+	> Está diseñado para mejorar el rendimiento de aplicaciones web escritas en PHP (como WordPress, Joomla, Drupal, Magento, etc.), sobre todo en entornos de alta concurrencia (muchos usuarios a la vez).
+	
+¿Para qué sirve?
+
+	1. Mejor rendimiento → Maneja más peticiones por segundo que el PHP tradicional.
+	2. Ahorro de recursos → Usa un sistema de gestión de procesos que optimiza la memoria y CPU.
+	3. Estabilidad → Permite configurar cómo reiniciar procesos fallidos, evitando caídas del servidor.
+	4. Seguridad → Se puede ejecutar cada sitio web con un pool de procesos PHP propio, bajo distintos usuarios, evitando que un sitio acceda a los archivos de otro.
+	5. Configuración flexible → Se pueden ajustar límites de memoria, tiempo de ejecución, número de procesos activos, etc.	
+	
+Relación con ciberseguridad
+
+	En seguridad de servidores web, PHP-FPM ayuda a:
+
+		> Aislar aplicaciones (evita escaladas de privilegios entre webs en el mismo servidor).
+		> Reducir la superficie de ataque (al poder deshabilitar funciones peligrosas en cada pool).
+		> Evitar denegación de servicio (DoS) configurando límites de procesos.	
+	
+Ejemplo práctico:
+
+	En un servidor Nginx + PHP-FPM, cuando un usuario entra a tu web, Nginx pasa la petición a PHP-FPM, que ejecuta el código PHP y devuelve el resultado en HTML.
+	Esto lo hace más rápido y seguro que usar el antiguo mod_php en Apache.	

@@ -1,0 +1,20 @@
+hgLame 
+
+	IP > 10.129.86.127
+	
+Enumeración 
+
+	nmap -sVC 10.129.86.127 -Pn 
+	
+		•	21/tcp  open  ftp
+		•	22/tcp  open  ssh
+		•	139/tcp open  netbios-ssn
+		•	445/tcp open  microsoft-ds 
+FTP
+
+	ftp -a 
+
+	msfconsole vsftpd 2.3.4. > backdoors 
+	
+	
+SMB 

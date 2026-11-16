@@ -1,0 +1,46 @@
+Wireshark (Sniffer) es una herramienta de análisis y captura de paquetes de red. Es de código abierto y ampliamente usada tanto en administración de redes como en ciberseguridad para estudiar 
+el tráfico que circula por una red.
+
+¿Para qué se usa?
+
+    Administración de redes
+    
+        > Monitorizar tráfico de red en tiempo real.
+        > Analizar problemas de conectividad.
+        > Diagnosticar latencias o pérdidas de paquetes.
+        > Ver protocolos que se están usando (HTTP, DNS, TCP, UDP, etc.).
+    
+    Ciberseguridad
+    
+        > Detectar actividad sospechosa (ataques, malware, intrusiones).
+        > Analizar tráfico para ataques MITM (Man-in-the-Middle) o sniffing.
+        > Extraer contraseñas o datos no cifrados (solo con permisos legales).
+        > Evaluar vulnerabilidades de protocolos y servicios.
+    
+Cómo funciona
+
+        > Captura paquetes en tiempo real desde la tarjeta de red.
+        > Permite filtrar y clasificar por IP, puerto, protocolo, tamaño, etc.
+        > Muestra información detallada de cada paquete, incluyendo cabeceras y payload.
+
+Comandos CLI (tshark)
+
+    --------------------------------------------------------------------------------------------
+    |   Comando                            |   Descripción                                     |
+    --------------------------------------------------------------------------------------------
+    |   tshark -i eth0                     |   Captura todo el tráfico en la interfaz eth0     |
+    |   tshark -i eth0 host 192.168.1.10   |   Captura tráfico de un host específico           |
+    |   tshark -i eth0 -w captura.pcap     |   Guardar la captura en un archivo pcap           |
+    |   tshark -r captura.pcap             |   Leer un archivo pcap previamente guardado       |
+    --------------------------------------------------------------------------------------------																							   |
+
+Funciones avanzadas
+
+    > Seguimiento de conexiones TCP/UDP (Follow TCP Stream).
+    > Exportar datos en varios formatos (CSV, JSON, XML).
+    > Detectar protocolos anómalos o no estándar.
+    > Integración con scripts para análisis automatizado.
+
+Resumen rápido
+
+    Wireshark es la navaja suiza del análisis de redes, tanto para administradores como para profesionales de ciberseguridad. Permite ver todo el tráfico, filtrarlo, analizarlo y detectar problemas o ataques.

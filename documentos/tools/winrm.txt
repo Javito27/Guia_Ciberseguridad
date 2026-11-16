@@ -1,0 +1,65 @@
+💻 WinRM (Windows Remote Management) es la implementación de Microsoft del estándar WS-Management (WSMan), un protocolo basado en SOAP que permite la administración remota de sistemas 
+Windows mediante HTTP/HTTPS.
+
+Fue introducido a partir de Windows Vista / Windows Server 2008 y actualmente es un componente fundamental tanto en la administración de sistemas Windows como en el ámbito de la 
+ciberseguridad (ofensiva y defensiva).
+
+🎯 ¿Para qué se usa WinRM?
+
+    🔧 En administración de sistemas
+
+        · Ejecutar comandos remotamente en otros equipos Windows.
+        · Gestionar configuraciones mediante scripts de PowerShell.
+        · Automatizar despliegues y tareas administrativas.
+        · Administrar servidores de forma remota, de manera similar a SSH en Linux.
+
+🔐 En ciberseguridad (Pentesting / Red Team)
+
+    · Se utiliza como vector de movimiento lateral: si un atacante obtiene credenciales válidas y WinRM está habilitado, puede abrir una sesión remota en otros equipos.
+    · Herramientas como Evil-WinRM permiten interactuar con el sistema remoto (ejecutar comandos, cargar scripts, etc.).
+    · Es clave en la fase de post-explotación, donde el atacante busca:
+
+        · Expandir acceso dentro de la red
+        · Escalar privilegios
+        · Mantener persistencia
+
+🌐 Puertos y protocolos
+
+    5985/TCP → WinRM sobre HTTP
+    5986/TCP → WinRM sobre HTTPS (cifrado con TLS)
+
+⚙️ Opciones y configuración principales en Windows
+
+    🔹 Configuración básica
+
+        -------------------------------------------------------------------------------------------
+        |  Descripción                    |  Ejemplo de uso                                       |
+        -------------------------------------------------------------------------------------------
+        |  Habilitar WinRM en el equipo   |  winrm quickconfig                                    |
+        |  Ver configuración actual       |  winrm get winrm/config                               |
+        |  Permitir autenticación básica  |  winrm set winrm/config/service/auth @{Basic="true"}  |
+        |  Configurar WinRM sobre HTTPS   |  winrm quickconfig -transport:https                   |
+        -------------------------------------------------------------------------------------------
+
+    🔹 Ejecución de comandos remotos (WinRS)
+
+        ------------------------------------------------------------------------------------------
+        |  Descripción                         |  Ejemplo de uso                                 |
+        ------------------------------------------------------------------------------------------
+        |  Ejecutar comando en máquina remota  |  winrs -r:IP -u:usuario -p:contraseña ipconfig  |
+        ------------------------------------------------------------------------------------------
+
+    🔹 Conexión vía PowerShell (Remoting)
+
+        -----------------------------------------------------------------------------------------------------------------------
+        |  Descripción                             |  Ejemplo de uso                                                          |
+        -----------------------------------------------------------------------------------------------------------------------
+        |  Crear sesión remota                     |  Enter-PSSession -ComputerName 192.168.1.10 -Credential dominio\usuario  |
+        |  Ejecutar comandos en múltiples equipos  |  Invoke-Command -ComputerName PC1,PC2 -ScriptBlock { Get-Process }       |
+        -----------------------------------------------------------------------------------------------------------------------
+
+⚠️ Riesgos de seguridad
+
+    · Uso de credenciales débiles → acceso remoto fácil para atacantes.
+    · Configuración insegura (ej. autenticación básica sin HTTPS) → posible exposición de credenciales.
+    · Puede ser explotado para movimiento lateral en redes corporativas.

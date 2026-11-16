@@ -1,0 +1,43 @@
+¿Qué son las cookies?
+
+	Las cookies son pequeños archivos de texto que un sitio web guarda en tu navegador cuando lo visitas. Sirven para almacenar información sobre tu actividad o preferencias y así 
+	mejorar la experiencia de navegación.
+
+	En ciberseguridad, también son importantes porque pueden ser usadas para rastrear usuarios, mantener sesiones abiertas o, si se gestionan mal, ser un punto de ataque (por ejemplo, 
+	con robo de cookies de sesión).
+
+¿Para qué sirven?
+
+	1. Autenticación y sesión: Mantienen tu sesión iniciada (ejemplo: entras en Gmail y no tienes que escribir tu contraseña en cada página).
+	2. Personalización: Guardan preferencias (idioma, tema oscuro/claro, carrito de compras, etc.).
+	3. Analítica y publicidad: Rastrean tu comportamiento en diferentes páginas para mostrarte anuncios personalizados.
+	4. Seguridad: Algunas cookies ayudan a verificar que las peticiones provienen de ti y no de un atacante (ej. cookies CSRF tokens).
+
+Tipos de cookies en ciberseguridad
+
+	> De sesión: Temporales, se borran al cerrar el navegador.
+	> Persistentes: Se guardan en el disco y tienen fecha de caducidad.
+	> De primera parte: Creada por el sitio que visitas directamente.
+	> De terceros: Creada por servicios externos (ej. publicidad, redes sociales).
+	> Seguras y HttpOnly: Configuraciones que limitan el acceso para protegerlas contra ataques (como Cross-Site Scripting).
+
+¿Cómo ver las cookies en el navegador?.
+
+	En Google Chrome / Edge / Brave:
+
+		1. Abre el sitio web.
+		2. Pulsa F12 (abre las herramientas de desarrollador).
+		3. Ve a la pestaña Application (Aplicación).
+		4. En el menú lateral izquierdo, busca Storage → Cookies.
+		5. Verás todas las cookies de ese sitio: nombre, valor, dominio, fecha de expiración, flags de seguridad (Secure, HttpOnly).
+
+	En Firefox:
+
+		1. Pulsa F12 → pestaña Almacenamiento (Storage).
+		2. En el panel lateral selecciona Cookies.
+
+	En Safari (MacOS/iOS):
+
+		1. Activa el menú de desarrollador (en Preferencias → Avanzado → Mostrar menú Desarrollo).
+		2. Menú Desarrollo → Mostrar inspector web.
+		3. Ve a la pestaña Almacenamiento → Cookies.

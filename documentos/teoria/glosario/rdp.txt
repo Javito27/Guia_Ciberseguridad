@@ -1,0 +1,21 @@
+Es un protocolo de Microsoft (TCP 3389) que permite conectarte a otro ordenador de forma remota y ver y controlar su escritorio como si estuvieras delante.
+
+Se usa para: 
+
+    - Administrar servidores Windows
+    - Teletrabajo
+    - Soporte técnico
+    - Acceso remoto a equipos de empresa
+
+Como funciona: 
+
+    1. El cliente RDP se conecta al servidor
+    2. Se autentica con usuario y contraseña
+    3. El servidor:
+
+        - envía la imagen del escritorio
+        - recibe teclado y ratón
+
+    4. La sesión queda activa
+
+RDP no viene con usuario ni contraseña predefinidas. Siempre se necesita una cuenta válida del sistema (local o de dominio).

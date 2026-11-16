@@ -1,0 +1,46 @@
+📌 Se usa para SMTPS, es decir, SMTP sobre SSL/TLS (envío de correo cifrado desde el inicio de la conexión).
+
+    Es una versión segura de SMTP donde:
+
+        🔒 La conexión va cifrada desde el primer momento
+        Se usa TLS/SSL
+        Normalmente requiere autenticación
+
+    A diferencia del puerto 25 (SMTP tradicional), aquí la seguridad es obligatoria.
+
+⚙️ ¿Cómo funciona?
+
+    1️⃣ El cliente se conecta al servidor por el puerto 465
+    2️⃣ Se establece el handshake TLS
+    3️⃣ Se cifra toda la comunicación
+    4️⃣ Se envía el correo de forma segura
+
+🧪 En ciberseguridad
+
+    Si el 465 está abierto:
+
+        Revisar configuración TLS
+        Comprobar certificados
+        Ver si permite autenticación débil
+        Analizar versiones SSL antiguas
+
+📊 Puertos relacionados con correo
+
+    -----------------------------------------------------------
+    | Puerto | Protocolo       | Uso                          |
+    -----------------------------------------------------------
+    | 25     | SMTP            | Envío entre servidores       |
+    | 587    | SMTP Submission | Envío autenticado (STARTTLS) |
+    | 465    | SMTPS           | SMTP cifrado desde inicio    |
+    | 110    | POP3            | Recepción                    |
+    | 143    | IMAP            | Recepción                    |
+    -----------------------------------------------------------
+
+🔐 Diferencia 465 vs 587
+
+    -----------------------------------------------------------
+    | Puerto | Cifrado     | Método                           |
+    -----------------------------------------------------------
+    | 465    | TLS directo | Cifrado desde el inicio          |
+    | 587    | STARTTLS    | Empieza sin cifrar y luego cifra |
+    -----------------------------------------------------------

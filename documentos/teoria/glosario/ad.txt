@@ -1,0 +1,62 @@
+Es un servicio de Microsoft utilizado en redes empresariales para gestionar de forma centralizada usuarios, equipos, contraseñas, permisos y recursos de una organización.
+
+🔑 Estructura de un Active Directory
+
+    ❌ Sin Active Directory:
+
+        · Cada ordenador tiene sus propios usuarios.
+        · Las contraseñas se gestionan individualmente.
+        · Los permisos deben configurarse equipo por equipo.
+        · La administración es mucho más complicada.
+
+    ✅ Con Active Directory:
+
+        · Los usuarios se gestionan desde un punto central.
+        · Los empleados pueden iniciar sesión en distintos equipos con sus credenciales corporativas.
+        · Se asignan permisos según departamentos o puestos.
+        · Se aplican políticas de seguridad centralizadas.
+
+🚀 Funcionamiento 
+
+    El elemento principal es el Domain Controller (DC), un servidor que ejecuta los servicios de Active Directory.
+
+        1️⃣ Un empleado enciende su ordenador.
+        2️⃣ Introduce su usuario y contraseña corporativos.
+        3️⃣ El equipo contacta con el Domain Controller.
+        4️⃣ El DC verifica las credenciales mediante Kerberos.
+        5️⃣ Si son correctas, permite el inicio de sesión y aplica las políticas correspondientes.
+
+🧩 Conceptos importantes 
+
+      Concepto                     Significado
+    ---------------------------------------------------------------------------------------------------
+      Domain                    |  Dominio que agrupa usuarios, equipos y recursos.
+      Domain Controller (DC)    |  Servidor que administra el dominio.
+      Forest                    |  Conjunto de uno o varios dominios relacionados.
+      Organizational Unit (OU)  |  Contenedor para organizar usuarios y equipos.
+      Group Policy (GPO)        |  Políticas centralizadas de configuración y seguridad.
+      LDAP                      |  Protocolo para consultar y modificar información del directorio.
+      Kerberos                  |  Protocolo de autenticación.
+      NTLM                      |  Protocolo de autenticación de Microsoft.
+      SID                       |  Identificador de seguridad de usuarios y grupos.
+      SPN                       |  Identifica servicios asociados a cuentas de dominio.
+    ---------------------------------------------------------------------------------------------------
+
+🧪 Ataques más habituales en ciberseguridad
+
+      Ataque               Descripción
+    ------------------------------------------------------------------------------------------------------------------
+      AS-REP Roasting   |  Ataca cuentas sin preautenticación Kerberos.
+      Kerberoasting     |  Intenta obtener contraseñas de cuentas asociadas a SPN.
+      Pass-the-Hash     |  Utiliza hashes NTLM para autenticarse.
+      Pass-the-Ticket   |  Reutiliza tickets Kerberos robados.
+      DCSync            |  Simula operaciones de replicación para obtener información de credenciales del dominio.
+      Golden Ticket     |  Falsifica tickets Kerberos utilizando material criptográfico del dominio.
+      Lateral Movement  |  Permite desplazarse entre equipos de la red.
+    ------------------------------------------------------------------------------------------------------------------
+
+🛠️ Herramientas para auditar AD
+
+    ➡️ BloodHound 
+    ➡️ Impacket 
+    ➡️ PowerView

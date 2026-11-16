@@ -1,0 +1,55 @@
+¿Qué es el THREE-WAY HANDSHAKE?
+
+	Es el proceso de tres pasos que utiliza el protocolo TCP (Transmission Control Protocol) para establecer una conexión confiable entre dos dispositivos en una red (por ejemplo, tu computadora y un servidor 
+	web). Sirve para:
+
+		> Verificar que ambas partes estén disponibles.
+		> Sincronizar números de secuencia (para ordenar datos).
+		> Asegurar que la conexión es bidireccional y confiable antes de transmitir información.
+		
+Pasos del Three-Way Handshake
+
+		> SYN → El cliente envía una señal SYN (synchronize) al servidor para iniciar la conexión.
+		> SYN-ACK → El servidor responde con SYN-ACK (synchronize-acknowledge), confirmando la petición y proponiendo su propio número de secuencia.
+		> ACK → El cliente responde con ACK (acknowledge), confirmando la recepción.
+
+	A partir de ahí, la conexión TCP queda establecida y se puede transmitir información de manera confiable.		
+		
+Importancia en ciberseguridad
+
+	> Los atacantes pueden manipular este proceso para ejecutar ataques como el SYN Flood, donde envían miles de peticiones SYN falsas para saturar al servidor.
+	> En análisis de tráfico (ej. con Wireshark), los analistas revisan el three-way handshake para detectar conexiones legítimas y sospechosas.
+	> Es una de las bases de la seguridad y estabilidad de las comunicaciones en Internet.		
+		
+***********************************************************************************************************************************************************************************************************************************************
+		
+¿Qué es el FOUR-WAY HANDSHAKE?
+
+	Es el proceso de autenticación que se realiza entre un cliente (dispositivo Wi-Fi) y un punto de acceso (router o AP) después de que un dispositivo introduce la contraseña correcta en una red protegida con 
+	WPA/WPA2/WPA3. Su objetivo principal es:
+
+		> Verificar que ambas partes (cliente y AP) conocen la clave compartida (PSK o Pairwise Master Key).
+		> Generar claves únicas de sesión (PTK, Pairwise Transient Key) que se usarán para cifrar los datos transmitidos.
+		> Evitar que la contraseña real circule por el aire.		
+			
+Pasos del Four-Way Handshake
+
+		1. Mensaje 1 (AP → Cliente): El punto de acceso envía un nonce (número aleatorio) al cliente.
+		2. Mensaje 2 (Cliente → AP): El cliente genera su propio nonce, calcula la clave temporal (PTK) usando la PSK y responde al AP con su nonce.
+		3. Mensaje 3 (AP → Cliente): El AP confirma que ambas partes han generado la misma PTK y envía información de configuración junto con un MIC (Message Integrity Code) para verificar la integridad.
+		4. Mensaje 4 (Cliente → AP): El cliente confirma la recepción y la validez de la clave.
+
+	A partir de aquí, la comunicación queda cifrada con claves únicas y seguras.		
+		
+Importancia en ciberseguridad
+
+	> Es el corazón de la seguridad Wi-Fi moderna.
+	> Evita que alguien pueda espiar la clave real de la red.
+	> Es un punto crítico: vulnerabilidades como el famoso ataque KRACK (Key Reinstallation Attack, 2017) se aprovecharon de fallos en la implementación del Four-Way Handshake para descifrar tráfico.		
+		
+***********************************************************************************************************************************************************************************************************************************************		
+		
+En resumen:
+
+	El Three-Way Handshake pertenece a TCP (conexión fiable).
+	El Four-Way Handshake pertenece a Wi-Fi WPA/WPA2/WPA3 (autenticación y cifrado).	

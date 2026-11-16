@@ -1,0 +1,74 @@
+SSH (Secure Shell) es un protocolo de red que permite la conexión segura y cifrada entre dos equipos, normalmente para administración remota de sistemas y 
+transferencia de datos.
+
+Fue creado como reemplazo de protocolos inseguros como Telnet o rlogin, que transmitían datos en texto plano (incluyendo contraseñas).
+
+
+¿Para qué se usa?
+
+    En informática y ciberseguridad, SSH se utiliza principalmente para:
+    
+        > Administración remota segura de servidores y dispositivos (Linux/Unix, switches, routers, firewalls).
+        
+        > Transferencia segura de archivos (con scp o sftp).
+        
+        > Túneles y port forwarding (redirigir puertos de forma cifrada, usado para bypass de firewalls).
+        
+        > Montaje de sistemas de archivos remotos (con sshfs).
+        
+        > Acceso a servidores en la nube (AWS, Azure, GCP).
+        
+        > En ciberseguridad ofensiva:
+        
+            - Movimiento lateral dentro de redes comprometidas.
+            - Pivoting a otros sistemas.
+            - Creación de túneles ocultos.
+
+
+Comando principal
+
+    ssh [opciones] usuario@host
+
+
+Opciones y comandos básicos de SSH
+
+    ----------------------------------------------------------------------------------------------------------------------------------------------
+    |  Opción  |  Descripción                                                          |  Ejemplo de Uso                                         |  
+    ----------------------------------------------------------------------------------------------------------------------------------------------
+    |  -p      |  Especificar el puerto (por defecto es el 22).                        |  ssh -p 2222 usuario@192.168.1.10                       |
+    |  -i      |  Usar clave privada para autenticación.                               |  ssh -i ~/.ssh/id_rsa usuario@servidor.com              |
+    |  -L      |  Port forwarding local (redirige un puerto local a uno remoto).       |  ssh -L 8080:localhost:80 usuario@servidor.com          |
+    |  -R      |  Port forwarding remoto (un puerto remoto se redirige a tu máquina).  |  ssh -R 9090:localhost:22 usuario@servidor.com          |
+    |  -D      |  Crear un proxy SOCKS5 para enrutar tráfico.                          |  ssh -D 9050 usuario@servidor.com                       |
+    |  -v      |  Modo verbose (útil para depuración).                                 |  ssh -v usuario@servidor.com                            |
+    |  -o      |  Opciones avanzadas.                                                  |  ssh -o StrictHostKeyChecking=no usuario@servidor.com   |
+    ----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Archivos importantes en SSH
+
+    ----------------------------------------------------------------------
+    |  ~/.ssh/id_rsa            | clave privada (no debe compartirse).   |
+    |  ~/.ssh/id_rsa.pub        | clave pública (se copia al servidor).  |
+    |  ~/.ssh/authorized_keys   | claves autorizadas en el servidor.     |
+    |  /etc/ssh/sshd_config     | configuración del servidor SSH.        |
+    ----------------------------------------------------------------------
+
+
+En Ciberseguridad
+
+    > Defensiva (Blue Team):
+    
+        - Reforzar seguridad en servidores (cambiar puerto, deshabilitar root login, usar autenticación por claves).
+        - Monitorizar intentos de acceso con herramientas como fail2ban.
+    
+    > Ofensiva (Red Team / Pentesting):
+    
+        - Usar credenciales filtradas para acceso remoto.
+        - Crear túneles para pivotar en la red.
+        - Establecer persistencia en sistemas comprometidos.
+
+
+En resumen
+
+    SSH es una de las herramientas más críticas en administración de sistemas y ciberseguridad, porque permite conexiones seguras y es muy flexible en su uso.

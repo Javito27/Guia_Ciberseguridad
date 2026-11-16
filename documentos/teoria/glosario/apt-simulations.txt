@@ -1,0 +1,54 @@
+APT-Simulations hace referencia a simulaciones de ataques realizados por grupos APT (Advanced Persistent Threat), es decir, amenazas persistentes avanzadas.
+
+🔑 Es un grupo o actor de amenazas que realiza ataques sofisticados, dirigidos y normalmente prolongados en el tiempo.
+
+	Sus objetivos pueden ser:
+
+		- Robar información confidencial.
+		- Espionaje empresarial o gubernamental.
+		- Obtener acceso persistente a una red.
+		- Robar credenciales.
+		- Exfiltrar información.
+
+	Algunos grupos conocidos son APT28 y APT29.
+
+💡 Un APT-Simulations son ejercicios que reproducen técnicas utilizadas por atacantes para evaluar las defensas de una organización.
+
+	Ejemplo de simulación APT
+		
+	1️⃣ Acceso inicial
+
+		Simular la entrada mediante phishing o credenciales comprometidas.
+	
+	2️⃣ Ejecución
+
+		Ejecutar comandos en un equipo comprometido.
+
+	3️⃣ Escalada de privilegios
+
+		Intentar obtener permisos de administrador.
+	
+	4️⃣ Movimiento lateral
+
+		Simular el desplazamiento hacia otros equipos de la red.
+	
+	5️⃣ Exfiltración
+
+		Simular la extracción de información.
+
+🛠️ Herramientas utilizadas
+
+	  Herramienta       |  Uso
+	---------------------------------------------------------------------
+	  MITRE Caldera     |  Simular técnicas de adversarios.
+	  Atomic Red Team   |  Ejecutar pruebas de técnicas ATT&CK.
+	  Prelude Operator  |  Simular ataques y evaluar defensas.
+	  MITRE ATT&CK      |  Clasificar tácticas y técnicas de atacantes.
+	---------------------------------------------------------------------
+
+🎯 Relación tiene con el trabajo de ciberseguridad
+
+	➡️ Red Team: simular ataques reales.
+	➡️ Blue Team: detectar y responder a los ataques.
+	➡️ Purple Team: colaborar entre Red Team y Blue Team para mejorar las defensas.
+	➡️ SOC: comprobar si las herramientas SIEM detectan las actividades maliciosas.

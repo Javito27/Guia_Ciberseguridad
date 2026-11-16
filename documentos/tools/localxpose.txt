@@ -1,0 +1,77 @@
+LocalXpose es una herramienta de tunneling seguro (reverse proxy) que permite exponer un servicio local a Internet de forma segura.
+
+Similar a Ngrok, pero con más flexibilidad y orientada también a pentesting, bug bounty y pruebas de seguridad.
+
+
+¿Para qué se usa en informática y ciberseguridad?
+
+    > Exponer un servidor local (ejemplo: un servidor web en localhost:8080) a través de una URL pública.
+    
+    > Probar aplicaciones web en desarrollo sin necesidad de desplegarlas en un hosting.
+    
+    > Compartir APIs locales con clientes o testers.
+    
+    > Recepción de webhooks (por ejemplo, pruebas con PayPal, Stripe, GitHub hooks).
+    
+    > Red Team / Pentesting:
+    
+        > Exfiltrar datos desde dentro de una red (C2 o Command & Control).
+        > Probar payloads que requieran conectarse desde Internet a tu equipo.
+        > Crear túneles reversos para saltarse firewalls o NAT.
+    
+
+Opciones y características principales
+
+    1. Exponer un servicio local (HTTP)
+    
+          loclx tunnel http --to 8080
+    
+          Expone localhost:8080 en una URL pública (https://<subdominio>.loclx.io).
+    
+    2. Especificar subdominio personalizado
+    
+          loclx tunnel http --to 8080 --subdomain miapp
+    
+          Te dará https://miapp.loclx.io
+    
+    3. Exponer otros protocolos (TCP/UDP/SSH)
+    
+          loclx tunnel tcp --to 22
+          loclx tunnel udp --to 53
+          loclx tunnel ssh --to 22
+    
+    4. Acceso remoto inverso (RDP/VNC, etc.)
+    
+          Puedes exponer un puerto de escritorio remoto para conectarte desde fuera.
+
+
+Opciones avanzadas
+
+    -----------------------------------------------------------------------------------------
+    |  Opción                   |  Descripción                                              |
+    -----------------------------------------------------------------------------------------
+    |  --region                 | Seleccionar la región del túnel (ejemplo: us, eu, asia).  |
+    |  --https                  | Forzar HTTPS.                                             |
+    |  --basic-auth user:pass   | Proteger con autenticación básica.                        |
+    |  --custom-domain          | Usar tu propio dominio en lugar de loclx.io.              |
+    |  --inspect                | Ver tráfico HTTP en vivo (como un proxy).                 |
+    -----------------------------------------------------------------------------------------
+
+
+Ejemplos prácticos
+
+    -------------------------------------------------------------------------------------------------------------------------------
+    |  Descripción                                                        |  Ejemplos de Uso                                      |
+    -------------------------------------------------------------------------------------------------------------------------------
+    |  Exponer un servidor web en localhost:5000                          |  loclx tunnel http --to 5000                          |
+    |  Exponer un servidor de pruebas en TCP (ej: base de datos en 3306)  |  loclx tunnel tcp --to 3306                           |
+    |  Crear un túnel seguro con autenticación                            |  loclx tunnel http --to 8080 --basic-auth admin:1234  |
+    -------------------------------------------------------------------------------------------------------------------------------	
+
+
+Ventajas sobre Ngrok
+
+    > Permite más protocolos (HTTP, TCP, UDP, SSH, RDP).
+    > Más flexible en uso de custom domains.
+    > Opciones específicas para pentesters (inspección de tráfico, tunelización inversa).
+    > No tan limitado en la versión gratuita como Ngrok.

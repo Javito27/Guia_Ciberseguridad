@@ -1,0 +1,110 @@
+APPS
+
+	Downloader
+	Kodi 21.3
+	Urban_UPN (permitir navegador para gratis) 
+
+--------------------------------------------------------------------------------
+
+CONECTARSE AL FIRESTICK
+
+	1. Activar el modo desarrollador en el Firestick
+
+		- Ajustes > Mi Fire TV > Acerca de y pulsa 7 veces sobre el nombre del dispositivo.
+		- Entra en Opciones para desarrolladores y activa Depuración ADB.
+		- Anota la IP en Acerca de > Red.
+
+	2. En el PC con Windows
+
+		- Descarga las platform-tools de Android (oficiales de Google) y descomprímelas.
+		- Abre una terminal en esa carpeta y ejecuta:
+		
+			adb connect IP_DEL_FIRESTICK:5555
+		  
+		- En la tele te pedirá autorizar el equipo; acepta (puedes marcar “permitir siempre”).
+
+	3. Qué puedes hacer desde ahí
+
+		- Instalar APKs: adb install archivo.apk
+		- Desinstalar o deshabilitar apps, como te comenté antes.
+		- Abrir una consola del dispositivo con adb shell.
+		- Ver y controlar la pantalla desde el PC con scrcpy, usando el teclado y el ratón. Es lo más parecido a “configurarlo desde el PC”.
+
+--------------------------------------------------------------------------------
+
+COMANDOS EN EL FIRESTICK
+
+1. 🔌 Conexión (desde Windows)
+
+	 Comando               | Para qué sirve 
+	--------------------------------------------------------------------------
+	 `adb connect IP:5555` | Conecta con el Firestick por Wi-Fi. 
+	 `adb devices`         | Lista los dispositivos conectados y su estado. 
+	 `adb disconnect`      | Cierra la conexión. 
+	 `adb shell`           | Abre la consola del Firestick. 
+	 `exit`                | Sale de la consola y vuelve a Windows. 
+	 `adb kill-server`     | Detiene el servicio ADB. 
+	 `adb start-server`    | Inicia el servicio ADB. 
+	 `adb reboot`          | Reinicia el Firestick. 
+	--------------------------------------------------------------------------
+		
+2. 🔎 Buscar aplicaciones (dentro del shell)
+
+	 Comando                                          | Para qué sirve 	
+	--------------------------------------------------------------------------------------------------------------
+	 `pm list packages`                               | Lista todos los paquetes instalados. 
+	 `pm list packages -3`                            | Muestra solo las aplicaciones instaladas por el usuario. 
+	 `pm list packages -s`                            | Muestra solo las aplicaciones del sistema. 
+	 `pm list packages -f`                            | Muestra los paquetes con la ruta de su APK. 
+	 `pm list packages \| grep -i kodi`               | Busca un paquete por nombre. 
+	 `pm path org.xbmc.kodi`                          | Muestra la ruta exacta del APK de Kodi. 
+	 `adb shell pm list packages \| findstr -i kodi`  | Busca Kodi directamente desde Windows. 
+	--------------------------------------------------------------------------------------------------------------
+	
+3. 📦 Gestionar aplicaciones
+
+	 Comando                                 | Para qué sirve 
+	------------------------------------------------------------------------------------------------------------------------
+	 `adb install archivo.apk`               | Instala un APK desde el ordenador. 
+	 `adb install -r archivo.apk`            | Reinstala o actualiza una aplicación conservando sus datos. 
+	 `pm uninstall -k --user 0 paquete`      | Desinstala una aplicación para el usuario principal, conservando sus datos. 
+	 `pm disable-user --user 0 paquete`      | Deshabilita una aplicación sin eliminarla. 
+	 `pm enable paquete`                     | Vuelve a habilitar una aplicación. 
+	 `cmd package install-existing paquete`  | Restaura una aplicación del sistema desinstalada para el usuario. 
+	 `am force-stop paquete`                 | Fuerza la detención de una aplicación. 
+	 `pm clear paquete`                      | Elimina los datos y la caché de una aplicación. 
+	 `monkey -p paquete 1`                   | Intenta abrir una aplicación. 
+	------------------------------------------------------------------------------------------------------------------------
+
+	Nota: Los comandos que comienzan por pm, am o cmd se ejecutan dentro de adb shell. Las operaciones sobre aplicaciones del sistema pueden estar restringidas.
+
+4. 📁 Gestión de archivos (desde Windows)
+
+	 Comando                                   | Para qué sirve 
+	---------------------------------------------------------------------------------------------------------------------
+	 `adb pull /ruta/en/firestick carpeta_pc`  | Copia un archivo del Firestick al ordenador. 
+	 `adb push archivo_pc /sdcard/`            | Copia un archivo del ordenador al Firestick. 
+	 `adb pull /data/app/.../base.apk`         | Extrae el APK de una aplicación instalada, si la ruta es accesible. 
+	---------------------------------------------------------------------------------------------------------------------
+	
+5. 🔐 Permisos y accesibilidad (dentro del shell)
+
+	 Comando                                                              | Para qué sirve 
+	-------------------------------------------------------------------------------------------------------------------------------------------------
+	 `pm grant paquete permiso`                                           | Concede un permiso compatible a una aplicación. 
+	 `dumpsys package paquete \| grep -i accessibility`                   | Busca información relacionada con la accesibilidad de una aplicación. 
+	 `settings get secure enabled_accessibility_services`                 | Muestra los servicios de accesibilidad configurados. 
+	 `settings put secure enabled_accessibility_services paquete/clase`   | Intenta configurar un servicio de accesibilidad. 
+	 `settings put secure accessibility_enabled 1`                        | Intenta activar la accesibilidad. 
+	 `settings put secure enabled_accessibility_services ""`              | Intenta eliminar los servicios de accesibilidad configurados. 
+	 `settings put secure accessibility_enabled 0`                        | Intenta desactivar la accesibilidad. 
+	 -------------------------------------------------------------------------------------------------------------------------------------------------
+
+6. 🖥️ Información del dispositivo y pantalla
+
+	 Comando | Para qué sirve |
+	-------------------------------------------------------------------------------------------------------------------------------------------------------
+	 `getprop ro.product.model`          | Muestra el modelo del dispositivo. 
+	 `getprop ro.build.version.release`  | Muestra la versión base de Android. 
+	 `scrcpy`                            | Permite visualizar y controlar la pantalla del Firestick desde Windows, cuando el dispositivo es compatible. 
+	-------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,9 @@
+Es la unidad de datos que se transmite en la capa de enlace de datos del modelo OSI (capa 2).
+
+Un frame suele incluir:
+
+    MAC origen → quién envía
+    MAC destino → quién recibe
+    Tipo / protocolo (IPv4, IPv6, ARP…)
+    Datos (el paquete IP va aquí dentro)
+    FCS / CRC → verificación de errores

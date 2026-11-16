@@ -1,0 +1,33 @@
+Es una vulnerabilidad de control de acceso que ocurre cuando una aplicación usa un identificador controlable por el usuario (un ID, un nombre de archivo, etc.) para acceder a un recurso, sin comprobar que ese usuario tenga permiso para verlo o modificarlo.
+
+🔑 Ejemplo típico
+
+    Estás logueado como usuario 1001 y ves tu perfil en:
+
+        https://ejemplo.com/perfil?id=1001
+
+    Si cambias el valor a id=1002 y la aplicación te muestra los datos de otro usuario, hay un IDOR. 
+    
+    El servidor confía en el ID que le envías en lugar de verificar que ese recurso te pertenece.
+
+⚠️ Se suele encontrar en: 
+
+    · Parámetros en la URL (?id=, ?user=, ?invoice=)
+    · Cuerpos de peticiones POST/PUT (JSON o formularios)
+    · Cookies o cabeceras
+    · Nombres de archivo predecibles (/descargas/factura_1002.pdf)
+    · Endpoints de APIs (/api/pedidos/5543)
+
+🔴 Impactos 
+
+    1️⃣ Lectura de datos de otros usuarios (horizontal: mismo nivel de privilegios)
+    2️⃣ Acceso a funciones de administrador (vertical: escalada de privilegios)
+    3️⃣ Modificación o borrado de recursos ajenos
+
+🚀 Como prevenirlo
+
+    · Comprobar siempre en el servidor que el usuario autenticado tiene permiso sobre el recurso solicitado.
+    · Usar identificadores no predecibles (UUID), aunque esto no sustituye al control de acceso, solo dificulta la enumeración.
+    · No confiar en datos enviados por el cliente para decidir permisos.
+
+Está en el OWASP Top 10 bajo Broken Access Control, la categoría número 1.

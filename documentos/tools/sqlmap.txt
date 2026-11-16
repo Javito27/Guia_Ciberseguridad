@@ -1,0 +1,90 @@
+SQLmap es una herramienta de código abierto escrita en Python que se utiliza en pentesting y ciberseguridad para detectar y explotar automáticamente vulnerabilidades de inyección 
+SQL (SQL Injection) en aplicaciones web.
+
+
+¿Para qué se usa en informática y ciberseguridad?
+
+    > Detectar fallos de inyección SQL en aplicaciones web.
+    
+    > Automatizar la explotación de esos fallos.
+    
+    > Identificar bases de datos vulnerables.
+    
+    > Extraer:
+    
+        - Listado de bases de datos
+        - Tablas
+        - Columnas
+        - Usuarios y contraseñas de bases de datos
+    
+    > Realizar ataques avanzados como:
+    
+        - Bypass de autenticación
+        - Obtención de archivos del sistema
+        - Ejecución remota de comandos (RCE) en algunos casos
+    
+    Es una herramienta muy poderosa en el hacking ético y pruebas de seguridad web.
+
+
+Uso básico
+
+    sqlmap -u "http://objetivo.com/page.php?id=1"
+
+
+Opciones más importantes de SQLmap
+
+    Definir objetivo
+    -----------------------------------------------------------------
+    |  Opción   |  Descripción                                      |
+    -----------------------------------------------------------------
+    |  -u       |  URL de la web a analizar                         |
+    |  -l       |  Leer URLs desde un archivo de logs de proxy      |
+    |  -m       |  Leer múltiples URLs desde un archivo de texto    |
+    -----------------------------------------------------------------
+
+    Descubrimiento
+    ---------------------------------------------------------------------------
+    |  Opción      |  Descripción                                             |
+    ---------------------------------------------------------------------------
+    |  --dbs       |  Enumera todas las bases de datos del sistema            |
+    |  --tables    |  Lista todas las tablas de una base de datos             |
+    |  --columns   |  Lista todas las columnas de una tabla                   |
+    |  --dump      |  Extrae el contenido de tablas/columnas                  |
+    |  --dump-all  |  Extrae toda la información de todas las bases de datos  |
+    ---------------------------------------------------------------------------
+
+    Opciones de explotación avanzada
+    ----------------------------------------------------------------------------------------------------------------
+    |  Opción                                                          |  Descripción                              |
+    ----------------------------------------------------------------------------------------------------------------
+    |  --os-shell                                                      |  Obtener una shell del sistema operativo  |
+    |  --os-cmd                                                        |  Ejecutar comandos en el sistema          |
+    |  --file-read=/etc/passwd                                         |  Leer archivos del servidor               |
+    |  --file-write=archivo.txt --file-dest=/var/www/html/archivo.txt  |  Subir archivos al servidor               |
+    ----------------------------------------------------------------------------------------------------------------
+
+    Personalización del ataque
+    ---------------------------------------------------------------------------------------------
+    |  Opción                         |  Descripción                                            |
+    ---------------------------------------------------------------------------------------------
+    |  --level (1-5)                  |  Nivel de profundidad del test                          |
+    |  --risk (1-3)                   |  Nivel de riesgo de payloads que se probarán            |
+    |  --threads=N                    |  Número de hilos (velocidad del ataque)                 |
+    |  --proxy=http://127.0.0.1:8080  |  Usar proxy (ej. BurpSuite)                             |
+    |  --tor                          |  Usar red TOR para anonimato                            |
+    |  --random-agent                 |  Usar un User-Agent aleatorio para evadir detecciones   |
+    ---------------------------------------------------------------------------------------------
+
+
+Ejemplo completo
+
+    sqlmap -u "http://objetivo.com/page.php?id=1" --dbs --threads=5 --random-agent --tor
+
+    Esto buscará inyecciones SQL en la URL, listará las bases de datos, usará 5 hilos, cambiará el user-agent y enrutará tráfico por TOR.
+	
+	
+En resumen:
+
+    SQLmap = herramienta automatizada de pentesting para inyección SQL
+
+        Se usa en informática forense, ciberseguridad y bug bounty para descubrir y explotar vulnerabilidades en bases de datos conectadas a aplicaciones web.	

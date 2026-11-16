@@ -1,0 +1,3 @@
+Sirve para dar instrucciones a los motores de búsqueda (como Google, Bing, etc.) sobre qué partes de un sitio web pueden o no rastrear. 
+
+Indica qué carpetas o páginas no rastrear, permitir acceso solo a ciertos bots y ayudar a organizar el rastreo (SEO).

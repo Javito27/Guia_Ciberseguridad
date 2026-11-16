@@ -1,0 +1,23 @@
+Es un servicio/protocolo antiguo que permite que ordenadores en una red local se identifiquen, se comuniquen y compartan recursos (archivos, impresoras).
+
+NetBIOS permite que los equipos se encuentren por nombre, no por IP.
+
+Antes de que DNS y Active Directory fueran lo normal, NetBIOS servía para:
+
+    - Identificar equipos por nombre
+    - Compartir archivos e impresoras
+    - Enviar mensajes entre equipos
+    - Descubrir dispositivos en la red local
+
+NetBIOS trabaja sobre TCP/IP, lo que se llama NetBIOS over TCP/IP (NBT).
+--------------------------------------------------------------
+|   Puerto    | Uso                                          |
+--------------------------------------------------------------
+|   137 UDP   | Resolución de nombres (NetBIOS Name Service) |
+|   138 UDP   | Servicio de datagramas                       |
+|   139 TCP   | Sesiones (compartición de archivos)          |
+--------------------------------------------------------------
+
+Comando típico:
+
+    nbtstat -A <IP>

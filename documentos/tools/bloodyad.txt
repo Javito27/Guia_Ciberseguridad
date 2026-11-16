@@ -1,0 +1,92 @@
+BloodyAD es una herramienta de código abierto diseñada para realizar escalada de privilegios en entornos de Active Directory. Utiliza llamadas LDAP y 
+SAMR específicas para interactuar con los controladores de dominio, permitiendo a los profesionales de la seguridad y pentesters identificar y explotar 
+configuraciones incorrectas o vulnerabilidades en AD.
+
+
+¿Para qué se utiliza?
+
+    BloodyAD se emplea en auditorías de seguridad y pruebas de penetración para:
+    
+        > Enumerar objetos de AD: usuarios, grupos, equipos, contenedores, unidades organizativas (OU), dominios de confianza, etc.
+        > Identificar cuentas susceptibles a ataques Kerberoasting: cuentas con Service Principal Names (SPN) configurados.
+        > Detectar cuentas sin preautenticación Kerberos (AS-REP): posibles objetivos para ataques de hash.
+        > Obtener registros DNS de AD: como registros SRV, SOA, etc.
+        > Gestionar objetos de AD: agregar usuarios a grupos, cambiar contraseñas, asignar derechos como GenericAll, entre otros.
+        > Realizar escalada de privilegios: mediante la explotación de configuraciones incorrectas en ACLs o permisos de escritura.
+
+
+Funcionalidades principales
+
+    Enumeración
+    
+        > Obtener nivel del bosque de AD:
+        
+          - python bloodyAD.py -u usuario -p 'contraseña' -d dominio --host controlador get object 'DC=dominio,DC=com' --attr msDS-Behavior-Version
+        
+		> Listar usuarios:
+        
+          - python bloodyAD.py -u usuario -p 'contraseña' -d dominio --host controlador get children --otype useronly
+        
+        > Listar equipos:
+        
+          - python bloodyAD.py -u usuario -p 'contraseña' -d dominio --host controlador get children --otype computer
+        
+        > Listar contenedores:
+        
+          - python bloodyAD.py -u usuario -p 'contraseña' -d dominio --host controlador get children --otype container
+        
+        > Obtener registros DNS de AD:
+        
+          - python bloodyAD.py -u usuario -p 'contraseña' -d dominio --host controlador get dnsDump
+        
+        > Detectar cuentas Kerberoastable:
+        
+          - python bloodyAD.py -u usuario -p 'contraseña' -d dominio --host controlador get search --filter '(&(samAccountType=805306368)(servicePrincipalName=*))' --attr sAMAccountName
+        
+        > Detectar cuentas sin preautenticación Kerberos (AS-REP):
+        
+          - python bloodyAD.py -u usuario -p 'contraseña' -d dominio --host controlador get search --filter '(&(userAccountControl:1.2.840.113556.1.4.803:=4194304)(!(UserAccountControl:1.2.840.113556.1.4.803:=2)))' --attr sAMAccountName
+
+    Gestión de objetos
+
+        > Cambiar contraseña de usuario:
+        
+            - python bloodyAD.py -u usuario -p 'contraseña' -d dominio --host controlador set password usuario 'NuevaContraseña123!'
+        
+        > Agregar usuario a grupo:
+        
+            - python bloodyAD.py -u usuario -p 'contraseña' -d dominio --host controlador add groupMember grupo usuario
+        
+        > Asignar derechos GenericAll a usuario:
+        
+            - python bloodyAD.py -u usuario -p 'contraseña' -d dominio --host controlador add genericAll 'CN=grupo,CN=Users,DC=dominio,DC=com' usuario
+        
+        > Cambiar propietario de objeto:
+        
+            - python bloodyAD.py -u usuario -p 'contraseña' -d dominio --host controlador set owner 'CN=grupo,CN=Users,DC=dominio,DC=com' usuario
+        
+		
+Métodos de autenticación soportados
+
+    - Contraseña en texto claro
+    - Pass-the-hash
+    - Pass-the-ticket (TGT)
+    - Autenticación basada en certificados
+    - Conexión a través de un proxy SOCKS
+
+Instalación
+
+    git clone https://github.com/CravateRouge/bloodyAD.git
+
+
+Comparativa con otras herramientas
+
+    -------------------------------------------------------------------------------------------------------------------
+    |  Herramienta |  Enfoque principal                                |  Plataforma    |  Interfaz |  Autenticación  |
+    -------------------------------------------------------------------------------------------------------------------
+    |  BloodHound  |  Visualización y análisis de rutas de privilegios |  Windows/Linux |  GUI      |  Kerberos       |
+    |  Impacket    |  Implementación de protocolos de red              |  Python        |  CLI      |  Kerberos, NTLM |
+    |  PowerView   |  Enumeración y explotación en PowerShell          |  PowerShell    |  CLI      |  NTLM           |
+    |  KerberosU   |  Enumeración de cuentas Kerberos                  |  Python        |  CLI      |  Kerberos       |
+    |  Impacket    |  Implementación de protocolos de red              |  Python        |  CLI      |  NTLM, Kerberos |
+    -------------------------------------------------------------------------------------------------------------------

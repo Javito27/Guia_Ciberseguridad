@@ -1,0 +1,69 @@
+🖥️ RDP (Remote Desktop Protocol) es un protocolo propietario desarrollado por Microsoft que permite la conexión remota a otro equipo a través de una red (local o Internet). Permite 
+interactuar con el escritorio remoto como si estuvieras físicamente frente al equipo, utilizando teclado, ratón e incluso redirección de recursos (archivos, impresoras, portapapeles, 
+etc.).
+
+🎯 ¿Para qué se usa?
+
+    🔧 1. En informática (uso legítimo)
+
+        · Acceder a servidores o equipos remotos para su administración.
+        · Soporte técnico remoto sin necesidad de presencia física.
+        · Teletrabajo (acceso al equipo de la oficina desde casa).
+        · Gestión de infraestructuras en la nube (Azure, AWS, etc.).
+
+    🔐 2. En ciberseguridad
+
+        🧪 Pentesting / Red Team
+
+            · Identificación de servicios RDP expuestos (por defecto en el puerto 3389/TCP).
+            · Ataques de fuerza bruta sobre credenciales débiles.
+            · Uso para movimiento lateral dentro de redes comprometidas.
+
+        🚨 Riesgos
+
+            · RDP mal configurado puede ser una vía de entrada para:
+            
+                · Ransomware
+                · Accesos no autorizados
+                · Compromiso total del sistema
+
+⚙️ Opciones y características de RDP
+
+    🔹 Cliente RDP en Windows
+
+        -----------------------------------------------------------
+        |  Opción     |  Descripción                              |
+        -----------------------------------------------------------
+        |  mstsc.exe  |  Cliente de escritorio remoto de Windows  |
+        -----------------------------------------------------------
+
+        Opciones principales
+
+            /v:<IP o nombre> → especifica el host remoto
+            /admin → conexión en modo administrador
+            /f → pantalla completa
+            /multimon → soporte para múltiples monitores
+            /restrictedAdmin → evita enviar credenciales al host remoto
+
+        📌 Ejemplo:
+
+            mstsc /v:192.168.1.100 /f
+
+    🔹 Herramientas en ciberseguridad
+
+        ----------------------------------------------------------------------------------------------------------------------------------------------
+        |  Herramienta     |  Uso                                         |  Ejemplo                                                                 |
+        ----------------------------------------------------------------------------------------------------------------------------------------------
+        |  Nmap            |  Detectar puerto RDP abierto                 |  nmap -p 3389 192.168.1.0/24                                             |
+        |  Hydra / Ncrack  |  Fuerza bruta de credenciales                |  hydra -t 1 -V -f -l administrator -P passwords.txt rdp://192.168.1.100  |
+        |  CrackMapExec    |  Auditoría y explotación en redes Windows    |  cme rdp 192.168.1.0/24 -u admin -p Pass123                              |
+        |  RDP Wrapper     |  Permitir múltiples sesiones RDP en Windows  |  —                                                                       |
+        ----------------------------------------------------------------------------------------------------------------------------------------------
+
+🔐 Buenas prácticas de seguridad en RDP
+
+    · Usar VPN antes de exponer RDP a Internet.
+    · Cambiar el puerto por defecto (3389) para reducir exposición básica.
+    · Habilitar NLA (Network Level Authentication).
+    · Implementar contraseñas robustas y MFA.
+    · Mantener el sistema actualizado con parches de seguridad.

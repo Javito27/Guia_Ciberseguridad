@@ -1,0 +1,67 @@
+💻 rsync es una herramienta para:
+
+    · Transferir archivos
+    · Sincronizar directorios entre máquinas
+    · Hacer backups remotos
+
+    👉 Muy usada en Linux/servidores
+
+🧠 Idea clave
+
+    · Funciona tipo FTP, pero más eficiente
+    · Permite copiar solo los cambios (no todo el archivo)
+
+🎯 Uso legítimo
+
+    · Backups automáticos
+    · Sincronización entre servidores
+    · Copias de seguridad remotas
+
+🔐 En ciberseguridad (muy importante)
+
+    El puerto 873 abierto puede ser muy peligroso si está mal configurado
+
+        🧪 1. Enumeración
+
+            rsync rsync://<IP>
+
+            Lista módulos compartidos (como shares SMB)
+
+        🧪 2. Conexión a un módulo
+
+            rsync rsync://<IP>/<nombre_modulo>
+
+        🧪 3. Descargar archivos
+
+            rsync -av rsync://<IP>/<nombre_modulo> file.txt
+
+            Te puedes bajar:
+
+                · backups
+                · configs
+                · credenciales 👀
+
+        🚨 4. Riesgos comunes
+
+            · Acceso anónimo permitido
+            · Backups expuestos
+            · Archivos sensibles:
+            
+                · /etc/passwd
+                · claves privadas
+                · scripts
+
+        🔥 5. Escenarios típicos de pentesting
+
+            · Encontrar credenciales en backups
+            · Descargar código fuente
+            · Escalar privilegios
+            · Pivoting (si hay scripts o claves SSH)
+
+⚠️ Nota importante
+
+    También puede funcionar sobre SSH:
+
+        rsync -av user@IP:/ruta .
+
+    Pero eso ya usa puerto 22, no 873

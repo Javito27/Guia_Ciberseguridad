@@ -1,0 +1,66 @@
+InsightVM es una herramienta de gestión de vulnerabilidades desarrollada por Rapid7. Forma parte de la suite Insight de la compañía, que incluye también InsightIDR (detección 
+y respuesta), InsightAppSec (seguridad de aplicaciones), entre otros.
+
+
+¿Para qué se usa?
+
+    InsightVM se utiliza principalmente para:
+    
+        1. Escaneo de vulnerabilidades
+        
+            > Detecta fallos de seguridad en sistemas, servidores, aplicaciones y dispositivos de red.
+            > Evalúa riesgos en función de su severidad y del contexto de la organización.
+        
+        2. Gestión de parches y remediación
+        
+            > Permite priorizar qué vulnerabilidades deben ser corregidas primero.
+            > Integra planes de acción y seguimiento de remediación.
+        
+        3. Monitoreo continuo y evaluación de riesgos
+        
+            > Mantiene un inventario actualizado de todos los activos.
+            > Detecta cambios en la red y nuevas vulnerabilidades automáticamente.
+        
+        4. Reportes y dashboards
+        
+            > Genera informes de cumplimiento normativo (ISO, PCI, HIPAA).
+            > Visualiza métricas de riesgo en tiempo real mediante dashboards.
+        
+        5. Integración con otras herramientas
+        
+            > SIEM, ITSM (ServiceNow, Jira) y soluciones de seguridad para automatizar tareas.
+
+
+Cómo funciona
+
+    > Agentes y escáneres remotos: InsightVM puede usar agentes instalados en endpoints o escáneres que exploran la red de forma remota.
+    > Prioridad de riesgo dinámico: No solo mide severidad de CVEs, sino también factores contextuales (importancia del activo, exposición a Internet, exploitabilidad).
+    > Consola web: Administración centralizada de activos, reportes y políticas de seguridad.
+
+
+Opciones y funcionalidades clave en informática y ciberseguridad.
+
+    ---------------------------------------------------------------------------------------------------------------------------------
+    |  Funcionalidad                 |  Descripción                                                                                 |
+    ---------------------------------------------------------------------------------------------------------------------------------
+    |  Escaneo de vulnerabilidades   |  Identificación de CVEs, configuraciones inseguras, versiones de software desactualizadas.   |
+    |  Gestión de activos            |  Inventario de todos los dispositivos y software en la red.                                  |
+    |  Prioridad de riesgos          |  Clasificación de vulnerabilidades según criticidad y exposición.                            |
+    |  Remediación integrada         |  Asignación de tareas y seguimiento de parches o correcciones.                               |
+    |  Reportes de cumplimiento      |  Informes automáticos para normativas y auditorías.                                          |
+    |  Integraciones                 |  SIEM, ticketing, automatización de seguridad.                                               |
+    |  Monitoreo en tiempo real      |  Detección de nuevos dispositivos o vulnerabilidades a medida que aparecen.                  |
+    ---------------------------------------------------------------------------------------------------------------------------------
+
+
+Ejemplo de uso típico en ciberseguridad
+
+    1. Inventario de activos: Se conectan escáneres o agentes y se mapea toda la red.
+    2. Escaneo: Detecta sistemas vulnerables, software obsoleto o configuraciones inseguras.
+    3. Priorización: Clasifica vulnerabilidades por riesgo real para la organización.
+    4. Remediación: Se asignan tickets a equipos de TI para parchear o mitigar.
+    5. Reportes: Se genera un informe para auditoría o seguimiento de cumplimiento.
+
+
+InsightVM es muy usado en equipos de seguridad corporativos, auditorías de cumplimiento, gestión de riesgos y pentesting interno, porque permite administrar y priorizar 
+vulnerabilidades de manera centralizada.

@@ -1,0 +1,32 @@
+En informática y ciberseguridad, el término “tenant” (inquilino) se usa principalmente en contextos de arquitecturas multi-tenant (multiinquilino).
+
+¿Qué significa "tenant"?
+
+	Un tenant es una instancia lógica y aislada de un servicio o aplicación que pertenece a un cliente, usuario o grupo dentro de una plataforma compartida.
+
+		> Aunque todos los tenants usan la misma infraestructura (servidores, bases de datos, aplicaciones), cada uno tiene su propio espacio seguro y aislado.
+
+		> Es como vivir en un edificio de apartamentos: todos comparten el mismo edificio (infraestructura), pero cada apartamento (tenant) está separado y solo sus dueños pueden entrar.
+
+¿Para qué sirve?
+
+	> Aislamiento de datos y usuarios: Los datos de un tenant no pueden ser accedidos por otro.
+	
+	> Gestión centralizada: El proveedor administra una sola plataforma, pero cada organización/cliente tiene su propio entorno.
+
+	> Escalabilidad: Facilita que un servicio en la nube soporte a miles de clientes en paralelo.
+
+	> Seguridad: Separa configuraciones, accesos y políticas de seguridad por cada tenant.
+
+Ejemplos en la práctica
+
+	> Microsoft 365 / Azure AD: Cada organización tiene su propio tenant de Azure Active Directory, con sus usuarios, permisos y políticas de seguridad.
+
+	> Google Workspace: Cada empresa que usa Gmail corporativo tiene su tenant aislado, aunque todos usan la infraestructura de Google.
+
+	> Aplicaciones SaaS (Software como servicio): CRM como Salesforce o ERP como SAP Cloud usan multi-tenant para servir a muchas empresas en la misma plataforma.
+
+En resumen:
+
+	Un tenant es el entorno exclusivo de un cliente dentro de un sistema compartido. En ciberseguridad es clave porque asegura que, aunque se comparta la infraestructura, los datos y accesos de cada cliente están aislados 
+	y protegidos.

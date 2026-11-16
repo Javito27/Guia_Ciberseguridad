@@ -1,0 +1,94 @@
+Metasploit es un framework de pruebas de penetración (pentesting) desarrollado principalmente en Ruby.
+
+Es ampliamente usado en informática y ciberseguridad para automatizar el proceso de descubrimiento, explotación y verificación de vulnerabilidades en sistemas y aplicaciones.
+
+
+¿Para qué se usa?
+
+    Metasploit se utiliza principalmente en pentesting y hacking ético, para:
+    
+    1. Explotación de vulnerabilidades
+    
+        > Aprovechar fallas conocidas en software, sistemas operativos y aplicaciones.
+    
+    2. Pruebas de penetración
+    
+        > Simular ataques reales para evaluar la seguridad de la infraestructura.
+    
+    3. Post-explotación
+    
+        > Obtener acceso, escalar privilegios y moverse lateralmente dentro de una red.
+    
+    4. Ingeniería social y phishing (en algunos módulos)
+    
+        > Generar payloads y enlaces maliciosos controlados para pruebas éticas.
+    
+    5. Investigación y aprendizaje
+    
+        > Aprender sobre vulnerabilidades y técnicas de explotación en un entorno seguro.
+
+
+Componentes principales
+
+    > msfconsole → Interfaz principal, muy completa y flexible (CLI).
+    > msfvenom → Generador de payloads y exploits personalizados.
+    > msfcli → Línea de comandos simplificada (menos usada hoy en día).
+    > Exploit modules → Código que aprovecha vulnerabilidades específicas.
+    > Payloads → Código que se ejecuta en el sistema víctima (ej: shell reversa).
+    > Auxiliary modules → Herramientas de escaneo, fuzzing, sniffing y más.
+
+
+Opciones principales en Metasploit (CLI con msfconsole)
+
+    ----------------------------------------------------------------------------------------------------
+    |  Opción                 |  Descripción                                                           |
+    ----------------------------------------------------------------------------------------------------
+    |  help                   |  Muestra todos los comandos disponibles                                |
+    |  search <nombre>        |  Buscar exploits, payloads o módulos por nombre                        |
+    |  use <módulo>           |  Seleccionar un módulo para usar                                       |
+    |  show exploits	      |  Lista todos los exploits disponibles                                  |
+    |  show payloads	      |  Lista payloads compatibles con el exploit seleccionado                |
+    |  show options           |  Muestra opciones configurables del módulo actual                      |
+    |  set <opción> <valor>   |  Configura una opción del módulo, por ejemplo set RHOST 192.168.1.10   |
+    |  exploit o run	      |  Ejecuta el módulo seleccionado                                        |
+    |  sessions	              |  Lista sesiones activas (shells abiertas en máquinas víctimas)         |
+    |  session -i <ID>	      |  Interactuar con una sesión activa                                     |
+    |  back                   |  Salir del módulo actual y volver al prompt                            |
+    ----------------------------------------------------------------------------------------------------
+
+Ejemplo de uso básico
+
+    -------------------------------------------------------------------------------------------
+    |  Descripción                             |  Comando                                     |
+    -------------------------------------------------------------------------------------------
+    |  Abrir consola                           |  msfconsole                                  |
+    -------------------------------------------------------------------------------------------
+    |  Buscar un exploit                       |  search vsftpd                               |
+    -------------------------------------------------------------------------------------------
+    |  Seleccionar el exploit                  |  use exploit/unix/ftp/vsftpd_234_backdoor    |
+    -------------------------------------------------------------------------------------------
+    |  Configurar opciones                     |  set RHOST 192.168.1.10                      |
+    |                                          |  set RPORT 21                                |
+	-------------------------------------------------------------------------------------------
+    |  Configurar payload (ej: shell reversa)  |  set PAYLOAD cmd/unix/reverse                |
+    -------------------------------------------------------------------------------------------
+    |  Ejecutar exploit                        |  exploit                                     |
+    -------------------------------------------------------------------------------------------
+    |  Interactuar con la sesión abierta       |  sessions -i 1                               |
+    -------------------------------------------------------------------------------------------
+
+
+Tipos de módulos más importantes
+
+    > Exploits → Aprovechan vulnerabilidades específicas
+    > Payloads → Código que se ejecuta en la víctima
+    > Auxiliary → Escaneo, fuzzing, sniffing, DoS
+    > Post → Actividades post-explotación: escalamiento de privilegios, recolección de información
+    > Encoders → Para codificar payloads y evadir detección
+    > NOPs → Relleno para exploits de buffer overflow
+
+
+Resumen
+
+    Metasploit es un framework integral para pruebas de penetración, desde la búsqueda de vulnerabilidades hasta la explotación y post-explotación, con soporte masivo de módulos 
+    y payloads. Es una herramienta indispensable para pentesters y profesionales de ciberseguridad.

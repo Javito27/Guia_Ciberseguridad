@@ -1,0 +1,27 @@
+Es un protocolo de red que asigna automáticamente direcciones IP y otros parámetros a los dispositivos de una red. No tienes que configurar la IP a mano en cada equipo.
+
+Que hace DHCP:
+
+    Asigna de forma automatica: 
+
+        📍 Dirección IP
+        🌐 Máscara de red
+        🚪 Puerta de enlace (gateway)
+        🔎 Servidores DNS
+        ⏱️ Tiempo de concesión (lease)
+
+El proceso clásico se llama DORA:
+
+    Discover → “¿Hay algún servidor DHCP?”
+
+    Offer → “Te ofrezco esta IP”
+
+    Request → “Quiero esa IP”
+
+    Acknowledge → “Confirmado, es tuya”
+
+Tipos de asignación
+
+    - Dinámica → IP cambia con el tiempo (lo normal)
+    - Estática (reserva) → misma IP para una MAC concreta
+    - Manual → IP fija sin DHCP

@@ -1,0 +1,75 @@
+nxc-smb es un módulo de SMB (Server Message Block) de la herramienta NetExec (antes CrackMapExec, CME). Se utiliza en auditorías de seguridad para interactuar con servicios SMB 
+de sistemas Windows, permitiendo enumeración, autenticación y explotación.
+
+En pocas palabras: sirve para probar credenciales, listar recursos compartidos, usuarios, sesiones y ejecutar comandos en equipos Windows a través de SMB.
+
+¿Qué es SMB?
+
+	SMB (Server Message Block) es un protocolo de red usado principalmente en Windows para compartir archivos, impresoras y comunicaciones entre máquinas.
+	El puerto estándar es 445/tcp.
+
+Usos principales de nxc-smb
+
+	> Enumerar información de un dominio o sistema Windows.
+	> Validar credenciales de usuarios.
+	> Listar recursos compartidos.
+	> Extraer hashes de contraseñas (si se tiene acceso).
+	> Ejecutar comandos remotamente en equipos comprometidos.
+
+Sintaxis general
+
+	nxc smb <objetivo> [opciones]
+	00
+Opciones principales de nxc-smb
+
+    Autenticación
+    -------------------------------------------------------------------------
+    |   Opción            |   Descripción                                   |
+    -------------------------------------------------------------------------
+    |   -u USERNAME       |   Usuario                                       |
+    |   -p PASSWORD       |   Contraseña                                    |
+    |   -H HASH           |   Autenticación con hash NTLM (Pass-the-Hash)   |
+    |   -d DOMAIN         |   Especificar dominio                           |
+    |   --no-bruteforce   |   No probar credenciales múltiples              |
+    -------------------------------------------------------------------------
+
+    Enumeración
+    -------------------------------------------------------------------------
+    |   Opción            |   Descripción                                   |
+    -------------------------------------------------------------------------
+    |   --shares          |   Lista recursos compartidos                    |
+    |   --sessions        |   Lista sesiones activas                        |
+    |   --users           |   Enumera usuarios del dominio                  |
+    |   --groups          |   Enumera grupos del dominio                    |
+    |   --rid-brute       |   Enumeración de usuarios vía RID Brute Forcing |
+    -------------------------------------------------------------------------
+
+    Ejecución remota
+    -------------------------------------------------------------------------
+    |   Opción            |   Descripción                                   |
+    -------------------------------------------------------------------------
+    |   -x "comando"      |   Ejecuta comando vía psexec                    |
+    |   -X "comando"      |   Ejecuta comando vía smbexec                   |
+    |   -M <módulo>       |   Cargar módulos extra de NetExec               |
+    -------------------------------------------------------------------------
+
+    Otros
+    -------------------------------------------------------------------------
+    |   Opción            |   Descripción                                   |
+    -------------------------------------------------------------------------
+    |  --sam              |   Extraer SAM (hashes locales)                  |
+    |  --lsa              |   Extraer secretos LSA                          |
+    |  --ntds             |   Extraer ntds.dit (hashes de AD)               |
+    |  --kerberos         |   Autenticación con tickets Kerberos            |
+    -------------------------------------------------------------------------
+
+Ejemplos prácticos
+
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |   Ejemplo                                                                                                       |   Descripción                           |
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |   nxc smb 192.168.1.100 -u admin -p 'Password123' --shares                                                      |   Listar recursos compartidos           |
+    |   nxc smb 192.168.1.0/24 -u usuario -p clave                                                                    |   Validar credenciales en toda la red   |
+    |   nxc smb 192.168.1.50 -u administrator -H aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0    |   Pass-the-Hash                         |
+    |   nxc smb 192.168.1.50 -u admin -p 'Password123' -x "whoami"                                                    |   Ejecutar un comando remotos           |
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------

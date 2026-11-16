@@ -1,0 +1,64 @@
+Naabu es una herramienta de seguridad desarrollada por ProjectDiscovery (los mismos creadores de Nuclei, Subfinder, etc.).
+
+	Qué es:
+
+		Naabu es un escáner de puertos rápido y sencillo, diseñado para la enumeración de puertos TCP en objetivos específicos.
+
+	Para qué se usa:
+
+		> Descubrir puertos abiertos en uno o varios hosts.
+		> Realizar reconocimiento en pruebas de pentesting y bug bounty.
+		> Integrarse con otras herramientas como httpx o nuclei para análisis más profundos.
+		> Alternativa más simple y veloz a nmap cuando solo se necesita detección de puertos.
+
+Instalación (Linux / MacOS)
+
+	go install -v github.com/projectdiscovery/naabu/v2/cmd/naabu@latest (Luego asegúrate de que $GOPATH/bin esté en tu $PATH)
+	
+Uso básico 
+
+	naabu -host ejemplo.com
+
+Opciones principales de Naabu
+
+    Especificar host o lista de hosts
+    --------------------------------------------------------------------------------
+    |   Descripción                                      |   Ejemplo de Uso        |
+    --------------------------------------------------------------------------------
+    |   Escaneo de un dominio/IP                         |   nc -l -p 4444         |
+    |   Escaneo de varios objetivos desde un archivo     |   nc -p 1234            |
+    --------------------------------------------------------------------------------
+																					
+    Selección de puertos																				   
+    ---------------------------------------------------------------------------------------------------------
+    |   Descripción                                    |   Ejemplo de Uso                                   |
+    ---------------------------------------------------------------------------------------------------------
+    |   Escanear puertos comunes (por defecto ~100)    |   naabu -host ejemplo.com                          |
+    |   Escanear todos los puertos                     |   naabu -host ejemplo.com -p -                     |
+    |   Escanear rango específico                      |   naabu -host ejemplo.com -p 80,443,21,22          |
+    |   Excluir puertos                                |   naabu -host ejemplo.com -exclude-ports 25,1      |
+    ---------------------------------------------------------------------------------------------------------											
+																					   
+    Velocidad y rendimiento
+    -------------------------------------------------------------------------------------------------
+    |   Descripción                                  |   Ejemplo de Uso                             |
+    -------------------------------------------------------------------------------------------------
+    |   Definir número de hilos (por defecto 25)     |   naabu -host ejemplo.com -rate 1000         |
+    |   Timeout (ms)                                 |   naabu -host ejemplo.com -timeout 1000      |
+    -------------------------------------------------------------------------------------------------
+	
+    Output (guardar resultados)
+    -------------------------------------------------------------------------------------
+    |   Descripción             |   Ejemplo de Uso                                      |
+    -------------------------------------------------------------------------------------
+    |   Guardar en archivo      |   naabu -host ejemplo.com -o resultados.txt           |
+    |   Formato JSON            |   naabu -host ejemplo.com -json -o resultados.json    |
+    -------------------------------------------------------------------------------------
+	
+    Integraciones útiles
+    -----------------------------------------------------------------------------------------------------------------------------------------------------
+    |   Descripción                                                         |   Ejemplo de Uso                                                          |
+    -----------------------------------------------------------------------------------------------------------------------------------------------------
+    |   Ejecutar nmap automáticamente sobre los puertos encontrados         |   naabu -host ejemplo.com -nmap-cli 'nmap -sV -oN nmap_resultados.txt'    |
+    |   Usar con httpx (para detectar servicios HTTP después del escaneo)   |   naabu -host ejemplo.com -p 80,443 | httpx                               |
+    -----------------------------------------------------------------------------------------------------------------------------------------------------

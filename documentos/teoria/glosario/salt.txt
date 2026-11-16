@@ -1,0 +1,19 @@
+Es un valor aleatorio que se añade a una contraseña antes de cifrarla (hashearla).
+
+Sirve para hacer mucho más difícil romper contraseñas, incluso aunque dos usuarios tengan la misma.
+
+Ejemplos: 
+
+    > Sin salt → Todos los usuarios con esa contraseña tienen el mismo hash.
+
+        hash("123456") → X
+
+    > Con salt → Cada usuario tiene la misma contraseña y un hash distinto. 
+
+        salt + "123456" → hash diferente
+
+Usos: 
+
+    - En sistemas Linux (/etc/shadow)
+    - Bases de datos de usuarios
+    - Sistemas de autenticación modernos

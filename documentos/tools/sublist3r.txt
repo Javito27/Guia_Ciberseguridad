@@ -1,0 +1,26 @@
+Sublist3r es una herramienta de enumeración de subdominios escrita en Python. Su objetivo principal es ayudar a pentesters y profesionales de seguridad a recopilar subdominios de 
+un dominio objetivo durante la fase de reconocimiento (recon) en pruebas de penetración o análisis de seguridad.
+
+Características principales:
+
+	> Automatiza la búsqueda de subdominios usando fuentes públicas (Google, Bing, Yahoo, Baidu, Ask, Netcraft, Virustotal, ThreatCrowd, DNSdumpster, etc.).
+	> Permite descubrimiento rápido y masivo de subdominios de un dominio.
+	> Puede integrarse con herramientas de fuerza bruta y resolución DNS para verificar si los subdominios son válidos.
+	> Exporta los resultados a archivos para análisis posterior.
+
+Opciones principales
+	--------------------------------------------------------------------------------------------------------------------------------------------------
+	|  Opción    |	Descripción                                                             |  Ejemplo de Uso                                        |              
+	--------------------------------------------------------------------------------------------------------------------------------------------------
+	|    -d      |	Especificar el dominio                                                  |  python sublist3r.py -d ejemplo.com                    |
+	|    -b      |	Usar Subbrute para fuerza bruta de subdominios                          |  python sublist3r.py -d ejemplo.com -b                 |
+	|    -p      |	Escaneo de puertos abiertos en los subdominios encontrados              |  python sublist3r.py -d ejemplo.com -p 80,443          |
+	|    -o      |	Guardar los resultados en un archivo                                    |  python sublist3r.py -d ejemplo.com -o resultado.txt   |
+	|    -e      |	Elegir motores de búsqueda específicos (ejemplo: Google, Yahoo, Bing)   |  python sublist3r.py -d ejemplo.com -e google,yahoo    |
+	--------------------------------------------------------------------------------------------------------------------------------------------------
+
+Usos típicos:
+
+	> Mapear la superficie de ataque de una organización.
+	> Encontrar servidores y servicios olvidados o expuestos.
+	> Ayudar a cazadores de bug bounty a descubrir activos ocultos.

@@ -1,0 +1,115 @@
+📌 Es el puerto por defecto de PostgreSQL, un sistema de gestión de bases de datos relacional (RDBMS).
+
+    Es una base de datos muy usada en:
+
+        🌐 Aplicaciones web
+        🧩 APIs
+        🏢 Entornos empresariales
+        🐧 Servidores Linux
+        ☁️ Cloud (AWS RDS, Azure, etc.)
+
+    Es conocida por ser:
+
+        Robusta
+        Segura
+        Muy compatible con estándares SQL
+
+⚙️ ¿Cómo funciona?
+
+    1️⃣ Un cliente (aplicación o usuario) se conecta al servidor por el 5432
+    2️⃣ Se autentica
+    3️⃣ Ejecuta consultas SQL
+
+    psql -h IP -U usuario -d basededatos
+
+🔐 Autenticación
+
+    PostgreSQL puede usar:
+
+        · Usuario + contraseña
+        · Autenticación por archivo pg_hba.conf
+        · Certificados TLS
+        · Integración con LDAP / Kerberos
+
+🧪 En pentesting
+
+    Si el puerto 5432 está abierto:
+
+        Indica posible base de datos PostgreSQL accesible
+
+        Se revisa:
+
+            · Acceso remoto innecesario
+            · Credenciales débiles
+            · Configuración del pg_hba.conf
+            · Si acepta conexiones sin cifrado
+
+⚠️ Riesgos comunes
+
+    Base de datos expuesta a Internet
+    Usuario postgres con contraseña débil
+    Falta de cifrado
+    Inyección SQL en apps que usan PostgreSQL
+
+🎯 Ejemplo de uso usando SSH
+
+    Nos conectamos al user 
+    
+        ssh <USER>@<IP>
+
+    Enumeración interna para ver los procesos y servicios activos 
+        
+        ss -tln
+
+        Donde: 
+
+            · Mostrar sockets TCP > -t
+            · Muestra solo sockets activos > -l
+            · No intentar resolver el nombre del servicio > -n
+													
+    Ver puerto que se está ejecutando
+    
+        ss -tl							
+																		
+    Comprobamos que está instalado psql en servidor
+    
+        psql				
+	
+    Nos conectamos (hay que desconectarse) con ssh al usuario
+    
+        ssh -L 8080:localhost:5432 <USER>@<IP>
+
+        Donde: 
+
+            · Reenvío de puertos locales
+            · 8080 > Puerto local
+            · Localhost 
+            · 5432 > Puerto PostgreQSL
+	
+    Conexión a la base de datos a través del túnel
+    
+        psql -U <USER> -h localhost -p 8080
+                                                                        
+    Listar bases de datos 
+    
+        \l																
+        
+    Conectarnos a una base de datos 
+    
+        \c
+
+    Listar tablas dentro de la base de datos 
+    
+        \dt
+
+    Listar contenido de la tabla
+    
+         \d <TABLE>
+
+    Ver el contenido de la columna 
+    
+        select <ROW> from <TABLE>
+        
+    Desconectarse de la base de datos 
+    
+        \q

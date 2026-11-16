@@ -1,0 +1,56 @@
+Windapsearch es una herramienta de reconocimiento en Active Directory.
+
+Está escrita en Python y se usa en auditorías de seguridad para extraer información de un dominio Windows mediante consultas LDAP (Lightweight Directory Access Protocol).
+
+¿Qué es y para qué se usa?
+
+    > Permite conectarse a un servidor LDAP/Active Directory y listar usuarios, grupos, controladores de dominio y permisos.
+    > Es útil en la fase de enumeración durante pruebas de penetración, sobre todo si se obtiene acceso inicial a una máquina dentro de la red corporativa.
+    > Se enfoca en escenarios sin autenticación o con credenciales de bajo privilegio, aprovechando la información que AD expone por defecto.
+
+Descarga / Instalación
+
+    git clone https://github.com/ropnop/windapsearch.git
+
+Opciones principales de Windapsearch
+
+    Opciones más usadas
+
+        ----------------------------------------------------------------------------------------------
+        |   Opción           |   Descripción                                                         |
+        ----------------------------------------------------------------------------------------------
+        |   -d <dominio>     |   Especificar el dominio (ejemplo: midominio.local).                  |
+        |   -u <usuario>     |   Usuario de AD para autenticar (ejemplo: usuario@midominio.local).   |
+        |   -p <password>    |   Contraseña del usuario.                                             |
+        |   --dc-ip <IP>     |   Indicar la IP del controlador de dominio (Domain Controller).       |
+        ----------------------------------------------------------------------------------------------
+
+    Módulos de enumeración 
+	
+        ---------------------------------------------------------------------------------------------------------
+        |   Módulos               |   Descripción                                                               |
+        ---------------------------------------------------------------------------------------------------------
+        |   --computers           |   Listar computadoras en el dominio.                                        |
+        |   --users               |   Listar usuarios.                                                          |
+        |   --groups              |   Listar grupos.                                                            |
+        |   --domain-controllers  |   Listar controladores de dominio.                                          |
+        |   --trusted-domains     |   Listar dominios de confianza.                                             |
+        |   --spns                |   Buscar SPNs (Service Principal Names), útil para ataques Kerberoasting.   |
+        |   --asreproast          |   Enumerar usuarios vulnerables a AS-REP Roasting.                          |
+        |   --gpos                |   Listar Group Policy Objects (GPOs).                                       |
+        ---------------------------------------------------------------------------------------------------------
+
+Ejemplos de uso
+
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |   Descripción                                               |   Ejemplos                                                                                       |
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |   Enumeración anónima de usuarios                           |   python windapsearch.py -d midominio.local --users                                              |
+    |   Autenticación con usuario/contraseña para listar grupos   |   python windapsearch.py -d midominio.local -u juan@midominio.local -p 'Password123' --groups    |
+    |   Buscar SPNs para Kerberoasting                            |   python windapsearch.py -d midominio.local -u juan@midominio.local -p 'Password123' --spns      |
+    |   Enumerar controladores de dominio                         |   python windapsearch.py -d midominio.local --domain-controllers                                 |
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+En resumen
+
+    Windapsearch se usa para mapear Active Directory y encontrar posibles vectores de ataque sin necesidad de credenciales privilegiadas.

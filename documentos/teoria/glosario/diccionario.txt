@@ -1,0 +1,86 @@
+Un diccionario es un archivo (lista de palabras) que contiene posibles contraseñas, frases o cadenas de texto que se usan en ataques de fuerza bruta o de diccionario.
+La idea es probar todas esas palabras contra un sistema hasta dar con la correcta.
+
+Características
+
+        > Normalmente es un .txt con una palabra por línea.
+        
+        > Puede contener contraseñas comunes, combinaciones de letras/números, frases populares o fugas de datos.
+        
+        > Se usan con herramientas de pentesting como Hydra, John the Ripper, Hashcat, Aircrack-ng, etc.
+			
+Tipos de diccionarios
+
+        > Genéricos → listas de contraseñas comunes (rockyou.txt es el más famoso).
+
+        > Personalizados → creados con información sobre la víctima (nombres, fechas, etc.).
+
+        > De fugas de datos → recopilados de bases de datos filtradas.
+
+        > Combinados → generados automáticamente con reglas (ej: convertir password en P@ssw0rd!).
+		
+Ejemplo		  
+	  
+	diccionario.txt
+
+		123456
+		qwerty
+		password
+		admin
+		letmein
+		maradona10
+
+	Y usamos herramientas como Hydra -> hydra -l root -P diccionario.txt ssh://192.168.1.10
+
+****************************************************************************************************************************************************************************************
+
+MEBUS CUPP		
+	Es una herramienta en Python usada en ciberseguridad/pentesting para generar diccionarios personalizados de contraseñas basados en información de la víctima (ingeniería social). 
+	En vez de usar un diccionario genérico como rockyou.txt, CUPP crea un listado de posibles contraseñas a partir de datos concretos de la persona/empresa objetivo (nombre, apellidos, 
+	cumpleaños, mascota, hobbies, pareja, etc.).
+
+	1. Instalar CUPP
+
+		> git clone https://github.com/Mebus/cupp.git
+		> cd cupp
+		> python3 cupp.py -h
+
+	2. Ejecutar el modo interactivo
+
+		> python3 cupp.py -i
+
+	3. Te va preguntando cosas como:
+
+		> Nombre
+		> Apellido
+		> Nickname
+		> Fecha de nacimiento
+		> Nombre de pareja, hijos, mascotas
+		> Empresa
+		> Palabras clave adicionales
+
+	4. Con esa info genera un archivo .txt con un diccionario adaptado al objetivo.
+
+	5. Ejemplo de uso
+
+		> Si el objetivo se llama Carlos Pérez, nació en 1990 y tiene un perro llamado Rocky, CUPP podría generar contraseñas como:
+
+			  > carlos1990
+			  > rocky90
+			  > perez123
+			  > carlosperez
+			  > carlosrocky
+			  > rocky1990
+
+	Opciones interesantes
+
+		  > -i → modo interactivo (el más usado).
+		  > -w → crea un diccionario basado en palabras clave que le pases.
+		  > -l → descarga diccionarios predefinidos.
+
+****************************************************************************************************************************************************************************************
+
+KAONASHI WORDLIST
+	Es un repositorio de listas de palabras que se han extraído de filtraciones de contraseñas reales y se han ordenado por número de ocurrencias. 
+
+		1. Descargar repositorio → https://github.com/kaonashi-passwords/Kaonashi.git

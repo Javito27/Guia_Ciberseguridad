@@ -1,0 +1,66 @@
+Dirsearch es una herramienta en Python de fuerza bruta para directorios y archivos web ocultos.
+
+Se usa mucho en pentesting y bug bounty porque es rápida, ligera y en línea de comandos, a diferencia de DirBuster (que es Java y más pesado).
+
+¿Para qué se usa?
+
+    > Encontrar directorios ocultos (/admin, /uploads, /backup, etc.)
+    > Descubrir archivos sensibles (config.php, index.bak, .git/, etc.)
+    > Hacer reconocimiento en aplicaciones web.
+    > Escaneo masivo de varios dominios con soporte para multihilo.
+
+Descarga e Instalación
+
+    git clone https://github.com/maurosoria/dirsearch.git
+	
+Sintaxis básica
+
+    python3 dirsearch.py -u <URL> -w <wordlist> [opciones]
+
+Opciones principales de Dirsearch
+
+    --------------------------------------------------------------------------------------------------------------------------------------------------------
+    |   Opción             |   Descripción                                          |   Ejemplo de Uso                                                     |  
+    --------------------------------------------------------------------------------------------------------------------------------------------------------
+    |   -u                 |   URL objetivo                                         |   -u http://ejemplo.com                                              |
+    |   -l                 |   Lista de URLs (para escanear múltiples sitios)       |   -l urls.txt                                                        |
+    |   -w                 |   Diccionario (wordlist)                               |   -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt    |
+    |   -e                 |   Extensiones a probar                                 |   -e php,html,txt,js                                                 |
+    |   -t                 |   Número de hilos (threads)                            |   -t 50                                                              |
+    |   --timeout          |   Tiempo de espera por petición                        |   --timeout=10                                                       |
+    |   --proxy            |   Usar proxy (ej: BurpSuite, Zap)                      |   --proxy=http://127.0.0.1:8080                                      |
+    |   --header           |   Agregar cabeceras personalizadas                     |   --header "Authorization: Bearer TOKEN123"                          |
+    |   --random-agent     |   Usar user-agents aleatorios para evadir detección.   |                                                                      |
+    | 	-o                 |   Guardar salida en un archivo                         |   -o resultados.txt                                                  |
+    |   --exclude-status   |   Excluir ciertos códigos HTTP (ej: 403, 404)          |   --exclude-status=403,404                                           |
+    |   --include-status   |   Incluir solo ciertos códigos HTTP                    |   --include-status=200,301                                           |
+    --------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Wordlists
+
+    ------------------------------------------------------------------------------------------------
+    |   Diccionario                     |   Descripción                                            |
+    ------------------------------------------------------------------------------------------------
+    |   directory-list-2.3-small.txt    | rápido (bueno para un escaneo inicial).                  |
+    |   directory-list-2.3-medium.txt   | balance entre rapidez y resultados (muy usado).          |
+    |   directory-list-2.3-big.txt      | más completo, pero lento.                                |
+    |   common.txt                      | con nombres comunes de directorios y archivos.           |
+    |   raft-medium-words.txt           | muy usado en Bug Bounty (SecLists).                      |
+    ------------------------------------------------------------------------------------------------
+	
+Ejemplos prácticos
+
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------
+    |   Descripción                         |   Ejemplo                                                                                                      |
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------
+    |   Escaneo básico                      |   python3 dirsearch.py -u http://objetivo.com -e php,html,txt                                                  |
+    |   Escaneo con wordlist y 100 hilos    |   python3 dirsearch.py -u http://objetivo.com -w /usr/share/seclists/Discovery/Web-Content/common.txt -t 100   |
+    |   Escaneo masivo con lista de sitios  |   python3 dirsearch.py -l sitios.txt -e php,html,js -t 50 -o reporte.txt                                       |
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------   
+    
+Ventaja de Dirsearch sobre DirBuster:
+    
+    > Más rápido y ligero
+    > Funciona en CLI. Ideal para automatización en scripts
+    > Compatible con proxies, cabeceras, exclusiones
+    > Muy usado en CTFs y bug bounty

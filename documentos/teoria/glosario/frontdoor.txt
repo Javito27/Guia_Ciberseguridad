@@ -1,0 +1,63 @@
+En informática y ciberseguridad, el término “frontdoor” puede referirse a varias cosas dependiendo del contexto, pero generalmente se usa de forma figurativa para describir un punto de acceso legítimo a un sistema o servicio. Es decir, 
+es la “entrada oficial” que permite que usuarios o procesos autorizados interactúen con un sistema.
+
+Contextos comunes:
+
+	1. En software y sistemas
+
+		> Un frontdoor es la interfaz o mecanismo normal que los usuarios usan para acceder a un sistema: por ejemplo, un login en un sitio web, un puerto de red abierto que acepta conexiones autorizadas, o una API pública.
+		> Sirve para permitir acceso seguro y controlado, siguiendo los permisos y políticas establecidas.
+
+	2. En ciberseguridad
+
+		> A veces se usa para diferenciar de un backdoor (puerta trasera), que es un acceso oculto o no autorizado a un sistema.
+		> Mientras que un backdoor permite al atacante entrar sin pasar por los controles normales, el frontdoor es el acceso legítimo que debería usarse.
+
+	3. Ejemplo práctico:
+
+		> Un administrador puede conectarse a un servidor mediante SSH usando su usuario y contraseña: eso es el frontdoor.
+		> Un malware que instala un servicio oculto para permitir acceso remoto sin autorización crea un backdoor.
+
+Resumen simple:
+
+	> Frontdoor = entrada oficial y autorizada a un sistema.
+	> Backdoor = entrada oculta o no autorizada, generalmente usada para ataques.
+
+***********************************************************************************************************************************************************************************************************************************************
+
+En ciberseguridad, los atacantes a veces abusan de los frontdoors legítimos de un sistema en lugar de crear un backdoor oculto. Esto se conoce como ataque por abuso de credenciales o explotación de servicios legítimos. La idea es usar 
+la “puerta de entrada oficial” para no levantar sospechas.
+
+Cómo pueden hacerlo:
+
+	1. Robo de credenciales
+	
+		> Si un atacante obtiene el usuario y la contraseña de un administrador o empleado (por phishing, malware o filtraciones), puede acceder al sistema por el frontdoor, exactamente como lo haría un usuario legítimo.
+		> Ventaja para el atacante: difícil de detectar porque el acceso parece legítimo.
+
+	2. Explotación de vulnerabilidades del servicio
+
+		> Algunos frontdoors tienen fallos de seguridad. Por ejemplo, una web con login vulnerable a inyecciones SQL o desbordamientos de buffer.
+		> El atacante entra por el frontdoor y consigue privilegios sin crear backdoors visibles.
+
+	3. Uso de APIs públicas
+
+		> Muchas aplicaciones ofrecen APIs como frontdoors legítimos.
+		> Si el API no valida correctamente los permisos o límites de uso, un atacante puede manipularla para acceder a datos o controlar funciones.
+
+	4. Persistencia sin backdoor
+
+		> Los atacantes a veces crean cuentas legítimas o manipulan configuraciones internas, de manera que puedan volver a entrar por el frontdoor sin instalar software malicioso. Esto hace que su presencia sea más difícil de 
+		  detectar.
+
+Claves para defenderse:
+
+	> Monitoreo de accesos: revisar patrones de login inusuales.
+	> Autenticación fuerte: usar MFA (autenticación multifactor) para que robar una contraseña no sea suficiente.
+	> Parchear vulnerabilidades: asegurar que servicios públicos y APIs estén actualizados.
+	> Principio de mínimo privilegio: dar a los usuarios solo los permisos que necesitan.
+
+Resumen: 
+
+Un frontdoor puede ser seguro, pero si alguien obtiene acceso legítimo o explota un fallo, puede usarlo como puerta trasera sin levantar alarmas. Por eso, en ciberseguridad, siempre se vigila y protege incluso la entrada “oficial” de 
+un sistema.

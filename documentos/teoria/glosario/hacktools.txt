@@ -1,0 +1,24 @@
+Es una extensión para navegador (Chrome y Firefox) diseñada para ayudar a profesionales y estudiantes de ciberseguridad durante auditorías web y CTFs.
+
+No es un “hack automático”, sino una herramienta de apoyo que facilita pruebas manuales.
+
+🔎 ¿Para qué sirve?
+
+    Permite generar rápidamente:
+
+        - Payloads de XSS
+        - Comandos para Reverse Shell
+        - Inyecciones SQL básicas
+        - Bypass de autenticación
+        - Wordlists simples
+        - Codificación/decodificación (Base64, URL, etc.)
+        - Cheatsheets de comandos (Linux, Windows, etc.)
+
+    Es como tener una chuleta rápida de pentesting integrada en el navegador.
+
+🎯 ¿Quién la usa?
+
+    Estudiantes de ciberseguridad
+    Pentesters
+    Personas que hacen CTFs
+    Participantes en Bug Bounty

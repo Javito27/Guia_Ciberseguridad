@@ -1,0 +1,31 @@
+En informática y ciberseguridad, el término "bypass" significa saltar, evitar o eludir un control, restricción o medida de seguridad establecida en un sistema. En otras palabras, hacer 
+un bypass es encontrar la manera de lograr 
+un acceso o realizar una acción sin pasar por los mecanismos normales de protección.
+
+Ejemplos de "bypass" en ciberseguridad
+
+	> Bypass de autenticación
+
+		- Ocurre cuando un atacante consigue entrar en una cuenta o sistema sin necesidad de introducir usuario y contraseña válidos, aprovechando fallos en el código o 
+		configuraciones inseguras.
+		- Ejemplo: manipular una URL o inyección SQL para iniciar sesión como administrador sin conocer la clave.
+
+	> Bypass de antivirus o firewall
+
+		- Los atacantes modifican malware para que no sea detectado por programas de seguridad.
+		- Ejemplo: usar técnicas de ofuscación para que un archivo malicioso no sea reconocido como amenaza.
+
+	> Bypass de restricciones en software o dispositivos
+
+		- Se refiere a saltarse bloqueos o limitaciones impuestas por un fabricante o administrador.
+		- Ejemplo: hacer jailbreak en un iPhone para instalar apps no autorizadas por Apple.
+
+¿Para qué sirve?
+
+	> En ciberseguridad defensiva, los profesionales investigan técnicas de bypass para detectar vulnerabilidades y reforzar la seguridad antes de que los atacantes las exploten.
+	> En ciberataques, los delincuentes lo usan para acceder ilegalmente a sistemas, datos o recursos.
+
+En resumen:
+
+	> Bypass = eludir un control.
+	> En seguridad, es un concepto crítico porque cada medida de defensa puede ser vulnerable a un intento de bypass.

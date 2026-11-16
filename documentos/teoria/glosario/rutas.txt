@@ -1,0 +1,71 @@
+En informática (y especialmente en ciberseguridad) entender la diferencia entre rutas relativas y rutas absolutas es clave, porque muchos ataques se aprovechan de un mal manejo de ellas (directory traversal, errores 
+de permisos, etc.).
+
+··· RUTAS ABSOLUTAS ···
+
+	> Una ruta absoluta indica la ubicación completa de un archivo o directorio en el sistema de archivos, desde la raíz.
+
+	> Siempre empieza desde / en sistemas Unix/Linux o con la letra de la unidad (ej. C:\) en Windows.
+
+	> Ejemplos:
+
+		- Linux:
+
+			/home/usuario/documentos/contraseña.txt
+
+		- Windows:
+
+			C:\Users\Usuario\Documents\contraseña.txt
+
+
+✅ Ventaja: No depende de dónde estés trabajando.
+❌ Desventaja: Son más largas y menos flexibles.
+
+
+··· RUTAS RELATIVAS ···
+
+	> Una ruta relativa indica la ubicación de un archivo en relación con el directorio actual en el que se está trabajando.
+
+	> No comienza desde la raíz, sino desde la carpeta en la que estás situado.
+
+	> Ejemplos (suponiendo que estamos en /home/usuario):
+
+		documentos/contraseña.txt → apunta a /home/usuario/documentos/contraseña.txt
+
+		../imagenes/foto.png → sube un nivel y abre foto.png en imagenes.
+
+
+✅ Ventaja: Más cortas y fáciles de mover entre sistemas.
+❌ Desventaja: Pueden dar lugar a errores o vulnerabilidades si no se controlan.
+
+***********************************************************************************************************************************************************************************************************************************************
+
+Importancia en ciberseguridad
+
+	1. Directory Traversal (Traversal de directorios)
+
+		> Si una aplicación web usa rutas relativas sin sanitizar entradas, un atacante podría manipular la ruta con ../ para acceder a archivos sensibles.
+
+		> Ejemplo de ataque:
+
+			https://victima.com/archivo?doc=../../etc/passwd
+
+	2. Control de accesos
+
+		> Un mal manejo de rutas absolutas puede exponer información sobre la estructura interna del sistema (filtración de paths en logs o mensajes de error).
+
+	3. Buenas prácticas
+
+		> Usar rutas absolutas en aplicaciones críticas para evitar ambigüedad.
+
+		> Validar y normalizar rutas cuando provienen del usuario.
+
+		> Restringir el acceso con sandboxes o jails para que aunque se intente hacer traversal, no se pueda salir del directorio permitido.
+
+***********************************************************************************************************************************************************************************************************************************************
+
+En resumen:
+
+	> Ruta absoluta = dirección exacta y fija desde la raíz.
+	> Ruta relativa = dirección dinámica desde donde te encuentras.
+	> En ciberseguridad, el uso incorrecto de rutas (sobre todo relativas) puede ser puerta de entrada a ataques.

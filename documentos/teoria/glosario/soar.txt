@@ -1,0 +1,43 @@
+Es una plataforma que automatiza la respuesta a incidentes conectando las distintas herramientas de seguridad, para que los analistas no tengan que hacer manualmente tareas repetitivas.
+
+🧩 Sus principales componentes son: 
+
+    1️⃣ Orquestación: 
+    
+        Conecta herramientas distintas (SIEM, EDR, firewall, correo, threat intelligence, tickets) para que trabajen juntas.
+
+    2️⃣ Automatización: 
+    
+        Ejecuta tareas repetitivas sin intervención humana.
+    
+    3️⃣ Respuesta: 
+    
+        Gestiona el ciclo del incidente (investigación, contención, cierre y documentación). 
+
+💡 Ejemplo práctico (playbook de phishing): 
+
+    1️⃣ El SIEM o el buzón de reportes detecta un correo sospechoso.
+    2️⃣ El SOAR extrae automáticamente URLs, adjuntos y remitente.
+    3️⃣ Consulta la reputación en VirusTotal u otras fuentes de threat intelligence.
+    4️⃣ Si es malicioso: lo elimina de todos los buzones, bloquea el dominio en el firewall y crea un ticket.
+    5️⃣ Si hay dudas, lo escala a un analista con toda la información ya recopilada.
+
+    Esas secuencias automatizadas se llaman playbooks (o runbooks).
+
+🚀 Aporta y mejora: 
+
+    · Reduce el tiempo de respuesta (MTTR).
+    · Disminuye la fatiga de alertas en el SOC.
+    · Estandariza los procesos de respuesta.
+    · Deja registro de todo lo que se hizo, útil para auditorías.
+
+🛠️ Herramientas SOAR: 
+
+    · Splunk SOAR (antes Phantom)
+    · Palo Alto Cortex XSOAR
+    · IBM QRadar SOAR
+    · Microsoft Sentinel (incluye automatización con Logic Apps)
+    · Shuffle (open source, bueno para practicar)
+    · TheHive + Cortex (open source)
+
+El SIEM detecta y alerta; el SOAR actúa sobre esas alertas. Suelen trabajar juntos. Es Blue Team. 

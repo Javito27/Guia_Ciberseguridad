@@ -1,0 +1,48 @@
+Es una herramienta de seguridad que se instala en los dispositivos finales (PCs, portátiles, servidores, a veces móviles) para monitorizar su actividad de forma continua, detectar comportamientos sospechosos y permitir responder a ellos.
+
+💡 Que hace principalmente: 
+
+    ➡️ Monitorización continua: 
+    
+        Registra procesos, conexiones de red, cambios en archivos y en el registro, uso de PowerShell, inicios de sesión, etc.
+    
+    ➡️ Detección por comportamiento: 
+    
+        No se basa solo en firmas. Detecta cosas como un Word que lanza PowerShell, volcado de memoria de lsass.exe o cifrado masivo de archivos (ransomware).
+    
+    ➡️ Respuesta: 
+
+        Aislar el equipo de la red, matar procesos, poner archivos en cuarentena, revertir cambios.
+    
+    ➡️ Investigación y forense: 
+    
+        Guarda telemetría histórica para reconstruir qué pasó (línea temporal del ataque).
+    
+    ➡️ Threat hunting: 
+    
+        Permite buscar IOCs o comportamientos en todos los equipos a la vez.
+
+❌ Diferencia con un antivirus tradicional:
+
+    ➡️ Antivirus: 
+    
+        Se basa sobre todo en firmas de malware conocido y bloquea.
+    
+    ➡️ EDR: 
+    
+        Analiza comportamiento, da visibilidad completa y permite investigar y responder, incluso ante amenazas desconocidas o ataques sin malware 
+        (fileless, living off the land).
+
+🛠️ Ejemplos de herramientas EDR:
+
+    · CrowdStrike Falcon
+    · Microsoft Defender for Endpoint
+    · SentinelOne
+    · Palo Alto Cortex XDR
+    · Elastic Defend
+    · Wazuh (open source, con funciones tipo EDR)
+    · Velociraptor y OSSEC (open source)
+
+Desde el punto de vista ofensivo (Red Team): evadir o desactivar el EDR es uno de los grandes retos en escalada de privilegios y movimiento lateral.
+
+Este punto encaja dentro de Blue Team. 

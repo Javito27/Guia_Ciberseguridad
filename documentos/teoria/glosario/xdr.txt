@@ -1,0 +1,41 @@
+Es una plataforma de seguridad que recopila y correlaciona datos de múltiples capas (endpoints, red, correo, identidad y cloud) para detectar amenazas y responder a ellas desde un único punto, en lugar de tener herramientas separadas que generan alertas aisladas.
+
+Es una versión más extendida que el EDR. 
+
+🔑 Como funciona: 
+
+    1️⃣ Recolecta telemetría de varias fuentes: 
+    
+        Agentes en endpoints, tráfico de red, gateways de correo, sistemas de identidad (Active Directory, Entra ID) y servicios cloud.
+
+    2️⃣ Correlaciona automáticamente esos eventos para reconstruir el ataque completo.
+
+    3️⃣ Agrupa las alertas relacionadas en un único incidente, con su línea temporal.
+
+    4️⃣ Permite responder desde la misma consola: 
+    
+        Aislar un equipo, deshabilitar una cuenta, bloquear un correo o una IP.
+
+🚀 Que aporta
+
+    · Visibilidad completa de la cadena de ataque (desde el phishing inicial hasta el movimiento lateral).
+    · Menos ruido: en vez de 20 alertas sueltas, un incidente con contexto.
+    · Respuesta más rápida, con acciones integradas y a menudo automatizadas.
+    · Detección de ataques que una sola capa no vería, por ejemplo, un inicio de sesión sospechoso más un proceso raro más tráfico saliente anómalo.
+
+❌ Limitaciones: 
+
+    · Suele funcionar mejor dentro del ecosistema de un único fabricante; integrar productos de terceros puede ser limitado.
+    · Puede generar dependencia del proveedor (vendor lock-in).
+    · No sustituye siempre al SIEM, que sigue siendo útil para logs de fuentes variadas y para cumplimiento normativo.
+
+🛠️ Herrmientas XDR: 
+
+    · Microsoft Defender XDR
+    · CrowdStrike Falcon
+    · Palo Alto Cortex XDR
+    · SentinelOne Singularity
+    · Trend Micro Vision One
+    · Wazuh (open source)
+
+Se incluye dentro del Blue Team. 

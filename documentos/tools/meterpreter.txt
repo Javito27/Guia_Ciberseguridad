@@ -1,0 +1,85 @@
+Meterpreter (Meta-Interpreter) es una carga útil avanzada (payload) de Metasploit Framework.
+
+En lugar de ser un exploit en sí, es una shell interactiva en memoria que se inyecta en el sistema objetivo después de una explotación exitosa.
+
+
+Características principales
+
+    > Corre en memoria (fileless) → difícil de detectar, no deja rastros en disco.
+    > Permite control remoto completo del sistema comprometido.
+    > Soporta extensiones dinámicas (puedes cargar módulos según lo necesites).
+    > Comunicación cifrada (TLS, HTTPS, etc.).
+    > Compatible con Windows, Linux, macOS, Android.
+
+
+¿Para qué se usa en informática y ciberseguridad?
+
+    Se utiliza en pruebas de penetración (pentesting) y red team, nunca con fines maliciosos. Permite:
+    
+    > Obtener una shell remota sobre el equipo víctima.
+    > Escalar privilegios (de usuario normal a administrador/root).
+    > Enumerar el sistema (usuarios, procesos, redes, parches).
+    > Exfiltrar archivos.
+    > Capturar contraseñas (keylogger, hashdump).
+    > Pivoting: moverse lateralmente a otros equipos dentro de la red.
+    > Persistencia: mantener acceso tras reinicios.
+
+
+Opciones y comandos disponibles en Meterpreter
+
+    Una vez dentro de una sesión Meterpreter, hay muchos comandos útiles:
+    
+    Básicos
+    ---------------------------------------------------------------------
+    |  Opción   |  Descripción                                          |
+    ---------------------------------------------------------------------   
+    |  help     |  muestra la lista de comandos disponibles.            |
+    |  sysinfo  |  información del sistema.                             |
+    |  getuid   |  muestra el usuario actual.                           |
+    |  ps       |  lista de procesos.                                   |
+    |  shell    |  lanza una shell del sistema (cmd, bash, etc.).       |
+    ---------------------------------------------------------------------
+	
+    Gestión de archivos
+    ---------------------------------------------------------------------
+    |  Opción               |  Descripción                              |
+    ---------------------------------------------------------------------   
+    |  ls                   |  listar archivos.                         |
+    |  cd                   |  cambiar de directorio.                   |
+    |  download <archivo>   |  descargar archivo desde la víctima.      |
+    |  upload <archivo>     |  +subir archivo a la víctima.             |
+    ---------------------------------------------------------------------   
+
+    Red y pivoting
+    ---------------------------------------------------------------------
+    |  Opción              |  Descripción                               |
+    ---------------------------------------------------------------------   
+    |  ipconfig            |  muestra interfaces de red.                |
+    |  route               |  gestionar rutas de red.                   |
+    |  portfwd             |  redirigir puertos.                        |
+    ---------------------------------------------------------------------    
+	
+    Post-explotación
+    ---------------------------------------------------------------------
+    |  Opción              |  Descripción                               |
+    ---------------------------------------------------------------------
+    |  migrate <pid>       |  migrar la sesión a otro proceso.          |
+    |  hashdump            |  extraer hashes de contraseñas.            |
+    |  keyscan_start       |  iniciar keylogger.                        |
+    |  screenshot          |  tomar captura de pantalla.                |
+    |  webcam_snap         |  tomar foto con la cámara (si existe).     |
+    ---------------------------------------------------------------------    
+	
+    Persistencia y escalada
+    ---------------------------------------------------------------------
+    |  Opción      |  Descripción                                       |
+    ---------------------------------------------------------------------    
+    |  getsystem   |  intenta escalar privilegios a administrador/root. |
+    |  persistence |  establecer persistencia en el sistema.            |
+    ---------------------------------------------------------------------
+
+
+Importante
+
+    > Uso legal: Meterpreter está diseñado para pentesters, investigadores de seguridad y equipos rojos dentro de auditorías autorizadas.
+    > Usarlo sin permiso es ilegal (equivale a intrusión no autorizada).

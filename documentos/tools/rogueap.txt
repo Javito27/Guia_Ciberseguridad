@@ -1,0 +1,77 @@
+RogueAP (o Rogue Access Point) se refiere a un punto de acceso inalámbrico malicioso o no autorizado que un atacante crea dentro de una red Wi-Fi legítima.
+
+En ciberseguridad, se usa para ataques de red, sobre todo relacionados con ingeniería social, interceptación de tráfico y acceso no autorizado.
+
+
+¿Para qué se usa?
+
+    1. Ataques Man-in-the-Middle (MITM)
+    
+        > El atacante crea un punto de acceso con un SSID similar al de la red legítima.
+        > Cuando las víctimas se conectan, todo su tráfico pasa por el atacante.
+        > Se pueden capturar credenciales, cookies o información sensible.
+    
+    2. Robo de credenciales
+    
+        > En redes públicas, los usuarios pueden conectarse pensando que es legítima.
+        > El atacante puede interceptar contraseñas de correo, redes sociales, etc.
+    
+    3. Distribución de malware
+    
+        > El RogueAP puede redirigir a los usuarios a sitios maliciosos para descargar software comprometido.
+    
+    4. Auditoría de seguridad
+    
+        > Los pentesters usan RogueAPs de forma controlada para evaluar la seguridad de redes Wi-Fi.
+
+
+Cómo se implementa (herramientas)
+
+    Algunas herramientas y técnicas comunes:
+    
+        > Airbase-ng (de suite Aircrack-ng)
+        
+            sudo airbase-ng -e "SSID_fake" -c 6 wlan0mon
+        
+            - -e → nombre del SSID (falso)
+            - -c → canal Wi-Fi
+            - wlan0mon → interfaz en modo monitor
+        
+        > Hostapd
+        
+            - Permite configurar un AP en Linux con autenticación personalizada, usado para auditorías.
+        
+        > EvilAP frameworks
+        
+            - WiFi-Pumpkin → herramienta de phishing y MITM vía Rogue AP
+            - Fluxion → ataque de phishing WPA/WPA2 usando Rogue AP
+            - Airgeddon → automatiza ataques a redes Wi-Fi y RogueAPs
+
+
+Opciones y parámetros comunes
+
+   Con Airbase-ng, un ejemplo completo sería:
+   
+       sudo airbase-ng -e "FreeWiFi" -c 11 -P -C 30 wlan0mon
+   
+   
+   Explicación:
+   
+       > -e "FreeWiFi" → SSID del Rogue AP
+       > -c 11 → Canal Wi-Fi
+       > -P → Activar modo de respuesta DHCP
+       > -C 30 → Limite de clientes conectados
+       > wlan0mon → interfaz en modo monitor
+   
+   Con WiFi-Pumpkin o Fluxion, la configuración es más visual y permite:
+   
+       > Captura de credenciales (HTTP/HTTPS)
+       > Redirección de tráfico a páginas de phishing
+       > Configuración de SSID dinámico
+       > Logs de tráfico y clientes conectados
+
+
+Importante
+
+    > Crear un RogueAP en redes ajenas sin autorización es ilegal y considerado un delito en casi todos los países.
+    > Su uso se restringe a laboratorios de seguridad, auditorías con autorización y pruebas de pentesting.

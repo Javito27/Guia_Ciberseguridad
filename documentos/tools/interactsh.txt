@@ -1,0 +1,75 @@
+Interactsh es una herramienta de interacción de servidores controlados por el atacante para detectar vulnerabilidades que requieren interacción externa, como:
+
+    > SSRF (Server-Side Request Forgery)
+    > RCE (Remote Code Execution con callback a servidor externo)
+    > XXE (XML External Entity)
+    > Blind SQLi
+    > Blind Command Injection
+    > Exfiltración DNS / HTTP / SMTP
+
+Fue desarrollada por ProjectDiscovery (los mismos creadores de Nuclei, Subfinder, etc.).
+
+
+¿Para qué se usa?
+
+En un pentest o bug bounty, muchas veces el fallo no devuelve un resultado directo (ej: un SSRF interno).
+
+Con Interactsh, puedes generar un dominio único, y si la aplicación lo resuelve o hace una petición, recibes la interacción en tu servidor, confirmando la vulnerabilidad.
+
+Ejemplo típico:
+
+    curl "http://victima.com/?url=http://<tu-dominio>.oast.fun"
+
+    Si tu dominio de Interactsh recibe la petición            | hay un SSRF.
+
+
+Comandos básicos
+
+    interactsh-client
+
+
+Opciones y características principales
+
+    --------------------------------------------------------------------------------------------------------------------------------------------------
+    |  Opción                   |  Descripción                                                              |  Ejemplo de Uso                        |  
+    --------------------------------------------------------------------------------------------------------------------------------------------------
+    |  -server                  | Definir un servidor de Interactsh (por defecto: oast.fun).                |  interactsh-client -server oast.fun    |
+    |  -domain                  | Especificar dominio propio en lugar del público.                          |                                        |
+    |  -o                       | Guardar las interacciones en un archivo JSON.                             |  interactsh-client -o resultados.json  |
+    |  -v                       | Modo verbose (muestra detalles de las peticiones recibidas).              |                                        |
+    |  -n                       | Número de identificadores únicos que quieres generar.                     |                                        |
+    |  -dns-only / -http-only   | Escuchar solo interacciones DNS o HTTP.                                   |                                        |
+    |  -json                    | Salida en formato JSON (para integrarlo en pipelines de automatización).  |                                        |
+    --------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Integraciones
+
+    Interactsh se integra con muchas herramientas de pentesting:
+    
+        > Nuclei → para detectar vulnerabilidades de callback.
+        > SQLMap, XSStrike y otros → para pruebas de inyección. 
+        > Scripts personalizados → para exfiltración de datos o detección de blind bugs.
+
+
+Ejemplo práctico de uso
+
+    1. Lanzar cliente:
+    
+          interactsh-client -v
+
+       Te dará un dominio único, por ejemplo:
+    
+          abc123.oast.fun
+    
+    2. Probar un posible SSRF:
+    
+        curl "http://victima.com/api?url=http://abc123.oast.fun"
+    
+    3. Si la aplicación hace la petición → lo verás reflejado en tu terminal.
+
+
+En resumen
+
+    Interactsh es una herramienta esencial en pentesting y bug bounty para detectar vulnerabilidades ciegas (blind), donde necesitas comprobar si el servidor interactúa con un dominio 
+    externo controlado por ti.

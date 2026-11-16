@@ -1,0 +1,32 @@
+Rutas 
+--------------------------------------------------------------------------------------------------------------------------------------------------
+  Ruta                                                                |  Descripción                                                              
+--------------------------------------------------------------------------------------------------------------------------------------------------
+> Archivos de configuración del sistema                               |                                                                           
+    C:\Windows\System32                                               |  Archivos esenciales del sistema, binarios y DLLs                         
+    C:\Windows\System32\drivers\etc\hosts                             |  Equivalente a `/etc/hosts` en Linux, para mapear IPs a nombres de host   
+    C:\Windows\System32\drivers\etc\networks                          |  Configuración de redes (hosts de red local)                              
+    C:\Windows\System32\config                                        |  Contiene el registro del sistema (SAM, SECURITY, SOFTWARE, SYSTEM)       
+                                                                      |                                                                           
+> Usuarios y perfiles                                                 |                                                                           
+    C:\Users\\                                                        |  Directorio donde se encuentran los perfiles de usuario                   
+    C:\Users\<Usuario>\AppData\Roaming                                |  Configuración y datos de aplicaciones por usuario                        
+    C:\Users\<Usuario>\AppData\Local                                  |  Configuración y cache local de aplicaciones                              
+    C:\Users\<Usuario>\AppData\Local\Temp                             |  Archivos temporales por usuario                                          
+                                                                      |                                                                           
+> Logs y eventos                                                      |                                                                           
+    C:\Windows\Logs                                                   |  Carpeta general de logs de Windows                                       
+    C:\Windows\System32\winevt\Logs                                   |  Archivos de logs del Visor de Eventos (Event Viewer)                     
+    C:\Windows\Temp                                                   |  Archivos temporales del sistema                                          
+                                                                      |                                                                           
+> Programas y binarios                                                |                                                                           
+    C:\Program Files                                                  |  Programas instalados de 64-bit                                           
+    C:\Program Files (x86)                                            |  Programas instalados de 32-bit                                           
+    C:\Windows\System32\WindowsPowerShell\v1.0                        |  Ejecutables de PowerShell                                                
+    C:\Windows\SysWOW64                                               |  Binarios de compatibilidad 32-bit en Windows 64-bit                      
+                                                                      |                                                                           
+> Configuración de red y DNS                                          |                                                                           
+    C:\Windows\System32\drivers\etc\resolv.conf (no siempre existe)   |  Configuración de resolución de DNS (Linux-style, rara en Windows)        
+    C:\Windows\System32\drivers\etc\protocol                          |  Protocolos de red disponibles                                            
+    C:\Windows\System32\drivers\etc\services                          |  Puertos y servicios asociados                                            
+--------------------------------------------------------------------------------------------------------------------------------------------------

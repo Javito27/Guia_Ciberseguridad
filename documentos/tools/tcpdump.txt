@@ -1,0 +1,58 @@
+TCPDump es una herramienta de línea de comandos en sistemas Unix/Linux que permite capturar y analizar tráfico de red en tiempo real.
+
+Es ampliamente usada en informática, redes y ciberseguridad para monitorear paquetes y diagnosticar problemas de red.
+
+¿Para qué se usa?
+
+    1. Análisis de tráfico de red:
+    
+        > Captura paquetes que atraviesan una interfaz de red.
+        > Útil para diagnosticar problemas de conectividad o rendimiento.
+    
+    2. Auditoría de seguridad y pentesting:
+    
+        > Detectar intentos de intrusión o tráfico sospechoso.
+        > Analizar protocolos como TCP, UDP, ICMP, HTTP, DNS, etc.
+        > Monitorizar conexiones de servicios críticos.
+    
+    3. Depuración de aplicaciones de red:
+    
+       > Revisar si un cliente o servidor está enviando o recibiendo datos correctamente.
+       > Ver errores en protocolos de comunicación.
+
+Comandos básicos y opciones de TCPDump
+
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |  Descripción                        |  Ejemplo de uso                                           |  Información extra                                                              |  
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------   
+    |  Capturar tráfico básico            |  sudo tcpdump                                             |  Captura todo el tráfico de la interfaz principal.                              |
+    |                                     |                                                           |  Requiere privilegios de administrador.                                         |
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------   
+    |  Especificar la interfaz            |  sudo tcpdump -i eth0                                     |  -i <interfaz> → seleccionar la interfaz de red (eth0, wlan0, enp0s3, etc.)     |
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------   
+    |  Filtrar por host                   |  sudo tcpdump -i eth0 host 192.168.1.10                   |  Solo captura paquetes enviados o recibidos por esa IP.                         |
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------   
+    |  Filtrar por puerto                 |  sudo tcpdump -i eth0 port 80                             |  Captura solo tráfico HTTP (puerto 80).                                         |
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------   
+    |  Filtrar por protocolo              |  sudo tcpdump -i eth0 tcp                                 |  TCP, UDP o ICMP.                                                               |
+    |                                     |  sudo tcpdump -i eth0 udp                                 |                                                                                 |
+    |                                     |  sudo tcpdump -i eth0 icmp                                |                                                                                 |
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------   
+    |  Guardar la captura en un archivo   |  sudo tcpdump -i eth0 -w captura.pcap                     |  -w → escribe la captura en un archivo .pcap para abrirlo luego en Wireshark.   |
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------   
+    |  Leer un archivo pcap               |  tcpdump -r captura.pcap                                  |  -r → leer un archivo previamente guardado.                                     |
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------   
+    |  Mostrar contenido en modo legible  |  sudo tcpdump -A -i eth0                                  |  -A → imprime el contenido de los paquetes en ASCII.                            |
+    |                                     |  sudo tcpdump -X -i eth0                                  |  -X → muestra el contenido en hexadecimal y ASCII.                              |
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------   
+    |  Limitar número de paquetes         |  sudo tcpdump -i eth0 -c 10                               |  -c 10 → captura solo 10 paquetes y luego termina.                              |
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------   
+    |  Combinando filtros                 |  sudo tcpdump -i eth0 tcp port 443 and host 192.168.1.10  |  Solo TCP, puerto 443, y host específico.                                       |
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Usos frecuentes en ciberseguridad
+
+    > Detectar escaneos de puertos o intentos de conexión sospechosos.
+    > Analizar malware que envía tráfico a servidores remotos.
+    > Comprobar si firewalls o IDS están funcionando correctamente.
+    > Capturar credenciales en tráfico no cifrado (solo para pruebas legales en entornos controlados).

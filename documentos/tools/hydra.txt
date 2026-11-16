@@ -1,0 +1,58 @@
+Hydra (también conocido como THC-Hydra) es una herramienta de fuerza bruta de contraseñas muy utilizada en informática y ciberseguridad.
+
+Fue desarrollada por The Hacker’s Choice (THC) y es una de las más rápidas y versátiles en su categoría.
+
+
+¿Para qué se usa Hydra?
+
+    Se utiliza principalmente para realizar ataques de autenticación contra múltiples servicios.
+	
+    Permite probar automáticamente muchas combinaciones de usuarios y contraseñas hasta encontrar las correctas.
+    
+    Algunos protocolos/servicios soportados:
+    
+        > Redes y sistemas → SSH, RDP, FTP, Telnet, SMB, VNC
+        > Bases de datos → MySQL, PostgreSQL, Oracle, MSSQL
+        > Servicios web → HTTP, HTTPS, HTTP-POST/GET forms, WebDAV
+        > Correo → POP3, IMAP, SMTP
+        > Otros → LDAP, IRC, SNMP, SIP, etc.
+
+
+Sintaxis básica
+
+    hydra -l usuario -P diccionario.txt <servicio>://<objetivo>
+
+
+Opciones principales de Hydra
+
+    -------------------------------------------------------------------------------------------
+    |  Opción  |  Descripción                                          |  Ejemplo de Uso      |
+    -------------------------------------------------------------------------------------------
+    |  -l      |  Usuario único                                        |  -l admin            |
+    |  -L      |  Lista de usuarios                                    |  -L usuarios.txt     |
+    |  -p      |  Contraseña única                                     |  -p 123456           |
+    |  -P      |  Lista de contraseñas (wordlist)                      |  -P rockyou.txt      |
+    |  -s      |  Especificar puerto                                   |  -s 2222             |
+    |  -t      |  Número de hilos (threads) en paralelo                |  -t 16               |
+    |  -vV     |  Modo verboso (muestra cada intento)                  |                      |
+    |  -f      |  Detenerse al encontrar la primera contraseña válida  |                      |
+    -------------------------------------------------------------------------------------------
+
+
+Ejemplos prácticos
+
+    ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |  Descripción                             |  Ejemplo de Uso                                                                                                  |
+    ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |  Ataque SSH                              |  hydra -l root -P /usr/share/wordlists/rockyou.txt ssh://192.168.1.10                                            |
+    |  Ataque FTP                              |  hydra -L usuarios.txt -P claves.txt ftp://10.0.0.5                                                              |
+    |  Ataque HTTP-POST (formulario de login)  |  hydra -l admin -P rockyou.txt 192.168.1.20 http-post-form "/login.php:user=^USER^&pass=^PASS^:F=Login failed"   |
+    |  Ataque RDP                              |  hydra -L users.txt -P passwords.txt rdp://192.168.1.30                                                          |
+    ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Consideraciones en ciberseguridad
+
+    > Uso legal y ético → Hydra debe usarse solo en auditorías autorizadas, ya que puede causar bloqueos de cuentas o detección por IDS/IPS.
+    > Es una herramienta de pentesting y pruebas de seguridad muy poderosa.
+    > Muy usada en CTFs y en entornos de Red Team.

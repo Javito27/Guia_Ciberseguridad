@@ -1,0 +1,52 @@
+¿Qué es ffuf?
+
+    ffuf (Fuzz Faster U Fool) es una herramienta de fuzzing muy rápida escrita en Go. Se utiliza en pentesting, bug bounty y hacking ético para descubrir:
+
+        > Directorios y archivos ocultos en un servidor web.
+        > Subdominios (cuando se combina con una wordlist adecuada).
+        > Parámetros GET/POST ocultos.
+        > Endpoints de APIs.
+        > Usuarios/contraseñas en formularios (con diccionarios).
+
+    Su gran ventaja es la velocidad y la flexibilidad para fuzzear casi cualquier cosa que se pueda enviar en una petición HTTP.
+	
+Instalación	
+	
+    sudo apt install ffuf
+
+Uso básico
+
+    ffuf -u http://ejemplo.com/FUZZ -w wordlist.txt
+
+Opciones más usadas de ffuf
+
+    ------------------------------------------------------------------------------------------------
+    |   Opción       |   Descripción                                                               |
+    ------------------------------------------------------------------------------------------------
+    |   -u           |   URL objetivo                                                              |
+    |   -w           |   Wordlist (lista de palabras)                                              |
+    |   -o           |   Guardar resultados en un archivo (JSON, CSV, etc.)                        |
+    |   -recursion   |   Escaneo recursivo de directorios                                          |
+    |   -e           |   Extensiones de archivos a probar                                          |
+    |   -mc          |   Filtrar por códigos de respuesta (ejemplo: 200 OK, 403 Forbidden, etc.)   |
+    |   -fc          |   Excluir ciertos códigos de respuesta                                      |
+    |   -t           |   Número de hilos (velocidad)                                               |
+    |   -ac          |   Auto-calibration (ignora respuestas repetitivas o de error genérico).     |
+    |   -X           |   Método HTTP (GET, POST, PUT, etc.)                                        |
+    |   -H           |   Cabeceras personalizadas                                                  |
+    ------------------------------------------------------------------------------------------------
+
+Ejemplos prácticos
+	
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |   Descripción                          |   Ejemplo de Uso                                                                                                 |
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |   1. Enumerar directorios              |   ffuf -u http://victima.com/FUZZ -w /usr/share/wordlists/dirb/common.txt                                        |
+    |   2. Buscar subdominios                |   ffuf -u http://FUZZ.victima.com -w subdomains.txt                                                              |
+    |   3. Fuerza bruta en parámetros GET    |   ffuf -u "http://victima.com/index.php?id=FUZZ" -w numbers.txt                                                  |
+    |   4. Fuzzing en POST                   |   ffuf -u http://victima.com/login -w users.txt:USER -w pass.txt:PASS -X POST -d "username=USER&password=PASS"   |
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Resumen
+
+    ffuf es la navaja suiza del fuzzing web: directorios, subdominios, parámetros y hasta brute force de logins.

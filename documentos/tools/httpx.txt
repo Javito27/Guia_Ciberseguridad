@@ -1,0 +1,70 @@
+httpx es una herramienta de línea de comandos desarrollada por ProjectDiscovery (los mismos de subfinder, naabu, nuclei, etc.)
+
+Se utiliza principalmente en hacking ético, bug bounty y pentesting para:
+
+	> Probar hosts y subdominios: Verifica qué subdominios resuelven a un servicio HTTP/HTTPS.
+	> Filtrar objetivos vivos: De una lista enorme de dominios/subdominios, solo te deja los que realmente tienen un servidor web activo.
+	> Recoger información adicional como: título de la página, códigos de estado HTTP, redirecciones, IPs, puertos abiertos, tecnología usada, etc.
+	
+Instalación (Linux) 	
+	
+	go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
+
+Uso básico	
+	
+	echo "https://ejemplo.com" | httpx
+
+	cat dominios.txt | httpx
+
+Opciones principales de httpx	
+
+    Información de respuesta
+    --------------------------------------------------------------------------------------
+    |  Opción             |   Descripción                                                |
+    --------------------------------------------------------------------------------------           
+    |   -title            |   Muestra el título de la página                             |
+    |   -status-code      |   Devuelve el código de estado HTTP (200, 403, 404, etc.)    |
+    |   -content-length   |   Longitud de la respuesta                                   |
+    |   -web-server       |   Servidor web detectado (Apache, Nginx, etc.)               |
+    |   -tech-detect      |   Detecta tecnologías (WordPress, PHP, ASP.NET, etc.)        |
+    --------------------------------------------------------------------------------------           
+	
+    Conexión y rendimiento
+    ---------------------------------------------------------------------------------
+    |  Opción        |   Descripción                                                |
+    ---------------------------------------------------------------------------------      
+    |   -timeout     |   Muestra el título de la página                             |
+    |   -retries     |   Devuelve el código de estado HTTP (200, 403, 404, etc.)    |
+    |   -no-color    |   Longitud de la respuesta                                   |
+    ---------------------------------------------------------------------------------
+
+    Manejo de resultados
+    ----------------------------------------------------------------------
+    |  Opción     |   Descripción                                        |
+    ----------------------------------------------------------------------    
+    |   -silent   |   Solo muestra resultados sin extra información      |
+    |   -o        |   Guarda en archivo de salida                        |
+    |   -json     |   Salida en formato JSON                             |
+    ----------------------------------------------------------------------
+
+    Puertos y protocolos
+    --------------------------------------------------------------------------------
+    |  Opción       |   Descripción                                                |
+    --------------------------------------------------------------------------------  
+    |   -ports      |   Especificar puertos (ej: -ports 80,443,8080)               |
+    |   -tls-probe  |   Probar información TLS/SSL (certificados, versión, etc.)   |
+    |   -ip         |   Mostrar la IP del host                                     |
+    --------------------------------------------------------------------------------	
+	
+Ejemplo completo
+
+	cat subdominios.txt | httpx -title -status-code -content-length -web-server -tech-detect -o reporte.txt
+
+	Esto toma una lista de subdominios y devuelve:
+
+		1. Estado HTTP
+		2. Título de la página
+		3. Tamaño de la respuesta
+		4. Servidor detectado
+		5. Tecnologías usadas
+		6. Guarda todo en reporte.txt

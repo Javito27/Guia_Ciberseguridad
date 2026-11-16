@@ -1,0 +1,34 @@
+➡️ This lab contains a SQL injection vulnerability in the product category filter. When the user selects a category, the application carries out a SQL query like the following:
+
+    SELECT * FROM products WHERE category = 'Gifts' AND released = 1
+
+To solve the lab, perform a SQL injection attack that causes the application to display one or more unreleased products.
+
+
+🎯 SOLUCIÓN DEL LABORATORIO
+
+    1️⃣ Seleccionar FoxyProxy
+
+        En el navegador seleccionamos la opción BURP en FoxyProxy para que BurpSuite intercepte las peticiones. 
+
+    2️⃣ Abrir BurpSuite
+
+        Se abre BurpSuite y vamos a Proxy > HTTP history
+
+    3️⃣ Navegamos por la web y seleccionamos una categoría
+
+    4️⃣ Interceptamos la request
+
+        Se intercepta la siguiente request:
+
+            GET /filter?category=Gifts HTTP/2
+
+        Y se manda a "Repeater" para modificar la request
+
+    5️⃣ Modificar la request en Repeater
+
+        Se añade '+OR+1=1-- sustituyendo el valor de category
+
+            GET /filter?category='+OR+1=1-- HTTP/2
+
+    6️⃣ Se pulsa el botón SEND y nos dirá si se ha resuelto el Laboratorio

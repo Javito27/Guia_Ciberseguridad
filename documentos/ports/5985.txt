@@ -1,0 +1,54 @@
+📌 Es el puerto por defecto de WinRM (Windows Remote Management) sobre HTTP. Es muy importante en entornos Windows y Active Directory.
+    
+    Es una herramienta incorporada en Windows que permite a los administradores realizar tareas de administración, resolución de problemas, la configuración y la automatización, sin 
+    necesidad de estar físicamente presentes en el sistema. WinRM es el servicio que permite:
+
+        · Ejecutar comandos remotamente en Windows usando PowerShell
+        · Administrar servidores
+        · Usar PowerShell Remoting
+        · Automatización en entornos empresariales
+
+    Es como una alternativa más “administrativa” a RDP.
+
+⚙️ Puertos de WinRM
+
+    ---------------------------------------------------------------------------------------
+    |  Puerto  |  Protocolo    |  Cifrado                                                 |
+    ---------------------------------------------------------------------------------------
+    |  5985    |  WinRM HTTP   |  ❌ No cifrado (aunque puede usar autenticación segura)  |
+    |  5986    |  WinRM HTTPS  |  ✅ Cifrado TLS                                          |
+    ---------------------------------------------------------------------------------------
+
+🧠 ¿Cómo funciona?
+
+    1️⃣ Cliente se conecta al 5985
+    2️⃣ Se autentica (NTLM o Kerberos)
+    3️⃣ Ejecuta comandos PowerShell remotamente
+
+🧪 En pentesting
+
+    Si el 5985 está abierto:
+
+        · Indica sistema Windows
+        · Puede permitir ejecución remota si tienes credenciales
+        · Muy usado para movimiento lateral en AD
+
+    Se revisa junto a:
+
+        · 88 → Kerberos
+        · 445 → SMB
+        · 3389 → RDP
+
+🔐 Riesgos comunes
+
+    · Credenciales débiles
+    · Usuarios con permisos excesivos
+    · WinRM expuesto a Internet
+    · Sin HTTPS (5986)
+
+🎯 Ejemplo de uso básico con la herramienta EVIL-WINRM
+
+    evil-winrm -i <IP> -u <USER> -p <PASS>
+
+En caso de no tener credenciales, se puede usar la herramienta Responder para obtener un hash y mediante la herramienta John-the-Ripper, obtendemos la credenciales para poder usar el 
+comando anterior.

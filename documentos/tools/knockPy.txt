@@ -1,0 +1,73 @@
+🎯 Es una herramienta de OSINT y reconocimiento DNS usada para descubrir:
+
+    🌐 Subdominios
+    🖥️ Hosts expuestos
+    📡 Información DNS
+    🔎 Superficie de ataque
+
+🛠️ Usos principales
+
+    1️⃣ Enumeración de subdominios
+
+        Descubrir servicios ocultos.
+
+            python3 knockpy.py example.com
+
+    2️⃣ Descubrir paneles y VPNs
+
+        Puede encontrar:
+
+            🔑 VPNs
+            🧪 Entornos dev/staging
+            ⚙️ Jenkins
+            📂 APIs
+            👨‍💻 Paneles admin
+
+        Ejemplo:
+
+            vpn.empresa.com
+            dev.empresa.com
+            jira.empresa.com
+
+    3️⃣ Resolución DNS e IPs
+
+        Obtiene IPs de subdominios:
+
+            api.example.com → 192.168.X.X
+
+        Luego puedes usar:
+
+            Nmap
+            WhatWeb
+            Nikto
+
+    4️⃣ Intentar Zone Transfer (AXFR)
+
+        Busca fallos DNS:
+
+            dig axfr @ns1.example.com example.com
+
+        Si funciona:
+
+            · Obtienes TODOS los registros DNS
+            · Enumeración completa del dominio
+
+📥 Instalación
+
+    git clone https://github.com/guelfoweb/knock.git
+    cd knock
+    pip3 install -r requirements.txt
+
+▶️ Uso básico
+
+    🔎 Escaneo simple
+
+        python3 knockpy.py example.com
+
+    💾 Guardar resultados
+
+        python3 knockpy.py example.com > resultados.txt
+
+    📚 Wordlist personalizada
+
+        python3 knockpy.py example.com -w wordlist.txt

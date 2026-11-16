@@ -1,0 +1,20 @@
+Kraken es un conjunto de herramientas todo en uno para ataques de fuerza bruta, desarrollado en Python. Está diseñado para profesionales de la ciberseguridad que buscan una solución 
+eficiente y centralizada para realizar pruebas de penetración.
+
+
+Funcionalidades
+
+    > Fuerza bruta en contraseñas: Permite realizar ataques de fuerza bruta en servicios como SSH, FTP, HTTP, entre otros.
+    > Enumeración de directorios: Facilita la identificación de directorios y archivos ocultos en aplicaciones web.
+    > Soporte para múltiples protocolos: Incluye herramientas para atacar diversos servicios y protocolos.
+    > Interfaz de línea de comandos: Ofrece una interfaz sencilla y directa para su uso.
+
+
+Instalación
+
+    git clone https://github.com/jasonxtn/Kraken.git
+	
+	
+Uso básico
+
+    python3 kraken.py -t ssh -u usuario -w /ruta/a/wordlist.txt

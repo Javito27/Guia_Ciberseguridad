@@ -1,0 +1,122 @@
+Ficheros y Directorios
+----------------------------------------------------------------------------------------------------------------------------
+  Comando                           |  Descripción                                                                        
+----------------------------------------------------------------------------------------------------------------------------
+  ls                                |  Listar directorio                                                                  
+  ls -la                            |  Listar directorios ocultos                                                         
+  ls -ld <ruta>                     |  Comprobar si existe un directorio                                                  
+  pwd                               |  Ver ruta actual                                                                    
+  find                              |  Buscar fichero                                                                     
+  find / -name <file> 2>/dev/null   |  Buscar ubicación de un fichero ocultando errores (permisos)                        
+  locate                            |  Buscar fichero o dominio por nombre                                                
+  get                               |  Obtener fichero                                                                    
+  mkdir                             |  Crear directorio                                                                   
+  rm                                |  Borrar fichero                                                                     
+  rm -rf <dir>                      |  Borrar directorio con contenido                                                    
+  touch                             |  Crear fichero                                                                      
+  cp                                |  Copiar fichero o directorio                                                        
+  mv <file> <dir>                   |  Mover archivo o directorio de ubicación                                            
+  crear_directorio <dir>            |  Script para crear directorio con unas carpetas específicas (Para máquinas de HTB)  
+  grep "<word>" <file>              |  Buscar texto en un fichero                                                         
+----------------------------------------------------------------------------------------------------------------------------
+
+Visualización y Edición
+-------------------------------------------------------------------------------------------------------------------
+  Comando        |  Descripción                                                                                   
+-------------------------------------------------------------------------------------------------------------------
+  cat            |  Muestra el contenido completo de un archivo en la terminal (también puede concatenar varios)  
+  batcat         |  Versión moderna del comando cat                                                               
+  less           |  Muestra el contenido de un archivo página por página (permite moverse arriba/abajo)           
+  more           |  Similar a less, pero más básico: muestra el archivo página por página, solo permite avanzar   
+  nano           |  Editor de texto simple y fácil de usar en la terminal.                                        
+  vi             |  Editor de texto más avanzado en la terminal (modo comandos y modo edición).                   
+  type           |  Muestra cómo se resolverá un comando (si es alias, función, binario,                          
+-------------------------------------------------------------------------------------------------------------------
+
+Procesos
+-------------------------------------------------------------------------------------------------------------------------------
+  Comando        |  Descripción                                                                                                
+-------------------------------------------------------------------------------------------------------------------------------
+  ps             |  Lista los procesos en ejecución en el sistema (por defecto, los del usuario actual y la terminal activa)   
+  pstree         |  Muestra los procesos en forma de árbol, indicando jerarquías (qué procesos son padres/hijos)               
+  top            |  Monitor interactivo que muestra procesos en tiempo real, con uso de CPU, memoria, etc                      
+  htop           |  Versión mejorada de top, con interfaz más visual y navegación con teclas                                   
+  kill           |  Envía una señal a un proceso (normalmente para terminarlo, usando su PID)                                  
+  stty           |  Configura y muestra los parámetros del terminal                                                            
+-------------------------------------------------------------------------------------------------------------------------------
+
+Informaciones
+-------------------------------------------------------------------------------------------------------------------
+  Comando                           |  Descripción                                                                 
+-------------------------------------------------------------------------------------------------------------------
+  df                                |  Muestra el uso del espacio en disco de los sistemas de archivos montados    
+  uname                             |  Da información del sistema operativo y kernel (ej: uname -a)                
+  free                              |  Muestra el uso de la memoria RAM y el swap.                                 
+  du                                |  Calcula el espacio usado por archivos y directorios                         
+  lsusb                             |  Lista los dispositivos USB conectados al sistema                            
+  lshw                              |  Muestra información detallada del hardware del equipo                       
+  rdate                             |  Obtiene la fecha y hora de un servidor remoto                               
+-------------------------------------------------------------------------------------------------------------------
+
+Usuarios y Grupos
+---------------------------------------------------------------------------------------------------------
+  Comando                                              |  Descripción                                    
+---------------------------------------------------------------------------------------------------------
+  groupadd <nombre_del_grupo>                          |  Crear un grupo                                 
+  grep <nombre_del_grupo> /etc/group                   |  Ver grupos                                     
+  adduser <nombre_del_usuario>                         |  Crear un nuevo usuario                         
+  usermod -aG <nombre_del_grupo> <nombre_del_usuario>  |  Crear un usuario y asignarle a un grupo        
+  -u <nombre_del_usuario> bash                         |  Crear un terminal bash del usuario             
+  chmod xxx file/directory                             |  Permisos de r/w/x a un fichero o directorio    
+--------------------------------------------------------------------------------------------------------- 
+
+Códigos permisos Usuarios y Grupos
+----------------------------------------------------------------------
+  000  |  Quitar permisos para todos los users, groups, owners        
+  777  |  Asignar todos los permisos para los users, groups, owners   
+  111  |  Permisos de ejecución para todos los user, groups, owners   
+  222  |  Permisos de escritura para todos los user, groups, owners   
+  333  |  Permisos de lectura para todos los user, groups, owners     
+----------------------------------------------------------------------
+--------------------------------------
+  00x  |  Permisos de usuarios        
+  0x0  |  Permisos de grupos          
+  x00  |  Permisos de propietarios    
+--------------------------------------
+------------------------------------
+   1   |  Ejecución                 
+   2   |  Escritura                 
+   3   |  Escritura + Ejecución     
+   4   |  Lectura                   
+   5   |  Lectura y Ejecución       
+   6   |  Lectura y Escritura       
+   7   |  Todos los permisos        
+   0   |  Ningún permiso            
+------------------------------------
+
+Configuraciones de redes
+-----------------------------------------------------------------------------------------------
+  Comando         |  Descripción                                                               
+-----------------------------------------------------------------------------------------------
+  ifconfig        |  (Obsoleto en muchos sistemas) Configura o muestra interfaces de red       
+  ip              |  (Reemplazo de ifconfig) Gestiona interfaces, rutas, direcciones IP, etc   
+  ping            |  Comprueba la conectividad con otro host enviando paquetes ICMP            
+  netstat         |  Muestra conexiones de red, puertos abiertos y estadísticas de red         
+  traceroute      |  Muestra la ruta que siguen los paquetes hasta llegar a un destino         
+  ssh             |  Conexión remota segura a otro equipo (Secure Shell)                       
+  arp             |  Muestra o manipula la caché ARP (asociación de IP ↔ MAC)                  
+  dig             |  Realiza consultas DNS (ejemplo: ver la IP de un dominio)                  
+-----------------------------------------------------------------------------------------------
+
+Paquetes
+-----------------------------------------------------------------------------------------------------------------
+  Comando     |  Descripción                                                                                     
+-----------------------------------------------------------------------------------------------------------------
+  apt         |  Gestor de paquetes en distribuciones basadas en Debian/Ubuntu (ej: apt install paquete)         
+  dpkg        |  Herramienta de bajo nivel para instalar, eliminar o gestionar paquetes .deb                     
+  dnf         |  Gestor de paquetes moderno en Fedora y derivados (reemplazo de yum)                             
+  yum         |  Gestor de paquetes en distribuciones basadas en RHEL/CentOS (más antiguo, sustituido por dnf)   
+  rpm         |  Herramienta de bajo nivel para instalar, eliminar o consultar paquetes .rpm                     
+-----------------------------------------------------------------------------------------------------------------
+
+Tip: Los path en Linux siempre tienen que ir en minúsculas. Si es mayúsculas o mixtas corresponde al Sistema Operativo Windows. 

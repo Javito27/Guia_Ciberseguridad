@@ -1,0 +1,45 @@
+¿Qué es Responder?
+
+    Responder es una herramienta escrita en Python que se utiliza en redes Windows para realizar ataques de envenenamiento de protocolos (LLMNR, NBT-NS, MDNS, DNS, etc.).
+    
+    Su objetivo principal es capturar hashes de contraseñas de usuarios de la red o incluso responder en su lugar a peticiones para engañar a los equipos.
+
+¿Para qué se usa?
+
+    > Captura de credenciales      | Intercepta respuestas de autenticación (NTLMv1/v2).
+    > Relay attacks (NTLM Relay)      | Usa las credenciales capturadas para autenticarse contra otros servicios en la red.
+    > Enumeración de redes      | Descubre equipos, servicios y configuraciones en redes corporativas.
+    > Explotación de protocolos inseguros      | Engaña a máquinas Windows que confían en LLMNR o NBNS.
+
+    Es muy común en pruebas de Red Team y pentesting interno.
+	
+Opciones principales de Responder	
+	
+    ------------------------------------------------------------------------------------------------------------
+    |   Opción  |   Descripción                                                                                |
+    ------------------------------------------------------------------------------------------------------------
+    |   -I      |   Interfaz de red (obligatorio)                                                              |
+    |   -w      |   Activar WPAD rogue proxy server. Engaña a las máquinas que buscan configuración de proxy.  |
+    |   -f      |   Activar Finger (identificación de sistemas).                                               |
+    |   -r      |   Activar envenenamiento de NBT-NS (NetBIOS Name Service).                                   |
+    |   -d      |   Activar envenenamiento de DHCP.                                                            |
+    |   -F      |   Forzar autenticación con Finger.                                                           |
+    |   -v      |   Modo verbose (más detalles en pantalla).                                                   |
+    |   -A      |   Solo envenena, no responde. Útil para detectar tráfico sin interferir demasiado.           |
+    |   -l      |   Guardar logs en archivos.                                                                  |
+    ------------------------------------------------------------------------------------------------------------	
+
+Ejemplo completo
+
+    sudo responder -I eth0 -wrf
+
+        Esto hará:
+		
+            1. Escuchar en eth0
+            2. Activar WPAD
+            3. Envenenar NBT-NS
+            4. Activar Finger
+
+        Los hashes capturados se guardan normalmente en:
+
+            /usr/share/responder/logs/

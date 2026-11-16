@@ -1,0 +1,68 @@
+¿Qué es?
+
+    John the Ripper (JtR) es una herramienta de cracking de contraseñas de código abierto, desarrollada inicialmente para UNIX y hoy usada en Windows, Linux y macOS.
+	
+    Es muy popular en informática forense, auditorías de seguridad y pentesting, ya que permite detectar contraseñas débiles.
+	
+	
+¿Para qué se usa en informática y ciberseguridad?
+
+    > Romper contraseñas de:
+    
+        - Archivos /etc/shadow de Linux/Unix.
+        - Hashes de Windows (LM, NTLM).
+        - Archivos comprimidos (ZIP, RAR).
+        - Documentos de Office (Word, Excel, PDF).
+        - Protocolo Kerberos, SSH, bases de datos, etc.
+    
+    > Probar la fortaleza de contraseñas en auditorías.
+    
+    > Recuperación de contraseñas olvidadas (uso legítimo en entornos corporativos o forenses).	
+	
+	
+Modos de ataque principales
+
+    1. Single Crack Mode → usa variaciones del nombre de usuario y datos asociados.
+    
+    2. Wordlist Mode → prueba contraseñas de un diccionario.
+    
+          john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt
+    
+    3. Incremental Mode (Brute Force) → prueba todas las combinaciones posibles.
+    
+    4. Hybrid Mode → mezcla wordlist + reglas (ej: añadir números, símbolos).	
+	
+	
+Opciones disponibles más importantes
+
+    ------------------------------------------------------------------------------------------------------------------------------------
+    |  Descripción                                              |  Ejemplo de Uso                                                      |  
+    ------------------------------------------------------------------------------------------------------------------------------------
+    |  Definir wordlist                                         |  john --wordlist=rockyou.txt hash.txt                                |
+    |  Ataque incremental (fuerza bruta)                        |  john --incremental hash.txt                                         |
+    |  Definir tipo de hash (importante para acelerar ataques)  |  john --format=nt hash.txt   | john --format=sha256crypt hash.txt    |
+    |  Mostrar contraseñas crackeadas                           |  john --show hash.txt                                                |
+    |  Reanudar ataque interrumpido                             |  john --restore                                                      |
+    |  Guardar estado del ataque                                |  john --session=mi_sesion hash.txt                                   |
+    |  Forzar detección de hash (autodetección)                 |  john --list=formats | grep md5                                      |
+    ------------------------------------------------------------------------------------------------------------------------------------
+	
+	
+Ejemplo práctico
+
+    1. Tienes hashes MD5 en un archivo hashes.txt.
+    
+    2. Ejecutas:
+    
+          john --wordlist=/usr/share/wordlists/rockyou.txt --format=raw-md5 hashes.txt
+    
+    3. Luego ves resultados:
+    
+          john --show hashes.txt	
+	
+	
+Versiones
+
+    > John the Ripper (Community/Classic) → la versión estándar.
+  
+    > Jumbo John → versión extendida con soporte para más tipos de hashes y funciones extra.

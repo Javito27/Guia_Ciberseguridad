@@ -1,0 +1,34 @@
+➡️ IDS (Intrusion Detection System)
+
+    · Detecta actividad sospechosa y genera alertas, pero no bloquea nada.
+    · Va “al lado” del tráfico (copia del tráfico mediante un puerto SPAN o TAP).
+    · Es pasivo: si hay un ataque, avisa, pero el ataque sigue.
+
+➡️ IPS (Intrusion Prevention System)
+
+    · Detecta y además bloquea el tráfico malicioso en tiempo real.
+    · Va en línea (inline), por donde pasa el tráfico.
+    · Riesgo: un falso positivo puede cortar tráfico legítimo.
+
+💡 IDPS = el sistema que combina ambas funciones.
+
+📈 Según donde se instalan:
+
+    · NIDS/NIPS (de red): analizan el tráfico de toda una red. Ejemplos: Snort, Suricata.
+    · HIDS/HIPS (de host): se instalan en un equipo y vigilan archivos, logs y procesos. Ejemplos: OSSEC, Wazuh.
+
+🎯 Según como se detectan: 
+
+    · Por firmas: comparan con patrones de ataques conocidos (rápido y preciso, pero no ve ataques nuevos).
+    · Por anomalías: detectan desviaciones de lo normal (puede detectar amenazas nuevas, pero genera más falsos positivos).
+    · Por comportamiento/heurística: combinan reglas y análisis de conducta.
+
+🛠️ Herramientas habituales: 
+
+    · Snort (open source, el clásico)
+    · Suricata (open source, multihilo)
+    · Zeek (más enfocado en análisis y metadatos que en reglas)
+    · Security Onion (distribución que integra Suricata, Zeek y más)
+    · Comerciales: Palo Alto, Cisco Firepower, Fortinet
+
+Se categoriza dentro de Blue Team como concepto. 

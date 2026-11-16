@@ -1,0 +1,72 @@
+🎣 Gophish es una plataforma de phishing open source escrita en Go (Golang). Se utiliza en ciberseguridad para simular ataques de phishing controlados con el fin de entrenar y 
+concienciar a usuarios dentro de una organización.
+
+No es una herramienta para atacantes maliciosos, sino un recurso de red team y concienciación en seguridad.
+
+
+🧠 ¿Para qué se usa en informática y ciberseguridad?
+
+    1. Simulación de ataques de phishing → reproducir campañas reales de phishing (emails falsos, landing pages, etc.).
+    2. Concienciación en seguridad → entrenar a empleados para identificar correos sospechosos.
+    3. Medición de riesgos → evaluar qué porcentaje de usuarios abre correos, hace clic en enlaces o entrega credenciales.
+    4. Generación de reportes → obtener estadísticas sobre el comportamiento de los usuarios.
+    5. Pruebas de red team → en entornos controlados para mejorar la postura defensiva.
+
+
+Características principales
+
+    > Fácil de instalar (binario compilado en Go).
+    > Interfaz web para gestionar campañas.
+    > Permite clonar páginas web legítimas para usarlas como señuelo.
+    > Gestión de usuarios y grupos (targets).
+    > Soporta envío de correos masivos.
+    > Reportes y métricas en tiempo real.
+    > API REST para integrarlo en otros sistemas.
+
+
+Opciones y uso en ciberseguridad
+
+    Opciones principales desde la GUI (panel web)
+    ------------------------------------------------------------------------------------------------
+    |  Opción              |   Descripción                                                         |
+    ------------------------------------------------------------------------------------------------
+    |  Users & Groups      |  definir las víctimas objetivo.                                       |
+    |  Email Templates     |  crear plantillas de correo (ej: "Tu cuenta expira, haz clic aquí").  |
+    |  Landing Pages       |  páginas de destino falsas donde el usuario introduce datos.          |
+    |  Sending Profiles    |  configuración del servidor SMTP para enviar correos.                 |
+    |  Campaigns           |  campañas de phishing (donde se combinan todos los elementos).        |
+    |  Reports             |  estadísticas de resultados.                                          |
+    ------------------------------------------------------------------------------------------------
+
+    Opciones disponibles por API (CLI o automatización):
+    ------------------------------------------------------------------------------------------------
+    |  Opción              |   Descripción                                                         |
+    ------------------------------------------------------------------------------------------------
+    |  /api/campaigns      |  crear, listar o detener campañas.                                    |
+    |  /api/groups         |  gestionar grupos de usuarios.                                        |
+    |  /api/templates      |  crear plantillas de correos.                                         |
+    |  /api/landing_pages  |  gestionar páginas falsas.                                            |
+    |  /api/smtp           |  gestionar perfiles de envío.                                         |
+    |  /api/users          |  autenticación y gestión de usuarios.                                 |
+    ------------------------------------------------------------------------------------------------
+
+    Ejemplo: curl -X GET http://127.0.0.1:3333/api/campaigns -H "Authorization: Bearer <API_KEY>"
+
+
+Ejemplo de flujo de uso
+
+    1. Definir un grupo de usuarios → lista de correos de empleados.
+    2. Crear una plantilla de email → correo de "soporte técnico".
+    3. Configurar un perfil SMTP → servidor que enviará el correo.
+    4. Crear una landing page → página falsa de inicio de sesión.
+    5. Lanzar una campaña → Gophish envía los correos y recolecta estadísticas.
+    6. Revisar reportes → saber quién abrió, quién hizo clic, quién introdujo credenciales.
+
+
+Usos éticos
+
+    > Pentesters / Red Team: simular ataques de spear phishing en una empresa.
+    > Concienciación en usuarios: entrenamientos en ciberseguridad.
+    > Blue Team: mejorar defensas de correo y detección de phishing.
+
+    No debe usarse de forma maliciosa (ej: ataques reales de phishing contra usuarios sin consentimiento).

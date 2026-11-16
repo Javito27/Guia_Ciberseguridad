@@ -1,0 +1,41 @@
+Rutas 
+----------------------------------------------------------------------------------------------------------------------------------------
+  Ruta                                                       |  Descripción                                                             
+----------------------------------------------------------------------------------------------------------------------------------------
+> Archivos de configuración de red                           |                                                                          
+    /etc/resolv.conf                                         |  Configuración de DNS                                                    
+    /etc/hosts                                               |  Asociaciones de IP a nombres de host. Añadir Dominios y sub dominios    
+    /etc/network/interfaces (Debian/Ubuntu)                  |  Configuración de interfaces de red                                      
+    /etc/sysconfig/network-scripts/ifcfg-\* (RHEL/CentOS)    |  Configuración de interfaces de red en Red Hat                           
+                                                             |                                                                          
+> Usuarios y permisos                                        |                                                                          
+    /etc/passwd                                              |  Lista de usuarios del sistema                                           
+    /etc/shadow                                              |  Contraseñas encriptadas de los usuarios                                 
+    /etc/group                                               |  Grupos de usuarios                                                      
+    /etc/sudoers                                             |  Configuración de permisos sudo                                          
+                                                             |                                                                          
+> Sistema y servicios                                        |                                                                          
+    /etc/fstab                                               |  Configuración de discos y particiones montadas automáticamente          
+    /etc/hostname                                            |  Nombre del host del sistema                                             
+    /etc/hosts.allow / /etc/hosts.deny                       |  Control de acceso a servicios (TCP wrappers)                            
+    /etc/systemd/system/                                     |  Archivos de configuración de servicios systemd personalizados           
+    /etc/crontab                                             |  Tareas programadas                                                      
+                                                             |                                                                          
+> Logs                                                       |                                                                          
+    /var/log/                                                |  Carpeta donde se almacenan todos los registros del sistema              
+    /var/log/syslog o /var/log/messages                      |  Registros generales del sistema                                         
+    /var/log/auth.log                                        |  Registros de autenticación y sudo                                       
+                                                             |                                                                          
+> Binarios y scripts                                         |                                                                          
+    /usr/local/bin/                                          |  Scripts y binarios instalados localmente                                
+    /usr/bin/                                                |  Binarios de usuario                                                     
+    /bin/                                                    |  Binarios esenciales del sistema                                         
+    /sbin/                                                   |  Binarios de administración del sistema                                  
+----------------------------------------------------------------------------------------------------------------------------------------
+
+Ficheros de configuración
+------------------------------------------------------------------------------------------
+  Comando                                    |  Descripción                               
+------------------------------------------------------------------------------------------
+  sudo update-alternatives --config java     |  Cambiar la versión de java del sistema    
+------------------------------------------------------------------------------------------

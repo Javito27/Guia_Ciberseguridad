@@ -1,0 +1,43 @@
+📌 2FA (Two-Factor Authentication)
+
+    2FA significa autenticación de dos factores.
+
+    👉 Es un método de seguridad que requiere dos formas diferentes de verificación para acceder a una cuenta.
+
+    🧠 Ejemplo típico:
+
+        1. Introduces tu contraseña.
+        2. Recibes un código SMS.
+        3. Introduces el código.
+
+    Acceso concedido ✅
+
+📌 MFA (Multi-Factor Authentication)
+
+    MFA significa autenticación multifactor.
+
+    👉 Es lo mismo que 2FA, pero puede usar dos o más factores (no solo dos).
+
+    Es un concepto más amplio.
+
+🎯 ¿Qué es un "factor"?
+
+    Un factor es una categoría de autenticación. Hay tres principales:
+
+    ----------------------------------------------------------
+    |  Tipo de factor      |  Ejemplo                        |
+    ----------------------------------------------------------
+    |  🧠 Algo que sabes   |  Contraseña, PIN                |
+    |  📱 Algo que tienes  |  Móvil, token, tarjeta          |
+    |  👁️ Algo que eres    |  Huella, reconocimiento facial  |
+    ----------------------------------------------------------
+
+🔥 ¿Por qué es importante?
+
+    Porque aunque te roben la contraseña:
+
+        · No pueden entrar sin el segundo factor.
+        · Reduce muchísimo el riesgo de phishing.
+
+👉 Todo 2FA es MFA.
+👉 No todo MFA es solo 2FA.

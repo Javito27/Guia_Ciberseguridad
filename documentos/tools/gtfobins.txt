@@ -1,0 +1,77 @@
+GTFOBins es un proyecto colaborativo (un repositorio público en GitHub) que recopila binarios presentes en sistemas tipo Unix/Linux que pueden ser aprovechados para realizar 
+técnicas de escalada de privilegios, evasión de restricciones de seguridad, ejecución de comandos, acceso a archivos, o exfiltración de datos.
+
+El nombre viene de:
+
+    “GTFO” = Get The F** Out* (sal de las restricciones)
+    “Bins” = binarios (programas instalados en /bin/, /usr/bin/, etc.)
+
+
+¿Para qué se usa GTFOBins?
+
+    Se utiliza principalmente en pentesting y hacking ético para:
+    
+    1. Escalada de privilegios
+    
+        > Si un binario tiene permisos SUID o sudo, se puede usar para ejecutar comandos como otro usuario (incluso como root).
+        > Ejemplo: usar vim, find, less o python para obtener una shell privilegiada.
+    
+    2. Evasión de restricciones
+    
+        > Saltarse protecciones como rbash (restricted bash) o limitaciones de shells restringidas.
+    
+    3. Lectura/escritura de archivos
+    
+        > Usar binarios como awk, tar o cat para acceder a archivos protegidos.
+    
+    4. Persistencia y movimiento lateral
+    
+        > Ejecutar payloads o scripts en sistemas donde hay pocas herramientas disponibles.
+    
+    5. Exfiltración de datos
+    
+        > Aprovechar binarios con funciones de red (curl, scp, rsync, etc.) para enviar datos fuera del sistema.
+
+
+Ejemplos de uso
+
+    Imagina que un binario tiene permisos SUID (ls -l /usr/bin/find muestra que puede ejecutarse como root).
+    
+    Usando find para ejecutar una shell root:
+    
+          find . -exec /bin/sh \; -quit
+    
+    Usando vim para escapar a una shell root:
+    
+          vim -c ':!sh'
+    
+    Usando awk para ejecutar comandos:
+    
+          awk 'BEGIN {system("/bin/sh")}'
+
+
+Opciones / Categorías en GTFOBins
+
+    Cuando revisas un binario en la web de GTFOBins, verás que puede tener distintas categorías de uso:
+    
+        > Shell → Obtener acceso interactivo a una shell.
+        > File read → Leer archivos (aunque estén restringidos).
+        > File write → Escribir/crear archivos.
+        > File upload / download → Exfiltración de datos o carga de archivos.
+        > SUID → Escalada de privilegios mediante binarios con bit SUID.
+        > Sudo → Uso del binario con privilegios otorgados por sudo.
+        > Capabilities → Aprovechar capacidades especiales en Linux.
+        > Limited shell → Escapar de entornos restringidos.
+
+
+En resumen
+
+    > GTFOBins no es un programa, sino un repositorio de técnicas que aprovechan binarios legítimos en Linux/Unix.
+    
+    > Se usa en pentesting, CTFs y auditorías de seguridad para:
+    
+        - Escalar privilegios.
+        - Escapar de restricciones.
+        - Acceder a archivos y datos sensibles.
+    
+    > Es una guía de referencia rápida para atacar o auditar sistemas.

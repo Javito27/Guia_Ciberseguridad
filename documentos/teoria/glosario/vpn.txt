@@ -1,0 +1,56 @@
+¿Qué es una VPN?
+
+	Una VPN (Virtual Private Network o Red Privada Virtual) es una tecnología que crea una conexión segura y cifrada entre tu dispositivo y una red (por ejemplo, Internet o la red de una empresa).
+
+	Funciona como un “túnel seguro” que protege tus datos para que no puedan ser interceptados fácilmente por terceros (hackers, proveedores de Internet, etc.).
+	
+¿Para qué sirve una VPN?
+
+	1. Privacidad en Internet
+
+		> Oculta tu dirección IP real y la reemplaza por la de un servidor VPN.
+		> Dificulta que rastreen tu ubicación o actividad en línea.
+
+	2. Protección de datos sensibles
+
+		> Cifra la información transmitida (como contraseñas, correos o datos bancarios) especialmente útil en redes Wi-Fi públicas.
+
+	3. Acceso remoto seguro
+
+		> Muy usado en empresas para que empleados trabajen desde casa accediendo a la red corporativa de manera segura.
+
+	4. Acceso a contenido restringido	
+		
+		> Permite conectarte como si estuvieras en otro país y evitar bloqueos geográficos.
+	
+Tipos de VPN
+
+	Existen varios, según el uso y la tecnología que empleen:
+
+		1. VPN de acceso remoto
+
+			> Conecta a un usuario individual con una red privada.
+			> Muy usada en teletrabajo para acceder a recursos de la empresa.
+
+		2. VPN de sitio a sitio
+
+			> Conecta dos redes completas (ejemplo: la sede principal de una empresa con una sucursal).
+			> Muy común en grandes organizaciones.
+
+		3. VPN personales (comerciales)
+
+			> Servicios que cualquiera puede contratar (ej. NordVPN, ExpressVPN).
+			> Se usan para proteger la navegación, evitar rastreo o desbloquear contenido.
+
+		4. VPN SSL/TLS
+
+			> Se accede desde el navegador web.
+			> Muy utilizada para conexiones rápidas y seguras sin necesidad de software adicional.
+
+		5. VPN de capa 2 y capa 3 (L2TP, IPsec, OpenVPN, WireGuard, etc.)
+
+			> Protocolos técnicos que definen cómo se cifran y transmiten los datos en la VPN.
+		
+En resumen: 
+
+	Una VPN sirve para aumentar la privacidad, seguridad y libertad en Internet, y en empresas se usa sobre todo para que la información viaje de forma segura entre sedes y trabajadores remotos.

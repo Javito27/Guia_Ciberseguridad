@@ -1,0 +1,90 @@
+En informática y ciberseguridad, un contenedor Docker es una tecnología que permite empaquetar y ejecutar aplicaciones de manera aislada, ligera y portátil.
+
+¿Qué es exactamente un contenedor Docker?
+
+Un contenedor es como una caja cerrada que incluye todo lo necesario para que una aplicación funcione:
+
+	> El código de la aplicación.
+	> Dependencias (librerías, frameworks, etc.).
+	> Configuraciones específicas.
+
+A diferencia de una máquina virtual, un contenedor no necesita un sistema operativo completo; en su lugar, comparte el núcleo del sistema operativo del host. Esto los hace mucho 
+más rápidos, ligeros y fáciles de mover entre diferentes entornos.
+
+¿Para qué sirve en ciberseguridad?
+
+	1. Aislamiento
+
+		> Si corres una aplicación en un contenedor y sufre un ataque, el daño queda limitado al contenedor, no afecta todo el sistema.
+		> Ejemplo: ejecutar un servidor vulnerable para pruebas de pentesting sin comprometer tu máquina principal.
+
+	2. Entornos reproducibles
+
+		> Puedes crear un Dockerfile (receta) y cualquiera podrá replicar exactamente el mismo entorno.
+		> Ideal para laboratorios de ciberseguridad (ej. practicar con metasploitable en Docker).
+
+	3. Portabilidad
+
+		> “Funciona en mi máquina” deja de ser un problema. Un contenedor Docker corre igual en Windows, Linux, macOS o en la nube.
+		
+	4. Seguridad en despliegue
+
+		> Facilita aplicar parches, escanear imágenes en busca de vulnerabilidades, y restringir permisos.
+		> Muchas empresas usan contenedores para reducir la superficie de ataque.
+		
+Ejemplo práctico en ciberseguridad
+
+	> Un analista puede levantar un laboratorio de pruebas en Docker con servicios vulnerables (como DVWA – Damn Vulnerable Web App o OWASP Juice Shop) para practicar ataques.
+	> Un blue team (defensores) puede usar contenedores para simular ataques y fortalecer la seguridad.
+	> Empresas usan Docker en producción con medidas extra (escaneo de imágenes, políticas de acceso) para minimizar riesgos.		
+		
+En resumen:
+
+Un contenedor Docker es una forma de ejecutar aplicaciones de manera segura, aislada y portátil, muy útil en ciberseguridad tanto para probar ataques como para defender sistemas.	
+
+***************************************************************************************************************************************************************************************
+
+Un Container Escape (o escape de contenedor) es una técnica de ataque en la que un atacante que logra comprometer una aplicación o servicio dentro de un contenedor (por ejemplo, 
+un contenedor Docker) consigue “escapar” del aislamiento y obtener acceso al host (la máquina real donde corre el contenedor) o incluso a otros contenedores.
+
+¿Por qué es importante?
+
+La promesa de seguridad de los contenedores es el aislamiento:
+
+	> Cada contenedor debería estar separado del resto y del host.
+	> Un escape rompe esta barrera, poniendo en riesgo todo el sistema.
+
+¿Cómo ocurre un container escape?
+
+Algunas técnicas conocidas incluyen:
+
+	> Mala configuración
+
+		- Montar volúmenes sensibles (ej. -v /:/host) expone archivos críticos del sistema.
+		- Ejecutar contenedores como root.
+
+	> Explotación de vulnerabilidades en Docker o el kernel
+
+		- Si el kernel o el runtime de Docker tienen fallos, un atacante puede usarlos para escalar privilegios.
+
+	> Capacidades de Linux mal restringidas
+
+		- Los contenedores usan namespaces y cgroups. Si no están bien configurados, permiten al atacante ejecutar llamadas al sistema con demasiado poder.
+
+Ejemplos de ataques famosos
+
+	> CVE-2019-5736 (runc vulnerability): Permitía a un atacante sobrescribir el binario runc desde dentro del contenedor y lograr acceso al host.
+	> CVE-2022-0492: Fallo en cgroups que permitía escapar a privilegios de root en el host.
+
+¿Cómo se previene?
+
+	> No correr contenedores como root (usar usuarios no privilegiados).
+	> Usar herramientas de seguridad como AppArmor, SELinux o seccomp.
+	> Escanear imágenes para detectar vulnerabilidades conocidas.
+	> Mantener Docker y el kernel actualizados.
+	> Principio de mínimo privilegio → darle al contenedor solo lo que realmente necesita.
+
+En resumen:
+
+Un container escape es cuando un atacante rompe el aislamiento de un contenedor y accede al sistema host o a otros contenedores. En ciberseguridad, es una de las amenazas más serias 
+contra la virtualización ligera porque convierte un ataque contenido en una toma de control total del sistema.

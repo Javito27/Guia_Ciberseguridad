@@ -1,0 +1,26 @@
+En informática y ciberseguridad, un “null exception” (también llamado NullPointerException en muchos lenguajes como Java o C#) se refiere a un error que ocurre cuando un programa intenta usar una referencia que no apunta 
+a ningún objeto válido, es decir, que es null.
+
+Qué significa:
+
+	> null es un valor especial que indica “no hay ningún objeto aquí”.
+	> Una exception es un error que ocurre durante la ejecución del programa.
+	> Por lo tanto, una null exception significa que el programa intentó acceder a algo que no existe.
+
+Ejemplo en pseudocódigo:
+
+		String nombre = null;
+		int longitud = nombre.length(); // Esto lanzará una NullPointerException
+
+	Aquí, nombre no apunta a ningún objeto, pero el código intenta usarlo como si existiera. Esto genera el error.
+
+Para qué sirve conocerlo en informática y ciberseguridad:
+
+	1. Prevención de fallos: Identificar posibles null exceptions ayuda a que los programas no se bloqueen inesperadamente.
+
+	2. Seguridad: En ciberseguridad, las null exceptions pueden ser explotadas por atacantes para causar errores, denegaciones de servicio (DoS) o incluso ejecutar código malicioso, especialmente si el error no se maneja 
+	   correctamente.
+
+	3. Debugging y auditoría: Los desarrolladores y auditores de seguridad revisan el código para manejar casos null y así evitar vulnerabilidades.
+
+Tip de seguridad: Siempre valida referencias antes de usarlas y maneja las exceptions de manera controlada.

@@ -1,0 +1,256 @@
+{
+
+"maltego": {
+    "titulo": "Maltego"
+},
+"subdomain": {
+    "titulo": "Subdomain Finder C99"
+},
+"sublist3r": {
+    "titulo": "Sublist3r"
+},
+"ping": {
+    "titulo": "Ping"
+},
+"traceroute": {
+    "titulo": "Traceroute"
+},
+"nmap": {
+    "titulo": "Nmap"
+},
+"netcat": {
+    "titulo": "Netcat"
+},
+"telnet": {
+    "titulo": "Telnet"
+},
+"dig": {
+    "titulo": "Dig"
+},
+"wireshark": {
+    "titulo": "WireShark"
+},
+"tcpdump": {
+    "titulo": "TCPdump"
+},
+"naabu": {
+    "titulo": "Naabu"
+},
+"httpx": {
+    "titulo": "Httpx"
+},
+"crackmapexec": {
+    "titulo": "CrackMapExec"
+},
+"nxc-smb": {
+    "titulo": "NXC SMB"
+},
+"enum4linux": {
+    "titulo": "Enum4linux"
+},
+"rpcclient": {
+    "titulo": "RPCClient"
+},
+"windapsearch": {
+    "titulo": "Windapsearch"
+},
+"ldapsearch": {
+    "titulo": "LDAPSearch"
+},
+"impacket": {
+    "titulo": "Impacket"
+},
+"responder": {
+    "titulo": "Responder"
+},
+"feroxbuster": {
+    "titulo": "Feroxbuster"
+},
+"ffuf": {
+    "titulo": "FFuF"
+},
+"dirbuster": {
+    "titulo": "Dirbuster"
+},
+"dirsearch": {
+    "titulo": "Dirsearch"
+},
+"gobuster": {
+    "titulo": "Gobuster"
+},
+"dirforcer": {
+    "titulo": "Dirforcer"
+},
+"knockpy": {
+    "titulo": "KnockPy"
+},
+"wpscan": {
+    "titulo": "WPScan"
+},
+"curl": {
+    "titulo": "Curl"
+},
+"burpsuite": {
+    "titulo": "BurpSuite"
+},
+"whatweb": {
+    "titulo": "WhatWeb"
+},
+"hcxtools": {
+    "titulo": "HCXTools"
+},
+"neo4j": {
+    "titulo": "Neo4j"
+},
+"nessus": {
+    "titulo": "Nessus"
+},
+"nexpose": {
+    "titulo": "Nexpose"
+},
+"insightvm": {
+    "titulo": "InsightVM"
+},
+"nikto": {
+    "titulo": "Nikto"
+},
+"wapiti": {
+    "titulo": "Wapiti"
+},
+"cmsmap": {
+    "titulo": "CMSmap"
+},
+"aircrack": {
+    "titulo": "Aircrack-ng Suite"
+},
+"reaver": {
+    "titulo": "Reaver"
+},
+"gophish": {
+    "titulo": "Gophish"
+},
+"zphisher": {
+    "titulo": "ZPhisher"
+},
+"evilginx": {
+    "titulo": "Evilginx"
+},
+"juggernaut": {
+    "titulo": "Juggernaut"
+},
+"hydra": {
+    "titulo": "Hydra"
+},
+"0365-spray": {
+    "titulo": "O365 Spray"
+},
+"cupp": {
+    "titulo": "Cupp"
+},
+"john-the-ripper": {
+    "titulo": "John the Ripper"
+},
+"hashcat": {
+    "titulo": "Hashcat"
+},
+"pyrit": {
+    "titulo": "Pyrit"
+},
+"kraken": {
+    "titulo": "Kraken"
+},
+"sqlmap": {
+    "titulo": "SQLmap"
+},
+"tplmap": {
+    "titulo": "TPlmap"
+},
+"wfuzz": {
+    "titulo": "Wfuzz"
+},
+"interactsh": {
+    "titulo": "Interactsh"
+},
+"roguejndi": {
+    "titulo": "RogueJNDI"
+},
+"metasploit": {
+    "titulo": "Metasploit"
+},
+"msfvenom": {
+    "titulo": "Msfvenom"
+},
+"rogueap": {
+    "titulo": "RogueAP"
+},
+"socat": {
+    "titulo": "Socat"
+},
+"reverse-shell": {
+    "titulo": "Reverse Shell"
+},
+"meterpreter": {
+    "titulo": "Meterpreter"
+},
+"ssh": {
+    "titulo": "SSH"
+},
+"rdp": {
+    "titulo": "RDP"
+},
+"xfreerdp": {
+    "titulo": "Xfreerdp"
+},
+"winrm": {
+    "titulo": "WinRM"
+},
+"evilwinrm": {
+    "titulo": "EvilWinRM"
+},
+"localxpose": {
+    "titulo": "LocalXpose"
+},
+"ngrock": {
+    "titulo": "Ngrock"
+},
+"linpeas": {
+    "titulo": "LinPeas"
+},
+"winpeas": {
+    "titulo": "WinPeas"
+},
+"gtfobins": {
+    "titulo": "GTFObins"
+},
+"juice-potato": {
+    "titulo": "Juice Potato"
+},
+"psexec": {
+    "titulo": "PSexec"
+},
+"netexec": {
+    "titulo": "NetExec"
+},
+"bloodhound": {
+    "titulo": "BloodHound"
+},
+"bloodyad": {
+    "titulo": "BloodyAD"
+},
+"faraday": {
+    "titulo": "Faraday"
+},
+"dradis": {
+    "titulo": "Dradis"
+},
+"office": {
+    "titulo": "Office"
+},
+"ip-rover": {
+    "titulo": "IP Rover"
+},
+"search-az": {
+    "titulo": "SearchAZ"
+}
+
+}

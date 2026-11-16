@@ -1,0 +1,38 @@
+ARP es un protocolo de red que permite obtener la dirección MAC de un dispositivo a partir de su dirección IP dentro de una red local (LAN).
+
+Sirve para que un ordenador sepa a qué dirección MAC tiene que enviar los datos cuando conoce la dirección IP del destinatario.
+
+🔑 ¿Como funciona?
+
+    Imagina que tienes dos equipos conectados a la misma red:
+
+        - PC1: IP 192.168.1.10
+        - PC2: IP 192.168.1.20
+        - PC2: MAC AA:BB:CC:11:22:33
+
+    El proceso tiene dos pasos:
+
+        1️⃣ ARP Request: PC1 envía una solicitud a toda la red local (broadcast): «¿Quién tiene la IP 192.168.1.20?».
+        2️⃣ ARP Reply: PC2 responde: «Esa IP es mía y mi MAC es AA:BB:CC:11:22:33».
+
+🛠️ Comandos ARP importantes
+
+      Comando        |  Función
+    ---------------------------------------------------------------
+      arp -a         |  Muestra la tabla ARP.
+      arp -d *       |  Borra las entradas dinámicas de la tabla.
+      arp -d IP      |  Elimina una entrada concreta.
+      arp -s IP MAC  |  Añade una asociación estática.
+    ---------------------------------------------------------------
+
+🧪 ARP es importante porque tiene vulnerabilidades que pueden aprovecharse en ataques de red.
+
+    ➡️ ARP Spoofing / ARP Poisoning
+    
+        Un atacante envía respuestas ARP falsas para asociar su dirección MAC con la IP de otro dispositivo, por ejemplo, la puerta de enlace.
+
+    Se utiliza para realizar ataques como:
+        
+        - MITM (Man-in-the-Middle).
+        - Interceptación de tráfico.
+        - Manipulación de comunicaciones.

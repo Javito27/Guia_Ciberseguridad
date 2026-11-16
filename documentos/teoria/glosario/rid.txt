@@ -1,0 +1,20 @@
+Es un número único que identifica a un usuario o grupo dentro de un dominio Windows. Forma parte del SID. 
+
+En Windows, los permisos no se asignan a nombres, sino a SIDs. Un SID tiene esta forma:
+
+S-1-5-21-3623811015-3361044348-30300820-500
+
+----------------------------
+| Cuenta         |   RID   |
+----------------------------
+| Administrador  |   500   |
+| Invitado       |   501   |
+| Usuario normal | ≥ 1000  |
+----------------------------
+
+El RID sirve para:
+
+    - Identificar usuarios y grupos
+    - Gestionar permisos
+    - Mantener coherencia aunque cambien los nombres
+    - Funcionamiento interno de Active Directory

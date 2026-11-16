@@ -1,0 +1,44 @@
+En informática y ciberseguridad, Virtual Hosting es una técnica que permite que un mismo servidor físico (o una misma dirección IP) aloje varios sitios web diferentes.
+
+¿Qué significa?
+
+	Un servidor web (por ejemplo, Apache, Nginx, IIS) puede configurarse para responder con diferentes páginas o aplicaciones dependiendo del nombre de dominio o la ruta solicitada por el cliente.
+
+	Por ejemplo:
+
+		> Una sola máquina con IP 203.0.113.10 puede responder como:
+
+			- www.empresa1.com
+			- www.empresa2.org
+			- intranet.local
+
+	Todo eso usando el mismo servidor.
+
+Tipos de Virtual Hosting
+
+	1. Name-based virtual hosting
+
+		> Usa el nombre de dominio enviado por el navegador en la cabecera Host de la petición HTTP.
+		> Ejemplo: Apache o Nginx detectan si pediste empresa1.com o empresa2.org y devuelven el contenido correcto.
+
+	2. IP-based virtual hosting
+
+		> Usa múltiples direcciones IP configuradas en el mismo servidor físico.
+		> Cada IP apunta a un sitio web distinto.
+
+	3. Port-based virtual hosting
+
+		> Usa el mismo dominio/IP pero diferentes puertos.
+		> Ejemplo: midominio.com:8080 para una app y midominio.com:8443 para otra.
+
+¿Para qué sirve en ciberseguridad?
+
+	> Eficiencia de recursos: no hace falta tener un servidor físico por cada web.
+	> Aislamiento parcial: aunque no tan fuerte como la virtualización de sistemas, permite cierta separación de sitios.
+	> Superficie de ataque: en auditorías de seguridad, es importante detectar todos los virtual hosts porque puede haber aplicaciones ocultas en el mismo servidor (vhost enumeration es una técnica de pentesting).
+	> Pruebas y desarrollo: los entornos de prueba pueden convivir con producción en la misma máquina (si se configura bien).
+
+En resumen:
+
+	Virtual Hosting permite correr múltiples sitios web en un solo servidor. Es muy usado en hosting compartido, y en ciberseguridad es importante porque puede haber dominios o aplicaciones “escondidas” detrás de 
+	la misma IP que podrían ser vulnerables.

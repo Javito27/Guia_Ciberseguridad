@@ -1,0 +1,39 @@
+📌 FTP (File Transfer Protocol) es un protocolo que permite transferir archivos entre un cliente y un servidor a través de una red (normalmente Internet o una red interna) usando el puerto 21.
+
+⚙️ ¿Para qué se usa?
+
+        > Subir archivos a un servidor web
+        > Descargar archivos desde servidores
+        > Transferencias internas en empresas
+        > Administración de servidores
+
+🔐 Problema de seguridad
+
+    FTP NO cifra la información. Eso significa que:
+
+        > Usuario y contraseña viajan en texto plano
+        > Un atacante podría capturar credenciales con herramientas como tcpdump o Wireshark
+
+🎯 Ejemplo de uso básico
+
+    
+    ftp -a <IP> 
+    
+
+    ------------------------------------------------------
+      Parte  |  Significado                              
+    ------------------------------------------------------
+      ftp    |  Cliente FTP de Windows                   
+      -a     |  Inicia sesión anónima (anonymous login)  
+      <IP>   |  Dirección IP del servidor                
+      ls     |  Listar contenido                         
+      get    |  Descargar fichero                        
+      get*   |  Descargar fichero                        
+      put    |  Subir un fichero                         
+    ------------------------------------------------------
+
+🧪 Máquinas Hack The Box
+
+    → Lame (Linux)
+    → Devel
+    → Irked 

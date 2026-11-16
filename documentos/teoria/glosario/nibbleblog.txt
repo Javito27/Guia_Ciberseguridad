@@ -1,0 +1,33 @@
+Nibbleblog es un CMS (Content Management System), es decir, un gestor de contenidos web, diseñado principalmente para crear y administrar blogs.
+
+🔑 Permite crear y gestionar una página web sin tener que programarla desde cero.
+
+    Entre sus funcionalidades están:
+
+        · Crear y editar publicaciones.
+        · Gestionar usuarios y administradores.
+        · Añadir imágenes y archivos.
+        · Instalar plugins.
+        · Cambiar el diseño mediante temas.
+        · Administrar categorías y páginas.
+
+    Está desarrollado en PHP y utiliza archivos XML para almacenar información.
+
+🎯 En laboratorios que tengan este CMS, permite la subida de ficheros sin una validación adecuada. 
+
+🔬 Cuando se encuentre Nibbleblog en un pentesting, los siguientes directorios suelen ser útiles: 
+
+      Elemento           |  Qué buscar
+    ---------------------------------------------------------------
+      /nibbleblog/       |  Directorio de instalación
+      /admin.php         |  Panel de administración
+      /README            |  Versión del CMS
+      /content/private/  |  Archivos de configuración
+      users.xml          |  Información de usuarios
+      config.xml         |  Configuración de la aplicación
+      Plugins            |  Posibles funcionalidades vulnerables
+    ---------------------------------------------------------------
+
+🧪 Laboratorios que se puede encontrar Nibbleblog
+
+    > nibbles (HTB)

@@ -1,0 +1,35 @@
+¿Qué es ping?
+
+ping es una herramienta de red que sirve para comprobar la conectividad entre dos dispositivos en una red (por ejemplo, entre tu PC y un servidor en Internet).
+
+	> Su nombre viene de “Packet Internet Groper”.
+	> Envía paquetes ICMP Echo Request y espera respuestas (Echo Reply).
+	> Es muy usada para diagnosticar problemas de red y medir latencia.
+
+¿Para qué se usa?
+
+	1. Ver si un host responde (si está “vivo” o no).
+	2. Medir la latencia (tiempo de ida y vuelta en milisegundos).
+	3. Detectar pérdidas de paquetes (si alguno no llega).
+	4. Comprobar calidad de la conexión.
+
+Opciones principales Linux/Mac
+	-------------------------------------------------------------------------------------------------------------------
+	|  Opción           |  Descripción                                               |  Ejemplo de Uso                |
+	-------------------------------------------------------------------------------------------------------------------
+	|  -c [n]           |  Número de paquetes a enviar                               |  ping -c 4 google.com          |
+	|  -i [segundos]    |  Intervalo entre paquetes                                  |  ping -i 2 google.com          |
+	|  -s [bytes]       |  Tamaño del paquete                                        |  ping -s 1000 google.com       |
+	|  -t [ttl]         |  Tiempo de vida de los paquetes                            |  ping -t 64 google.com         |
+	|  -q               |  Salida silenciosa, solo muestra resumen                   |  ping -c 4 -q google.com       |
+	-------------------------------------------------------------------------------------------------------------------
+	
+Opciones principales Windows
+	-------------------------------------------------------------------------------------------------------------------
+	|  Opción           |  Descripción                                               |  Ejemplo de Uso                |
+	-------------------------------------------------------------------------------------------------------------------
+	|  -n [n]           |  Número de paquetes a enviar                               |  ping -n 4 google.com          |
+	|  -l [bytes]       |  Tamaño del paquete                                        |  ping -l 1000 google.com       |
+	|  -t               |  Enviar ping continuo hasta que lo detengas con Ctrl + C   |  ping -t google.com            |
+	|  -w [tiempo]      |  Tiempo de espera en milisegundos                          |  ping -w 2000 google.com       |
+	-------------------------------------------------------------------------------------------------------------------

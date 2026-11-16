@@ -1,0 +1,45 @@
+Qué es Telnet?
+
+    Telnet (Telecommunication Network) es un protocolo de red que permite conectarse de manera remota a otro dispositivo en la red (generalmente servidores, routers o switches) usando una 
+    interfaz de línea de comandos.
+    
+    Funciona sobre el puerto 23 (TCP) por defecto, aunque se puede usar en otros puertos.
+
+¿Para qué se usa Telnet?
+
+    > Administrar dispositivos de red (routers, switches, firewalls).
+    > Hacer pruebas de conectividad a puertos (similar a nc o nmap).
+    > Acceder de forma remota a un servidor o equipo.
+    > Diagnosticar servicios en red (HTTP, SMTP, POP3, etc.) enviando comandos manuales.
+    
+    Importante: Telnet no cifra la comunicación, por eso hoy en día se reemplaza por SSH, aunque aún se usa en pruebas o redes locales.
+
+Sintaxis básica de Telnet
+
+    telnet [host] [puerto] -> telnet 192.168.1.10 23
+
+Opciones comunes de Telnet
+
+    Dependen un poco del sistema operativo, pero en general:
+    
+    ----------------------------------------------------------------------------------------------
+    |  Opción                        |  Descripción                                              |
+    ----------------------------------------------------------------------------------------------
+    |  telnet <host>                 |  Conectar al host en el puerto por defecto (23)           |
+    |  telnet <host> <puerto>        |  Conectar a un servicio en un puerto específico           |
+    |  telnet mail.dominio.com 25    |  Probar servidor SMTP                                     |
+    |  telnet web.dominio.com 80     |  Probar servidor HTTP                                     |
+    |  quit                          |  Salir de la sesión                                       |
+    |  open <host> <puerto>          |  Abrir conexión a otro host sin salir de Telnet           |
+    |  close                         |  Cerrar la conexión actual                                |
+    |  status                        |  Mostrar estado de la conexión                            |
+    |  display                       |  Mostrar configuraciones actuale                          |
+    |  mode line / mode character    |  Cambiar modo de entrada de comandos                      |
+    |  ? o help                      |  Mostrar lista de comandos disponibles dentro de Telnet   |
+    ----------------------------------------------------------------------------------------------     
+
+Ejemplo práctico:
+
+    Probar si un servidor SMTP responde:
+        
+        telnet smtp.gmail.com 587

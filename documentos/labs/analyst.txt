@@ -1,0 +1,55 @@
+ANALYST (equipo de respuesta a incidentes BLUE TEAM)
+
+	WIRESHARK (.pcap)
+	
+		IP ATACANTE: http.request.method=="POST" (Ver que se ha posteado / subido)
+		
+			Src: 198.51.100.23
+			Dst: 10.10.2.15
+		
+		PAÍS
+		
+			Vietnam (en el .json)
+	
+		USER-AGENT: Clic derecho sobre el paquete del atacante > Follow(Seguir) > TCP Stream > User Agent o http.request.method=="POST" && http.user_agent
+	
+			http.request.method=="POST" && http.user_agent 
+			
+		ENDPOINT SUBIDA
+		
+			/reviews/upload.php
+			
+		DIRECTORIO DE SUBIDAS 
+		
+			http.response && frame.number < 108 (108 es el paquete atacante)
+			
+			/reviews/uploads/
+	
+		NOMBRE ARCHIVO MALICIOSO
+		
+			Hypertext Transfer Protocol > MIME Multipart > Media Encapsulation (o "Media Type") > Content-Disposition: form-data; name="file"; filename="image.jpg.php"
+			
+			shell.php
+			image.jpg
+			
+			ip.src==198.51.100.23 and http.request.method=="POST"
+			
+			Follow > HTTP Stream
+			   
+			   image.jpg.php
+			   
+		CONEXIÓN SALIENTE
+		
+			ip.addr == 198.51.100.23 && ip.addr == 10.10.2.15 && frame.number >= 108
+			
+			Ver el GET después de la subida (8080)
+			
+		RECONOCIMIENTO INTERNO
+		
+			ip.src==10.10.2.15 and ip.dst==198.51.100.23 and tcp.flags.syn==1 and tcp.flags.ack==0
+			
+				/etc/passwd
+				
+		USUARIO AFECTADO
+		
+			pinguinito

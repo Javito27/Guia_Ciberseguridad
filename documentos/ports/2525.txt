@@ -1,0 +1,47 @@
+📌 Es un puerto alternativo para SMTP (envío de correo). No es un puerto oficial estándar como el 25 o el 587, pero muchos proveedores lo usan cuando:
+
+    🚫 El puerto 25 está bloqueado por el ISP
+    🔒 Se necesita una alternativa para envío autenticado
+    ☁️ Servicios cloud restringen tráfico saliente por 25
+
+    Generalmente para:
+
+        📤 Envío de correo autenticado (como el 587)
+
+    Muchos servicios de hosting y cloud permiten:
+
+        SMTP por 587
+        SMTP por 2525 (como alternativa)
+
+⚙️ ¿Cómo funciona?
+
+    Depende de la configuración del servidor:
+
+        · Puede usar STARTTLS
+        · Puede requerir autenticación
+        · Puede funcionar igual que el 587
+
+🔐 ¿Es seguro?
+
+    La seguridad no depende del número de puerto, sino de:
+
+        · Uso de TLS
+        · Autenticación obligatoria
+        · Configuración correcta
+
+    Puede ser seguro si está bien configurado.
+
+🧪 En ciberseguridad
+
+    Si el 2525 está abierto:
+
+        Indica servicio SMTP personalizado
+
+        Se revisa si:
+
+            · Permite open relay
+            · Usa TLS
+            · Requiere autenticación
+            · Tiene versiones antiguas
+
+💡 En entornos cloud (AWS, Azure, hosting compartido), es común ver 2525 abierto porque el 25 suele estar bloqueado por defecto.

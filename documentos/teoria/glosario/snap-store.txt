@@ -1,0 +1,30 @@
+¿Qué es la Snap Store?
+
+	Es la tienda oficial de paquetes "Snap" de Canonical (la empresa detrás de Ubuntu).	Los snaps son un formato de paquetes de software creado para Linux, que incluyen no solo la aplicación, sino también 
+	todas sus dependencias necesarias para funcionar.
+
+	La Snap Store es entonces un repositorio centralizado donde los desarrolladores publican sus aplicaciones en formato snap, y los usuarios pueden buscar, instalar, actualizar y gestionar esos programas de 
+	manera sencilla.
+
+¿Para qué sirve?
+
+	Instalación fácil de software: Permite a usuarios de Linux instalar aplicaciones sin preocuparse por dependencias incompatibles.
+
+	Actualizaciones automáticas y seguras: Las apps instaladas desde Snap Store se actualizan solas y suelen incluir parches de seguridad rápidamente.
+
+	Aislamiento y seguridad (sandboxing): Los snaps se ejecutan en un entorno aislado (sandbox), reduciendo el riesgo de que una aplicación maliciosa acceda a todo el sistema.
+
+	Multidistribución: Un mismo paquete snap puede instalarse en diferentes distribuciones Linux (Ubuntu, Fedora, Debian, Arch, etc.), lo que simplifica el trabajo de los desarrolladores.
+	
+Relevancia en ciberseguridad
+
+	Los snaps están firmados digitalmente, lo que ayuda a verificar su autenticidad.
+	
+	El sandboxing limita el daño en caso de que una app esté comprometida.
+	
+	Pero como toda tienda de software, no está 100% libre de riesgos: si un atacante llegara a subir un paquete malicioso antes de ser detectado, podría afectar a usuarios que lo instalen.	
+	
+En resumen:
+
+	La Snap Store es como la "App Store de Linux" para paquetes snap. Facilita la instalación y mantenimiento de software, y añade capas de seguridad importantes, aunque en ciberseguridad siempre se recomienda 
+	verificar la fuente de la aplicación antes de instalar.	

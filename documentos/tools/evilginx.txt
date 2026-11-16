@@ -1,0 +1,80 @@
+Evilginx es una herramienta de ataque man-in-the-middle (MITM) usada en red teaming, pentesting y ciberseguridad ofensiva.
+
+Se comporta como un proxy inverso entre la víctima y el servicio legítimo (ej: Gmail, Facebook, Office365, etc.), permitiendo:
+
+    > Capturar credenciales en tiempo real (usuario y contraseña).
+    > Robar cookies de sesión            | lo que permite a un atacante bypassear el 2FA/MFA (porque el atacante obtiene la sesión ya autenticada).
+    > Simular el sitio web original de forma transparente.
+
+Evilginx no roba solo contraseñas            | roba tokens de sesión (más valioso aún).
+
+
+¿Para qué se usa en informática y ciberseguridad?
+
+    > En red teaming: simular ataques avanzados de phishing.
+    > En pentesting: probar la resistencia de una organización contra ataques de ingeniería social y robo de sesión.
+    > En formación/concienciación: enseñar a usuarios y empresas cómo funcionan ataques de phishing con bypass de 2FA.
+    
+    Aviso ético: Su uso debe ser estrictamente con fines autorizados (pruebas de seguridad, auditorías, entornos controlados).
+
+
+Opciones y características principales de Evilginx
+
+    ----------------------------------------------------------------------------------------------
+    |  Opción                      |  Descripción                                                |
+    ----------------------------------------------------------------------------------------------
+    |  config                      |  mostrar o cambiar la configuración actual.                 |
+    |  phishlets                   |  gestionar plantillas (listar, habilitar, deshabilitar).    |
+    |  phishlets get               |  ver configuración de un phishlet específico.               |
+    |  phishlets enable <sitio>    |  activar un phishlet.                                       |
+    |  phishlets disable <sitio>   |  desactivar un phishlet.                                    |
+    |  phishlets domains <sitio>   |  asignar dominio propio al phishlet.                        |
+    |  lures                       |  crear y administrar enlaces de phishing.                   |
+    |  sessions                    |  mostrar sesiones capturadas (cookies y credenciales).      |
+    |  certs                       |  gestionar certificados TLS/SSL para los dominios falsos.   |
+    ----------------------------------------------------------------------------------------------
+
+
+Ejemplo de flujo de uso
+
+    1. Configurar un dominio que apunte al servidor Evilginx.
+    
+    2. Habilitar un phishlet (ejemplo: outlook, google, facebook).
+    
+    3. Crear un lure (URL de phishing).
+    
+        lures create phishlet_name
+    
+    4. Mandar el enlace a la víctima → la víctima se loguea en el sitio clonado.
+    
+    5. Evilginx captura credenciales y tokens de sesión en:
+    
+        sessions
+    
+    6. El atacante puede usar la cookie capturada para iniciar sesión sin necesidad de contraseña ni 2FA.
+
+
+Opciones avanzadas
+
+    > Soporte HTTPS automático con Let’s Encrypt.
+    > Registro de cookies/tokens en tiempo real.
+    > Personalización de phishlets para adaptarlos a sitios específicos.
+    > Integración en campañas de red teaming con enlaces acortados y ofuscados.
+
+
+Ejemplo de uso (solo en entorno controlado)
+
+    sudo ./evilginx3
+    config domain phishing.com
+    config ip 192.168.1.100
+    phishlets enable outlook
+    lures create outlook
+    sessions
+
+
+Resumen
+
+    > Evilginx = Proxy inverso para phishing avanzado.
+    > Uso principal: captura de sesiones y bypass de MFA/2FA.
+    > Opciones clave: phishlets, lures, sessions.
+    > Ámbito: Red Team, pentesting, formación en seguridad.

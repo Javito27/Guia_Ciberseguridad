@@ -1,0 +1,31 @@
+📌 Es el puerto estándar utilizado por el protocolo DNS, encargado de traducir nombres de dominio a direcciones IP.
+
+    Aunque comúnmente se usa UDP, también puede estar abierto por TCP para ciertas funciones como:
+
+        Transferencias de zona (AXFR).
+        Consultas más grandes que no caben en un paquete UDP.
+
+🔐 Importancia en ciberseguridad
+
+    El puerto 53 es muy sensible porque:
+
+        🔎 Permite enumeración de dominios
+        📂 Puede permitir transferencia de zona mal configurada
+        🕵️ Se usa para DNS tunneling (exfiltración de datos ocultos)
+        💥 Puede ser explotado en ataques de amplificación DNS (DDoS)
+
+🧪 En auditoría / pentesting
+
+    Verifica si hay una transferencia de zona permitida (AXFR)
+
+        Da todos los registros DNS del dominio
+
+        ********************************
+        **  dig axfr @<IP> <dominio>  **
+        ********************************        
+
+        Descubrir dominio 		
+
+        *********************************************
+        **  dnsrecon -t axfr -d <dominio> -n <IP>  **
+        *********************************************

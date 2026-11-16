@@ -1,0 +1,32 @@
+Es una función de seguridad que utiliza Windows para proteger los procesos más importantes del sistema operativo frente a código malicioso o ataques.
+
+Su objetivo es aislar los procesos críticos del sistema para evitar que programas no confiables puedan acceder o modificarlos fácilmente.
+
+🔑 ¿Cómo funciona el aislamiento del núcleo?
+
+    Windows utiliza tecnologías de virtualización para crear un entorno aislado que protege determinadas funciones críticas del sistema.
+
+        Sin aislamiento:
+
+            - Un controlador malicioso podría intentar modificar memoria del núcleo.
+            - Un malware podría intentar ejecutar código con privilegios elevados.
+
+        Con aislamiento:
+
+            - Windows establece barreras de seguridad adicionales.
+            - Utiliza virtualización para proteger determinadas operaciones.
+            - Dificulta que código malicioso pueda manipular el núcleo.
+
+🚀 Características principales
+
+      Función                    Descripción
+    --------------------------------------------------------------------------------------------------------------
+      Aislamiento del núcleo  |  Agrupa las protecciones basadas en virtualización.
+      Integridad de memoria   |  Impide que código no confiable se ejecute en procesos protegidos del núcleo.
+      VBS                     |  Seguridad basada en virtualización (Virtualization-Based Security).
+      HVCI                    |  Integridad de código aplicada por hipervisor.
+    --------------------------------------------------------------------------------------------------------------
+
+    ➡️ Importante: Integridad de memoria (HVCI) es una de las protecciones principales del aislamiento del núcleo.
+
+La “tortuga” no es un término formal académico, sino jerga técnica que se usa para describir un núcleo excesivamente protegido que termina siendo muy lento o rígido.

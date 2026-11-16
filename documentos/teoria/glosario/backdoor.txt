@@ -1,0 +1,35 @@
+En informática y ciberseguridad, un backdoor (o puerta trasera) es un método oculto de acceso a un sistema, aplicación o dispositivo que permite a alguien entrar sin pasar por los 
+mecanismos normales de autenticación 
+(como contraseñas o certificados).
+
+Qué significa
+
+	> Es como una entrada secreta que se deja en un sistema.
+	> Puede ser instalada intencionalmente (por el fabricante o un administrador para mantenimiento) o maliciosamente (por un atacante que ya comprometió el sistema).
+
+Para qué sirve, dependiendo del contexto
+
+	> Uso legítimo (raro, pero existe):
+
+		- Administradores o desarrolladores pueden dejar backdoors para hacer pruebas o solucionar problemas rápidamente.
+		- Ejemplo: una cuenta de “soporte técnico” que no aparece en la interfaz normal del sistema.
+
+	> Uso malicioso (lo más común en ciberseguridad):
+
+		- Un atacante instala un backdoor después de hackear un sistema para mantener acceso persistente.
+		- Puede permitir:
+
+			· Control remoto de la máquina.
+			· Robo de información.
+			· Instalación de otros malware (ransomware, troyanos, etc.).
+			· Espionaje encubierto.
+
+Ejemplo práctico
+
+	> Un ciberdelincuente logra entrar en un servidor aprovechando una vulnerabilidad.
+	> Una vez dentro, instala un backdoor para poder regresar más tarde aunque el fallo inicial se repare.
+	> Desde fuera, el atacante podrá entrar sin ser detectado por los controles normales de seguridad.
+
+En resumen: un backdoor es una puerta secreta en un sistema informático que da acceso sin seguir las reglas de seguridad.
+
+En ciberseguridad, encontrarlos y eliminarlos es clave para evitar accesos no autorizados.

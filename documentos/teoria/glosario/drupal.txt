@@ -1,0 +1,30 @@
+¿Qué es Drupal?
+
+Drupal es un CMS (Content Management System) de código abierto, escrito en PHP, que sirve para crear y administrar sitios web y aplicaciones digitales. Se parece a otros CMS como WordPress o Joomla, pero se caracteriza por ser más 
+flexible, modular y escalable, lo que lo hace muy usado en:
+
+	> Portales gubernamentales
+	> Universidades
+	> Organizaciones internacionales
+	> Sitios corporativos grandes
+
+¿Para qué sirve Drupal?
+
+	> Gestión de contenidos: Permite crear, editar y publicar páginas, blogs, foros, catálogos, etc.
+	> Extensibilidad: Tiene miles de módulos y temas que amplían sus funciones (SEO, comercio electrónico, seguridad, analítica, etc.).
+	> Escalabilidad: Puede manejar desde una web personal pequeña hasta portales con millones de usuarios.
+	> Personalización: Se adapta muy bien a proyectos complejos gracias a su arquitectura modular.
+
+Drupal y la ciberseguridad
+
+En seguridad, Drupal es conocido por tener una comunidad activa y un equipo de seguridad oficial (Drupal Security Team) que publica parches y avisos cuando aparecen vulnerabilidades. Sin embargo, como todo CMS, si no se
+mantiene actualizado puede ser objetivo de ataques:
+
+	> Vulnerabilidades críticas: Ejemplo, el famoso Drupalgeddon (2014 y 2018), fallos de ejecución remota de código que permitían a un atacante tomar control del servidor.
+	> Exposición a exploits: Un sitio Drupal desactualizado puede ser usado para instalar malware, mineros de criptomonedas o backdoors.
+	> Seguridad por módulos: Hay módulos específicos que refuerzan la seguridad (firewall de aplicaciones web, doble factor de autenticación, control de roles, etc.).
+
+En resumen:
+
+Drupal es un CMS robusto y flexible para construir sitios web, muy valorado en entornos que requieren seguridad y escalabilidad. Pero, al igual que cualquier software, necesita actualizaciones constantes y buenas prácticas 
+de seguridad para no convertirse en un punto débil.

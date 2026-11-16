@@ -1,0 +1,42 @@
+En informática y sobre todo en ciberseguridad, el concepto “Usabilidad vs Seguridad” se refiere al equilibrio entre dos aspectos que muchas veces entran en conflicto.
+
+Usabilidad
+
+	> Qué tan fácil, cómodo y rápido es para un usuario utilizar un sistema.
+	> Busca minimizar fricciones: menos pasos, menos requisitos, una experiencia fluida.
+	> Ejemplo: entrar a una app solo con un clic de “Iniciar sesión con Google” (sencillo y rápido).
+
+Seguridad
+
+	> Qué tan protegido está un sistema contra accesos no autorizados, ataques o fugas de información.
+	> Busca reducir riesgos, aunque eso implique más esfuerzo por parte del usuario.
+	> Ejemplo: obligar a usar una contraseña larga y compleja con autenticación de dos factores.
+	
+El dilema “Usabilidad vs Seguridad”
+
+	En muchos casos, aumentar la seguridad disminuye la usabilidad y viceversa.
+	
+		> Si el sistema es muy seguro, puede ser incómodo para los usuarios (demasiadas contraseñas, verificaciones constantes).
+		> Si es muy usable, puede sacrificar medidas de seguridad (entradas demasiado fáciles, menos barreras).
+
+¿Para qué sirve este concepto?
+
+	Sirve para:
+
+		> Diseñar sistemas equilibrados → No se trata de elegir entre seguridad o usabilidad, sino de encontrar un punto medio.
+		> Reducir errores humanos → Si un sistema es muy difícil de usar, los usuarios buscarán atajos inseguros (ej. apuntar contraseñas en papel).
+		> Tomar decisiones estratégicas → En banca online, hospitales, empresas, etc., se prioriza seguridad; en apps de uso cotidiano, se busca fluidez sin descuidar lo básico.
+
+Ejemplo real:
+
+	Una aplicación bancaria obliga a:
+
+		1. Contraseña compleja.
+		2. Token o código SMS.
+		3. Confirmación biométrica.
+
+		→ Alta seguridad, pero menos usabilidad (más pasos).
+
+	En cambio, una app de música permite acceder con un solo botón (Google/Facebook).
+		
+		→ Alta usabilidad, pero menor seguridad si tu cuenta externa se ve comprometida.

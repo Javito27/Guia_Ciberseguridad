@@ -1,0 +1,94 @@
+💻 Es una herramienta que permite ejecutar comandos o abrir una consola en otro equipo Windows de forma remota. Es como hacer cmd en otro ordenador pero desde el tuyo.
+
+🎯 ¿Para qué sirve?
+
+    🔹 1. Administración remota
+
+        · ejecutar comandos
+        · gestionar sistemas
+        · instalar software
+
+    🔹 2. Ciberseguridad ofensiva
+
+        · MUY usado en pentesting para:
+
+            · movimiento lateral
+            · ejecutar comandos en otros equipos
+
+⚙️ ¿Cómo funciona?
+
+    Usa:
+
+        · SMB (puerto 445)
+        · credenciales válidas
+
+🧩 Flujo
+
+    1. Tienes usuario + contraseña (o hash)
+    2. Te conectas a otra máquina
+    3. Ejecutas comandos
+
+    💥 control remoto
+
+💻 Ejemplo
+
+    psexec \\equipo_remoto [opciones] comando.exe
+
+🧠 Opciones principales de PsExec
+
+    ------------------------------------------------------------------------------------------
+    |  Opción          |  Descripción                                                        |
+    ------------------------------------------------------------------------------------------
+    |  \\equipo       |  Nombre o IP de la máquina remota                                    |
+    |  -u usuario     |  Especificar usuario para la conexión remota                         |
+    |  -p contraseña  |  Contraseña del usuario remoto                                       |
+    |  -s             |  Ejecutar el proceso con **privilegios de SYSTEM**                   |
+    |  -i             |  Ejecutar proceso de manera **interactiva** en la sesión del usuario |
+    |  -d             |  No esperar a que el proceso termine (modo desapegado / asíncrono)   |
+    |  -c             |  Copiar el ejecutable al equipo remoto antes de ejecutarlo           |
+    |  -h             |  Ejecutar con **elevación de privilegios** en Vista o superior       |
+    |  -n <segundos>  |  Tiempo de espera antes de cancelar la conexión                      |
+    |  -x             |  Ejecutar el proceso en **la sesión de la consola remota**           |
+    ------------------------------------------------------------------------------------------
+
+🔥 Ejemplos de uso
+
+    ------------------------------------------------------------------------------------------------------------------------------------------
+    |  Descripción                                              |  Ejemplo de Uso                                                            |  
+    ------------------------------------------------------------------------------------------------------------------------------------------
+    |  Ejecutar un comando remoto con usuario y contraseña      |  psexec \\192.168.1.10 -u Administrador -p Pass123 ipconfig                |
+    |  Abrir una shell remota con privilegios SYSTEM            |  psexec \\192.168.1.10 -s cmd.exe                                          |
+    |  Ejecutar un archivo en la máquina remota                 |  psexec \\192.168.1.10 -u Admin -p Pass123 -c C:\herramientas\script.bat   |
+    |  Ejecutar de manera interactiva en la sesión del usuario  |  psexec \\192.168.1.10 -i notepad.exe                                      |
+    ------------------------------------------------------------------------------------------------------------------------------------------
+
+🧪 Uso típico en hacking
+
+    💥 Movimiento lateral
+
+        1. Comprometes un equipo
+        2. Robas credenciales
+        3. Usas PsExec
+
+    👉 accedes a otro equipo
+
+🔐 Versión ofensiva
+
+    👉 Existe versión en:
+
+        · Metasploit
+        · Impacket (psexec.py)
+
+💥 Ejemplo con hash
+
+    👉 Pass-the-Hash:
+
+        psexec.py admin@192.168.1.10 -hashes LM:NTLM
+
+⚠️ Requisitos
+
+    Para que funcione necesitas:
+
+        · credenciales válidas
+        · acceso SMB
+        · permisos administrativos

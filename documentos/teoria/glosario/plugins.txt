@@ -1,0 +1,33 @@
+En informática y ciberseguridad, un plugin (a veces escrito “pluggin” por error, aunque lo correcto es plugin) es un complemento o extensión de software que agrega nuevas funciones a un programa principal sin modificar 
+su código base.
+
+Qué es un plugin:
+
+	> Es un pequeño programa que se “enchufa” a otro software más grande.
+	> Permite personalizar o ampliar las funcionalidades del programa principal.
+	> Muchos programas modernos dependen de plugins para ser más flexibles y adaptables.
+
+Para qué sirve:
+
+	1. Añadir funcionalidades nuevas:
+	
+		> Ejemplo: Un plugin de navegador que bloquea anuncios o traduce páginas automáticamente.
+
+	2. Extender programas de desarrollo o edición:
+	
+		> Ejemplo: En software de edición de fotos como Photoshop, los plugins pueden agregar filtros o efectos especiales.
+
+	3. En ciberseguridad:
+
+		> Los plugins de seguridad pueden analizar vulnerabilidades, escanear malware o monitorear tráfico de red.
+		> Herramientas como Burp Suite o Wireshark permiten usar plugins para añadir funciones de análisis avanzadas o automatizar pruebas de penetración.
+
+Resumen visual:
+
+	Programa principal: Navegador, editor, herramienta de seguridad
+			  |
+			  └─ Plugin: Añade funciones adicionales sin tocar el programa base
+
+Tip de ciberseguridad: 
+
+	Los plugins también pueden ser vectores de ataque, porque si no son confiables pueden incluir malware o vulnerabilidades. Por eso es importante instalarlos solo de fuentes seguras.

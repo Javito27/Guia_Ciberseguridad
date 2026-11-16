@@ -1,0 +1,55 @@
+Navegación y Archivos
+-----------------------------------------------------------------------------------
+  Comando                           |  Descripción                                 
+-----------------------------------------------------------------------------------
+ Get-ChildItem                      | Listar archivos y carpetas (similar a dir)   
+ Set-Location                       | Cambiar directorio (cd)                      
+ Get-Location                       | Mostrar el directorio actual                 
+ New-Item                           | Crear archivos o carpetas                    
+ Remove-Item                        | Eliminar archivos o carpetas                 
+ Copy-Item                          | Copiar archivos o carpetas                   
+ Move-Item                          | Mover archivos o carpetas                    
+ Rename-Item                        | Renombrar archivos o carpetas                
+-----------------------------------------------------------------------------------
+
+Información del sistema
+-----------------------------------------------------------------------------------
+  Comando                           |  Descripción                                 
+-----------------------------------------------------------------------------------
+ Get-Process                        | Listar procesos en ejecución                 
+ Stop-Process                       | Detener un proceso (Stop-Process -Id 1234)   
+ Get-Service                        | Ver servicios y su estado                    
+ Start-Service                      | Iniciar un servicio                          
+ Stop-Service                       | Detener un servicio                          
+ Get-EventLog                       | Leer registros de eventos                    
+ Get-ComputerInfo                   | Información detallada del sistema            
+-----------------------------------------------------------------------------------
+
+Red
+--------------------------------------------------------------------------
+  Comando                           |  Descripción                        
+--------------------------------------------------------------------------
+ Test-Connection                    | Equivalente a ping                  
+ Get-NetIPAddress                   | Mostrar IPs de la máquina           
+ Get-NetAdapter                     | Información de adaptadores de red   
+--------------------------------------------------------------------------
+
+Administración
+----------------------------------------------------------------------------------------
+  Comando                           |  Descripción                                      
+----------------------------------------------------------------------------------------
+ Set-ExecutionPolicy                | Cambiar política de ejecución de scripts          
+ Get-Help                           | Mostrar ayuda de cmdlets (Get-Help Get-Process)   
+ Clear-Host                         | Limpiar la pantalla (cls)                         
+ Exit                               | Salir de PowerShell                               
+----------------------------------------------------------------------------------------
+
+Salida y Filtrado
+----------------------------------------------------------------------------------------
+  Comando                           |  Descripción                                      
+----------------------------------------------------------------------------------------
+ Select-Object                      | Seleccionar propiedades específicas de objetos    
+ Where-Object                       | Filtrar objetos según condiciones                 
+ Sort-Object                        | Ordenar resultados                                
+ Format-Table                       | Formatear salida en forma de tabla                
+----------------------------------------------------------------------------------------

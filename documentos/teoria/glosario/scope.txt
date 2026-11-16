@@ -1,0 +1,60 @@
+En informática y ciberseguridad, el término scope (en inglés significa alcance) se utiliza en distintos contextos, pero en general se refiere a los límites, el rango o el contexto en el que algo es válido o aplicable.
+
+1. En pruebas de ciberseguridad (pentesting / auditorías)
+
+	> El scope define qué sistemas, aplicaciones, redes o activos están incluidos en una evaluación de seguridad.
+
+	> Sirve para que tanto el auditor como la organización tengan claro qué se puede probar y qué no.
+
+	> Ejemplo:
+
+		- Una empresa contrata un pentest.
+		
+		- Scope: api.empresa.com y portal.empresa.com.
+		
+		- Fuera de scope: correo corporativo o servidores internos.
+
+	Esto evita problemas legales y ayuda a enfocar la auditoría.
+
+2. En programación y APIs
+
+	> El scope puede definir el nivel de acceso o permisos que tiene un token o aplicación.
+
+	> Muy común en sistemas de autenticación como OAuth 2.0.
+
+	> Ejemplo:
+
+		- Una app pide permiso a Google para acceder a tu cuenta.
+
+		- El scope puede ser:
+
+			email → solo tu correo.
+			calendar.read → solo leer tu calendario.
+			calendar.write → modificar tu calendario.
+
+	De esta forma, el alcance limita qué puede hacer la aplicación con tu información.
+
+3. En lenguajes de programación
+
+	> El scope es el ámbito de visibilidad de las variables o funciones dentro del código.
+
+	> Puede ser:
+
+		- Local scope: variable solo existe dentro de una función o bloque.
+		- Global scope: variable accesible desde cualquier parte del programa.
+
+	> Ejemplo en Python:
+	
+		x = 10  # variable global
+
+		def funcion():
+			y = 5  # variable local
+			print(x, y)
+
+		funcion()   # imprime: 10 5
+		print(y)    # ❌ error: y no existe fuera de la función
+
+En resumen:
+
+	Scope = Alcance.
+	Sirve para definir límites: qué sistemas se prueban, qué permisos tiene una app, o dónde vive una variable en un programa.

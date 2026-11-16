@@ -1,0 +1,31 @@
+Netcat (abreviado como nc) es una herramienta de red muy versátil que se conoce como la “navaja suiza de la red”. Se utiliza en administración de sistemas, pruebas de seguridad y pentesting, 
+porque permite leer y escribir datos a través de conexiones de red usando TCP o UDP.
+
+¿Para qué se usa Netcat?
+
+	> Conectar a puertos TCP/UDP y enviar datos.
+	> Crear servidores de escucha (listeners).
+	> Transferir archivos entre máquinas.
+	> Hacer port scanning (escaneo de puertos).
+	> Establecer backdoors (conexiones remotas en pruebas de seguridad).
+	> Depurar y probar servicios de red.
+
+Sintaxis básica
+
+	nc [opciones] host puerto
+
+Opciones principales de Netcat
+
+    ---------------------------------------------------------------------------------------------------------------------------------------------
+    |  Opción   |   Descripción                                          |   Ejemplo de Uso                                                     |  
+    ---------------------------------------------------------------------------------------------------------------------------------------------
+    |   -l      |   Escuchar conexiones entrantes (modo servidor)        |   nc -l -p 4444                                                      |
+    |   -p      |   Especificar puerto local                             |   nc -p 1234                                                         |
+    |   -v      |   Modo verbose (muestra más información)               |   nc -v google.com 443                                               |
+    |   -u      |   Usar UDP en vez de TCP                               |   nc -u 192.168.1.10 53                                              |
+    |   -z      |   Escaneo de puertos sin enviar datos                  |   nc -zv 192.168.1.10 20-100                                         |
+    |   -e      |   Ejecutar un programa tras la conexión (backdoor)     |   nc -l -p 4444 -e /bin/bash                                         |
+    |   -w      |   Tiempo de espera (timeout)                           |   nc -w 3 192.168.1.10 80                                            |
+    |   -n      |   No usar DNS (resuelve más rápido con IP directa)     |                                                                      |
+    |   ><      |   Transferir un archivo (servidor / cliente)           |   nc -l -p 4444 > archivo.txt | nc 192.168.1.10 4444 < archivo.txt   |
+    ---------------------------------------------------------------------------------------------------------------------------------------------

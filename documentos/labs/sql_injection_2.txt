@@ -1,0 +1,20 @@
+➡️ This lab contains a SQL injection vulnerability in the login function.
+
+To solve the lab, perform a SQL injection attack that logs in to the application as the administrator user.
+
+
+🎯 SOLUCIÓN DEL LABORATORIO
+
+    1️⃣ Seleccionar FoxyProxy
+
+        En el navegador seleccionamos la opción BURP en FoxyProxy para que BurpSuite intercepte las peticiones. 
+
+    2️⃣ Seleccionamos la opción de "My account"
+
+    4️⃣ En username, introducimos la siguiente inyección: 
+
+        administrator'--
+
+    5️⃣ Y en la contraseña introducimos lo que queramos y enviamos
+
+    6️⃣ Ya estamos dentro del usuario Administrador

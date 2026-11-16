@@ -1,0 +1,80 @@
+Hashcat es una herramienta de cracking de contraseñas de código abierto.
+Se usa para recuperar contraseñas o probar su fortaleza a partir de hashes.
+
+Está considerada una de las más rápidas porque aprovecha el poder de CPU y GPU para acelerar los cálculos.
+
+
+¿Para qué se usa en informática y ciberseguridad?
+
+    > Pentesting / Red Team:
+    
+        - Probar la seguridad de contraseñas almacenadas en sistemas (auditoría).
+        - Verificar si una contraseña puede ser crackeada con diccionarios conocidos.
+    
+    > Recuperación de contraseñas:
+    
+        - Usuarios o administradores que han perdido contraseñas cifradas.
+    
+    > Forense digital:
+    
+        - Recuperación de información en investigaciones.
+    
+    > Investigación académica:
+    
+        - Estudio de la seguridad de algoritmos de hashing (MD5, SHA, bcrypt, NTLM, etc.).
+
+
+Algoritmos soportados
+
+    Hashcat soporta más de 300 algoritmos de hash, entre ellos:
+    
+        > Hashes comunes: MD5, SHA1, SHA256, SHA512
+        > Windows: NTLM, LM, Kerberos
+        > Linux: /etc/shadow (des, md5crypt, sha512crypt, etc.)
+        > Wi-Fi: WPA/WPA2 PMKID/EAPOL
+        > Criptografía moderna: bcrypt, scrypt, Argon2
+
+
+Modos de ataque disponibles
+
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |  Modo de ataque                   |  Descripción                                                                             |  Ejemplo de Uso                                               |
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |  Ataque de diccionario (straight) |  Probar palabras de un diccionario como contraseñas                                      |  hashcat -m 0 -a 0 hash.txt rockyou.txt                       |
+    |  Ataque combinado (combinator)    |  Une dos diccionarios y prueba todas las combinaciones                                   |  hashcat -m 0 -a 1 hash.txt dic1.txt dic2.txt                 |
+    |  Ataque de máscara (mask attack)  |  Prueba patrones personalizados (ej: ?d=dígito, ?l=minúscula, ?u=mayúscula, ?s=símbolos) |  hashcat -m 0 -a 3 hash.txt ?l?l?l?l?d?d                      |
+    |  Ataque híbrido                   |  Diccionario + máscara                                                                   |  hashcat -m 0 -a 6 hash.txt rockyou.txt ?d?d                  |
+    |  Ataque de reglas                 |  Modifica palabras de un diccionario aplicando reglas (añadir números, mayúsculas, etc.) |  hashcat -m 0 -a 0 hash.txt rockyou.txt -r rules/best64.rule  |
+    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Opciones principales
+
+    --------------------------------------------------------------------------------------
+    |  Opción     |  Descripción                                                         | 
+    --------------------------------------------------------------------------------------
+    |  -m         |  Tipo de hash (ej: 0=MD5, 1000=NTLM, 22000=WPA-PBKDF2)               |
+    |  -a         |  Tipo de ataque (0=diccionario, 1=combinador, 3=mask, 6/7=híbridos)  |
+    |  -w         |  Workload profile (intensidad, de 1 a 4)                             |
+    |  --force    |  Ignorar advertencias del hardware                                   |
+    |  --show     |  Mostrar hashes ya crackeados                                        |
+    |  -o         |  Guardar resultados en archivo                                       |
+    |  --status   |  Mostrar progreso del ataque                                         |
+    |  --restore  |  Reanudar un ataque interrumpido                                     |
+    --------------------------------------------------------------------------------------
+
+
+Ejemplos de uso
+
+    ------------------------------------------------------------------------------------------------------------------------
+    |  Descripción                                       |  Ejemplo de uso                                                 |    
+    ------------------------------------------------------------------------------------------------------------------------
+    |  Cracking con diccionario (MD5)                    |  hashcat -m 0 -a 0 hashes.txt /usr/share/wordlists/rockyou.txt  |
+    |  WPA2 Wi-Fi (captura en formato .hccapx o .22000)  |  hashcat -m 22000 -a 0 wifi.hc22000 rockyou.txt                 |
+    |  Ataque de máscara a hash NTLM                     |  hashcat -m 1000 -a 3 hashes.txt ?u?l?l?l?d?d?d                 |
+    ------------------------------------------------------------------------------------------------------------------------
+
+En resumen
+
+    Hashcat = herramienta para probar la robustez de contraseñas a partir de hashes, usando técnicas de fuerza bruta optimizadas con GPU. 
+    Es clave en pentesting, auditorías de seguridad y forense digital.

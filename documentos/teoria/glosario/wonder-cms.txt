@@ -1,0 +1,26 @@
+WonderCMS es un CMS (Content Management System, o Sistema de Gestión de Contenidos), muy ligero y de código abierto, que permite crear y administrar sitios web sin necesidad de bases de datos.
+
+Características principales:
+
+	> Ligero y sencillo: ocupa muy poco espacio (menos de 1 MB).
+	> Sin base de datos: toda la información se guarda en un archivo de texto (json), lo que reduce la complejidad.
+	> Editable en línea: se puede modificar el contenido directamente desde el navegador.
+	> Extensible: permite instalar temas y plugins para personalizar el sitio.
+	> Código abierto: cualquiera puede revisar, modificar o mejorar el software.
+
+En informática
+
+	WonderCMS es simplemente una herramienta para gestionar páginas web fácilmente, sobre todo pensada para sitios pequeños o personales (blogs, portafolios, páginas estáticas, etc.).
+
+En ciberseguridad
+
+	Desde la perspectiva de seguridad, WonderCMS es interesante porque:
+
+		> Al ser tan simple y minimalista, tiene menos superficie de ataque en comparación con otros CMS más grandes como WordPress o Joomla.
+		> Sin embargo, como cualquier software expuesto en internet, puede ser objetivo de ataques si no está actualizado o si se usan plugins inseguros.
+		> Los analistas de ciberseguridad pueden encontrarse sitios que usan WonderCMS y deben evaluar posibles vulnerabilidades (inyección de código, escalamiento de privilegios, etc.).
+
+En resumen:
+
+	WonderCMS sirve para crear y administrar sitios web pequeños de manera rápida y sin complicaciones. Desde el punto de vista de ciberseguridad, es importante mantenerlo actualizado y 
+	revisar los plugins/temas que se instalan para reducir riesgos.

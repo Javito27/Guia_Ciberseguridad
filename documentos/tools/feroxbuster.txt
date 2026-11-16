@@ -1,0 +1,47 @@
+Feroxbuster es una herramienta de fuzzing y fuerza bruta para directorios y archivos web, escrita en Rust.
+
+Se usa principalmente en pentesting y bug bounty para descubrir directorios ocultos, archivos sensibles o endpoints en aplicaciones web.
+
+¿Para qué se usa Feroxbuster?
+
+    > Enumerar directorios ocultos en un sitio web.
+    > Buscar archivos sensibles (ejemplo: .git/, backup.zip, config.php).
+    > Ayuda a encontrar posibles superficies de ataque.
+    > Similar a herramientas como dirb o gobuster, pero muy rápida porque está optimizada en Rust.
+
+Instalación
+
+    sudo apt install feroxbuster
+
+Uso básico
+
+    feroxbuster -u http://ejemplo.com
+
+Opciones principales
+
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |   Opción    |   Descripción                                                      |   Ejemplo de Uso                                                              |
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |   -u        |   URL objetivo                                                     |   feroxbuster -u http://ejemplo.com                                           |
+    |   -w        |   Diccionario de palabras a usar                                   |   feroxbuster -u http://ejemplo.com -w /usr/share/wordlists/dirb/common.txt   |
+    |   -t        |   Número de hilos (threads)                                        |   feroxbuster -u http://ejemplo.com -t 50                                     |
+    |   -x        |   Extensiones de archivos a buscar                                 |   feroxbuster -u http://ejemplo.com -x php,html,js                            |
+    |   -o        |   Guardar resultados en un archivo                                 |   feroxbuster -u http://ejemplo.com -o resultado.txt                          |
+    |   -r        |   Seguir redirecciones                                             |   feroxbuster -u http://ejemplo.com -r                                        |
+    |   -s        |   Mostrar solo ciertos códigos de respuesta (ejemplo: 200 y 403)   |   feroxbuster -u http://ejemplo.com -s 200 403                                |
+    |   --depth   |   Profundidad de escaneo (seguir directorios encontrados)          |   feroxbuster -u http://ejemplo.com --depth 3                                 |
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Ejemplo completo
+
+    feroxbuster -u http://ejemplo.com -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x php,html,js -t 50 -o resultado.txt -s 200 403 --depth 2
+
+    Esto hace:
+
+        > Escanear ejemplo.com
+        > Usar diccionario de palabras de DirBuster
+        > Buscar extensiones php, html, js
+        > Usar 50 hilos para mayor velocidad
+        > Guardar en resultado.txt
+        > Mostrar solo respuestas 200 y 403
+        > Explorar hasta 2 niveles de directorios

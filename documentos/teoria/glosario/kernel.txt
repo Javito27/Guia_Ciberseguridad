@@ -1,0 +1,30 @@
+En informática y ciberseguridad, el kernel es una pieza fundamental del sistema operativo. Es como el “corazón” o “núcleo” que controla todo lo que sucede en una computadora.
+
+Qué es el kernel
+
+	El kernel es el software que actúa como intermediario entre:
+
+		> El hardware (CPU, memoria, discos, red, etc.)
+		> El software (programas y aplicaciones que usamos)
+
+	Es responsable de gestionar recursos, asegurarse de que los programas no interfieran entre sí y proteger el sistema de accesos no autorizados
+	
+Para qué sirve
+
+	Algunas funciones clave del kernel son:
+
+		> Gestión de procesos: Decide qué programas se ejecutan, cuándo y cuánto tiempo usan la CPU.
+		> Gestión de memoria: Controla qué parte de la memoria RAM usa cada programa y protege unas áreas de otras.
+		> Control de hardware: Permite que el software interactúe con discos, impresoras, tarjetas de red, etc., sin que el programa tenga que conocer los detalles de cada dispositivo.
+		> Seguridad: Establece permisos y barreras para que un programa malicioso no pueda tomar control del sistema o acceder a datos sensibles.
+		> Comunicación entre procesos: Permite que distintos programas “hablen” entre sí de manera controlada.	
+			
+Tipos de kernel
+
+	> Monolítico: Todo el kernel y sus servicios corren juntos en un solo espacio de memoria (ej. Linux).
+	> Microkernel: Solo las funciones básicas corren en el kernel, mientras que el resto de servicios corren como procesos separados (ej. Minix, algunos sistemas de investigación).			
+	
+Ejemplo práctico en ciberseguridad:
+
+	Si un malware intenta acceder directamente a la memoria de otro programa o del sistema operativo, el kernel es quien puede detectar y bloquear ese intento. Por eso, entender cómo funciona 
+	el kernel es clave para diseñar sistemas seguros y detectar exploits.

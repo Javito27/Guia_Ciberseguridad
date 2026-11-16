@@ -1,0 +1,77 @@
+Neo4j es una base de datos orientada a grafos, es decir, en lugar de almacenar la información en tablas como una base de datos relacional (SQL), usa nodos, relaciones y propiedades 
+para representar datos.
+
+    > Nodos → representan entidades (usuarios, equipos, dominios, aplicaciones, etc.)
+    > Relaciones → representan cómo se conectan esas entidades (ej: usuario pertenece a grupo, equipo está en dominio, usuario inicia sesión en máquina).
+    > Propiedades → atributos de los nodos o relaciones (ej: nombre, permisos, roles, hashes).
+
+
+¿Para qué se usa en informática?
+
+    > Modelado de datos complejos → ideal para sistemas donde las conexiones son más importantes que los datos en sí (redes sociales, rutas, grafos de transporte).
+    > Recomendaciones y análisis de relaciones → Netflix, LinkedIn y otras grandes empresas lo usan para recomendar amigos, productos o películas.
+    > Visualización de grafos → permite representar conexiones de forma intuitiva.
+    > Consultas con Cypher (su propio lenguaje de consulta) → similar a SQL, pero para grafos.
+
+    Ejemplo:
+	
+        MATCH (u:Usuario)-[:PERTENECE_A]->(g:Grupo)
+        WHERE g.nombre = "Administradores"
+        RETURN u.nombre;
+	
+    Devuelve los usuarios que pertenecen al grupo Administradores.
+
+
+¿Para qué se usa en ciberseguridad?
+
+    Aquí es donde Neo4j se volvió muy popular:
+    
+    ··· BloodHound ····
+        
+            > Es una herramienta muy usada en pentesting y red team para analizar Active Directory (AD).
+            
+            > Usa Neo4j para representar la red corporativa como un grafo de:
+            
+                - Usuarios
+                - Grupos
+                - Máquinas
+                - Permisos
+            
+            > Permite descubrir caminos de ataque:
+            
+                - Qué usuario puede escalar privilegios hasta ser administrador del dominio.
+                - Dónde existen relaciones inseguras.
+                - Qué credenciales comprometerían más máquinas.
+    
+    Ejemplo en ciberseguridad:
+    
+        > Usuario juan pertenece al grupo SoporteTI.
+        > Ese grupo tiene permisos de login en PC-Seguridad.
+        > PC-Seguridad tiene credenciales almacenadas de un Administrador de dominio.
+    
+	Neo4j + BloodHound muestran este camino de ataque en forma de grafo.
+
+
+Opciones y características de Neo4j
+
+    > Ediciones:
+    
+        - Community Edition (gratuita).
+        - Enterprise Edition (con características avanzadas).
+    
+    > Lenguaje de consultas: Cypher (similar a SQL pero para grafos).
+    
+    > API: se puede integrar con Python, Java, Go, etc.
+    
+    > Plugins en ciberseguridad:
+    
+        - BloodHound → análisis de AD.
+        - Cartografía de redes → visualizar relaciones entre sistemas.
+        - Análisis forense digital → representar conexiones entre eventos, usuarios y logs.
+
+
+Resumen
+
+    > Neo4j = Base de datos de grafos.
+    > En informática → análisis de relaciones, recomendaciones, rutas, modelado de grafos.
+    > En ciberseguridad → sobre todo en Active Directory, para descubrir rutas de ataque, escaladas de privilegios y relaciones peligrosas (principalmente con BloodHound).

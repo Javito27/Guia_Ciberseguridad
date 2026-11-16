@@ -1,0 +1,66 @@
+CMSmap es un scanner de vulnerabilidades para CMS (Content Management Systems) escrito en Python. Sirve para automatizar la detección de fallos de seguridad en gestores de contenido 
+populares como:
+
+    > WordPress
+    > Joomla
+    > Drupal
+    > Moodle
+
+
+¿Para qué se usa en informática y ciberseguridad?
+
+    > Enumerar información de un CMS objetivo (versión, plugins, módulos, temas).
+    > Detectar vulnerabilidades conocidas en esos componentes.
+    > Descubrir configuraciones inseguras.
+    > Probar credenciales débiles (fuerza bruta de usuarios/contraseñas en logins).
+    > Hacer pruebas de reconocimiento durante un pentest o un análisis de seguridad web.
+    
+    Es muy útil en bug bounty, pentesting web y auditorías de seguridad en sitios que usan CMS.
+
+
+Sintaxis general
+
+    cmsmap.py <URL> [opciones]
+
+
+Opciones principales de CMSmap
+
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |  Opción   |  Descripción                                                                |   Ejemplo de Uso                                                            |
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |  -h       |  Muestra la ayuda con todas las opciones disponibles.                       |                                                                             |
+    |  -t       |  Tipo de CMS (wp = WordPress, joomla, drupal, moodle).                      |  cmsmap.py http://victima.com -t wp                                         |
+    |  -u       |  URL objetivo.                                                              |  cmsmap.py -u http://victima.com                                            |
+    |  -o       |  Guardar resultados en un archivo.                                          |  cmsmap.py -u http://victima.com -o reporte.txt                             |
+    |  -w       |  Ruta a un diccionario (para fuerza bruta de credenciales).                 |  cmsmap.py -u http://victima.com -t wp -w /usr/share/wordlists/rockyou.txt  |
+    |  -d       |  Fuerza bruta de directorios/módulos/plugins.                               |  cmsmap.py -u http://victima.com -t wp -d                                   |
+    |  -p       |  Especificar un proxy (por ejemplo, para usar con BurpSuite).               |  cmsmap.py -u http://victima.com -p http://127.0.0.1:8080                   |
+    |  -a       |  Escaneo automático completo (plugins, temas, usuarios, vulnerabilidades).  |  cmsmap.py -u http://victima.com -t wp -a                                   |
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Ejemplos prácticos
+
+    1. Escaneo de un WordPress:
+    
+        cmsmap.py -u http://victima.com -t wp
+    
+    2. Escaneo automático con búsqueda de vulnerabilidades:
+    
+        cmsmap.py -u http://victima.com -t wp -a
+    
+    3. Fuerza bruta de credenciales en Joomla:
+    
+        cmsmap.py -u http://victima.com -t joomla -w /usr/share/wordlists/rockyou.txt
+
+
+Ventajas
+
+   > Compatible con los CMS más usados.
+   > Automatiza tareas comunes de enumeración y análisis.
+   > Útil tanto en reconocimiento como en explotación básica.
+
+
+En resumen
+
+    CMSmap es un scanner especializado para detectar vulnerabilidades en CMS, muy práctico en pentesting web.

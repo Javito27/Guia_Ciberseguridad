@@ -1,0 +1,62 @@
+En informática y especialmente en ciberseguridad web, los Security Headers (o encabezados de seguridad HTTP) son instrucciones especiales que un servidor web envía al navegador junto con una página, para indicarle cómo 
+debe comportarse respecto a la seguridad de esa aplicación o sitio web.
+
+¿Qué significan?
+
+	Son configuraciones que viajan en la cabecera de la respuesta HTTP (antes del contenido de la página) y que ayudan a:
+
+		> Prevenir ataques comunes (XSS, Clickjacking, robo de cookies, etc.).
+		> Forzar conexiones seguras.
+		> Controlar cómo otros sitios pueden interactuar con el nuestro.
+
+¿Para qué sirven?
+
+	Aquí algunos de los Security Headers más importantes y su función:
+
+		1. Content-Security-Policy (CSP)
+
+			> Evita ataques de Cross-Site Scripting (XSS) y la ejecución de código malicioso.
+			> Define qué recursos (scripts, estilos, imágenes) puede cargar el navegador y desde dónde.
+
+		2. Strict-Transport-Security (HSTS)
+
+			> Obliga al navegador a usar siempre HTTPS en vez de HTTP.
+			> Protege contra ataques de downgrade y man-in-the-middle.
+
+		3. X-Frame-Options
+
+			> Evita que tu sitio se muestre dentro de un <iframe> en otra página.
+			> Protege contra ataques de Clickjacking.
+
+		4. X-Content-Type-Options
+
+			> Impide que el navegador “adivine” el tipo de archivo (MIME sniffing).
+			> Evita que un archivo malicioso se ejecute como si fuera otro tipo de recurso.
+
+		5. Referrer-Policy
+
+			> Controla qué información del “referer” (URL desde la que viene el usuario) se comparte con otros sitios.
+
+		6. Permissions-Policy (antes Feature-Policy)
+
+			> Restringe el acceso a funciones sensibles del navegador (cámara, micrófono, geolocalización, etc.).
+
+		7. Cross-Origin-Resource-Policy (CORP) / Cross-Origin-Embedder-Policy (COEP)
+
+			> Controlan cómo se pueden compartir recursos entre diferentes dominios.
+
+Ejemplo de uso real
+
+	Un servidor web puede devolver en la cabecera algo como:
+
+		Strict-Transport-Security: max-age=31536000; includeSubDomains
+		Content-Security-Policy: default-src 'self'; script-src 'self' https://apis.google.com
+		X-Frame-Options: DENY
+		X-Content-Type-Options: nosniff
+		Referrer-Policy: no-referrer
+
+	Con esto, el navegador del usuario aplica esas políticas automáticamente, reduciendo la superficie de ataque.
+
+En resumen: 
+
+	los Security Headers son como un cinturón de seguridad para los navegadores, ayudan a reforzar la seguridad de un sitio web y proteger a los usuarios frente a ataques comunes.

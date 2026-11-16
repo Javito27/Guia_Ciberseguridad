@@ -1,0 +1,67 @@
+📌 Es el puerto estándar del protocolo SNMP (Simple Network Management Protocol). Es usado para monitorizar y administrar dispositivos de red (switches, routers, impresoras).
+
+    Se encuentra en la capa de aplicación. Se usa en: 
+
+        Routers
+        Switches
+        Firewalls
+        Servidores
+        Impresoras
+        Dispositivos IoT
+
+    Funciona normalmente sobre UDP 161.
+
+⚙️ ¿Cómo funciona?
+
+    Hay tres elementos principales:
+
+        1️⃣ Manager → El sistema que consulta
+        2️⃣ Agent → El dispositivo que responde
+        3️⃣ MIB (Management Information Base) → Base de datos con información del dispositivo
+
+🔐 Problema de seguridad
+
+    SNMP v1 y v2 usan community strings (como contraseñas).
+
+    Las más comunes:
+
+        public
+        private
+
+    ⚠️ Si están por defecto → cualquiera puede leer información del sistema.
+
+🧪 En pentesting
+
+    Si el puerto 161 está abierto:
+
+        · Se intenta enumerar información
+        · Se prueban community strings comunes
+        · Puede revelar:
+
+            Usuarios
+            Servicios
+            Configuraciones
+            Información sensible
+
+🎯 Ejemplo de uso básico
+
+    **************************************
+    **   snmpwalk -v2c -c public <IP>   **
+    **************************************
+
+    Donde: 
+    
+        -v2c → versión SNMP
+        -c public → community string
+        <IP> → IP objetivo
+
+    snmpwalk es una herramienta que permite enumerar información de un dispositivo usando SNMP.
+
+        Puede revelar:
+
+            🖥️ Nombre del sistema
+            📦 Versión del SO
+            👤 Usuarios
+            🌐 Interfaces de red
+            🔧 Procesos
+            📊 Uso de CPU y memoria

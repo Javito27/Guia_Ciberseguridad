@@ -1,0 +1,364 @@
+{
+
+"_numeros_0-9": "B", 
+
+        "3-way-handshakes": {
+            "titulo": "3 Way Handshakes"
+        },
+
+"_letra_A": "A",  
+
+        "api": {
+            "titulo": "API (Application Programming Interface)"
+        },
+        "apt-simulations": {
+            "titulo": "APT-Simulations"
+        },
+        "arp": {
+            "titulo": "ARP (Address Resolution Protocol)"
+        },
+        "assets": {
+            "titulo": "Assets"
+        },
+        "aislamiento-nucleo": {
+            "titulo": "Aislamiento del núcleo (Kernel Isolation)"
+        },
+        "ad-mindmap": {
+            "titulo": "AD MindMap"
+        },
+        "as-rep-roasting": {
+            "titulo": "AS-REP Roasting"
+        },
+        "ad": {
+            "titulo": "Active Directory (AD)"
+        },
+
+"_letra_B": "B",  
+
+        "bloodhound": {
+            "titulo": "BloodHound"
+        },
+        "bypass": {
+            "titulo": "Bypass"
+        },
+        "backdoors": {
+            "titulo": "Backdoors"
+        },
+        "bug-bounty": {
+            "titulo": "Bug Bounty"
+        },
+
+"_letra_C": "C",  
+
+        "contenedor-docker": {
+            "titulo": "Contenedor Docker"
+        },
+        "cli-cgi": {
+            "titulo": "CLI y CGI"
+        },
+        "clasification-software": {
+            "titulo": "Clasificación del software"
+        },
+        "cia": {
+            "titulo": "CIA Triada"
+        },
+        "cookies": {
+            "titulo": "Cookies"
+        },
+        "cms": {
+            "titulo": "CMS"
+        },
+
+"_letra_D": "D",  
+
+        "drupal": {
+            "titulo": "Drupal"
+        },
+        "diccionarios": {
+            "titulo": "Diccionarios"
+        },
+        "dns": {
+            "titulo": "DNS"
+        },
+        "dominios-nivel-superior": {
+            "titulo": "Dominios de Nivel Superior"
+        },
+        "dhcp": {
+            "titulo": "DHCP"
+        },
+
+"_letra_E": "E", 
+
+        "entidades-xml": {
+            "titulo": "Entidades XML"
+        },
+        "enumeraciones": {
+            "titulo": "Enumeraciones"
+        },
+        "ettercap": {
+            "titulo": "Ettercap"
+        },
+        "edr": {
+            "titulo": "Endpoint Detection and Response (EDR)"
+        },
+
+"_letra_F": "F", 
+
+        "fpm": {
+            "titulo": "FPM"
+        },
+        "frontdoor": {
+            "titulo": "Frontdoor"
+        },
+        "frame": {
+            "titulo": "Frame"
+        },
+        "factores-auth": {
+            "titulo": "Factores de Autenticación"
+        },
+        "firestick": {
+            "titulo": "FireStick"
+        },
+
+"_letra_G": "G", 
+
+        "gftobins": {
+            "titulo": "GFTobins"
+        },
+        "gdb": {
+            "titulo": "GDB"
+        },
+        "gcc": {
+            "titulo": "GCC"
+        },
+
+"_letra_H": "H", 
+
+        "hacktools": {
+            "titulo": "Hacktools"
+        },
+        "htb": {
+            "titulo": "Hack The Box (HTB)"
+        },
+
+"_letra_I": "I", 
+
+        "iis": {
+            "titulo": "Internet Information Services (IIS)"
+        },
+        "intruder-attacks": {
+            "titulo": "Intruder Attacks"
+        },
+        "idor": {
+            "titulo": "Insecure Direct Object Reference (IDOR)"
+        },
+        "idps": {
+            "titulo": "Intrusion Detection and Prevention System (IDPS)"
+        },
+
+"_letra_J": "J", 
+
+        "": {
+            "titulo": ""
+        },
+
+"_letra_K": "K", 
+
+        "kernel": {
+            "titulo": "Kernel"
+        },
+
+"_letra_L": "L", 
+
+        "": {
+            "titulo": ""
+        },
+
+"_letra_M": "M", 
+
+        "modalidades-pentest": {
+            "titulo": "Modalidades de Pentest"
+        },
+        "osi": {
+            "titulo": "Modelo OSI"
+        },
+        "mindmap": {
+            "titulo": "Mindmap"
+        },
+        "mullvad": {
+            "titulo": "Mullvad"
+        },
+        "mx": {
+            "titulo": "MX"
+        },
+        "mttr": {
+            "titulo": "MTTR"
+        },
+        "mitre": {
+            "titulo": "MITRE ATT&CK"
+        },
+
+"_letra_N": "N", 
+
+        "null-exception": {
+            "titulo": "Null Exception"
+        },
+        "n8n": {
+            "titulo": "n8n"
+        },
+        "null-byte": {
+            "titulo": "Null Byte"
+        },
+        "netbios": {
+            "titulo": "NetBIOS"
+        },
+        "nibbleblog": {
+            "titulo": "Nibbleblog"
+        },
+
+"_letra_O": "O", 
+
+
+        "osint": {
+            "titulo": "OSINT"
+        },
+
+"_letra_P": "P", 
+
+        "plugins": {
+            "titulo": "Plugins"
+        },
+        "pid": {
+            "titulo": "PID"
+        },
+        "proxy": {
+            "titulo": "Proxy"
+        },
+        "pentesting": {
+            "titulo": "Pentesting"
+        },
+
+"_letra_Q": "Q", 
+
+        "": {
+            "titulo": ""
+        },
+
+"_letra_R": "R", 
+
+        "rutas": {
+            "titulo": "Rutas"
+        },
+        "robots": {
+            "titulo": "Robots.txt"
+        },
+        "rdif": {
+            "titulo": "Radio Frecuency Identification (RDIF)"
+        },
+        "reverse-shell": {
+            "titulo": "Reverse Shell"
+        },
+        "rid": {
+            "titulo": "RID"
+        },
+        "rdp": {
+            "titulo": "RDP"
+        },
+
+"_letra_S": "S", 
+
+        "siem": {
+            "titulo": "Security Information and Event Management (SIEM)"
+        },
+        "security-header": {
+            "titulo": "Security Headers"
+        },
+        "scope": {
+            "titulo": "Scope"
+        },
+        "snap-store": {
+            "titulo": "Snap Store"
+        },
+        "salt": {
+            "titulo": "Salt"
+        },
+        "sid": {
+            "titulo": "SID"
+        },
+        "soc": {
+            "titulo": "Security Operations Center (SOC)"
+        },
+        "soar": {
+            "titulo": "Security Orchestration, Automation and Response (SOAR)"
+        },
+        "ssti": {
+            "titulo": "SSTI"
+        },
+
+"_letra_T": "T", 
+
+        "tenant": {
+            "titulo": "Tenant"
+        },
+        "teams": {
+            "titulo": "Teams"
+        },
+        "ttl": {
+            "titulo": "TTL"
+        },
+
+"_letra_U": "U", 
+
+        "usabilidad-seguridad": {
+            "titulo": "Usabilidad vs Seguridad"
+        },
+
+"_letra_V": "V", 
+
+        "virtual-machines": {
+            "titulo": "Virtual Machines"
+        },
+        "vpn": {
+            "titulo": "VPN"
+        },
+        "virtual-hosting": {
+            "titulo": "Virtual Hosting"
+        },
+
+"_letra_W": "W", 
+
+        "way-handshake": {
+            "titulo": "Way Handshake"
+        },
+        "wonder-cms": {
+            "titulo": "Wonder CMS"
+        },
+        "whatweb": {
+            "titulo": "WhatWeb"
+        },
+
+"_letra_X": "X", 
+
+        "xss": {
+            "titulo": "XSS"
+        },
+        "x64dbg": {
+            "titulo": "x64dbg"
+        },
+        "xdr": {
+            "titulo": "Extended Detection and Response (XDR)"
+        },
+
+"_letra_Y": "Y", 
+
+        "": {
+            "titulo": ""
+        },
+
+"_letra_Z": "Z", 
+
+        "": {
+            "titulo": ""
+        }
+
+}

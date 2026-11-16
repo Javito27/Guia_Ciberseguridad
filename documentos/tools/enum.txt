@@ -1,0 +1,49 @@
+enum4linux es una herramienta de enumeración para sistemas Windows (aunque se ejecuta desde Linux). Fue diseñada para obtener información de hosts que utilizan SMB (Server Message Block), 
+el mismo protocolo que usa Windows para compartir archivos, impresoras y otros recursos en red.
+
+Es muy usada en pentesting y CTFs porque ayuda a recolectar información sensible de equipos Windows o Samba sin necesidad de credenciales válidas.
+	
+¿Para qué se usa?
+
+    > Sirve para enumerar información de un host Windows/Samba, como:
+    > Nombre del dominio y grupo de trabajo.
+    > Usuarios y grupos locales.
+    > Recursos compartidos (shares).
+    > Políticas de contraseñas.
+    > Versiones de sistemas operativos.
+    > Información de RPC, RID cycling y más.	
+	
+Sintaxis básica	
+	
+    enum4linux [opciones] <IP_del_objetivo>
+
+Opciones más usados con enum4linux
+
+    ----------------------------------------------------------------------
+    |   Opción   |   Descripción                                         |
+    ----------------------------------------------------------------------		
+    |   -U       |   Enumera usuarios.                                   |
+    |   -M       |   Enumera máquinas en el dominio.                     |
+    |   -S       |   Enumera recursos compartidos (shares).              |
+    |   -P       |   Enumera políticas de contraseñas.                   |
+    |   -G       |   Enumera grupos y sus miembros.                      |
+    |   -L       |   Enumera sesiones activas en el sistema.             |
+    |   -r       |   Enumera RID (permite encontrar usuarios ocultos).   |
+    |   -o       |   Detecta la versión del sistema operativo.           |
+    |   -a       |   Modo completo (ejecuta todos los chequeos).         |
+    ----------------------------------------------------------------------																
+	
+Ejemplos de uso		
+		
+    ------------------------------------------------------------------------------
+    |   Descripción                         |   Ejemplos                         |
+    ------------------------------------------------------------------------------			
+    |   Enumerar todo lo posible del host   |   enum4linux -a 192.168.1.10       |
+    |   Obtener solo usuarios y shares      |   enum4linux -U -S 192.168.1.10    |
+    |   Detectar la versión del sistema     |   enum4linux -o 192.168.1.10       |
+    ------------------------------------------------------------------------------	
+		
+Puertos más usados
+
+    > SMB 139/TCP		
+    > SMB 445/TCP 

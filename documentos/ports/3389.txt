@@ -1,0 +1,71 @@
+📌 Es el puerto por defecto de RDP (Remote Desktop Protocol), el protocolo de escritorio remoto de Microsoft.
+
+    RDP permite:
+
+        🖥️ Conectarse gráficamente a un equipo Windows remoto
+        👤 Iniciar sesión como si estuvieras físicamente delante
+        ⚙️ Administrar servidores Windows
+
+    Se usa mucho en:
+
+        · Servidores Windows
+        · Active Directory
+        · Entornos empresariales
+        · Cloud (Azure, AWS Windows)
+
+⚙️ ¿Cómo funciona?
+
+    1️⃣ Cliente RDP se conecta al 3389/TCP
+    2️⃣ Se negocia la sesión
+    3️⃣ Se realiza autenticación (usuario/contraseña o Kerberos)
+    4️⃣ Se abre el escritorio remoto
+
+🔐 Seguridad
+
+    RDP moderno:
+
+        · Usa cifrado
+        · Puede usar NLA (Network Level Authentication)
+        · Puede integrarse con Kerberos
+
+    Pero si está mal configurado:
+
+    ⚠️ Puede ser objetivo de:
+
+        · Fuerza bruta
+        · Password spraying
+        · Robo de credenciales
+        · Acceso directo a servidor crítico
+
+🧪 En pentesting
+
+    Cuando se realiza un escaneo, normalmente se ve el servicio ms-wbt-server Microsoft Terminal Services corriendo. 
+
+    Si el 3389 está abierto:
+
+        · Indica sistema Windows accesible remotamente
+        · Se comprueba si NLA está habilitado
+        · Se prueba si acepta credenciales válidas
+        · Se revisa si está expuesto a Internet
+
+⚠️ Riesgos comunes
+
+    · Servidor RDP expuesto a Internet
+    · Contraseñas débiles
+    · Sin MFA
+    · Versiones antiguas vulnerables (BlueKeep)
+    · Normalmente, al ser Windows, el usuario es "Administrator"
+
+🎯 ¿Cómo funciona?
+
+    Se usa la herramienta xfreerdp. Es un cliente RDP para Linux (muy usado en Kali) que permite conectarte a un servidor Windows por el puerto 3389.
+
+    Uso:
+
+        xfreerdp /v:IP /u:usuario /p:contraseña
+
+    Donde:
+
+        /v: → IP o hostname
+        /u: → usuario
+        /p: → contraseña

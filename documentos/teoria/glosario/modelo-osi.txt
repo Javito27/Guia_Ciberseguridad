@@ -1,0 +1,46 @@
+En informática y ciberseguridad, el modelo OSI (Open Systems Interconnection) es un marco conceptual que describe cómo los datos viajan desde una computadora a otra a través de una red. 
+No es un software ni un protocolo, sino una guía para entender y diseñar sistemas de comunicación en redes.
+
+Qué es
+
+	El modelo OSI divide la comunicación de red en 7 capas distintas, cada una con funciones específicas. Esto ayuda a los ingenieros y especialistas en ciberseguridad a:
+
+		> Diagnosticar problemas de red.
+		> Entender cómo interactúan los distintos protocolos.
+		> Diseñar sistemas y aplicaciones que puedan comunicarse de manera efectiva.
+		
+Las 7 capas del modelo OSI		
+
+	============================================================================================================================================================================
+	| Capa   |  Nombre             |  Función principal                                                                              |  Ejemplo                                |
+	============================================================================================================================================================================
+	|  7     |  Aplicación         |  Interfaz con el usuario y aplicaciones (ej. navegadores, correo electrónico).                  |  HTTP, FTP, IRC, SSH, DNS               |
+	----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	|  6     |  Presentación       |  Traduce datos a un formato común, cifrado/descifrado, compresión.                              |  SSL, SSH, IMAP, FTP, MPEG, JPEG        |
+	----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	|  5     |  Sesión             |  Establece, mantiene y termina sesiones de comunicación entre aplicaciones.                     |  API, Sockets, WinSOCK                  |
+	----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	|  4     |  Transporte         |  Controla la entrega de datos, asegura que lleguen completos y en orden (TCP/UDP).              |  TCP, UDP                               |
+	----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	|  3     |  Red                |  Encaminamiento de paquetes entre redes (IP).                                                   |  IP, ICMP, IPSec, IGMP                  |
+	----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	|  2     |  Enlace de datos    |  Transmite datos entre dispositivos en la misma red física, maneja errores (MAC, switches).     |  Ethernet, PPP, Switch, Bridge          |
+	----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	|  1     |  Física             |  Transmisión de bits a través del medio físico (cables, Wi-Fi, señales eléctricas/ópticas).     |  Coax, Fibra, Wireless, HUB, Repetidor  |
+	============================================================================================================================================================================
+		
+Para qué sirve en ciberseguridad
+
+	> Análisis de ataques: Permite identificar en qué capa ocurrió un ataque (ej. un ataque DDoS afecta capa 3/4, malware puede actuar en capa 7).
+	> Diseño de defensas: Firewalls, IDS/IPS y VPNs operan en diferentes capas.
+	> Diagnóstico de vulnerabilidades: Ayuda a segmentar problemas de red y detectar brechas.	
+			
+Analogía rápida:
+
+	Imagina que enviar datos por la red es como enviar una carta:
+
+		1. La capa física es el cartero y el buzón.
+		2. La capa de enlace de datos es el sobre.
+		3. La capa de red es la dirección en el sobre.
+		4. La capa de transporte asegura que todas las cartas lleguen completas.
+		5. Las capas de sesión, presentación y aplicación se encargan de que el mensaje dentro de la carta se pueda leer correctamente.

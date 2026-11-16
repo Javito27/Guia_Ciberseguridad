@@ -1,0 +1,69 @@
+🔌 El puerto 27017/TCP es el puerto por defecto de MongoDB. Base de datos NoSQL muy usada en aplicaciones web.
+
+⚙️ Uso legítimo
+
+    · Almacenamiento de datos (JSON/BSON)
+    · Backend de aplicaciones
+    · APIs y microservicios
+
+⚠️ Instalación en local
+
+    sudo curl -O https://downloads.mongodb.com/compass/mongosh-2.3.2-linux-x64.tgz
+
+    sudo tar xvf mongosh-2.3.2-linux-x64.tgz
+
+    cd mongosh-2.3.2-linux-x64/bin
+
+    ./mongosh mongodb://<IP>:27017
+
+🔐 En pentesting (MUY IMPORTANTE)
+
+    MongoDB es famoso porque muchas veces está mal configurado 👇
+
+        🧪 1. Acceso sin autenticación
+
+            mongo --host <IP> --port 27017
+
+        Si entra sin usuario/contraseña = 🔥
+
+        🧪 2. Enumeración
+
+            Dentro de MongoDB:
+
+                show dbs
+                use <db>
+                show collections
+                db.<collection>.find()
+
+        🚨 3. Riesgos típicos
+
+            · Bases de datos expuestas públicamente
+            · Robo de información
+            · Borrado de datos (ransom MongoDB muy común)
+
+🔌 Puerto 27018 (probable)
+
+    También relacionado con MongoDB:
+
+        · Segundo nodo / instancia
+        · Replica set
+        · Configuraciones internas
+
+    👉 Se usa en:
+
+        · Clusters
+        · Alta disponibilidad
+
+🔐 En pentesting (27018)
+
+    · Igual que 27017 → comprobar acceso sin auth
+    · Enumerar datos
+    · Ver si hay replicación mal configurada
+
+🚨 Clave de pentesting
+
+    👉 Si ves MongoDB abierto:
+
+        · Intenta conexión sin credenciales
+        · Enumera bases de datos
+        · Busca datos sensibles

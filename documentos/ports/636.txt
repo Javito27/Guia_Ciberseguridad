@@ -1,0 +1,56 @@
+📌 Se usa para LDAPS (LDAP sobre SSL/TLS), es decir, la versión cifrada de LDAP.
+
+    LDAPS es simplemente:
+
+        🔐 LDAP + cifrado TLS
+
+    Mientras que:
+
+        389 → LDAP sin cifrar
+        636 → LDAP cifrado
+
+    Se usa mucho en Active Directory para proteger las consultas al directorio.
+
+⚙️ ¿Qué protege?
+
+    Cuando se consulta LDAP se puede transmitir:
+
+        👤 Usuarios
+        🔑 Hashes (según configuración)
+        📂 Estructura del dominio
+        🔐 Información sensible
+
+    Si se usa 389 sin TLS → podría capturarse en red.
+    Con 636 → todo va cifrado.
+
+🧠 ¿Cómo funciona?
+
+    1️⃣ Cliente conecta al servidor por el 636
+    2️⃣ Se realiza handshake TLS
+    3️⃣ Se establece canal cifrado
+    4️⃣ Se realizan consultas LDAP seguras
+
+🧪 En pentesting
+
+    Si el 636 está abierto:
+
+        Indica Active Directory o servidor LDAP seguro
+        Se revisa el certificado
+        Se analizan versiones TLS
+        Se comprueba si permite autenticación débil
+
+🎯 ¿Cómo funciona?
+
+    Ejemplo conceptual:
+
+		ldapsearch -x -H ldap://<IP> -b "dc=DOMINIO, dc=COM, ES, ORG, ETC..."
+
+    El servidor responde con objetos del directorio.
+
+    Donde: 
+
+        ldapsearch  →   Herramienta para consultar LDAP
+        -x  →   Autenticación simple (sin SASL)
+        -H  →   ldap://IP	Dirección del servidor LDAP
+        -b  →   Base DN (punto desde donde empieza la búsqueda)
+        "dc=empresa,dc=local"   →   Dominio en formato LDAP

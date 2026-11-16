@@ -1,0 +1,72 @@
+Evil-WinRM es una herramienta escrita en Ruby que permite establecer sesiones remotas en sistemas Windows a través de WinRM (Windows Remote Management).
+
+WinRM es un servicio de Windows (basado en el protocolo WS-Management) que permite la administración remota de máquinas mediante PowerShell.
+
+Evil-WinRM se considera la “navaja suiza” para pentesters en entornos Windows, ya que facilita mucho la explotación cuando obtienes credenciales o un hash válido.
+
+
+¿Para qué se usa?
+
+    En pentesting y CTFs (HackTheBox, TryHackMe, etc.), Evil-WinRM se utiliza principalmente para:
+    
+        > Conectarse remotamente a una máquina Windows con credenciales válidas (usuario/contraseña o hash NTLM).
+        > Ejecutar comandos de forma remota vía PowerShell.
+        > Cargar archivos (upload) y descargar archivos (download) fácilmente.
+        > Inyectar scripts PowerShell (para explotación, post-explotación o persistencia).
+        > Ejecutar payloads de Metasploit, Mimikatz u otros dentro de la sesión.
+
+
+Descarga / Instalación
+
+    sudo apt install evil-winrm
+
+    git clone https://github.com/Hackplayers/evil-winrm.git
+
+
+Uso básico
+
+    evil-winrm -i <IP> -u <usuario> -p <contraseña>
+
+
+Opciones principales de Evil-WinRM
+
+    -----------------------------------------------------------------------
+    |  Opción            |  Descripción                                   |
+    -----------------------------------------------------------------------
+    |  -i  <IP>          |  Dirección IP del host objetivo                |
+    |  -u  <usuario>     |  Usuario válido en el sistema Windows          |
+    |  -p  <contraseña>  |  Contraseña del usuario                        |
+    |  -H  <hash>        |  Hash NTLM del usuario (pass-the-hash)         |
+    |  -s  <ruta>        |  Cargar scripts PowerShell desde esa carpeta   |
+    |  -e  <ruta>        |  Cargar ejecutables desde esa carpeta          |
+    |  -S                |  Forzar modo SSL                               |
+    |  -P                |  Puerto (por defecto 5985, o 5986 para SSL)    |
+    |  -h                |  Mostrar ayuda                                 |
+    -----------------------------------------------------------------------	
+																	
+
+Funcionalidades dentro de la sesión
+
+    Una vez dentro de la shell de Evil-WinRM puedes usar:
+    
+        > supload <archivo> → Subir archivo desde tu máquina al host.
+        > sdownload <archivo> → Descargar archivo desde el host a tu máquina.
+        > smenu → Mostrar un menú con módulos y opciones extra.
+        > shelp → Ayuda de comandos disponibles.
+		
+
+Ejemplo práctico
+
+    ------------------------------------------------------------------------------------------------------------------------------------------
+    |  Descripción                                     |  Ejemplo de Uso                                                                     |  
+    ------------------------------------------------------------------------------------------------------------------------------------------
+    |  Conexión con usuario y contraseña               |  evil-winrm -i 10.10.10.14 -u administrador -p Password123!                         |
+    |  Conexión usando Pass-The-Hash                   |  evil-winrm -i 10.10.10.14 -u juan -H 31d6cfe0d16ae931b73c59d7e0c089c0              |
+    |  Cargar un script de PowerShell automáticamente  |  evil-winrm -i 10.10.10.14 -u admin -p Passw0rd! -s /usr/share/powershell-scripts/  |
+    ------------------------------------------------------------------------------------------------------------------------------------------
+	
+
+En resumen
+
+    Evil-WinRM es la herramienta más usada por pentesters para explotar WinRM en Windows, permitiendo acceso remoto, ejecución de comandos, transferencia de archivos 
+    y post-explotación de manera sencilla.

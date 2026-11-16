@@ -1,0 +1,45 @@
+📌 Es el puerto por defecto de Microsoft SQL Server (MSSQL). Es el puerto donde el servidor de base de datos escucha conexiones remotas.
+
+    Microsoft SQL Server es un sistema de gestión de bases de datos relacional (DBMS) para establecer conexiones a través del protocolo de transferencia de datos TCP/IP, usado en:
+
+        > Aplicaciones empresariales
+        > ERPs
+        > CRMs
+        > Entornos Active Directory
+        > Servidores web con backend Windows
+
+⚙️ ¿Cómo funciona?
+
+    1️⃣ Un cliente (aplicación o usuario) se conecta al servidor
+    2️⃣ Usa el protocolo TDS (Tabular Data Stream)
+    3️⃣ Se autentica
+    4️⃣ Ejecuta consultas SQL
+
+🔐 Autenticación
+
+    MSSQL puede usar:
+
+        🔑 Autenticación SQL (usuario/contraseña)
+        👤 Autenticación Windows (integrada con AD)
+
+🧪 En pentesting
+
+    Si el puerto 1433 está abierto:
+
+        Indica servidor MSSQL accesible
+
+        Se prueba:
+
+            · Credenciales débiles
+            · Acceso anónimo
+            · Enumeración de bases de datos
+            · Escalada a xp_cmdshell (ejecución de comandos)
+
+⚠️ Riesgos comunes
+
+    · Contraseñas débiles
+    · Cuentas sa activas
+    · xp_cmdshell habilitado
+    · Base de datos expuesta a Internet
+
+    Si está abierto hacia Internet → riesgo alto.

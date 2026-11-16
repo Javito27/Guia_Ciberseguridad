@@ -1,0 +1,110 @@
+Ngrok es una herramienta que crea túneles seguros desde Internet hacia tu máquina local.
+
+En palabras simples: permite exponer un servidor local (ej. en localhost:8080) a una URL pública accesible desde cualquier parte del mundo.
+
+Esto se hace creando un túnel mediante los servidores de Ngrok, que redirigen el tráfico entrante a tu PC.
+
+
+¿Para qué se usa en informática y ciberseguridad?
+
+    > En informática (desarrollo y pruebas):
+    
+        - Compartir aplicaciones web en desarrollo sin necesidad de desplegarlas en un servidor externo.
+        - Probar webhooks (ej: Stripe, PayPal, GitHub, Discord, Telegram) contra tu entorno local.
+        - Mostrar demos rápidas de aplicaciones a clientes o compañeros.
+        - Hacer pruebas de APIs sin subirlas aún a producción.
+    
+    > En ciberseguridad (pentesting y hacking ético):
+    
+        - Túneles reversos: exponer shells inversas o conexiones de prueba en un pentest.
+        - Pruebas de phishing y C2 (Command & Control): montar servidores locales y hacerlos accesibles externamente.
+        - Evasión de firewalls y NAT: saltarse restricciones de red que impiden conexiones entrantes.
+        - Testing en Red Team: simular servidores de ataque sin necesidad de infraestructura propia.
+
+
+Comandos y opciones principales en Ngrok
+
+    Autenticación inicial
+    -----------------------------------------------------------------------------------------------------------------
+    |  Descripción                                                      |  Ejemplo de Uso                           |
+    -----------------------------------------------------------------------------------------------------------------	
+    |  Primero hay que registrarse en ngrok.com y obtener un authtoken  |  ngrok config add-authtoken TU_AUTHTOKEN  |
+    -----------------------------------------------------------------------------------------------------------------
+ 
+    Exponer un puerto local
+    -----------------------------------------------------------------------------------------------------------------
+    |  Descripción                                                      |  Ejemplo de Uso                           |
+    -----------------------------------------------------------------------------------------------------------------	
+    |  Ejemplo: exponer un servidor web en el puerto 8080               |  ngrok http 8080                          |
+    -----------------------------------------------------------------------------------------------------------------
+    |  Ngrok devolverá una URL pública del tipo  →                      |  https://random-id.ngrok.io               |
+    |                                                                      que redirige a tu localhost:8080.        |
+    -----------------------------------------------------------------------------------------------------------------
+
+
+    Opciones comunes
+
+        Especificar protocolo y puerto
+        ----------------------------------------------------------
+        |  Descripción                       |  Ejemplo de Uso   |
+        ----------------------------------------------------------
+        |  HTTP                              |  ngrok http 8080  |
+        |  TCP (ejemplo: exponer SSH local)  |  ngrok tcp 22     |
+        |  TLS                               |  ngrok tls 443    |
+        ----------------------------------------------------------
+
+        Definir subdominio (plan pago)
+        -----------------------------------------------------------------------
+        |  Descripción                      |  Ejemplo de Uso                 |
+        -----------------------------------------------------------------------            
+        |  ngrok http -subdomain=miapp 8080 |  URL → https://miapp.ngrok.io   |
+        -----------------------------------------------------------------------
+
+        Asignar nombre a la sesión
+        ----------------------------------------------------------
+        |  Ejemplo de Uso                                        |
+        ----------------------------------------------------------
+        |  ngrok http 5000 --label edge=miapp                    |
+        ----------------------------------------------------------
+
+        Configurar cabeceras personalizadas
+        ----------------------------------------------------------
+        |  Ejemplo de Uso                                        |
+        ----------------------------------------------------------
+        |  ngrok http 8080 --request-header-add "X-Auth: secret" |
+        ----------------------------------------------------------
+
+       Especificar región de servidor
+        ----------------------------------------------------------
+        |  Ejemplo de Uso                                        |
+        ----------------------------------------------------------
+        |  ngrok http 3000 --region=eu                           |
+        ----------------------------------------------------------
+
+        Ver la interfaz web de Ngrok (monitoring)
+        ----------------------------------------------------------
+        |  Ejemplo de Uso                                        |
+        ----------------------------------------------------------		
+        |  Por defecto está en http://127.0.0.1:4040             |
+        |  Desde ahí puedes ver todas las peticiones que pasan   |
+        |  por el túnel.                                         |
+        ----------------------------------------------------------
+
+
+Ejemplos prácticos en ciberseguridad
+
+    --------------------------------------------------------------------------------------------------------------------------------------
+    |  Descripción                                                                                                    |  Ejemplo de Uso  |  
+    --------------------------------------------------------------------------------------------------------------------------------------  
+    |  Phishing controlado: exponer un servidor local de pruebas para mostrar cómo funcionaría un ataque de phishing. |  ngrok http 80   |
+    |  Reverse Shell: abrir un túnel TCP al puerto que escucha el atacante.                                           |  ngrok tcp 4444  |
+    |  C2 Framework (Metasploit, Empire, etc.): hacer que un C2 local sea accesible desde internet.                   |                  |
+    --------------------------------------------------------------------------------------------------------------------------------------
+	
+	
+Resumen
+
+    > Ngrok = túneles seguros de localhost a Internet.
+    > En informática → desarrollo, testing, compartir apps.
+    > En ciberseguridad → pentesting, shells reversas, C2, simulación de ataques.
+    > Opciones más usadas: http, tcp, tls, --region, --subdomain, --request-header-add.

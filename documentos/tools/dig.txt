@@ -1,0 +1,37 @@
+dig (Domain Information Groper) es una herramienta de línea de comandos usada para realizar consultas DNS. Es muy utilizada por administradores de sistemas, redes y pentesters para diagnosticar 
+problemas de resolución de nombres y obtener información detallada de registros DNS.
+
+¿Para qué se usa dig?
+
+	> Consultar registros DNS (A, MX, NS, TXT, CNAME, etc.).
+	> Verificar la propagación de DNS.
+	> Diagnosticar problemas de resolución de nombres.
+	> Obtener información de un dominio o servidor de nombres específico.
+	> Realizar consultas inversas (resolución de IP → dominio).
+
+Sintaxis básica
+
+	dig [opciones] dominio [tipo-de-registro]
+
+Opciones y parámetros más usados
+
+    ---------------------------------------------------------------------------------------------------------------------------------------------
+    |   Opción           |   Descripción                                                                  |   Ejemplo de Uso                    | 
+    ---------------------------------------------------------------------------------------------------------------------------------------------
+    |   A                |   Dirección IPv4                                                               |   dig ejemplo.com A                 |
+    |   AAAA             |   Dirección IPv6                                                               |   dig ejemplo.com AAAA              |
+    |   MX               |   Servidores de correo                                                         |   dig ejemplo.com MX                |
+    |   NS               |   Servidores de nombres                                                        |   dig ejemplo.com NS                |
+    |   TXT              |   Texto (usado para SPF, DKIM, validaciones)                                   |   dig ejemplo.com TXT               |
+    |   CNAME            |   Alias de dominio                                                             |   dig www.ejemplo.com CNAME         |
+    |   ANY              |   Todos los registros disponibles (aunque muchos servidores ya lo bloquean)    |   dig ejemplo.com ANY               |
+    |   @servidor        |   Consultar contra un servidor DNS específico                                  |   dig @8.8.8.8 ejemplo.com          |
+    |   +short           |   Respuesta resumida (muy útil en scripts)                                     |   dig ejemplo.com +short            |
+    |   +trace           |   Seguimiento completo de la resolución (como traceroute pero para DNS)        |   dig ejemplo.com +trace            |
+    |   +noall +answer   |   Muestra solo la respuesta limpia                                             |   dig ejemplo.com +noall +answer    |
+    |   -x               |   Búsqueda inversa (IP → dominio)                                              |   dig -x 8.8.8.8                    |
+    ---------------------------------------------------------------------------------------------------------------------------------------------
+	
+En resumen
+
+	dig es como una "navaja suiza" para el DNS.

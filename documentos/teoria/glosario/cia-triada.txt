@@ -1,0 +1,31 @@
+En informática y ciberseguridad, la Triada CIA son las siglas de tres principios básicos que garantizan la seguridad de la información. Significan Confidentiality, Integrity, Availability.
+
+1. Confidencialidad (Confidentiality)
+
+	> Se refiere a proteger la información para que solo las personas autorizadas puedan acceder a ella.
+
+		- Ejemplo: uso de contraseñas, cifrado de datos, control de accesos.
+
+2. Integridad (Integrity)
+
+	> Garantiza que los datos no sean alterados o modificados de forma no autorizada, y que se mantengan correctos y completos.
+
+		- Ejemplo: firmas digitales, hash, controles de versiones.
+
+3. Disponibilidad (Availability)
+
+	> Asegura que la información y los sistemas estén siempre accesibles para los usuarios autorizados cuando los necesiten.
+
+		- Ejemplo: servidores redundantes, planes de recuperación ante desastres, protección contra ataques DDoS.
+
+¿Para qué sirve la Triada CIA?
+
+	> Es la base de cualquier política de seguridad informática.
+	> Sirve como guía para diseñar medidas de protección en redes, servidores, aplicaciones y datos.
+	> Permite evaluar riesgos: si un ataque afecta a uno de los tres pilares (ej. robo de datos → confidencialidad, ransomware → disponibilidad, manipulación de bases de datos
+	 → integridad), se compromete la seguridad de la organización.
+
+Resumen: 
+
+La Triada CIA es el punto de partida fundamental para entender la seguridad de la información. Toda estrategia de ciberseguridad busca equilibrar y proteger la Confidencialidad, 
+Integridad y Disponibilidad de los datos.

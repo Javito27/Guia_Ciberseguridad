@@ -1,0 +1,13 @@
+Cualquier recurso de una organización que tiene valor y que necesita protección, es decir, cualquier elemento que pueda ser importante para el funcionamiento de una empresa o que contenga información que deba protegerse.
+
+🔑 Ejemplos de Assets
+
+      Tipo de activo  |  Ejemplos
+    --------------------------------------------------------------------------
+      Hardware        |  Servidores, ordenadores, routers.
+      Software        |  Aplicaciones, sistemas operativos, bases de datos.
+      Información     |  Contraseñas, datos de clientes, documentos.
+      Red             |  Switches, firewalls, infraestructura de red.
+      Personas        |  Empleados, administradores, usuarios.
+      Servicios       |  API, servicios web, correo electrónico.
+    --------------------------------------------------------------------------

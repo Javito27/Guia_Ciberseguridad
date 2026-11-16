@@ -1,0 +1,49 @@
+📌 Es utilizado por Microsoft RPC (Remote Procedure Call), concretamente por el servicio RPC Endpoint Mapper en sistemas Windows. Es un puerto muy común en entornos Active Directory.
+
+Permite que un programa ejecute funciones en otro equipo como si fueran locales. En Windows se usa para:
+
+    Administración remota
+    Servicios internos del sistema
+    Comunicación entre componentes (DCOM)
+    Funciones de Active Directory
+
+⚙️ Funcionamiento simplificado
+
+    1️⃣ Cliente conecta al 135
+    2️⃣ Pregunta por un servicio RPC concreto
+    3️⃣ El servidor responde con un puerto dinámico alto (ej: 49154)
+    4️⃣ El cliente se conecta a ese puerto para continuar
+
+🔐 ¿Por qué es importante en ciberseguridad?
+
+    En redes Windows internas es clave porque:
+
+        Permite enumeración de servicios y procesos (a través de WMI o herramientas como rpcclient)
+        Puede revelar información del sistema (sistema operativo, nombre de host y dominio)
+        Es usado en ataques laterales
+        Está relacionado con SMB (445) y NetBIOS
+
+    Si el 135 está abierto hacia Internet → ⚠️ mala configuración grave.
+
+🧪 En pentesting
+
+    Si encuentras el 135 abierto:
+
+        Suele indicar sistema Windows
+        Puede permitir enumeración RPC
+
+❌ Riesgos
+
+    Los riesgos más comunes son: 
+
+		- MS03-026: Vulnerabilidad en el servicio RPC (parcheada con el MSBlaster).
+		- Enumeración remota sin autenticación en configuraciones inseguras.
+		- Usado como puerta de entrada a través de otros vectores (como WMI lateral movement).
+
+🎯 Explotación 
+
+    Para explotarlo, una vez buscado información de los exploits, podemos usar msf console. 
+	
+		use exploit/Windows/dcerpc/ms03_026_dcom
+	
+	También puede facilitar ataques como lateral movement con herramientas como wmiexec.py (Impacket).

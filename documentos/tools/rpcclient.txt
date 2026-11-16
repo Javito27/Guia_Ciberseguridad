@@ -1,0 +1,56 @@
+rpcclient es una herramienta incluida en Samba, utilizada en auditorías de seguridad y administración de redes Windows.
+
+Permite a un atacante (o administrador) interactuar con el servicio MS-RPC (Microsoft Remote Procedure Call) de un sistema Windows, normalmente a través del puerto 445 (SMB).
+
+¿Qué es y para qué se usa?
+
+    > Es un cliente RPC que permite enviar comandos a servidores Windows.
+    > Se utiliza mucho en pentesting para enumerar información de un dominio o máquina Windows sin necesidad de credenciales válidas.
+    > Funciona de forma interactiva (como una shell) o ejecutando comandos directamente.
+    
+    Con rpcclient puedes:
+    
+        > Enumerar usuarios de un dominio.
+        > Enumerar grupos y sus miembros.
+        > Consultar políticas de contraseñas.
+        > Obtener SIDs (Security Identifiers).
+        > Autenticarte con usuario/contraseña o incluso sin credenciales (null session).
+
+Sintaxis básica
+
+    Con credenciales
+	
+        rpcclient -U usuario%contraseña <IP>
+		
+    Sin credenciales
+
+        rpcclient -U "" -N <IP>
+	
+Opciones principales
+
+    ---------------------------------------------------------------------------------------------------
+    |   Opción                  |   Descripción                                                       |
+    ---------------------------------------------------------------------------------------------------
+    |   -U usuario%contraseña   |   especificar credenciales                                          |
+    |   -N                      |   null session (sin contraseña)                                     |
+    |   -c "comando"            |   ejecutar un comando directamente sin entrar en modo interactivo   |
+    |   -W WORKGROUP            |   especificar el workgroup o dominio                                |
+    ---------------------------------------------------------------------------------------------------
+
+Comandos más usados una vez dentro de rpcclient
+
+    ---------------------------------------------------------------------------
+    |   Descripción                               |   Ejemplos                |
+    ---------------------------------------------------------------------------
+    |   Enumeración de usuarios                   |   enumdomusers            |
+    |   Enumeración de grupos                     |   enumdomgroups           |
+    |   Enumeración de miembros de un grupo       |   querygroupmem <RID>     |
+    |   Ver información de un usuario             |   queryuser <RID>         |
+    |   Obtener SID de dominio                    |   lsaquery                |
+    |   Consultar políticas de contraseñas        |   getdompwinfo            |
+    |   Enumerar shares (recursos compartidos)    |   netshareenum            |
+    ---------------------------------------------------------------------------
+
+En resumen
+
+    rpcclient es una herramienta poderosa para enumeración de sistemas Windows vía SMB/RPC, clave en pentesting y reconocimiento de redes corporativas.

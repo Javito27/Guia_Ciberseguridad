@@ -1,0 +1,111 @@
+	
+······················································································································································································
+·· NGROK ·············································································································································································	
+······················································································································································································	
+		
+> Ngrok es una herramienta muy útil que permite exponer puertos locales a internet de forma segura. Se utiliza comúnmente en desarrollo web, pruebas de APIs, y 
+  demos remotas.
+   
+> Ngrok es un túnel seguro que permite acceder a un servidor que se ejecuta localmente (por ejemplo, en tu máquina o una red privada) a través de una URL pública 
+  accesible desde internet.
+     |
+     |> Para que se usa
+     |     |
+     |     |> Probar webhooks (por ejemplo, de Stripe o GitHub) en desarrollo local.
+     |     |> Compartir el desarrollo de una app web con clientes o compañeros sin necesidad de desplegar.
+     |     |> Acceder remotamente a servicios que están detrás de un NAT o firewall.
+     |     |> Exponer APIs locales para testeo con dispositivos móviles.
+     |
+     |
+     |> Como funciona
+     |     |
+     |     |> Instalas y ejecutas Ngrok en tu equipo.
+     |     |> Indicas el puerto local que deseas exponer (por ejemplo, ngrok http 5000).
+     |     |> Ngrok crea una URL pública (https) que redirige al puerto local.
+     |		
+     |
+     |> Uso básico
+     |     |
+     |     |> # Paso 1: Instalar ngrok (si no lo tienes)
+     |     |     |
+     |     |     |> brew install ngrok        # MacOS
+     |     |     |> choco install ngrok       # Windows
+     |     |     |> sudo snap install ngrok   # Linux (Snap)
+     |     |		
+     |     |> # Paso 2: Autenticación (una sola vez)		
+     |     |     |
+     |     |     |> ngrok config add-authtoken TU_TOKEN_DE_AUTENTICACIÓN
+     |     |		
+     |     |> # Paso 3: Crear túnel a localhost:3000
+     |     |     |
+     |     |     |> ngrok http 3000
+     |     |		
+     |     |> Resultado 
+     |           |
+     |           |> Forwarding https://1234-xyz.ngrok.io -> http://localhost:3000
+     |
+     |			
+     |> Características útiles			
+     |     |
+     |     |> HTTPS automático.
+     |     |> Estadísticas y monitoreo de tráfico.
+     |     |> Subdominios personalizados (con cuenta Pro).
+     |     |> Soporte para túneles TCP.
+     |		
+     |		
+     |> Seguridad			
+           |
+           |> Ngrok crea conexiones seguras (HTTPS), pero lo que expongas será 
+              público, así que asegúrate de:
+                 |
+                 |> No exponer puertos sin protección.
+                 |> Usar autenticación en tus servicios si es necesario.
+                 |> Cerrar el túnel cuando no se use.          
+     
+
+······················································································································································································
+·· Interactsh ········································································································································································
+······················································································································································································	
+
+> Interactsh es una herramienta utilizada principalmente en pruebas de penetración (pentesting) y red teaming para detectar vulnerabilidades relacionadas con 
+  interacción de servicios externos, como:
+	|     |
+	|     |> Blind SSRF (Server-Side Request Forgery)
+	|     |> RCE (Remote Code Execution)
+	|     |> XSS ciego (Blind Cross-Site Scripting)
+	|     |> Inyecciones DNS, HTTP, SMTP, etc.
+	|
+	|
+	|> Repositorio oficial
+	|     |
+	|     |> https://github.com/projectdiscovery/interactsh
+	|
+	|
+	|> ¿Cómo funciona?
+	|     |
+	|     |> Interactsh actúa como un servidor de "callback" controlado por el pentester. Su función principal es recibir conexiones salientes desde aplicaciones 
+	|        objetivo cuando se inyectan cargas maliciosas (payloads). Si la aplicación realiza alguna solicitud (por ejemplo, una petición DNS o HTTP), esa 
+	|        interacción queda registrada y ayuda a confirmar la vulnerabilidad.
+	|		
+	|
+	|> Arquitectura básica:
+	|     |
+	|     |> Servidor Interactsh: Escucha solicitudes entrantes en protocolos como DNS, HTTP, HTTPS y SMTP.
+	|     |> Cliente Interactsh: El pentester genera un payload con un subdominio controlado (por ejemplo, abc123.interact.sh) y lo inyecta en la aplicación.
+	|     |> Monitoreo: Si la aplicación objetivo interactúa con ese dominio, el servidor lo registra, y el cliente puede recuperarlo.
+	|		
+	|		
+	|> Casos de uso comunes
+	|     |
+	|     |> Detección de SSRF ciego
+	|     |> Validación de deserialización remota
+	|     |> Confirmación de comandos ejecutados remotamente
+	|     |> Pruebas de exfiltración de datos
+	|		
+	|		
+	|> Herramientas que lo integran:
+          |
+          |> Nuclei
+          |> [Burp Suite (con plugins)]
+          |> [Custom scripts]
+		

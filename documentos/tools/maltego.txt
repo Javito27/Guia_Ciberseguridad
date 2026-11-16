@@ -1,0 +1,34 @@
+Es una herramienta de análisis forense y de inteligencia de fuentes abiertas (OSINT), ampliamente utilizada en el ámbito de la ciberseguridad, la investigación digital y el análisis de 
+amenazas. Su principal función es recopilar, correlacionar y visualizar información sobre personas, organizaciones, dominios, direcciones IP, redes sociales y mucho más.
+    |
+    |> Características principales
+    |    |
+    |    |> Visualización en grafos: Presenta la información en forma de grafo, mostrando cómo los distintos elementos están interconectados.
+    |    |
+    |    |> Transformaciones: Usa "transformaciones", que son consultas automatizadas a fuentes públicas y privadas de información (como DNS, WHOIS, redes sociales, etc.).
+    |    |
+    |    |> Modular y extensible: Permite integrar otras fuentes de datos, APIs o herramientas externas.
+    |    |
+    |    |> Análisis de relaciones: Identifica conexiones ocultas entre personas, dominios, correos electrónicos, IPs, etc.
+    |		
+    |		
+    |> Usos comunes
+    |    |
+    |    |> Investigación de ciberataques y APT.
+    |    |
+    |    |> Recolección de inteligencia para test de penetración.
+    |    |
+    |    |> Análisis de amenazas en entornos corporativos.
+    |    |
+    |    |> Investigación en periodismo de datos y seguridad nacional.
+    |    |
+    |    |> Perfilado digital en investigaciones OSINT.
+    |		
+    |		
+    |> Ejemplos de transformaciones 		
+         |
+         |> Introduces una dirección de correo
+         |
+         |> Maltego consulta fuentes públicas
+         |
+         |> Devuelve posibles redes sociales, dominios asociados, leaks, etc.

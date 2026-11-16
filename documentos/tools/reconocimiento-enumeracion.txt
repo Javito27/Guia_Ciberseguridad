@@ -1,0 +1,501 @@
+······················································································································································································
+·· Whatweb ···········································································································································································
+······················································································································································································
+
+> Identifica las tecnologías web que están siendo utilizadas por un sitio web. 
+    |
+    |> Que detecta
+    |    |
+    |    |> CMS (como WordPress, Joomla, Drupal)
+    |    |> Servidores web (Apache, Nginx, IIS, etc.)
+    |    |> Lenguajes de programación usados (PHP, ASP.NET, etc.)
+    |    |> Frameworks JavaScript (jQuery, React, etc.)
+    |    |> Analítica y publicidad (Google Analytics, etc.)
+    |    |> Información del encabezado HTTP y cookies
+    |    |> Plugins, versiones y posibles vulnerabilidades
+    |	
+    |> Como funciona (fingerprinting)
+    |    |
+    |    |> Análisis de encabezados HTTP
+    |    |> Coincidencias con patrones en el HTML
+    |    |> Análisis de cookies
+    |    |> Consultas específicas (GET/POST)
+    |    |> Plugins que amplían la detección
+    |
+    |> Usos 
+         |
+         |> Escaneo básico > whatweb http://<IP>
+         |> Escaneo más detallado > whatweb -v --color=always http://<IP>
+			
+				
+······················································································································································································
+·· enum4linux ········································································································································································	
+······················································································································································································				
+
+> Es una herramienta de recolección de información utilizada por profesionales de seguridad informática y pentesters para 
+  enumerar recursos y configuraciones en sistemas Windows a través del protocolo SMB (Server Message Block).
+    |
+    |> Para que sirve
+    |    |
+    |    |> Usuarios y grupos del sistema.
+    |    |> Recursos compartidos.
+    |    |> Políticas de contraseñas.
+    |    |> Listado de sesiones activas.
+    |    |> Información del dominio (en entornos Active Directory).
+    |
+    |> Usos
+    |    |
+    |    |> enum4linux -a <IP>
+    |    |
+    |    |> enum4linux -a -u '' -p '' <IP>
+    |
+    |> Puertos
+         |
+         |> SMB 139/TCP		
+         |> SMB 445/TCP 			
+    	
+			
+······················································································································································································
+·· nxc ···············································································································································································	
+······················································································································································································				
+
+> Es una herramienta desarrollada en .NET Core (de ahí su nombre: NXC = .NET eXtended Console), y su propósito principal es automatizar técnicas ofensivas para entornos 
+  Windows. Es similar en filosofía a herramientas como SharpHound, Rubeus, o Mimikatz, pero busca reunir varias funcionalidades en una sola consola modular.
+    |
+    |> Funcionalidades típicas de NXC
+    |    |
+    |    |> Enumeración de Active Directory (usuarios, grupos, políticas, equipos, ACLs, delegaciones).
+    |    |
+    |    |> Kerberos attacks, como AS-REP roasting y Kerberoasting.
+    |    |
+    |    |> Pass-the-Hash y overpass-the-hash.
+    |    |
+    |    |> Abuso de ACLs y privilegios mal configurados.
+    |    |
+    |    |> Ejecución remota de comandos en sistemas Windows.
+    |    |
+    |    |> Técnicas de evasión de antivirus (AV) y EDR.
+    |	
+    |> ¿Para qué se usa?
+    |    |	
+    |    |> NXC se usa principalmente por profesionales del Red Team, pentesters, y auditores de seguridad para:
+    |        |
+    |        |> Identificar fallas de configuración en entornos Windows.
+    |        |
+    |        |> Simular ataques reales (técnicas de post-explotación).
+    |        |
+    |        |> Realizar pruebas de acceso lateral y escalamiento de privilegios.
+    |        
+    |> Uso 
+        |	
+        |> nxc smb <IP>
+        |
+        |> nxc smb <IP> -u '' -p '' --shares
+    	
+			
+······················································································································································································
+·· xfreerdp ··········································································································································································	
+······················································································································································································					
+			
+> Herramienta de línea de comandos utilizada para establacer conexiones RDP desde Linux a Windows. 
+    |
+    |> Instalación 
+    |    |
+    |    |> sudo apt install freerdp2-x11
+    |
+    |> Características
+    |    |
+    |    |> Permite conectarse remotamente a escritorios de Windows.
+    |    |> Compatible con múltiples opciones de autenticación y cifrado.
+    |    |> Admite redirección de dispositivos (como impresoras, discos, audio, etc.).
+    |    |> Funciona desde terminales en Linux, macOS y otros sistemas tipo Unix.
+    |	
+    |> Ejemplo básico
+         |
+         |> xfreerdp /u:usuario /p:contraseña /v:IP_o_hostname
+         |
+         |> Opciones
+              |
+              |> /u:usuario → nombre de usuario para iniciar sesión.
+              |> /p:contraseña → contraseña del usuario.
+              |> /v:host → dirección IP o nombre del host al que conectarse.
+              |> /f → pantalla completa.
+              |> /cert-ignore → ignora problemas de certificado (útil en entornos con certificados autofirmados).
+              |> /sound → redirige el audio.
+              |> /clipboard → comparte el portapapeles.
+         
+
+······················································································································································································
+·· Burp Suite ········································································································································································	
+······················································································································································································	
+
+> Herramienta usada por pentesters y testers de seguridad para auditar la seguridad de aplicaciones web. 
+> Intercepta, analiza, modifica y automatiza el tráfico HTTP/S entre el navegador y la aplicación web. 
+    |
+    |> Descubre vulnerabilidades
+    |    |
+    |    |> Inyección SQL
+    |    |> Cross-Site Scripting (XSS)
+    |    |> Falsificación de peticiones (CSRF)
+    |    |> Autenticación rota
+    |    |> Configuraciones inseguras, entre otras.
+    |
+    |> Componentes principales
+    |    |
+    |    |> Proxy: Intercepta y modifica solicitudes/respuestas entre el navegador y el servidor.
+    |    |> Spider: Recorre automáticamente el sitio web para mapear su estructura.
+    |    |> Scanner (solo en la versión Pro): Escanea automáticamente aplicaciones para detectar vulnerabilidades.
+    |    |> Intruder: Realiza ataques automatizados (fuzzing, brute force, etc.).
+    |    |> Repeater: Permite reenviar y modificar manualmente peticiones HTTP para probar comportamientos específicos.
+    |    |> Sequencer: Analiza la aleatoriedad de tokens (como los de sesión).
+    |    |> Decoder: Codifica y decodifica datos en distintos formatos (Base64, URL, etc.).
+    |    |> Comparer: Compara dos respuestas HTTP para encontrar diferencias.
+    |    |> Extensiones: Permite añadir funcionalidades personalizadas desde BApp Store.
+    |   		
+    |> Quién lo usa		
+    |    |
+    |    |> Pentesters
+    |    |> Analistas de seguridad
+    |    |> Desarrolladores
+    |    |> Equipos de Red Team
+    |		
+    |> Inyecciones 
+    |    |	
+    |    |> Inyección XML
+    |    |> Inyección SQL
+    |    |> Inyección CSRF								
+    |					
+    |> Comandos		
+         |			
+         |> Ctrl + u > Codificar request	
+				
+				
+······················································································································································································
+·· BloodHound ········································································································································································	
+······················································································································································································	
+
+> Es una herramienta de reconocimiento y análisis de seguridad que se utiliza principalmente para identificar relaciones y posibles rutas de ataque 
+  dentro de entornos de Active Directory (AD). Fue desarrollada por los investigadores de seguridad de SpecterOps y es muy utilizada por equipos de 
+  red teaming, pentesters y defensores para analizar la seguridad interna de una red corporativa.
+    |
+    |> Instalación 
+    |    |
+    |    |> GUI - git clone https://github.com/SpecterOps/BloodHound
+    |    |
+    |    |> CLI - git clone https://github.com/dirkjanm/BloodHound.py
+    |        |
+    |        |> sudo pip3 install . --break-system-packages
+    |
+    |
+    |> Usa técnicas de recolección de datos (ingestión) para mapear relaciones entre objetos de Active Directory
+    |    |
+    |    |> Usuarios
+    |    |> Equipos (computadoras)
+    |    |> Grupos
+    |    |> Políticas delegadas 
+    |    |> ACLs (Listas de Control de Acceso)
+    |    |
+    |    |> Luego construye un grafo de relaciones que permite visualizar cómo un atacante podría escalar privilegios o moverse lateralmente en la red.
+    |		
+    |		
+    |> Como funciona		
+    |    |
+    |    |> Recolección de datos
+    |    |    |
+    |    |    |> Se utiliza un componente llamado SharpHound (escrito en C# o PowerShell) que recoge información del dominio.
+    |    |
+    |    |> Ingesta en la base de datos
+    |    |    |
+    |    |    |> Los datos recolectados se cargan en la interfaz de BloodHound.
+    |    |		
+    |    |> Visualización de relaciones
+    |    |    |
+    |    |    |> Usando un grafo visual, se pueden ver rutas como
+    |    |        |
+    |    |        |> "Este usuario puede ejecutar código como admin en esta máquina."
+    |    |        |> "Este grupo tiene derechos sobre este objeto."
+    |    |    		
+    |    |> Análisis de ataques potenciales
+    |        |
+    |        |> Se pueden identificar caminos para llegar a ser Domain Admin, entre otros objetivos de alto valor.	
+    |				
+    |				
+    |> ¿Para qué se usa?				
+    |    |
+    |    |> Red Teaming: Simulación de ataques internos.
+    |    |
+    |    |> Pentesting interno: Evaluación de seguridad dentro de una red AD.
+    |    |
+    |    |> Blue Teaming / Defensores: Detección de configuraciones peligrosas o mal implementadas.
+    |    |
+    |    |> Hardening: Mejora de la configuración de seguridad de Active Directory.		
+    |		
+    |		
+    |> Configuración Base de Datos		
+    |    |
+    |    |> sudo -u postgres psql 
+    |    |
+    |    |> ALTER DATABASE postgres REFRESH COLLATION VERSION;
+    |    | 
+    |    |> ALTER DATABASE template1 REFRESH COLLATION VERSION;
+    |		
+    |		
+    |> Uso		
+        |
+        |> bloodhound - Inicia el servicio
+        |
+        |> bloodhound-setup
+        |
+        |> Para obtener ficheros json de un usuario - bloodhound-python -c All -d <DOMAIN> -u <USER> -p <PASS> 
+                                                                                                          |
+                                                                                                          |> poner las \ para que reconozca la pass
+    Importante
+        |
+        |> BloodHound no explota vulnerabilidades: sólo analiza relaciones existentes.
+        |
+        |> Es legal y ético si se usa con permiso del propietario de la red.
+    
+		
+······················································································································································································
+·· neo4j ·············································································································································································	
+······················································································································································································	
+
+> Es una base de datos orientada a grafos, diseñada para almacenar, consultar y gestionar datos estructurados como nodos, relaciones y propiedades. A 
+  diferencia de las bases de datos relacionales tradicionales (como MySQL o PostgreSQL), Neo4j está optimizada para representar y consultar relaciones 
+  complejas entre datos de manera eficiente.
+    |
+    |> Instalación
+    |    |
+    |    |> Downloads
+    |    |    |
+    |    |    |> wget https://dist.neo4j.org/neo4j-community-4.4.28-unix.tar.gz
+    |    |    |
+    |    |    |> tar -xvf neo4j-community-4.4.28-unix.tar.gz
+    |    |    |
+    |    |    |> sudo mv neo4j-community-4.4.28 /usr/share/neo4j
+    |    |
+    |    |> neo4j
+    |         |
+    |         |> sudo chown -R $USER:$USER /usr/share/neo4j
+    |    
+    |		
+    |> Características principales	
+    |         |	
+    |         |> Modelo de grafos: La unidad básica de datos es un nodo (que representa entidades como personas, productos, etc.), y las 
+    |         |  relaciones entre nodos (como "amigo de", "compra", "trabaja en") son de primera clase, es decir, tan importantes como los 
+    |         |  propios nodos.
+    |         |	
+    |         |> Consulta con Cypher: Usa su propio lenguaje de consulta llamado Cypher, diseñado específicamente para trabajar con grafos. 
+    |         |  Es intuitivo y permite expresar consultas complejas de forma clara.
+    |         |	
+    |         |> Alto rendimiento en relaciones: Muy eficiente para consultas que implican muchas relaciones, como redes sociales, 
+    |         |  recomendaciones, detección de fraudes, etc.	
+    |         |	
+    |         |> ACID: Cumple con las propiedades ACID (Atomicidad, Consistencia, Aislamiento, Durabilidad), lo que garantiza la integridad 
+    |		   de los datos.	
+    |	
+    |	
+    |> Casos de uso comunes	
+    |         |
+    |         |> Redes sociales
+    |         |
+    |         |> Recomendadores (por ejemplo, de productos o contenido)
+    |         |
+    |         |> Detección de fraudes
+    |         |
+    |         |> Gestión de redes (IT, telecomunicaciones)
+    |         |
+    |         |> Inteligencia artificial explicable (XAI)
+    |         |
+    |         |> Análisis de genealogías o rutas de transporte
+    |		
+    |		
+    |> Cambio de contraseñas - sudo nano /etc/bhapi/bhapi.json		
+    |		
+    |		
+    |Usos		
+         |		
+         |> neo4j <COMAND>	
+             |
+             |> console             - Start server in console.
+             |> start               - Start server as a daemon.
+             |> stop                - Stop the server daemon.
+             |> restart             - Restart the server daemon.
+             |> status              - Get the status of the server.
+             |> version, --version  - Print version information and exit.
+             |> help, --help        - Displays help information about the specified command
+    			
+    			
+······················································································································································································
+·· Maltego ·············································································································································································	
+······················································································································································································								
+
+
+		
+			
+······················································································································································································
+·· dirsearch ·········································································································································································	
+······················································································································································································
+
+> Realiza fuerza bruta de directorios y archivos web.
+> Descubre rutas y directorios ocultos en servidores web.
+> Usada en auditorías de seguridad, bug bounty y pentesting.
+    |
+    |> Para que sirve
+    |    |
+    |    |> Enumerar directorios ocultos (como /admin/, /backup/, /config/)
+    |    |> Buscar archivos sensibles (como .env, db.sql, index.bak)
+    |    |> Descubrir posibles vulnerabilidades al exponer rutas no seguras
+    |    |> Identificar paneles de administración o páginas de prueba
+    |	
+    |> Características
+    |    |
+    |    |> Multihilo (rápido y eficiente)
+    |    |> Soporta múltiples extensiones de archivo (.php, .html, etc.)
+    |    |> Soporta autenticación, proxies, y headers personalizados
+    |    |> Compatible con listas de palabras personalizadas
+    |    |> Puede guardar los resultados en distintos formatos (TXT, JSON, CSV, etc.)
+    |	
+    |> Usos 
+         |
+         |> dirsearch -u <IP> 
+         |> dirsearch -u http://<IP> --exclude-status=403,404,400
+         |> python3 dirsearch.py -u http://example.com -e php,html,txt
+
+
+······················································································································································································
+·· Gobuster ··········································································································································································	
+······················································································································································································
+
+> Realiza fuerza bruta de rutas/directorios, subdominios, archivos y buckets S3 en servidores web.
+> Enumera rutas/directorios
+> Escrito en lenguaje Go
+    |
+    |> Que hace 
+    |    |
+    |    |> Descubrimiento de directorios y archivos.
+    |    |> Enumeración de subdominios.
+    |    |> Escaneo de buckets de Amazon S3 (modo s3).
+    |    |> Fuerza de URIs en servidores DNS.
+    |	
+    |> Enumerar rutas / directorios
+    |    |
+    |    |> gobuster dir -u http://<IP> -w /usr/share/wordlists/dirb/common.txt
+    |    |> gobuster dir -u http://<IP> -w /usr/share/wordlists/dirb/common.txt -x txt,rdp,php,asp
+    |    |> gobuster dir -u http://<IP> -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 --no-error
+    |    |> gobuster dir --url http://<IP> --wordlist /usr/share/wordlists/dirb/big.txt
+    |	
+    |> Enumerar subdominios
+    |    |
+    |    |> gobuster vhost --append-domain -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-5000.txt -u http://<DOMAIN>
+    |	
+    |> Diccionarios	
+    |    |
+    |    |> /usr/share/seclists/Discovery/Web-Content/common.txt
+    |    |> /usr/share/wordlists/dirb/common.txt
+    |    |> /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+    |	
+    |> Parámetros útiles
+         |
+         |> URL objetivo > -u
+         |> Ruta del diccionario (wordlist) > -w
+         |> Número de hilos (threads) > -t 
+         |> Extensiones de archivo > -x
+         |> Para ignorar subdominios con wildcard DNS > --wildcard
+         |> Para evitar errores > --no-error
+			
+
+······················································································································································································
+·· Parabuster ········································································································································································
+······················································································································································································
+
+> Parabuster es una herramienta de fuerza bruta utilizada comúnmente para descubrir directorios y archivos ocultos en servidores web. Es similar a 
+  otras herramientas como DirBuster, Gobuster o Dirsearch, y suele emplearse en pruebas de penetración y evaluaciones de seguridad para encontrar 
+  rutas no protegidas o mal configuradas.
+    |
+    |> Características principales de Parabuster:
+    |    |
+    |    |> Fuerza bruta de rutas: Utiliza diccionarios de palabras (wordlists) para probar diferentes 
+    |    |  combinaciones de nombres de archivos y directorios.
+    |    |
+    |    |> Soporte para HTTP/S: Funciona tanto con sitios HTTP como HTTPS.
+    |    | 
+    |    |> Multihilo: Puede realizar múltiples solicitudes simultáneamente para acelerar la búsqueda.
+    |    | 
+    |    |> Filtros de respuestas: Permite ignorar respuestas con ciertos códigos HTTP (como 404 o 403) 
+    |       o tamaños de respuesta.
+    |
+    |> Usos comunes
+    |    |
+    |    |> Descubrir rutas ocultas (como /admin, /login, /backup, etc.).
+    |    |> Identificar puntos débiles o mal configurados en una aplicación web.
+    |    |> Obtener una mayor superficie de ataque en pruebas de penetración.
+    |
+    |> Ejemplo de uso típico (en línea de comandos)
+         |
+         |> parabuster -u https://ejemplo.com -w /ruta/a/wordlist.txt
+			
+
+······················································································································································································
+·· Dirbuster ·········································································································································································
+······················································································································································································
+
+> En construcción
+		
+		
+······················································································································································································
+·· ffuz ··············································································································································································
+······················································································································································································		
+		
+> En construcción		
+		
+		
+······················································································································································································
+·· tcpdump ···········································································································································································	
+······················································································································································································
+					
+> Es una herramienta de línea de comandos muy utilizada para capturar y analizar tráfico de red. 
+> Permite inspeccionar paquetes que pasan por una interfaz de red, lo cual es útil para diversas tareas. 
+    |
+    |> Tareas 
+    |    |> Diagnóstico de red.
+    |    |> Análisis de rendimiento.
+    |    |> Detección de actividades sospechosas o maliciosas.
+    |    |> Auditorías de seguridad.
+    |
+    |> Características clave
+    |    |
+    |    |> Captura en tiempo real: muestra los paquetes a medida que llegan.
+    |    |> Filtros BPF (Berkeley Packet Filter): permite seleccionar solo ciertos tipos de tráfico (por ejemplo, solo paquetes TCP o de una IP específica).
+    |    |> Exportación a archivos: puede guardar las capturas en formato .pcap para analizarlas luego con herramientas como Wireshark.
+    |
+    |> Donde se utiliza
+    |    |
+    |    |> En entornos de administración de sistemas y redes
+    |    |> En análisis forense digital
+    |    |> Por investigadores de seguridad y pentesters
+    |
+    |> Ejemplo básico de uso > sudo tcpdump -i eth0
+    |	
+    |> Ejemplo con filtro > sudo tcpdump -i eth0 tcp port 80
+    |
+    |> Comandos
+         |
+         |> Indicar la interfaz de red > tcpdump -i eth0
+         |
+         |> Para volcar datos > tcpdump -i eth0 -w file.pcap
+         |
+         |> Se interpretan los bytes >  tcpdump -i eth0 -A
+         |
+         |> Imprime en formato hexadecimal >  tcpdump -i eth0 -XX
+         |
+         |> Filtro en función de lo que ponga > tcpdump -i eth0 tcp
+         |
+         |> tcpdump -i eth0 tcp port xx
+		
+	
+······················································································································································································
+·· ip rover ··········································································································································································	
+······················································································································································································						
+					
+> ip rover (python finder.py) > para ver la info de una IP pública

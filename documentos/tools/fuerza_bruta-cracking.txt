@@ -1,0 +1,153 @@
+
+······················································································································································································
+·· Hydra ·············································································································································································	
+······················································································································································································
+	
+> Es una herramienta de fuerza bruta rápida y flexible usada para descubrir contraseñas válidas en diversos servicios de red. Es muy popular en pentesting, 
+  red teaming y CTFs, y se centra en romper autenticaciones mediante ataques de diccionario o credenciales por defecto.
+     |
+     |> Instalación
+     |     |
+     |     |> sudo apt install hydra
+     |     |> https://github.com/vanhauser-thc/thc-hydra
+     |
+     |> Que hace Hydra
+     |     |
+     |     |> Automatiza ataques de fuerza bruta (probando combinaciones de usuario/contraseña) contra servicios como:
+     |          |
+     |          |> SSH
+     |          |> FTP
+     |          |> HTTP/HTTPS (auth básica, formularios, etc.)
+     |          |> Telnet
+     |          |> SMB
+     |          |> RDP
+     |          |> VNC
+     |          |> POP3/IMAP/SMTP
+     |          |> MySQL, MSSQL, PostgreSQL
+     |          |> y muchos más...
+     |		
+     |> Usos
+     |     |		
+     |     |> hydra -l root -P rockyou.txt ssh://<IP>
+     |			
+     |> Parámetros		
+           |
+           |> Usuario (root) > -l
+           |> Diccionario de contraseñas (rockyou.txt) > -P 
+           |> Protocolo y dirección IP del objetivo > ssh://
+           |> Diccionario de usuarios > -L
+           |> Contraseña individual > -p
+           |> Número de hilos (paralelismo) > -t
+           |> Puerto (si es distinto al estándar) > -s
+           |> Muestra cada intento de login > -V 
+           |> Detiene el ataque al encontrar una credencial válida > -f
+			
+
+······················································································································································································
+·· John The Ripper ···································································································································································	
+······················································································································································································
+									
+> Para crackear contraseñas y descifrar contraseñas.
+     |
+     |> Para que sirve
+     |     |	
+     |     |> Descubrir contraseñas vulnerables mediante ataques de fuerza bruta, diccionario o combinados.
+     |     |> Auditorías de seguridad: los administradores lo usan para comprobar la robustez de las contraseñas en sistemas reales.
+     |     |> Recuperación de contraseñas: útil cuando se pierde una contraseña y se tiene acceso al archivo de hashes.
+     |
+     |> Como funciona 
+     |     |
+     |     |> Toma un archivo de hashes de contraseñas (como /etc/shadow en Linux) y prueba contraseñas posibles, 
+     |        comparando sus hashes con los reales, hasta encontrar coincidencias.
+     |	
+     |> Modos de ataque
+     |     |
+     |     |> Modo diccionario: prueba palabras de un archivo predefinido.
+     |     |> Modo incremental (fuerza bruta): prueba todas las combinaciones posibles de caracteres.
+     |     |> Modo externo: permite scripts personalizados para ataques más complejos.
+     |     |> Combinado o híbrido: mezcla diccionario con mutaciones o reglas.
+     |	
+     |> Usos
+           |
+           |> john --wordlist=rockyou.txt hashes.txt
+           |> Obtener hash zip > zip2john <ZIP>.zip > <FILE>.hash
+           |> Averiguar la contraseña del zip > john --show <FILE>.hash
+           |> Introducir la contraseña en el zip y descomprimirlo > unzip -P <PASS> <ZIP>.zip
+           |> Descifrar el hash > john -w=/usr/share/wordlists/rockyou.txt hash.txt
+				
+
+······················································································································································································
+·· Kraken ···································································································································································	
+······················································································································································································
+		
+> En ciberseguridad, la herramienta Kraken puede referirse a distintas soluciones o proyectos dependiendo del contexto. Aquí te explico 
+  las interpretaciones más comunes:
+     |
+     |> Kraken como herramienta de fuerza bruta contra hashes
+     |     |
+     |     |> Una de las acepciones más conocidas de "Kraken" en ciberseguridad es una herramienta de descifrado de contraseñas mediante 
+     |        ataques de fuerza bruta o ataques de diccionario, especialmente diseñada para romper hashes de contraseñas, como los 
+     |        generados por WPA/WPA2 en redes Wi-Fi.
+     |           |
+     |           |> Uso común: Se usa junto con archivos de captura (como .cap o .hccapx) y bases de datos de contraseñas.
+     |           |> Similitud: Comparte funcionalidad con herramientas como Hashcat o John the Ripper.
+     |           |> Entorno: Se puede usar en sistemas Linux, especialmente distribuciones como Kali Linux o Parrot OS.
+     |
+     |
+     |> Kraken como malware
+     |     |
+     |     |> También ha habido malware o botnets llamados Kraken, que fueron identificados como:
+     |     |     |
+     |     |     |> Una red de bots (botnet) que infectaba sistemas para enviar spam o realizar ataques distribuidos.
+     |     |     |> Detectado por firmas de seguridad como Damballa o Symantec en el pasado.
+     |     |
+     |     |> Este uso de "Kraken" es negativo, pues se refiere a una amenaza activa más que a una herramienta de análisis.
+     |
+     |
+     |> Kraken en análisis forense o pentesting personalizado
+           |	
+           |> Algunos investigadores o equipos de seguridad crean herramientas personalizadas con nombres como “Kraken” 
+           |  para tareas específicas, como:
+           |     |
+           |     |> Escaneo de vulnerabilidades
+           |     |> Automatización de pruebas de penetración
+           |     |> Recolección de inteligencia en red (OSINT)
+           |
+           |> En estos casos, no hay una herramienta universal llamada "Kraken", sino herramientas individuales con ese nombre.
+     
+     
+······················································································································································································
+·· crackmapexec ······································································································································································	
+······················································································································································································	
+
+> Es una herramienta de post-explotación y evaluación de seguridad de redes diseñada principalmente para entornos Windows/Active Directory.
+     |
+     |> Que puede hacer
+     |     |
+     |     |> Enumeración de redes: detectar sistemas Windows, identificar roles (controladores de dominio, estaciones de trabajo, etc.), versiones de sistema operativo y configuraciones.
+     |     |
+     |     |> Validación de credenciales: probar múltiples combinaciones de usuarios y contraseñas o hashes en una red para verificar accesos válidos.
+     |     |
+     |     |> Ejecutar comandos remotamente: lanzar comandos o scripts (como PowerShell) en equipos remotos.
+     |     |
+     |     |> Dumping de credenciales: acceder a credenciales en memoria o en el sistema (por ejemplo, con Mimikatz).
+     |     |
+     |     |> Movimientos laterales: propagarse por la red mediante herramientas como WMI, SMB o WinRM.
+     |     |
+     |     |> Soporte de módulos: CME es modular y admite plugins que amplían sus capacidades.
+     |	
+     |> Tecnologías que utiliza	
+     |     |
+     |     |> SMB (Server Message Block)
+     |     | 
+     |     |> WMI (Windows Management Instrumentation)
+     |     | 
+     |     |> WinRM (Windows Remote Management)
+     |     |
+     |     |> LDAP, Kerberos, entre otros
+     |	
+     |> Usos	
+           |
+           |> cme smb <IP> -u <USER> -p <PASS>
+           |
+           |> crackmapexec smb <IP> -u <USER> -p <PASS>

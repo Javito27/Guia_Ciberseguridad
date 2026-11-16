@@ -1,0 +1,61 @@
+Nessus es un escáner de vulnerabilidades desarrollado por Tenable, Inc. Es uno de los más utilizados en auditorías de seguridad, pruebas de penetración y cumplimiento normativo.
+
+¿Qué es y para qué se usa?
+
+    Nessus se usa para:
+    
+        > Escanear sistemas, redes y aplicaciones en busca de vulnerabilidades conocidas.
+        > Detectar configuraciones inseguras (por ejemplo, puertos abiertos innecesarios, contraseñas débiles).
+        > Identificar software desactualizado o sin parches de seguridad.
+        > Comprobar cumplimiento normativo (PCI-DSS, HIPAA, ISO 27001, etc.).
+        > Generar reportes detallados con vulnerabilidades clasificadas por nivel de riesgo (Crítico, Alto, Medio, Bajo, Informativo).
+
+
+Tipos de escaneos que ofrece Nessus
+
+    > Escaneo de red → Encuentra hosts vivos, puertos abiertos y servicios.
+    > Escaneo de vulnerabilidades → Revisa miles de CVEs conocidos en sistemas, aplicaciones y dispositivos.
+    > Escaneo de configuraciones → Evalúa configuraciones inseguras en sistemas operativos y dispositivos de red.
+    > Escaneo web → Identifica problemas como inyecciones SQL, XSS, directorios expuestos, etc.
+    > Escaneo de cumplimiento → Verifica si un sistema cumple con estándares de seguridad.
+
+
+Opciones y características en informática y ciberseguridad
+
+    Algunas funciones destacadas:
+    
+        > Amplia base de datos de vulnerabilidades → actualizada constantemente por Tenable.
+        
+        > Escaneo autenticado y no autenticado
+        
+               - No autenticado: analiza el sistema desde afuera (como un atacante).
+               - Autenticado: se conecta con credenciales para un análisis más profundo.
+        
+        > Políticas de escaneo personalizables → puedes definir qué buscar (ejemplo: solo servicios web o solo servidores Windows).
+        
+        > Informes exportables → en HTML, PDF, CSV, etc.
+        
+        > Integración con SIEM y otras herramientas de seguridad.
+        
+        > Escaneo distribuido → puedes usar varios agentes para cubrir redes grandes.
+
+
+Versiones de Nessus
+
+    > Nessus Essentials → Gratis, pero limitada (máx. 16 hosts). Ideal para estudiantes y principiantes.
+    > Nessus Professional → Comercial, con todas las funciones (escaneo ilimitado).
+    > Tenable.sc y Tenable.io → Versiones empresariales en servidor o en la nube, con gestión centralizada de vulnerabilidades.
+
+
+Ejemplo de uso práctico en ciberseguridad
+
+    > Instalas Nessus en un servidor o máquina virtual.
+    > Defines un rango de IPs (ejemplo: 192.168.1.0/24).
+    > Seleccionas una política de escaneo (ej: “Red interna completa”).
+    > Nessus analiza la red y encuentra hosts, servicios y vulnerabilidades.
+    > Exportas un reporte en PDF para presentar hallazgos (ej: puertos inseguros, versiones antiguas de Apache, usuarios sin contraseñas seguras).
+
+
+En resumen
+
+    Nessus es una herramienta fundamental para detectar vulnerabilidades y fortalecer la seguridad de redes y sistemas antes de que un atacante las explote.

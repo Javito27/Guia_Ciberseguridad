@@ -1,0 +1,49 @@
+NetExec es una herramienta de ejecución remota de comandos en redes, especialmente útil en entornos de Active Directory. Permite realizar auditorías de seguridad, 
+explotación de servicios y recopilación de credenciales en redes Windows. Su objetivo es facilitar la evaluación de la seguridad en redes grandes mediante la 
+automatización de tareas repetitivas.
+
+
+Funcionalidades principales
+
+    > Autenticación en múltiples protocolos: Soporta SMB, LDAP, RDP, WinRM, MSSQL, entre otros.
+    > Ejecución remota de comandos: Permite ejecutar comandos en múltiples máquinas simultáneamente.
+    > Enumeración de servicios y usuarios: Recopila información sobre usuarios, grupos y servicios en la red.
+    > Integración con BloodHound: Facilita la recopilación de información para análisis de relaciones de confianza en Active Directory
+    > Modo de auditoría: Permite realizar auditorías sin realizar cambios en el sistema objetivo.
+    > Soporte para Kerberos y certificados: Autenticación mediante Kerberos y uso de certificados para conexiones seguras.
+
+
+Instalación en Kali Linux
+
+    sudo apt install netexec
+
+
+Ejemplos de uso
+
+    ---------------------------------------------------------------------------------------------------------------------------------
+    |  Descripción                                           |  Ejemplo de Uso                                                      |  
+    ---------------------------------------------------------------------------------------------------------------------------------
+    |  Enumerar usuarios en un dominio LDAP                  |  nxc ldap -u usuario -p contraseña -d dominio                        |
+    |  Ejecutar un comando en máquinas remotas mediante SMB  |  nxc smb -u usuario -p contraseña -t 192.168.1.10 --exec "ipconfig"  |
+    |  Realizar un escaneo de vulnerabilidades en una red    |  nxc scan -t 192.168.1.0/24                                          |
+    ---------------------------------------------------------------------------------------------------------------------------------
+
+
+Opciones disponibles
+
+    NetExec ofrece una variedad de módulos y opciones para adaptarse a diferentes necesidades de evaluación de seguridad. Algunas de las opciones más comunes incluyen:
+
+        > Módulos de autenticación: Permiten autenticar en diversos servicios como SMB, LDAP, RDP, entre otros.
+        > Módulos de ejecución remota: Facilitan la ejecución de comandos en máquinas remotas.
+        > Módulos de enumeración: Recopilan información sobre usuarios, grupos, servicios y configuraciones en la red.
+        > Módulos de explotación: Aprovechan vulnerabilidades conocidas para obtener acceso a sistemas.
+        > Módulos de recopilación de credenciales: Extraen credenciales almacenadas en sistemas comprometidos.
+
+    Para obtener una lista completa de módulos y opciones, puedes consultar la documentación oficial de NetExec.
+
+
+Recursos adicionales
+
+    > Documentación oficial: https://www.netexec.wiki/
+    > Repositorio en GitHub: https://github.com/Pennyw0rth/NetExec
+    > Página en Kali Linux: https://www.kali.org/tools/netexec/

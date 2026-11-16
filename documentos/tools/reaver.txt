@@ -1,0 +1,52 @@
+Reaver es una herramienta de auditoría Wi-Fi que se utiliza en ciberseguridad para explotar la vulnerabilidad del protocolo WPS (Wi-Fi Protected Setup) en redes inalámbricas.
+
+Fue desarrollada originalmente por Tactical Network Solutions y hoy en día es ampliamente usada en pruebas de penetración inalámbricas.
+
+
+¿Para qué se usa Reaver?
+
+    > Para realizar ataques de fuerza bruta al PIN de WPS de un punto de acceso Wi-Fi.
+    > Una vez obtenido el PIN de WPS, permite derivar la clave WPA o WPA2-PSK de la red inalámbrica.
+    > Se utiliza en auditorías de seguridad para comprobar si un router es vulnerable.
+    > Es común en tests de penetración dentro de redes corporativas o domésticas mal configuradas.
+    
+    En ciberseguridad, su objetivo NO es robar Wi-Fi, sino detectar routers inseguros y recomendar desactivar WPS.
+
+
+Comando general
+
+    --------------------------------------------------------------------------------------------------------------------------
+    |  Opción   |  Descripción                                                                    |   Ejemplo de Uso         |
+    --------------------------------------------------------------------------------------------------------------------------
+    |  -i       |  Interfaz inalámbrica en modo monitor                                           |  -i wlan0mon             |
+    |  -b       |  Dirección MAC del punto de acceso (BSSID)                                      |  -b 00:11:22:33:44:55    |
+    |  -c       |  Canal del punto de acceso                                                      |  -c 6                    |
+    |  -o       |  Guardar resultados en un archivo                                               |  -o resultado.txt        |
+    |  -vv      |  Modo muy detallado (verbose)                                                   |  -vv                     |
+    |  -d       |  Retraso entre intentos (segundos)                                              |  -d 2                    |
+    |  -r       |  Retraso adicional después de cierto número de intentos                         |  -r 5:15                 |
+    |  -l       |  Retraso adicional cuando el AP bloquea temporalmente WPS.                      |                          |
+    |  -p       |  Especificar un PIN manual (si ya se conoce o se quiere probar uno concreto).   |                          |
+    |  -K       |  Ataque Pixie Dust (si el AP es vulnerable, recupera el PIN instantáneamente).  |                          |
+    --------------------------------------------------------------------------------------------------------------------------
+
+
+Ejemplo de uso
+
+    reaver -i wlan0mon -b 00:11:22:33:44:55 -c 6 -vv
+
+    Ataca el BSSID indicado en el canal 6, mostrando salida detallada.
+
+
+Limitaciones
+
+    > Solo funciona si el router tiene WPS activado.
+    > Muchos routers modernos bloquean el WPS después de varios intentos fallidos.
+    > El ataque puede tardar varias horas en completarse.
+
+
+Medidas de defensa
+
+    > Desactivar WPS en el router.
+    > Usar WPA2/WPA3 con contraseñas largas y complejas.
+    > Actualizar el firmware del router.

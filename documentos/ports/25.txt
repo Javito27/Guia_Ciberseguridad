@@ -1,0 +1,35 @@
+📌 Es el puerto estándar del protocolo SMTP (Simple Mail Transfer Protocol). Es el encargado de enviar correos electrónicos entre servidores.
+
+    El puerto 25 se usa principalmente para envío entre servidores (Mail Transfer Agent - MTA).
+    No suele usarse para que un usuario envíe correos desde su cliente (eso suele ser 587).
+
+⚙️ ¿Cómo funciona?
+
+    Ejemplo simplificado:
+
+        1️⃣ Tu servidor envía un correo
+        2️⃣ Se conecta al servidor destino por el puerto 25
+        3️⃣ Entrega el mensaje
+
+🔐 ¿Es seguro?
+
+    Originalmente ❌ NO.
+
+    SMTP en puerto 25:
+
+        No cifra el contenido por defecto
+        Puede ser interceptado
+        Fue muy explotado para spam
+
+    Hoy se suele usar:
+
+        STARTTLS para cifrado
+        O puertos alternativos más seguros
+
+🧪 En pentesting
+
+    Si el puerto 25 está abierto se revisa:
+
+        📬 ¿Permite Open Relay? (enviar correos sin autenticación)
+        👤 Enumeración de usuarios (VRFY, EXPN)
+        🔓 Configuración TLS débil

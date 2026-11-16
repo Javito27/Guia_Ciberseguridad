@@ -1,0 +1,29 @@
+En informática y ciberseguridad, el término “intruder attacks” se refiere a los ataques realizados por intrusos o atacantes no autorizados que intentan acceder, alterar o dañar sistemas, redes o datos. Es un término general para describir 
+cualquier intento de penetración no autorizado.
+
+Qué significa exactamente
+
+	> Intruder = intruso, persona que no tiene permiso para acceder a un sistema.
+	> Attack = ataque, intento de explotar vulnerabilidades para obtener acceso, información o causar daño.
+
+	Entonces, intruder attacks son ataques de intrusos contra sistemas informáticos, que pueden ser tanto externos (hackers desde Internet) como internos (empleados con acceso indebido).
+
+Para qué sirve (o mejor dicho, cuál es su objetivo)
+
+	Los objetivos de estos ataques pueden variar según el atacante:
+
+		> Robo de información: datos personales, financieros, secretos corporativos.
+		> Interrupción de servicios: como ataques DDoS (denegación de servicio).
+		> Modificación de datos: cambiar información de manera maliciosa.
+		> Acceso no autorizado: para usar recursos de la red o sistema (computación, ancho de banda, almacenamiento).
+		> Instalación de malware o ransomware: para controlar el sistema o pedir rescate.
+
+Tipos comunes de intruder attacks
+
+	> Password attacks: fuerza bruta, adivinación o robo de contraseñas.
+	> Phishing: engañar al usuario para que revele información sensible.
+	> Exploits de vulnerabilidades: aprovechar fallos de software o hardware.
+	> Man-in-the-middle (MitM): interceptar y alterar comunicaciones.
+
+En resumen: “intruder attacks” son cualquier intento de acceso o daño a un sistema por parte de alguien que no tiene permiso, y entenderlos es fundamental para implementar medidas de seguridad como firewalls, sistemas de detección 
+de intrusos (IDS) y protocolos de autenticación fuertes.

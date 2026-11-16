@@ -1,0 +1,35 @@
+CLI (Command Line Interface) - Interfaz de Línea de Comandos.
+
+	> Es una forma de interactuar con el sistema operativo o aplicaciones escribiendo comandos en texto, en lugar de usar una interfaz gráfica (GUI).
+	> Se utiliza mucho en administración de sistemas, programación y ciberseguridad porque ofrece más control, velocidad y flexibilidad que una interfaz gráfica.
+
+	Ejemplo en ciberseguridad:
+
+		> Un analista usa la CLI en Linux para ejecutar herramientas como nmap, netstat o tcpdump para analizar tráfico de red o buscar vulnerabilidades.
+		> Los atacantes también suelen preferir CLI en sus scripts porque es más rápido y automatizable.
+
+*****************************************************************************************************************************************************************************
+
+CGI (Common Gateway Interface) - Interfaz Común de Entrada.
+
+	> Es un estándar que permite a un servidor web ejecutar programas externos (scripts) y devolver el resultado al navegador del usuario.
+	> Fue muy usado en los inicios de la web (años 90), normalmente con scripts en Perl, Python o Bash.
+
+	Ejemplo en ciberseguridad:
+
+		> Si un sitio web tiene un script CGI mal configurado o inseguro, un atacante podría explotarlo para ejecutar comandos en el servidor (Remote Code Execution – RCE).
+		> Algunos exploits clásicos (como Shellshock) se aprovecharon de vulnerabilidades en scripts CGI.
+
+*****************************************************************************************************************************************************************************
+
+Resumen
+
+	En informática: 
+
+		> CLI → Herramienta de administración y control del sistema mediante comandos.
+		> CGI → Mecanismo que permite a un servidor web ejecutar scripts/programas para generar contenido dinámico.
+
+	En ciberseguridad:
+
+		> CLI es esencial para administradores y pentesters.
+		> CGI suele aparecer en el análisis de vulnerabilidades web (especialmente en sistemas antiguos).

@@ -1,0 +1,138 @@
+Cuando en el ámbito de informática y ciberseguridad se habla de los “Tipos de Teams”, generalmente se está haciendo referencia a distintos tipos de equipos especializados según sus roles y funciones dentro de 
+una estrategia de seguridad.
+
+··· RED TEAM ···
+
+	El Red Team, en el contexto de la ciberseguridad y el hacking ético, es un equipo de profesionales que simulan ataques reales contra una organización con 
+	el objetivo de identificar vulnerabilidades y evaluar su capacidad de defensa. Su propósito no es dañar, sino mejorar la seguridad.
+	
+	Concepto básico
+		|
+		|> El Red Team actúa como el atacante
+			|
+			|> Utiliza técnicas similares a las de cibercriminales reales.
+			|> Trata de comprometer sistemas, redes, aplicaciones o incluso personas (ingeniería social).
+			|> Opera de forma sigilosa, sin que el equipo de defensa (Blue Team) sepa cuándo y cómo atacará.
+			
+	Objetivos del Red Team:
+		|
+		|> Poner a prueba los controles de seguridad técnicos y humanos.
+		|> Simular ataques reales avanzados (APT).
+		|> Detectar debilidades en los procesos de detección y respuesta.
+		|> Proveer un análisis realista del riesgo al que se enfrenta la organización.		
+
+	Tácticas comunes que usan:
+		|
+		|> Phishing y spear-phishing.
+		|> Explotación de vulnerabilidades (CVE).
+		|> Movimiento lateral dentro de redes comprometidas.
+		|> Evasión de detección (bypassing antivirus, EDR, etc.).
+		|> Acceso físico o a través de dispositivos (USBs, badges falsos).
+	
+	Red Team vs Penetration Test 
+	------------------------------------------------------------------------------------------------
+	| Aspecto                | Red Team                          | Pentest (Prueba de Penetración) |
+	------------------------------------------------------------------------------------------------
+	| Alcance                | Amplio y persistente              | Limitado y puntual              |
+	| Tiempo de ejecución    | Semanas o meses                   | Días o pocas semanas            |
+	| Nivel de sigilo        | Alto (evasivo)                    | Bajo (más directo)              |
+	| Objetivo principal     | Evaluar defensas y respuesta real | Encontrar vulnerabilidades      |
+	| Simulación de atacante | Realista                          | Técnica                         |
+	------------------------------------------------------------------------------------------------
+
+	En resumen: 
+
+		El Red Team es como un simulador de ataques reales controlado, donde expertos en hacking ético juegan el papel de atacantes para fortalecer la 
+		seguridad de una organización.
+		
+		
+··· BLUE TEAM ···
+
+	El Blue Team es el equipo de defensa dentro de la ciberseguridad. Su objetivo principal es detectar, responder y mitigar cualquier intento de 
+	intrusión o amenaza que afecte a los sistemas de una organización.
+	
+	Funciones principales del Blue Team:
+		|
+		|> Monitoreo continuo del entorno (redes, endpoints, servidores, etc.).
+		|> Detección de intrusiones mediante herramientas como SIEM, IDS/IPS, EDR...
+		|> Análisis forense en caso de incidentes (qué pasó, cómo, y por qué).
+		|> Respuesta a incidentes: contención, erradicación y recuperación.
+		|> Fortalecimiento del entorno: actualizaciones, parches, endurecimiento de sistemas (hardening).
+		|> Concienciación y formación de usuarios para prevenir errores humanos.
+		
+	Herramientas comunes que usa el Blue Team:
+		|
+		|> SIEM (Ej: Splunk, QRadar): para correlación de eventos y alertas.
+		|> EDR (Ej: CrowdStrike, SentinelOne): para monitorear endpoints.
+		|> Firewall, IDS/IPS: para filtrar y detectar tráfico sospechoso.
+		|> Análisis de tráfico de red (Wireshark, Zeek).
+		|> Honeypots: para detectar comportamiento malicioso.
+		|> Playbooks de respuesta a incidentes.	
+		
+	---------------------------------------------------------------------------------
+	| Rol        	| Red Team               	| Blue Team 		               	|
+	---------------------------------------------------------------------------------
+	| Simula     	| Un atacante real         	| Un defensor activo             	|
+	| Objetivo   	| Romper, infiltrarse      	| Detectar, proteger y responder 	|
+	| Estilo     	| Oculto, persistente      	| Reactivo y preventivo          	|
+	| Mentalidad 	| "Piensa como el enemigo" 	| "Piensa como el defensor"      	|
+	---------------------------------------------------------------------------------
+	
+	
+··· PURPLE TEAM ···
+	
+	El Purple Team no es un equipo separado, sino una colaboración activa entre Red y Blue Teams. 
+	
+	Su propósito es:
+		|
+		|> Compartir conocimientos entre atacantes y defensores.
+		|> Aumentar la eficacia de ambos lados.
+		|> Mejorar detección y respuesta en base a los ataques simulados.
+		
+		
+En resumen:
+	|
+	|> Red Team ataca.
+	|> Blue Team defiende.
+	|> Purple Team hace que ambos aprendan mutuamente.			
+			
+***********************************************************************************************************************************************************************************************************************************************
+		
+Otros equipos especializados que también se mencionan
+
+	> SOC (Security Operations Center)
+
+		- Centro de Operaciones de Seguridad: una estructura operativa 24/7 donde se recibe, investiga y responde a alertas de seguridad. Funciona como núcleo integrador de los equipos Red, Blue, Threat Intelligence, y DFIR.
+
+	> Threat Intelligence (Inteligencia de Amenazas)
+
+		- Analiza amenazas emergentes, campañas maliciosas o malware nuevo. Recoge datos de inteligencia (IoC, TTP) para alimentar al SOC y a los equipos defensivos.
+
+	> DFIR (Digital Forensics & Incident Response)
+
+		- Se activa tras un incidente: recopila evidencias, reconstruye ataques, evalúa el impacto y ayuda en la mejora continua y el cumplimiento normativo.
+
+	> GRC (Gobernanza, Riesgo y Cumplimiento)
+
+		- Se encarga de las políticas, auditorías, formación, normativas y cumplimiento legal. Traduce requisitos legales en controles técnicos verificables.
+
+	> Equipos emergentes:
+
+		- Yellow Team: enfocado en la seguridad durante el desarrollo (DevSecOps).
+		- Green Team: orientado a crear procesos y tecnologías innovadoras para mejorar la seguridad de forma preventiva.
+		
+***********************************************************************************************************************************************************************************************************************************************		
+		
+Resumen comparativo	
+---------------------------------------------------------------------------------------------------------------------		
+|  Equipo / Centro             | Rol principal                                                                      |
+---------------------------------------------------------------------------------------------------------------------
+| Red Team                     | Simula ataques; identifica vulnerabilidades de forma controlada.                   |
+| Blue Team                    | Defiende, monitorea, responde al incidente y refuerza la seguridad.                |
+| Purple Team                  | Facilita la cooperación entre Red y Blue para mejorar la defensa conjunta.         |
+| SOC                          | Centro operativo que monitorea, detecta y coordina respuestas 24/7.                |
+| Threat Intelligence          | Analiza amenazas reales y provee inteligencia preventiva.                          |
+| DFIR                         | Realiza análisis forense post-incidente y respuesta técnica y legal.               |
+| GRC                          | Asegura cumplimiento de normativas, políticas y formación.                         |
+| Yellow / Green Teams         | Seguridad en desarrollo y mejora continua de procesos (roles más emergentes).      |
+---------------------------------------------------------------------------------------------------------------------

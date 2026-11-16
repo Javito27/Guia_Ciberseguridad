@@ -1,0 +1,13 @@
+Un bug bounty (o programa de recompensas por errores) es una iniciativa en la que una empresa paga a investigadores de seguridad por encontrar y reportar vulnerabilidades en sus sistemas, 
+aplicaciones o sitios web.
+
+🔎 ¿Cómo funciona un Bug Bounty?
+
+    1. Una empresa (por ejemplo, Google o Facebook) lanza un programa público.
+    2. Define el alcance (qué dominios, apps o sistemas se pueden analizar).
+    3. Investigadores de ciberseguridad buscan fallos de forma ética.
+    4. Si encuentran una vulnerabilidad válida y la reportan correctamente:
+
+        La empresa la verifica.
+        La corrige.
+        Paga una recompensa económica.

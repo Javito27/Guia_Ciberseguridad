@@ -1,0 +1,65 @@
+📂 Es una herramienta sencilla de fuerza bruta de directorios web. Su objetivo es descubrir:
+
+    · Directorios ocultos
+    · Archivos sensibles
+    · Paneles admin
+    · Entornos de desarrollo
+
+    Funciona parecido a:
+
+        · Gobuster
+        · Dirsearch
+        · ffuf
+
+    Es una herramienta pequeña y poco mantenida comparada con herramientas modernas. Hoy en día se usa poco. 
+
+⚙️ ¿Cómo funciona?
+
+    Usa una wordlist con nombres comunes:
+
+        admin
+        login
+        backup
+        uploads
+        test
+
+    Y prueba automáticamente rutas como:
+
+        http://target.com/admin
+        http://target.com/login
+        http://target.com/backup
+
+🛠️ Instalación
+
+    git clone https://github.com/thiagous06/dirforcer
+    cd dirforcer
+    pip install pyfiglet
+
+▶️ Uso básico
+
+        python3 dirforcer.py -d example.com -w wordlist.txt
+
+    Parámetros:
+
+        -d → dominio objetivo 
+        -w → wordlist 
+
+🎯 Usos típicos
+
+    🔐 Encontrar paneles admin
+
+        /admin
+        /cpanel
+        /phpmyadmin
+
+    📂 Encontrar backups
+
+        /backup.zip
+        /db.sql
+        /site_old
+
+    🧪 Descubrir entornos de desarrollo
+
+        /dev
+        /staging
+        /test

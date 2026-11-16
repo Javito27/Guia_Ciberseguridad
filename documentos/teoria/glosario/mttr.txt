@@ -1,0 +1,28 @@
+Es una métrica que mide cuánto tarda una organización en resolver un problema. Su significado exacto varía según el contexto, y esto genera bastante confusión, porque la “R” puede ser varias palabras.
+
+Las variantes más habituales:
+
+    ➡️ Mean Time To Respond (tiempo medio de respuesta): desde que se detecta una amenaza hasta que se empieza a actuar contra ella.
+
+    ➡️ Mean Time To Resolve (tiempo medio de resolución): desde que se detecta el incidente hasta que queda totalmente resuelto y cerrado.
+
+    ➡️ Mean Time To Recover (tiempo medio de recuperación): desde que ocurre el fallo o ataque hasta que el servicio vuelve a funcionar con normalidad.
+
+    ➡️ Mean Time To Repair (tiempo medio de reparación): más usada en operaciones de TI e industria, mide el tiempo de arreglar algo averiado.
+
+En ciberseguridad, lo más común es Mean Time To Respond o Mean Time To Resolve. Conviene que cada organización defina cuál usa.
+
+✨ Métricas relacionadas: 
+
+    · MTTD (Mean Time To Detect): tiempo medio hasta detectar un incidente desde que empezó.
+    · MTTA (Mean Time To Acknowledge): tiempo hasta que un analista reconoce la alerta.
+    · MTTC (Mean Time To Contain): tiempo hasta contener la amenaza.
+    · MTBF (Mean Time Between Failures): tiempo medio entre fallos.
+
+🎯 Cómo se calcula: 
+
+    MTTR = tiempo total invertido en incidentes / número de incidentes
+
+📈 Línea temporal del incidente
+
+    Ataque inicia → [MTTD] → Detección → [MTTA] → Reconocimiento → [MTTR] → Resolución

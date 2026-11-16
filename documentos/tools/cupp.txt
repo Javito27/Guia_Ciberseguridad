@@ -1,0 +1,70 @@
+CUPP es una herramienta de ingeniería social y auditoría de contraseñas desarrollada en Python.
+
+Su objetivo principal es generar wordlists personalizadas basadas en información conocida de un usuario o empresa para ataques de fuerza bruta o pruebas de penetración.
+
+
+¿Para qué se usa?
+
+    > Generar diccionarios de contraseñas a partir de información sobre la víctima.
+    > Realizar ataques de fuerza bruta con herramientas como Hydra, John the Ripper o Hashcat.
+    > Apoyar en auditorías de seguridad para comprobar la fortaleza de contraseñas.
+    > Muy útil en pentesting y red team para evaluar riesgos por contraseñas débiles o predecibles.
+
+
+Funcionamiento
+
+    1. CUPP solicita información sobre la víctima o la organización:
+    
+        - Nombre y apellidos
+        - Fecha de nacimiento
+        - Aficiones, mascotas, apodos
+        - Nombre de la empresa, ciudad, equipo deportivo favorito, etc.
+    
+    2. Combina la información en múltiples variaciones para crear un diccionario personalizado.
+    
+    3. Genera un archivo de wordlist listo para ser usado con herramientas de cracking.
+
+
+Instalación
+
+    git clone https://github.com/Mebus/cupp.git
+
+
+Uso básico
+
+    python3 cupp.py -h
+
+
+Opciones principales
+
+    ----------------------------------------------------------------------------------------------------------------------------------
+    |  Opción        |  Descripción                                                          |   Ejemplo de Uso                      |
+    ----------------------------------------------------------------------------------------------------------------------------------
+    |  -i            |  Modo interactivo (pregunta datos de la víctima)                      |  python3 cupp.py -i                   |
+    |  -o <archivo>  |  Guardar wordlist generada en un archivo                              |  python3 cupp.py -i -o wordlist.txt   |
+    |  -n <nombre>   |  Especificar nombre de la víctima (para uso directo sin interactivo)  |                                       |
+    |  -f <fichero>  |  Cargar datos desde un fichero CSV                                    |                                       |
+    |  -p            |  Añadir patrones o combinaciones personalizadas                       |                                       |
+    |  -h            |  Mostrar ayuda y opciones disponibles                                 |                                       |
+    ----------------------------------------------------------------------------------------------------------------------------------
+
+
+Ejemplo de uso práctico
+
+    python3 cupp.py -i -o wordlist.txt
+
+    El programa pedirá:
+
+        > Nombre y apellidos
+        > Fecha de nacimiento
+        > Mascotas
+        > Combinaciones de palabras relevantes
+
+    Luego generará un archivo wordlist.txt con todas las posibles combinaciones que podrían ser usadas como contraseñas.
+
+
+Ventajas de CUPP:
+
+    > Permite generar diccionarios específicos, mucho más efectivos que listas genéricas.
+    > Ideal para ataques de ingeniería social y pruebas de contraseñas corporativas.
+    > Funciona en Linux y Windows con Python.

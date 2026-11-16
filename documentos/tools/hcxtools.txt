@@ -1,0 +1,91 @@
+🛠️ HCXTools es un conjunto de herramientas de ciberseguridad que se utiliza para analizar redes Wi-Fi y capturar información de autenticación.
+
+    Se usa principalmente en auditorías de seguridad Wi-Fi para comprobar si una red es segura o si su contraseña podría ser vulnerable.
+
+🎯 HCXTools permite:
+
+    · Capturar handshakes de Wi-Fi (intercambio de autenticación entre dispositivo y router)
+    · Analizar tráfico de redes inalámbricas
+    · Preparar datos para intentar comprobar la seguridad de contraseñas
+    · Realizar auditorías de seguridad en redes Wi-Fi
+
+    Normalmente se usa junto con herramientas como Hashcat, que sirven para probar contraseñas usando los datos capturados.
+
+⚙️ Algunas funciones comunes son:
+
+    · Convertir capturas de red a formatos utilizables para análisis
+    · Extraer información de autenticación Wi-Fi
+    · Analizar protocolos de seguridad como WPA/WPA2
+    · Preparar archivos para pruebas de seguridad
+
+📚 Ejemplo simple de uso
+
+    En una auditoría de seguridad:
+
+        1️⃣ Se captura el tráfico de una red Wi-Fi.
+        2️⃣ HCXTools analiza esa captura.
+        3️⃣ Se extrae el handshake de autenticación.
+        4️⃣ Ese handshake se usa para comprobar si la contraseña es segura.
+
+🔐 ¿Para qué se usa en informática y ciberseguridad?
+
+    > Pentesting WiFi → permite preparar handshakes capturados para crackear contraseñas.
+    > Conversión de formatos → por ejemplo, de .pcap (Wireshark, tcpdump, airodump) a .hccapx (hashcat).
+    > Análisis avanzado → comprobar calidad de los handshakes, eliminar paquetes inválidos o duplicados.
+    > Auditorías de seguridad → verificar la robustez de redes WiFi en entornos corporativos.	
+
+	
+🧪 Opciones y comandos principales de hcxtools
+
+    hcxpcapngtool
+	
+        > Convierte capturas (.pcap, .pcapng) a formatos compatibles con hashcat.
+          ------------------------------------------------------------------
+          |  Opción   |  Descripción                                       |
+          ------------------------------------------------------------------  
+          |  -o       |  archivo de salida en formato .hccapx              |
+          |  -E       |  extraer lista de ESSIDs                           |
+          |  -I       |  mostrar información detallada de la captura       |
+          |  -P       |  exportar pares PMKID                              |
+          ------------------------------------------------------------------
+          Ejemplo: hcxpcapngtool -o salida.hccapx -E essidlist.txt captura.pcapng
+    
+    hcxhashtool
+    
+        > Filtra y organiza hashes capturados.
+          ------------------------------------------------------------------
+          |  Opción   |  Descripción                                       |
+          ------------------------------------------------------------------  
+          |  -i       |  archivo de entrada                                |
+          |  -o       |  archivo de salida                                 |
+          |  --info   |  mostrar estadísticas de los handshakes            |
+          ------------------------------------------------------------------    
+          Ejemplo: hcxhashtool -i input.22000 -o output.22000 --info
+    
+    hcxpsktool
+    
+        > Genera hashes PMK a partir de diccionarios y ESSIDs.
+    
+          Ejemplo: hcxpsktool -i diccionario.txt -o pmklist.16800 -e essidlist.txt
+    
+    hcxpmkidtool
+    
+        > Trabaja específicamente con PMKID (otro vector de ataque contra WPA/WPA2).
+
+          Ejemplo: hcxpmkidtool -i captura.pcapng -o pmkids.16800
+
+
+🔍 Ejemplo de flujo típico en pentesting WiFi
+
+    ---------------------------------------------------------------------------------------------------------------------------------------------
+    |  Opción                                       |  Ejemplo de Uso                                      |  Descripción                       |
+    ---------------------------------------------------------------------------------------------------------------------------------------------
+    |  Capturar tráfico con airodump-ng o tcpdump   |  airodump-ng wlan0mon -w captura                     |  → genera captura.cap              |
+    |  Convertir con hcxpcapngtool                  |  hcxpcapngtool -o handshake.hccapx captura.cap       |                                    |
+    |  Pasar a hashcat para crackear                |  hashcat -m 2500 handshake.hccapx diccionario.txt    |  (o con formato 22000: -m 22000)   |
+    ---------------------------------------------------------------------------------------------------------------------------------------------
+	
+🧠 En resumen
+
+    > hcxtools es el puente entre la captura de paquetes WiFi y el crackeo con hashcat.
+    > Sirve para preparar, analizar y optimizar handshakes/PMKID antes de romper contraseñas.

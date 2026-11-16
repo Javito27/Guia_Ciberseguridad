@@ -1,0 +1,39 @@
+RogueJNDI es una herramienta diseñada para explotar vulnerabilidades en la interfaz Java Naming and Directory Interface (JNDI). Permite configurar un servidor LDAP malicioso que 
+responde a solicitudes JNDI de aplicaciones vulnerables, facilitando la ejecución remota de código (RCE) en sistemas afectados.
+
+
+¿Para qué se utiliza?
+
+    RogueJNDI se emplea principalmente en:
+    
+        > Pruebas de penetración: para evaluar la seguridad de aplicaciones Java frente a ataques de inyección JNDI.
+        > Investigación de vulnerabilidades: para analizar y demostrar la explotación de fallos de seguridad en entornos Java.
+        > Simulación de ataques: para entrenar a profesionales de ciberseguridad en la detección y mitigación de amenazas relacionadas con JNDI.
+
+
+Opciones disponibles
+
+    Al ejecutar RogueJNDI, se pueden utilizar diversas opciones para configurar su comportamiento:
+    ------------------------------------------------------------------------------------------------------------------------------------ 
+    |  Opción          |  Descripción                                                                                                  |
+    ------------------------------------------------------------------------------------------------------------------------------------ 
+    |  -c, --command   |  especifica el comando a ejecutar en el servidor objetivo (por defecto, se ejecuta la calculadora en macOS).  |
+    |  -n, --hostname  |  define el nombre de host del servidor HTTP local (requerido para cargas remotas y cargas de WebSphere).      |
+    |  -p, --port      |  establece el puerto del servidor HTTP local (por defecto, 8080).                                             |
+    |  -h, --help      |  muestra la ayuda con las opciones disponibles.                                                               |
+    ------------------------------------------------------------------------------------------------------------------------------------
+
+
+Ejemplo de uso
+
+    Para iniciar un servidor LDAP malicioso en el puerto 1389 y un servidor HTTP en el puerto 8080, ejecuta:
+
+          java -jar RogueJndi-1.0.jar -c 'calc.exe' -n 'localhost' -p 8080
+
+    Este comando configurará el servidor para ejecutar la calculadora en un sistema Windows cuando una aplicación vulnerable realice una solicitud JNDI.
+
+
+Consideraciones de seguridad
+
+    Es fundamental utilizar RogueJNDI únicamente en entornos controlados y con el consentimiento adecuado, ya que su uso indebido puede constituir una actividad ilegal. Además, es 
+    importante estar al tanto de las actualizaciones y parches de seguridad para mitigar las vulnerabilidades asociadas a JNDI.

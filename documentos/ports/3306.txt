@@ -1,0 +1,86 @@
+📌 Es el puerto por defecto del sistema de base de datos MySQL (y también lo usa normalmente MariaDB).
+
+    MySQL es un gestor de bases de datos relacional (RDBMS) muy usado en:
+
+        🌐 Aplicaciones web (LAMP stack)
+        🛒 E-commerce
+        📊 CMS como WordPress
+        📦 Backends de APIs
+
+⚙️ ¿Cómo funciona?
+
+    1️⃣ Una aplicación (por ejemplo, un servidor web) se conecta al servidor MySQL
+    2️⃣ Se autentica con usuario y contraseña
+    3️⃣ Ejecuta consultas SQL
+
+🔐 Autenticación
+
+    MySQL usa:
+
+        👤 Usuario + contraseña
+        Permisos por base de datos
+        Permisos por IP
+
+    Por defecto debería estar accesible solo desde localhost.
+
+🧪 En ciberseguridad
+
+    Si el puerto 3306 está abierto hacia la red:
+
+    ⚠️ Puede ser un riesgo si:
+
+        · Permite acceso remoto innecesario
+        · Tiene credenciales débiles
+        · Existe usuario root accesible remotamente
+        · No tiene cifrado TLS habilitado
+
+💣 Riesgos comunes
+
+    · Contraseñas débiles
+    · Bases de datos expuestas a Internet
+    · Inyección SQL en aplicaciones que usan MySQL
+    · Fugas masivas de datos si comprometen la DB
+
+💡 En un servidor web típico vulnerable puedes ver:
+
+    · 80 / 443 → Web
+    · 3306 → MySQL
+    · 22 → SSH
+
+    Si el 3306 está abierto externamente, suele ser mala práctica.	
+
+🎯 Ejemplo de uso básico
+
+    Acceso ssh con usuario y contraseña
+	
+        mysql -u <USER> -h <IP> -p
+
+        SHOW DATABASES;
+
+        USE <DB>;
+
+        SHOW TABLES;
+
+        DESCRIBE <TABLES>;
+
+        SELECT * FROM <TABLES>;
+
+        DESCRIBE config;
+
+🖥️ Uso con MariaDB
+
+    mysql -h <Hostname> -u root
+    mysql -h <Hostname> -u root@localhost
+    mysql -h >Hostname> -u root --ssl=0
+
+    SHOW DATABASES;
+
+    USE <DB>;
+
+    SHOW TABLES;
+
+    DESCRIBE <TABLES>;
+
+    SELECT * FROM <TABLES>;
+
+    DESCRIBE config;

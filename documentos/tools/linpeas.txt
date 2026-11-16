@@ -1,0 +1,142 @@
+🐧 LinPEAS (Linux Privilege Escalation Awesome Script) es un script en bash que forma parte del proyecto PEAS (Privilege Escalation Awesome Scripts). Es un script que se usa para 
+detectar posibles formas de escalada de privilegios en Linux. 
+
+    Es como un escáner automático de fallos de seguridad en Linux
+
+🎯 ¿Para qué sirve?
+
+    Cuando ya tienes acceso a una máquina Linux:
+
+    👉 ejecutas LinPEAS y te dice:
+
+        · posibles vulnerabilidades
+        · malas configuraciones
+        · oportunidades de escalar a root
+
+🔥 Qué analiza LinPEAS
+
+    1️⃣ Permisos y usuarios
+
+        · qué usuario eres
+        · qué puedes hacer
+
+    2️⃣ SUDO
+
+        · sudo -l
+
+            👉 detecta comandos peligrosos
+
+    3️⃣ SUID binaries
+
+        👉 archivos que pueden ejecutarse como root
+
+    4️⃣ Cron jobs
+
+        👉 tareas automáticas vulnerables
+
+    5️⃣ Credenciales
+
+        👉 busca:
+
+            · passwords
+            · claves
+            · archivos sensibles
+
+    6️⃣ Servicios
+
+        👉 procesos que pueden explotarse
+
+    7️⃣ PATH y variables
+
+        👉 posibles hijacking
+
+    8️⃣ Kernel
+
+        👉 versión vulnerable
+
+💻 Ejemplo de uso
+
+    🔹 Paso 1: subir LinPEAS
+
+        wget http://IP/linpeas.sh
+
+    🔹 Paso 2: dar permisos
+
+        chmod +x linpeas.sh
+
+    🔹 Paso 3: ejecutar
+
+        ./linpeas.sh
+    
+    💥 Resultado
+
+    Te muestra cosas como:
+
+        [+] SUID binary found
+        [+] Writable file found
+        [+] Possible exploit
+
+    👉 Tú eliges qué explotar
+
+🧩 Uso en pentesting
+
+    1. Consigues shell
+    2. Ejecutas LinPEAS
+    3. Encuentras vulnerabilidad
+    4. Escalas a root
+
+🛠️ Forma parte de
+
+    👉 La suite:
+
+        · PEASS-ng
+
+    Incluye:
+
+        · LinPEAS (Linux)
+        · winPEAS (Windows)
+
+⚠️ Importante
+
+    👉 LinPEAS NO explota nada
+
+    👉 Solo:
+
+        🔍 detecta oportunidades
+
+🧠 Instalación / Ejecución
+
+    wget https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh
+
+🧪 Opciones principales de LinPEAS
+
+    ---------------------------------------------------------------------------------------------------------------------------
+    |  Opción   |  Descripción                                                             |  Ejemplo de                      |
+    ---------------------------------------------------------------------------------------------------------------------------
+    |  -a       |  Modo avanzado (más exhaustivo, puede tardar más)                        |  ./linpeas.sh -a                 |
+    |  -s       |  Modo rápido (stealth mode), muestra menos información (más sigiloso).   |  ./linpeas.sh -s                 |
+    |  -o       |  Guardar la salida en un archivo.                                        |  ./linpeas.sh -o resultado.txt   |
+    |  -q       |  Quiet mode, sin colores ni ASCII (ideal para logs o salida a archivo).  |  ./linpeas.sh -q                 |
+    |  -h       |  Muestra la ayuda.                                                       |                                  |
+    ---------------------------------------------------------------------------------------------------------------------------
+
+🚨 Ejemplo de uso en pentesting
+
+    1. Ya tienes acceso como usuario limitado (ej. por SSH).
+    
+    2. Subes LinPEAS y lo ejecutas:
+    
+          ./linpeas.sh -a > reporte.txt
+    
+    3. Luego revisas el reporte.txt buscando:
+    
+          - Archivos con SUID/SGID
+          - Credenciales en /etc/passwd, /etc/shadow, archivos .bash_history, .ssh/, etc.
+          - Procesos cron que puedes modificar
+          - Versiones de kernel vulnerables a exploits
+
+⚙️ Relación con otras herramientas
+
+    > WinPEAS → equivalente de LinPEAS, pero para Windows.
+    > PEASS-ng → proyecto principal que contiene ambas herramientas.
+    > Complementa a manuales como GTFOBins (para abusar de binarios SUID).

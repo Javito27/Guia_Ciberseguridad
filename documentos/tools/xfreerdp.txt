@@ -1,0 +1,66 @@
+FreeRDP es un cliente de Remote Desktop Protocol (RDP) de código abierto.
+
+Permite conectarse a sistemas Windows (o cualquier servicio RDP) desde Linux, macOS o incluso otros Windows.
+
+xfreerdp es el cliente en línea de comandos (CLI) de FreeRDP.
+
+En resumen: xfreerdp es una herramienta para conectarse a escritorios remotos vía RDP, equivalente al cliente RDP de Windows (mstsc), pero en sistemas Unix/Linux.
+
+
+¿Para qué se usa?
+
+     En informática general:
+     
+          > Conectarse a servidores Windows desde Linux.
+          > Administración remota de escritorios y servidores.
+          > Soporte de múltiples monitores, impresión remota, audio, etc.
+     
+     En ciberseguridad:
+     
+          > Acceso remoto tras comprometer credenciales en un pentest/red team.
+          > Exploitation de servicios RDP mal configurados.
+          > Movimiento lateral dentro de una red (usando credenciales robadas).
+          > Verificación de configuraciones de seguridad en RDP (TLS, NLA, cifrado).
+
+
+Conexión básica
+
+    xfreerdp /u:usuario /p:contraseña /v:IP
+
+
+Opciones disponibles en xfreerdp
+
+    --------------------------------------------------------------------------------------
+    |  Opción               |  Descripción                                               | 
+    --------------------------------------------------------------------------------------
+    |  /u:usuario           |  usuario                                                   |
+    |  /p:contraseña        |  contraseña (si no se pone, pedirá input)                  |
+    |  /v:host:puerto       |  dirección IP o dominio + puerto (por defecto 3389)        |
+    |  /cert:ignore         |  ignorar errores de certificado (muy usado en pentesting)  |
+    |  /dynamic-resolution  |  ajuste dinámico de la resolución de pantalla              |
+    |  /multimon            |  usar múltiples monitores                                  |
+    |  /drive:share,/ruta   |  montar un directorio local en la sesión remota            |
+    |  /clipboard           |  compartir portapapeles                                    |
+    |  /sound:sys:alsa      |  habilitar audio                                           |
+    |  /gfx                 |  habilitar gráficos avanzados                              |
+    --------------------------------------------------------------------------------------
+
+
+Opciones útiles en ciberseguridad
+
+    ------------------------------------------------------------------------------------------------------------------------
+    |  Opción                                       |  Descripción                                                         | 
+    ------------------------------------------------------------------------------------------------------------------------
+    |  /u:usuario /p:contraseña /v:IP /cert:ignore  |  saltar advertencias de certificado                                  |
+    |  /sec:nla, /sec:tls, /sec:rdp                 |  especificar el protocolo de seguridad usado                         |
+    |  /smartcard                                   |  autenticación con tarjeta inteligente                               |
+    |  /kbd:layout                                  |  cambiar distribución de teclado (útil en sesiones internacionales)  |
+    ------------------------------------------------------------------------------------------------------------------------
+
+
+Resumen rápido
+
+    > FreeRDP = implementación libre del protocolo RDP.
+    > xfreerdp = cliente CLI para conectarse a escritorios remotos vía RDP.
+    > Usos en IT = administración remota de servidores Windows.
+    > Usos en Ciberseguridad = acceso con credenciales robadas, movimiento lateral, auditoría de configuraciones RDP.

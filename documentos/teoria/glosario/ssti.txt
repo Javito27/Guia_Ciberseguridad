@@ -1,0 +1,45 @@
+Es una vulnerabilidad web que ocurre cuando una aplicación renderiza plantillas en el servidor y no valida correctamente la entrada del usuario.
+
+El atacante puede inyectar código en la plantilla y hacer que el servidor lo ejecute.
+
+Como se ejecuta: 
+
+    - La web usa plantillas (HTML dinámico)
+    - El usuario introduce datos
+    - La aplicación confía demasiado
+    - El servidor ejecuta lo que no debería
+
+Ejemplos de inyecciones SSTI: 
+
+    Supón que la web hace esto: Hola {{ nombre }}
+
+    Entonces el usuario introduce {{7*7}} y como resultado devolverá Hola 49
+
+    La vulnerabilidad es porque ha ejecutado código, no texto. 
+
+Motores de plantillas afectados, dependiendo del lenguaje y framework: 
+
+    - Python → Jinja2
+    - Java → FreeMarker, Velocity
+    - PHP → Twig, Smarty
+    - Ruby → ERB
+
+Buenas prácticas pare prevenir SSTI:
+
+    ❌ No renderizar entrada del usuario directamente
+    ✅ Usar auto-escaping
+    ✅ Separar lógica y vista
+    ✅ Validar y sanitizar entradas
+    ✅ Usar versiones actualizadas del motor
+    ✅ Usar plantillas seguras (context-aware)
+
+Diferencia entre SSTI vs XSS
+
+    ------------------------------------------------------------------
+    | SSTI                          | XSS                            |
+    ------------------------------------------------------------------
+    | Se ejecuta en el **servidor** | Se ejecuta en el **navegador** |
+    | Muy crítica                   | Variable                       |
+    | Puede llevar a RCE            | Normalmente roba datos         |
+    | Backend                       | Frontend                       |
+    ------------------------------------------------------------------

@@ -1,0 +1,75 @@
+📌 Es el puerto estándar del protocolo LDAP (Lightweight Directory Access Protocol). Es uno de los puertos más importantes en Active Directory.
+
+    LDAP es un protocolo para:
+
+        Consultar información del directorio
+        Modificar información
+        Buscar usuarios
+        Buscar grupos
+        Obtener información del dominio
+
+    En Active Directory, LDAP permite consultar:
+
+        👤 Usuarios
+        🏢 Equipos
+        👥 Grupos
+        🔑 Permisos
+        🌐 Estructura del dominio
+
+    Siguen el modelo cliente-servidor. 
+
+🔐 ¿Es seguro?
+
+    LDAP en 389:
+
+        ❌ No va cifrado por defecto
+
+    Versión segura:
+
+        🔒 LDAPS → Puerto 636 (LDAP sobre TLS)
+
+
+🧪 En pentesting AD
+
+    Si el 389 está abierto:
+
+        Indica Active Directory o servidor LDAP
+        Permite enumeración de usuarios
+        Puede revelar estructura completa del dominio
+        Puede permitir ataques si no requiere autenticación
+
+    Se revisa junto a:
+
+        88 → Kerberos
+        135 → RPC
+        445 → SMB
+
+⚠️ Riesgos comunes
+
+    Enumeración anónima
+    Exposición de estructura interna
+    Información para ataques como:
+
+        Kerberoasting
+        AS-REP Roasting
+        Escalada de privilegios
+
+🎯 ¿Cómo funciona?
+
+    Un cliente puede hacer consultas tipo:
+
+        “Dame todos los usuarios del dominio”
+
+    Ejemplo conceptual:
+
+		ldapsearch -x -H ldap://<IP> -b "dc=DOMINIO, dc=COM, ES, ORG, ETC..."
+
+    El servidor responde con objetos del directorio.
+
+    Donde: 
+
+        ldapsearch  →   Herramienta para consultar LDAP
+        -x  →   Autenticación simple (sin SASL)
+        -H  →   ldap://IP	Dirección del servidor LDAP
+        -b  →   Base DN (punto desde donde empieza la búsqueda)
+        "dc=empresa,dc=local"   →   Dominio en formato LDAP

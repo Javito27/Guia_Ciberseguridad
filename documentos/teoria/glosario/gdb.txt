@@ -1,0 +1,33 @@
+En el contexto de informática y ciberseguridad, GDB significa GNU Debugger. Es una herramienta fundamental para depurar programas, es decir, encontrar y analizar errores o comportamientos inesperados en el código.
+
+Qué es GDB
+
+	> Es un depurador para programas escritos en C, C++, y otros lenguajes soportados.
+	> Forma parte del proyecto GNU, que desarrolla software libre.
+	> Funciona en sistemas operativos tipo Unix (Linux, macOS) y también tiene versiones para Windows.
+
+Para qué sirve
+
+	1. Detectar errores (bugs): Permite ver dónde y por qué un programa falla.
+	2. Seguir la ejecución paso a paso: Puedes ejecutar el programa línea por línea para ver qué hace exactamente en cada paso.
+	3.Examinar variables y memoria: Muestra el contenido de variables, estructuras de datos y la memoria en tiempo real.
+	4. Analizar fallos de seguridad: En ciberseguridad, GDB se usa para:
+
+		- Analizar vulnerabilidades como desbordamientos de búfer (buffer overflow).
+		- Revisar cómo un exploit manipula la memoria del programa.
+
+	5. Modificar la ejecución del programa: Puedes cambiar valores de variables o saltarte instrucciones para probar diferentes escenarios.
+
+Ejemplo básico de uso
+
+-------------------------------------------------------------------------------------------
+|  gcc -g programa.c -o programa  |  # Compila con información de depuración              |
+|  gdb ./programa                 |  # Inicia GDB                                         |
+|  (gdb) break main               |  # Coloca un breakpoint en la función main            |
+|  (gdb) run                      |  # Ejecuta el programa hasta el breakpoint            |
+|  (gdb) print variable           |  # Muestra el valor de 'variable'                     |
+|  (gdb) next                     |  # Ejecuta la siguiente línea de código               |
+|  (gdb) continue                 |  # Continúa la ejecución hasta el próximo breakpoint  |
+-------------------------------------------------------------------------------------------
+
+En ciberseguridad, GDB es muy usado para reverse engineering y para analizar cómo funcionan exploits o malware, porque permite inspeccionar directamente cómo un programa interactúa con la memoria y los registros del procesador.

@@ -1,0 +1,68 @@
+o365-spray es una herramienta de Password Spraying escrita en Python.
+
+Se utiliza contra cuentas de Microsoft Office 365 (Azure AD / Microsoft 365) para probar credenciales de manera controlada.
+
+
+¿Qué es el Password Spraying?
+
+    > Es una técnica de ataque de fuerza bruta lenta y distribuida.
+    
+    > En lugar de probar muchas contraseñas para un solo usuario (lo que activa bloqueos), se prueba una misma contraseña para muchos usuarios.
+    
+    > Ejemplo:
+    
+        - Usuario1: Password123!
+        - Usuario2: Password123!
+        - Usuario3: Password123!
+    
+    > Si alguna cuenta usa esa contraseña común, se obtiene acceso.
+
+
+¿Para qué se usa o365-spray en informática y ciberseguridad?
+
+    1. Pentesting y Red Team → detectar contraseñas débiles en entornos corporativos.
+    2. Evaluar políticas de contraseñas → ver si usuarios están usando claves simples como Verano2023!, Password1!.
+    3. Bug bounty / Auditorías → comprobar la exposición de cuentas de correo de Office 365.
+    4. Concienciación de seguridad → demostrar riesgos del uso de contraseñas comunes.
+
+
+Ejemplo de ejecución
+
+    python3 o365spray.py --validate --domain empresa.com
+
+
+Opciones principales de o365-spray
+
+    ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |  Opción               |  Descripción                                                    |   Ejemplo de Uso                                                                    |  
+    ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |  --validate           |  Valida usuarios de un dominio de Office 365.                   |  python3 o365spray.py --validate --domain empresa.com                               |    
+    |  --enum               |  Enumera usuarios válidos a partir de un listado.               |  python3 o365spray.py --enum -U users.txt --domain empresa.com                      |    
+    |  --spray              |  Ejecuta ataque de password spraying.                           |  python3 o365spray.py --spray -U users.txt -p 'Password123!' --domain empresa.com   |    
+    |  -U                   |  Lista de usuarios o correos electrónicos.                      |                                                                                     |
+    |  -p                   |  Contraseña a probar.                                           |                                                                                     |
+    |  -P                   |  Lista de contraseñas (wordlist).                               |                                                                                     |
+    |  --lockout-threshold  |  Controla el número de intentos para evitar bloqueos.           |                                                                                     |
+    |  --rate-limit         |  Controla el tiempo entre intentos (para evadir detecciones).   |                                                                                     |
+    |  --verbose            |  Modo detallado.                                                |                                                                                     |
+    ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Ejemplo práctico
+
+    python3 o365spray.py --spray -U users.txt -P passwords.txt --domain empresa.com --lockout-threshold 5 --rate-limit 60
+
+    Esto probará todas las contraseñas en passwords.txt contra todos los usuarios en users.txt, respetando umbrales de bloqueo (5 intentos) y con 60 segundos entre rondas.
+
+
+Importante
+
+    > Herramienta solo para entornos controlados y legales (ej: auditorías, pentesting autorizado).
+    
+    > Usarla sin permiso es un delito (ataque real a cuentas corporativas).
+    
+    > Mitigación en empresas:
+    
+        - Activar MFA (Multi-Factor Authentication).
+        - Políticas de contraseñas robustas.
+        - Monitoreo de accesos anómalos en Azure AD.

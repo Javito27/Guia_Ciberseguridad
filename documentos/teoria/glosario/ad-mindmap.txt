@@ -1,0 +1,3 @@
+Es un mapa de técnicas y conocimientos relacionados con la administración de sistemas, especialmente Windows y Active Directory.
+
+💻 https://orange-cyberdefense.github.io/ocd-mindmaps/img/mindmap_ad_dark_classic_2025.03.excalidraw.svg

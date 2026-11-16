@@ -1,0 +1,108 @@
+📌 Es el puerto utilizado por Kerberos, el protocolo de autenticación principal en entornos Active Directory.
+
+    Kerberos es un protocolo de autenticación basada en tickets.
+
+    En lugar de enviar la contraseña cada vez, el sistema:
+
+        1️⃣ Verifica tu identidad
+        2️⃣ Te entrega un ticket
+        3️⃣ Usas ese ticket para acceder a servicios
+
+    Todo sin reenviar la contraseña continuamente.
+
+⚙️ ¿Qué usa?
+
+    Puerto 88
+    Normalmente sobre TCP y UDP
+    Funciona con un KDC (Key Distribution Center): En Active Directory → el Domain Controller
+
+🧪 En ciberseguridad / pentesting AD
+
+    El puerto 88 es muy importante porque permite ataques como:
+
+        🎯 Kerberoasting
+        🎯 AS-REP Roasting
+        🎯 Golden Ticket
+        🎯 Silver Ticket
+
+    Si el 88 está abierto → casi seguro hay Active Directory.
+
+🧠 Cómo funciona (simplificado)
+
+    1️⃣ Usuario inicia sesión
+    2️⃣ Pide un TGT (Ticket Granting Ticket)
+    3️⃣ El KDC lo entrega
+    4️⃣ Con ese TGT solicita acceso a un servicio
+    5️⃣ Obtiene un TGS (Service Ticket)
+
+📊 Pasos funcionamiento KERBEROS
+
+    Paso 0️⃣) Actores (quién es quién)
+
+        Cliente: tu PC / usuario (por ejemplo, ISABEL-PC)
+        KDC/DC: controlador de dominio (por ejemplo, DC01)
+        Servicio: algo al que quieres acceder (SMB/archivo, HTTP/IIS, MSSQL, etc.)
+
+
+    Paso 1️⃣) Login → pedir un TGT (AS-REQ) (puerto 88)
+
+        Cuando inicias sesión en el dominio, tu equipo envía al DC una petición:
+
+            “Hola DC, soy isabel, quiero un ticket para poder pedir acceso a cosas”.
+
+        Eso es un AS-REQ (Authentication Service Request).
+
+        Importante: aquí NO se envía la contraseña “tal cual”. Se usa para demostrar que la conoces.
+
+
+    Paso 2️⃣) El DC responde con un TGT (AS-REP) (puerto 88)
+
+        El DC verifica al usuario y responde con:
+
+            TGT (Ticket Granting Ticket): un “pase” que demuestra que ya estás autenticada.
+            Una clave de sesión (para seguir hablando seguro).
+
+        Eso es un AS-REP.
+
+        ✅ Con el TGT, ya no necesitas “loguearte” otra vez para cada servicio.
+
+
+    Paso 3️⃣) Quiero acceder a un servicio → pedir un TGS (TGS-REQ) (puerto 88)
+
+        Ahora quieres acceder, por ejemplo, a un recurso:
+
+            Carpeta compartida (SMB)
+            Web interna (HTTP)
+            SQL Server (MSSQL)
+
+        Tu PC le dice al DC:
+
+            “Aquí tienes mi TGT, dame un ticket para el servicio SMB/DC01 (o el que toque)”.
+
+        Esto es un TGS-REQ (Ticket Granting Service Request).
+
+
+    Paso 4️⃣) El DC te da el ticket del servicio (TGS-REP) (puerto 88)
+
+        El DC responde con:
+
+            TGS / Service Ticket: ticket específico para ese servicio.
+
+        Eso es un TGS-REP.
+
+        ✅ Ya tienes el “pase” para entrar al servicio concreto.
+
+
+    Paso 5️⃣) Accedes al servicio con el ticket (AP-REQ) (puerto del servicio)
+
+        Ahora ya no usas el 88.
+
+        Te conectas al servicio real (por ejemplo):
+
+            SMB → 445
+            HTTP → 80/443
+            MSSQL → 1433
+
+        Y le presentas el Service Ticket (AP-REQ).
+
+        El servicio valida el ticket y te deja entrar si tienes permisos.

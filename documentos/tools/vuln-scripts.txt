@@ -1,0 +1,99 @@
+Nmap + NSE (Nmap Scripting Engine)
+
+¿Qué es Nmap?
+
+    > Nmap (Network Mapper) es una herramienta de escaneo de redes.
+    
+    > Se usa en informática, redes y ciberseguridad para:
+    
+        - Descubrir hosts activos en una red.
+        - Detectar puertos abiertos y servicios en ejecución.
+        - Identificar sistemas operativos y versiones de servicios.
+        - Hacer auditorías de seguridad y pruebas de penetración.
+    
+    Ejemplo básico:
+    
+        nmap 192.168.1.1
+    
+
+¿Qué es NSE (Nmap Scripting Engine)?
+
+    > Es un motor de scripts en Nmap que permite ampliar sus funciones.
+    
+    > Los scripts están escritos en Lua.
+        
+    > Se agrupan por categorías, por ejemplo:
+        
+        ---------------------------------------------------------
+        |  Opción      |  Descripción                           |
+        ---------------------------------------------------------
+        |  safe        |  información sin riesgo.               |
+        |  discovery   |  descubrimiento de servicios.          |
+        |  default     |  se ejecutan con -sC.                  |
+        |  vuln        |  detección de vulnerabilidades.        |
+        |  exploit     |  intentan explotar vulnerabilidades.   |
+        |  auth        |  autenticación en servicios.           |
+        |  brute       |  fuerza bruta de contraseñas.          |
+        ---------------------------------------------------------
+		
+    Los más famosos son los de la categoría vuln, que permiten encontrar vulnerabilidades comunes.
+
+
+¿Para qué se usa en informática y ciberseguridad?
+
+    1. Administración de redes → detectar puertos abiertos y servicios expuestos.
+    2. Pruebas de seguridad (pentesting) → buscar vulnerabilidades conocidas en servicios.
+    3. Gestión de vulnerabilidades → complementar escáneres como Nessus o OpenVAS.
+    4. Hacking ético / Red Team → reconocimiento y explotación básica.
+    5. Forense y auditoría → descubrir configuraciones débiles o inseguras.
+
+
+Opciones principales de Nmap
+
+        ------------------------------------------------------------------------------------------------
+        |  Opción           |  Descripción                                                             |
+        ------------------------------------------------------------------------------------------------
+        |  -sS              |  Escaneo SYN (stealth).                                                  |
+        |  -sT              |  Escaneo TCP completo.                                                   |
+        |  -sU              |  Escaneo UDP.                                                            |
+        |  -O               |  Detección de sistema operativo.                                         |
+        |  -sV              |  Detección de versiones de servicios.                                    |
+        |  -A               |  Escaneo agresivo (OS + servicios + traceroute + scripts por defecto).   |
+        |  -p               |  Especificar puertos. Ejemplo: -p 80,443 o -p- (todos los puertos).      |
+        |  -Pn              |  No hacer descubrimiento de hosts (asume que están activos).             |
+        |  -T4              |  Velocidad de escaneo (1=lento, 5=rápido).                               |
+        |  -oN/-oX/-oG/-oA  |  Guardar resultados en diferentes formatos.                              |
+        ------------------------------------------------------------------------------------------------
+
+
+Opciones con NSE
+
+    ----------------------------------------------------------------------------------------------------------------------------------------------
+    |  script              |  Descripción                                          |  Ejemplo de Uso                                             |  
+    ----------------------------------------------------------------------------------------------------------------------------------------------
+    |  --script <nombre>   |  Ejecutar un script específico.                       |  nmap --script http-vuln-cve2017-5638 -p 8080 192.168.1.10  |
+    |  --script vuln       |  Ejecutar todos los scripts de la categoría "vuln".   |   nmap -sV --script vuln 192.168.1.10                       |
+    |  --script default    |  Ejecutar los scripts por defecto.                    |                                                             |
+    |  --script discovery  |  Scripts de descubrimiento de servicios.              |                                                             |
+    |  --script brute      |  Scripts de fuerza bruta.                             |                                                             |
+    |  --script "http-*"   |  Ejecutar todos los scripts relacionados con HTTP.    |                                                             |
+    ----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Ejemplos prácticos
+
+    --------------------------------------------------------------------------------------------------
+    |  Descripción                                    |   Ejemplo de Uso                             |
+    --------------------------------------------------------------------------------------------------
+    |  Escaneo básico de puertos abiertos             |  nmap -sS 192.168.1.1                        |
+    |  Detección de servicios y versiones             |  nmap -sV 192.168.1.1                        |
+    |  Ejecutar scripts de vulnerabilidades           |  nmap -sV --script vuln 192.168.1.1          |
+    |  Escaneo completo con scripts y detección OS    |  nmap -A 192.168.1.1                         |
+    |  Ejemplo dirigido a HTTP                        |  nmap -p 80 --script http-enum 192.168.1.1   |
+    --------------------------------------------------------------------------------------------------
+
+En resumen:
+
+    > Nmap descubre hosts, puertos y servicios.
+    > NSE (vuln scripts) permite buscar vulnerabilidades específicas en esos servicios.
+    > Es una herramienta fundamental en ciberseguridad, administración de sistemas y pentesting.

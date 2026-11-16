@@ -1,0 +1,71 @@
+En informática y ciberseguridad, las entidades XML (XML Entities) son mecanismos especiales dentro de XML que permiten definir valores reutilizables o referencias a datos externos dentro de un documento XML.
+
+Se parecen a "variables" en programación, pero en el contexto de XML.
+
+Tipos de entidades XML
+
+	1. Entidades internas -> Definidas dentro del propio documento.
+
+		Ejemplo: 
+		
+			<!DOCTYPE ejemplo [
+			  <!ENTITY autor "Juan Pérez">
+			]>
+			<mensaje>El autor es &autor;</mensaje>
+
+		Aquí, &autor; se sustituye por "Juan Pérez".
+
+	2. Entidades externas -> Referencian contenido que está fuera del documento XML (en otro archivo o recurso remoto).
+
+		Ejemplo:
+
+			<!DOCTYPE ejemplo [
+			  <!ENTITY capitulo1 SYSTEM "file:///etc/passwd">
+			]>
+			<texto>&capitulo1;</texto>
+
+		Esto es muy peligroso, porque el XML puede "incluir" información de archivos locales o URLs externas.
+
+***********************************************************************************************************************************************************************************************************************************************
+
+En el ámbito de la ciberseguridad, ¿por qué importan?
+
+Las entidades XML son relevantes porque dieron origen a un tipo de vulnerabilidad muy conocida:
+
+	XXE (XML External Entity Injection)
+
+		> Ocurre cuando una aplicación que procesa XML permite el uso de entidades externas sin restricciones.
+		> Un atacante puede aprovecharlo para:
+
+			- Leer archivos sensibles del servidor (ej. /etc/passwd).
+			- Hacer requests a servicios internos (SSRF).
+			- Consumir recursos del sistema (billion laughs attack, un ataque de denegación de servicio).
+
+		Ejemplo de ataque básico con XXE:
+
+			<?xml version="1.0" encoding="UTF-8"?>
+			<!DOCTYPE data [
+			  <!ENTITY xxe SYSTEM "file:///etc/passwd">
+			]>
+			<request>
+			  <info>&xxe;</info>
+			</request>
+
+		Si la aplicación es vulnerable, devolverá el contenido de /etc/passwd.
+
+¿Para qué sirven entonces?
+
+	En un uso legítimo, las entidades XML se crearon para:
+
+		> Reutilizar valores en varios lugares del XML.
+		> Incluir documentos externos (útil en configuración modular).
+
+	Pero en ciberseguridad moderna, lo recomendable es:
+
+		> Deshabilitar entidades externas en los parsers XML.
+		> Usar alternativas más seguras (JSON, formatos sin este tipo de riesgos).
+
+En resumen:
+
+	> Las entidades XML son referencias dentro de un documento XML que permiten reutilizar datos o incluir contenido externo.
+	> En ciberseguridad, son un vector común de ataques (XXE) si no se configuran bien los parsers.

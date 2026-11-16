@@ -1,0 +1,74 @@
+Wapiti es un escáner de vulnerabilidades web de código abierto, escrito en Python.
+
+Su función principal es analizar aplicaciones web para detectar vulnerabilidades de seguridad sin necesidad de acceso al código fuente.
+
+
+¿Para qué se usa?
+
+    > Escanear sitios web y aplicaciones web en busca de vulnerabilidades.
+    
+    > Detectar fallos de seguridad como:
+    
+        - XSS (Cross-Site Scripting)
+        - SQL Injection
+        - Command Injection
+        - File Disclosure
+        - CRLF Injection
+        - LDAP Injection, entre otros.
+    
+    > Generar reportes de seguridad para auditorías.
+    
+    > Usado tanto en pentesting profesional como en entornos educativos o CTFs.
+
+
+Características principales
+
+    > Escaneo black-box: analiza la web desde fuera, sin acceso al código.
+    > Detecta vulnerabilidades comunes en aplicaciones web.
+    > Soporta múltiples métodos de HTTP: GET y POST.
+    > Permite autenticación y sesiones, cookies, cabeceras personalizadas.
+    > Genera reportes en HTML, XML o JSON.
+
+
+Instalación
+
+    sudo apt install wapiti
+	
+
+Uso básico
+
+    wapiti -u http://objetivo.com
+
+    Esto realiza un escaneo completo del sitio web en busca de vulnerabilidades.
+	
+	
+Opciones principales
+
+    ----------------------------------------------------------------------------------------------------------------------------------------------------
+    |  Opción          |  Descripción                                               |  Ejemplo de Uso                                                  |  
+    ----------------------------------------------------------------------------------------------------------------------------------------------------
+    |  -u              |  URL del sitio web a analizar                              |  wapiti -u http://ejemplo.com                                    |
+    |  -m              |  Módulos específicos a usar (ej: xss, sqli, rfi)           |  wapiti -u http://ejemplo.com -m sqli,xss                        |
+    |  -p              |  Proxy (ej: BurpSuite, OWASP ZAP)                          |  wapiti -u http://ejemplo.com -p http://127.0.0.1:8080           |
+    |  --scope         |  Limitar el escaneo a un subdirectorio específico          |  wapiti -u http://ejemplo.com --scope /admin                     |
+    |  -v              |  Nivel de verbosidad (para ver detalles del escaneo)       |  wapiti -u http://ejemplo.com -v 2                               |
+    |  -o              |  Formato y ubicación del reporte                           |  wapiti -u http://ejemplo.com -o html:/home/user/reporte.html    |
+    |  --cookie        |  Añadir cookies para autenticación en la web               |  wapiti -u http://ejemplo.com --cookie "PHPSESSID=abcd1234"      |
+    |  --random-agent  |  Usar agentes de usuario aleatorios para evitar bloqueos   |                                                                  |
+    |  --max-depth     |  Profundidad máxima del escaneo en el sitio web            |                                                                  |
+    ----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Ejemplo práctico
+
+    Escanear un sitio web completo, detectando SQLi y XSS, usando BurpSuite como proxy y generando reporte HTML:
+	
+	    wapiti -u http://objetivo.com -m sqli,xss -p http://127.0.0.1:8080 -o html:/home/user/reporte.html
+
+
+Ventajas de Wapiti
+
+    > Ligero y rápido.
+    > Múltiples módulos de detección de vulnerabilidades.
+    > Genera reportes claros y detallados.
+    > Soporta autenticación, cookies y proxy.

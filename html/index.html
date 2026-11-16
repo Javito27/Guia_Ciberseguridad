@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía Ciberseguridad & IA</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/search.js" defer></script> <!-- Buscador web -->
+</head>
+
+<body>
+  <div class="layout">
+
+    <aside class="sidebar" id="sidebar">
+
+      <a class="brand" href="#inicio"><span class="brand-mark">⌘</span><span>CYBER<span class="accent">GUIDE</span><small>CIBERSEGURIDAD & IA</small></span></a>
+
+      <div class="nav-caption">EXPLORAR CONTENIDOS</div>
+
+      <nav aria-label="Secciones de la guía">
+        <a href="index.html#teoria-fundamentos" class="nav-link"><span>📖</span>Teoría y Fundamentos</a>
+        <a href="index.html#herramientas" class="nav-link"><span>🛠️</span>Herramientas</a>
+        <a href="index.html#puertos-y-protocolos" class="nav-link"><span>🔌</span>Puertos y protocolos</a>
+        <a href="index.html#escalada-de-privilegios" class="nav-link"><span>🔐</span>Escalada de privilegios</a>
+        <a href="index.html#pivoting-y-movimiento-lateral" class="nav-link"><span>🔀</span>Pivoting y movimiento lateral</a>
+        <a href="index.html#vulnerabilidades" class="nav-link"><span>⚠️</span>Vulnerabilidades</a>
+        <a href="index.html#osint" class="nav-link"><span>🔎</span>OSINT</a>
+        <a href="index.html#shells" class="nav-link"><span>⌨️</span>Shells</a>
+        <a href="index.html#redes" class="nav-link"><span>🌐</span>Redes</a>
+        <a href="index.html#bases-de-datos" class="nav-link"><span>🗄️</span>Bases de datos</a>
+        <a href="index.html#criptografia" class="nav-link"><span>🔑</span>Criptografía</a>
+        <a href="index.html#malware" class="nav-link"><span>🧬</span>Malware</a>
+        <a href="index.html#ingenieria-social" class="nav-link"><span>🧠</span>Ingeniería social</a>
+        <a href="index.html#laboratorios"class="nav-link"><span>🧪</span>Laboratorios</a>
+        <a href="index.html#recursos-web" class="nav-link"><span>🌍</span>Recursos web</a>
+        <a href="index.html#repositorios-git" class="nav-link"><span>📦</span>Repositorios Git</a>
+        <a href="index.html#metodologias-de-auditoria" class="nav-link"><span>📋</span>Metodologías de auditoría</a>
+        <a href="index.html#informes" class="nav-link"><span>📝</span>Informes</a>
+        <a href="index.html#salidas-profesionales" class="nav-link"><span>💼</span>Salidas profesionales</a>
+      </nav>
+
+    </aside>
+
+    <div class="main-area"  id="inicio">
+
+      <header class="topbar"><button id="menu-toggle" class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button><span class="breadcrumb"></span>
+
+        <div class="top-links">
+          <a href="https://claude.ai/new" target="_blank" rel="noopener noreferrer">Claude</a>
+          <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">ChatGPT</a>
+          <a href="https://chat.deepseek.com/" target="_blank" rel="noopener noreferrer">DeepSeek</a>
+        </div>
+
+      </header>
+
+      <main>
+
+        <section class="hero">
+          <h1>Biblioteca de<br><span class="gradient-text">Ciberseguridad & IA</span></h1>
+          <p>Guía de conocimientos y herramientas, organizada para aprender, practicar y documentar.</p>
+
+          <div class="hero-actions">
+            <a href="#teoria-fundamentos" class="primary-action">Explorar contenidos</a>
+          </div>
+        </section>
+      
+        <br>
+        <br>
+
+        <!-- Buscador -->
+        <div class="content-header">
+          
+          <div>
+            <span class="eyebrow">BIBLIOTECA</span>
+            <h2>Explorar contenidos</h2>
+            <p>Busca recursos o navega por categorías.</p>
+          </div>
+          
+          <label class="search-wrap"><span>⌕</span><input id="search" type="search" placeholder="Buscar contenido ..." aria-label="Buscar recursos"></label>
+        </div>
+
+        <!-- Resultado de búsqueda no coincide -->
+        <div id="empty-state-index" class="empty-state-index" hidden>No se encontraron recursos con ese nombre.</div>
+
+        <!-- Paneles de recursos -->
+        <div class="panels">
+
+          <!-- Teoría y Fundamentos -->
+          <section class="panel" id="teoria-fundamentos">
+            <div class="panel-head">
+              <div><span class="panel-icon">📖</span>
+                <h2>Teoría y Fundamentos</h2>
+              </div>
+            </div>
+            <div class="resource-grid">
+              <a class="resource" href="teoria/glosario.html">Glosario<span aria-hidden="true">→</span></a>
+              <a class="resource" href="teoria/comandos.html">Comandos<span aria-hidden="true">→</span></a>
+              <a class="resource" href="teoria/rutas.html">Rutas y ficheros de configuración<span aria-hidden="true">→</span></a>
+            </div>
+          </section>
+
+          <!-- Tools -->
+          <section class="panel" id="herramientas">
+            <div class="panel-head">
+              <div><span class="panel-icon">🛠️</span>
+                <h2>Herramientas</h2>
+              </div>
+            </div>
+            <div class="resource-grid">
+              <a class="resource" href="tools/reconocimiento.html">FASE 1 → Reconocimiento<span aria-hidden="true">→</span></a>
+              <a class="resource" href="tools/escaneo-enumeracion.html">FASE 2 → Escaneo y enumeración<span aria-hidden="true">→</span></a>
+              <a class="resource" href="tools/analisis-vulnerabilidades.html">FASE 3 → Análisis de vulnerabilidades<span aria-hidden="true">→</span></a>
+              <a class="resource" href="tools/explotacion.html">FASE 4 → Explotación<span aria-hidden="true">→</span></a>
+              <a class="resource" href="tools/post-explotacion.html">FASE 5 → Post-explotación<span aria-hidden="true">→</span></a>
+              <a class="resource" href="tools/limpieza-reporte.html">FASE 6 → Limpieza y reporte<span aria-hidden="true">→</span></a>
+              <a class="resource" href="tools/otras-herramientas.html">Otras herramientas<span aria-hidden="true">→</span></a>
+            </div>
+          </section>
+
+          <!-- Puertos y protocolos -->
+          <section class="panel" id="puertos-y-protocolos">
+            <div class="panel-head">
+              <div><span class="panel-icon">🔌</span>
+                <h2>Puertos y protocolos</h2>
+              </div>
+            </div>
+            <div class="resource-grid">
+              <a class="resource" href="ports/port.html?id=21">FTP 21/TCP<span aria-hidden="true">→</span></a>
+              <a class="resource" href="ports/port.html?id=22">SSH 22/TCP<span aria-hidden="true">→</span></a>
+              <a class="resource" href="ports/port.html?id=23">Telnet 23/TCP<span aria-hidden="true">→</span></a>
+              <a class="resource" href="ports/port.html?id=25">SMTP 25/TCP<span aria-hidden="true">→</span></a>
+              <a class="resource" href="ports/port.html?id=53">DNS 53/TCP/UDP<span aria-hidden="true">→</span></a>
+              <a class="resource" href="ports/port.html?id=69">TFTP 69/UDP<span aria-hidden="true">→</span></a>
+              <a class="resource" href="ports/port.html?id=80">HTTP 80/TCP<span aria-hidden="true">→</span></a>
+              <a class="resource" href="ports/port.html?id=88">Kerberos 88/TCP/UDP<span aria-hidden="true">→</span></a>
+              <a class="resource" href="ports/port.html?id=135">RPC 135/TCP<span aria-hidden="true">→</span></a>
+              <a class="resource" href="ports/port.html?id=139">NetBIOS 139/TCP<span aria-hidden="true">→</span></a>
+              <a class="resource" href="ports/port.html?id=161">SNMP 161/UDP<span aria-hidden="true">→</span></a>
+              <a class="resource" href="ports/port.html?id=389">LDAP 389/TCP<span aria-hidden="true">→</span></a>
+              <a class="resource" href="ports/port.html?id=443">HTTPS 443/TCP<span aria-hidden="true">→</span></a>
+              <a class="resource" href="ports/port.html?id=445">SMB 445/TCP<span aria-hidden="true">→</span></a>
+              <a class="resource" href="ports/port.html?id=465">SMTPS 465/TCP<span aria-hidden="true">→</span></a>
+              <a class="resource" href="ports/port.html?id=587">SMTP Submission 587/TCP<span aria-hidden="true">→</span></a>
+              <a class="resource" href="ports/port.html?id=636">LDAPS 636/TCP<span aria-hidden="true">→</span></a>
+              <a class="resource" href="ports/port.html?id=873">rsync 873/TCP<span aria-hidden="true">→</span></a>
+              <a class="resource" href="ports/port.html?id=1433">MS SQL Server 1433/TCP<span aria-hidden="true">→</span></a>
+              <a class="resource" href="ports/port.html?id=2525">SMTP alternativo 2525/TCP<span aria-hidden="true">→</span></a>
+              <a class="resource" href="ports/port.html?id=3268">LDAP GC 3268/TCP<span aria-hidden="true">→</span></a>
+              <a class="resource" href="ports/port.html?id=3269">LDAP GC SSL 3269/TCP<span aria-hidden="true">→</span></a>
+              <a class="resource" href="ports/port.html?id=3306">MySQL 3306/TCP <span aria-hidden="true">→</span></a>
+              <a class="resource" href="ports/port.html?id=3389">RDP 3389/TCP<span aria-hidden="true">→</span></a>
+              <a class="resource" href="ports/port.html?id=5432">PostgreSQL 5432/TCP<span aria-hidden="true">→</span></a>
+              <a class="resource" href="ports/port.html?id=5985">WinRM 5985/5986 TCP<span aria-hidden="true">→</span></a>
+              <a class="resource" href="ports/port.html?id=6379">Redis 6379/TCP<span aria-hidden="true">→</span></a>
+              <a class="resource" href="ports/port.html?id=8080">HTTP alternativo 8080/TCP<span aria-hidden="true">→</span></a>
+              <a class="resource" href="ports/port.html?id=8443">HTTPS alternativo 8443/TCP <span aria-hidden="true">→</span></a>
+              <a class="resource" href="ports/port.html?id=8500">8500/TCP (verificar servicio)<span aria-hidden="true">→</span></a>
+              <a class="resource" href="ports/port.html?id=27017">MongoDB 27017-27018/TCP<span aria-hidden="true">→</span></a>
+              <a class="resource" href="ports/port.html?id=61616">ActiveMQ 61616/TCP <span aria-hidden="true">→</span></a>
+            </div>
+          </section>
+
+          <!-- Escalada de privilegios -->
+          <section class="panel" id="escalada-de-privilegios">
+            <div class="panel-head">
+              <div><span class="panel-icon">🔐</span>
+                <h2>Escalada de privilegios</h2>
+              </div>
+            </div>
+            <div class="resource-grid">
+              <span class="resource disabled" title="Contenido en preparación">Definición <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Tipos <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Según sistema operativo <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Rutas y comandos útiles <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Herramientas <small>Próximamente</small></span>
+            </div>
+          </section>
+
+          <!-- Pivoting y movimiento Lateral -->
+          <section class="panel" id="pivoting-y-movimiento-lateral">
+            <div class="panel-head">
+              <div><span class="panel-icon">🔀</span>
+                <h2>Pivoting y movimiento lateral</h2>
+              </div>
+            </div>
+            <div class="resource-grid">
+              <span class="resource disabled" title="Contenido en preparación">Definición <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Herramientas pivoting <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Técnicas comunes <small>Próximamente</small></span>
+            </div>
+          </section>
+
+          <!-- Vulnerabilidades -->
+          <section class="panel" id="vulnerabilidades">
+            <div class="panel-head">
+              <div><span class="panel-icon">⚠️</span>
+                <h2>Vulnerabilidades</h2>
+              </div>
+            </div>
+            <div class="resource-grid">
+              <a class="resource" href="vulnerabilidades/inyecciones.html">Inyecciones<span aria-hidden="true">→</span></a>
+              <a class="resource" href="vulnerabilidades/cves.html">CVE conocidos<span aria-hidden="true">→</span></a>
+              <a class="resource" href="vulnerabilidades/definicion.html?id=idor&from=definicion.html">IDOR<span aria-hidden="true">→</span></a>
+              <span class="resource disabled" title="Contenido en preparación">NGINX <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Otros <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Web <small>Próximamente</small></span>
+            </div>
+          </section>
+
+          <!-- OSINT -->
+          <section class="panel" id="osint">
+            <div class="panel-head">
+              <div><span class="panel-icon">🔎</span>
+                <h2>OSINT</h2>
+              </div>
+            </div>
+            <div class="resource-grid">
+              <span class="resource disabled" title="Contenido en preparación">¿Qué es? <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Herramientas OSINT <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Checklist <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Informes <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">OSINT Framework <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Google Dorking <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">OSRFramework <small>Próximamente</small></span>
+            </div>
+          </section>
+
+          <!-- Shells -->
+          <section class="panel" id="shells">
+            <div class="panel-head">
+              <div><span class="panel-icon">⌨️</span>
+                <h2>Shells</h2>
+              </div>
+            </div>
+            <div class="resource-grid">
+              <span class="resource disabled" title="Contenido en preparación">Definición <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Tipos de shells <small>Próximamente</small></span>
+            </div>
+          </section>
+
+          <!-- Redes -->
+          <section class="panel" id="redes">
+            <div class="panel-head">
+              <div><span class="panel-icon">🌐</span>
+                <h2>Redes</h2>
+              </div>
+            </div>
+            <div class="resource-grid">
+              <span class="resource disabled" title="Contenido en preparación">Conceptos básicos <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Tipos de redes <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Puertos críticos de red <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Protocolos de seguridad <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Objetivos del hacking WiFi <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Ataques WiFi <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Protección contra cracking <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Herramientas <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Comandos de red <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Calculadora de redes y subredes<small>Próximamente</small></span>
+            </div>
+          </section>
+
+          <!-- Base de Datos -->
+          <section class="panel" id="bases-de-datos">
+            <div class="panel-head">
+              <div><span class="panel-icon">🗄️</span>
+                <h2>Bases de datos</h2>
+              </div>
+            </div>
+            <div class="resource-grid">
+              <span class="resource disabled" title="Contenido en preparación">MySQL <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">MariaDB <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">PostgreSQL <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Oracle Database <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Microsoft SQL Server <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">SQLite <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">MongoDB <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Redis <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Cassandra <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Elasticsearch <small>Próximamente</small></span>
+            </div>
+          </section>
+
+          <!-- Criptografia -->
+          <section class="panel" id="criptografia">
+            <div class="panel-head">
+              <div><span class="panel-icon">🔑</span>
+                <h2>Criptografía</h2>
+              </div>
+            </div>
+            <div class="resource-grid">
+              <span class="resource disabled" title="Contenido en preparación">Definición <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Tipos de cifrado <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Esteganografía <small>Próximamente</small></span>
+            </div>
+          </section>
+
+          <!-- Malwares -->
+          <section class="panel" id="malware">
+            <div class="panel-head">
+              <div><span class="panel-icon">🧬</span>
+                <h2>Malware</h2>
+              </div>
+            </div>
+            <div class="resource-grid">
+              <span class="resource disabled" title="Contenido en preparación">Ransomware <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Recursos para el análisis de malware <small>Próximamente</small></span>
+            </div>
+          </section>
+
+          <!-- Ingenería Social -->
+          <section class="panel" id="ingenieria-social">
+            <div class="panel-head">
+              <div><span class="panel-icon">🧠</span>
+                <h2>Ingeniería social</h2>
+              </div>
+            </div>
+            <div class="resource-grid">
+              <span class="resource disabled" title="Contenido en preparación">Definición <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Tipos <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Técnicas avanzadas <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Herramientas <small>Próximamente</small></span>
+            </div>
+          </section>
+
+          <!-- Laboratorios -->
+          <section class="panel" id="laboratorios">
+            <div class="panel-head">
+              <div><span class="panel-icon">🧪</span>
+                <h2>Laboratorios</h2>
+              </div>
+            </div>
+            <div class="resource-grid">
+              <a class="resource" href="labs/machines_htb.html">Laboratorios Hack The Box<span aria-hidden="true">→</span></a>
+              <a class="resource" href="https://app.hackthebox.com/home" target="_blank" rel="noopener noreferrer">Hack The Box<span aria-hidden="true">↗</span></a>
+              <a class="resource" href="labs/machines_dl.html">Laboratorios DockerLabs<span aria-hidden="true">→</span></a>
+              <a class="resource" href="https://dockerlabs.es/" target="_blank" rel="noopener noreferrer">DockerLabs<span aria-hidden="true">↗</span></a>
+              <a class="resource" href="labs/machines_ps.html">Laboratorios PortSwigger<span aria-hidden="true">→</span></a>
+              <a class="resource" href="https://portswigger.net/web-security" target="_blank" rel="noopener noreferrer">PortSwigger<span aria-hidden="true">↗</span></a>
+              <a class="resource" href="labs/machines_ma.html">Laboratorios Maldev Academy<span aria-hidden="true">→</span></a>
+              <a class="resource" href="https://maldevacademy.com/" target="_blank" rel="noopener noreferrer">Maldev Academy<span aria-hidden="true">↗</span></a>
+              <a class="resource" href="labs/machines_vh.html">Laboratorios VulnHub<span aria-hidden="true">→</span></a>
+              <a class="resource" href="Laboratorios/vuln_hub.html">VulnHub<span aria-hidden="true">→</span></a>
+              <a class="resource" href="labs/machines_goad.html">Laboratorios GOAD<span aria-hidden="true">→</span></a>
+              <a class="resource" href="Laboratorios/goad.html">GOAD<span aria-hidden="true">→</span></a>
+            </div>
+          </section>
+
+          <!-- Recursos Web -->
+          <section class="panel" id="recursos-web">
+            <div class="panel-head">
+              <div><span class="panel-icon">🌍</span>
+                <h2>Recursos web</h2>
+              </div>
+            </div>
+            <div class="resource-grid">
+              <a class="resource" href="https://book.hacktricks.wiki/en/index.html" target="_blank" rel="noopener noreferrer">HackTricks<span aria-hidden="true">↗</span></a>
+              <a class="resource" href="https://tryhackme.com" target="_blank" rel="noopener noreferrer">TryHackMe<span aria-hidden="true">↗</span></a>
+              <a class="resource" href="https://crackstation.net/" target="_blank" rel="noopener noreferrer">CrackStation<span aria-hidden="true">↗</span></a>
+              <a class="resource" href="https://subdomainfinder.c99.nl/" target="_blank" rel="noopener noreferrer">Subdomain Finder<span aria-hidden="true">↗</span></a>
+              <a class="resource" href="https://hashes.com/en/decrypt/hash" target="_blank" rel="noopener noreferrer">Hashes.com<span aria-hidden="true">↗</span></a>
+              <a class="resource" href="https://www.fakefilegenerator.com/generate-file.php" target="_blank" rel="noopener noreferrer">Fake PDF<span aria-hidden="true">↗</span></a>
+              <a class="resource" href="https://www.virustotal.com/gui/home/upload" target="_blank" rel="noopener noreferrer">VirusTotal<span aria-hidden="true">↗</span></a>
+              <a class="resource" href="https://www.exploit-db.com/" target="_blank" rel="noopener noreferrer">Exploit DB<span aria-hidden="true">↗</span></a>
+              <a class="resource" href="https://chromewebstore.google.com/detail/foxyproxy/gcknhkkoolaabfmlnjonogaaifnjlfnp" target="_blank" rel="noopener noreferrer">FoxyProxy<span aria-hidden="true">↗</span></a>
+              <a class="resource" href="https://resend.com/" target="_blank" rel="noopener noreferrer">Resend<span aria-hidden="true">↗</span></a>
+              <a class="resource" href="https://www.wappalyzer.com/" target="_blank" rel="noopener noreferrer">Wappalyzer<span aria-hidden="true">↗</span></a>
+              <a class="resource" href="https://chromewebstore.google.com/detail/hack-tools/cmbndhnoonmghfofefkcccljbkdpamhi" target="_blank" rel="noopener noreferrer">Hack-Tools<span aria-hidden="true">↗</span></a>
+              <a class="resource" href="https://portswigger.net/burp" target="_blank" rel="noopener noreferrer">Burp Suite<span aria-hidden="true">↗</span></a>
+              <a class="resource" href="https://juggernaut-sec.com/blog/" target="_blank" rel="noopener noreferrer">Juggernaut<span aria-hidden="true">↗</span></a>
+            </div>
+          </section>
+
+          <!-- Repositorios GIT -->
+          <section class="panel" id="repositorios-git">
+            <div class="panel-head">
+              <div><span class="panel-icon">📦</span>
+                <h2>Repositorios Git</h2>
+              </div>
+            </div>
+            <div class="resource-grid">
+              <a class="resource" href="https://github.com/lirantal/daloradius" target="_blank" rel="noopener noreferrer">Daloradius <span aria-hidden="true">↗</span></a>
+              <a class="resource" href="https://github.com/kaonashi-passwords/Kaonashi" target="_blank" rel="noopener noreferrer">Kaonashi <span aria-hidden="true">↗</span></a>
+              <a class="resource" href="https://github.com/VirtualAlllocEx/DEFCON-31-Syscalls-Workshop/wiki" target="_blank" rel="noopener noreferrer">RedOps <span aria-hidden="true">↗</span></a>
+              <a class="resource" href="https://github.com/dirkjanm/BloodHound.py" target="_blank" rel="noopener noreferrer">BloodHound <span aria-hidden="true">↗</span></a>
+              <a class="resource" href="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/SQL%20Injection" target="_blank" rel="noopener noreferrer">SQL Injection <span aria-hidden="true">↗</span></a>
+              <a class="resource" href="https://github.com/Quantika14/osint-suite-tools" target="_blank" rel="noopener noreferrer">OSINT Suite Tools <span aria-hidden="true">↗</span></a>
+              <a class="resource" href="https://github.com/Ragmthy/gralhix_osint_exercises" target="_blank" rel="noopener noreferrer">Gralhix OSINT Exercises <span aria-hidden="true">↗</span></a>
+              <a class="resource" href="https://github.com/chvancooten/OSEP-Code-Snippets" target="_blank"  rel="noopener noreferrer">OSEP Code Snippets <span aria-hidden="true">↗</span></a>
+              <a class="resource" href="https://github.com/brightio/penelope" target="_blank" rel="noopener noreferrer">Penelope <span aria-hidden="true">↗</span></a>
+              <a class="resource" href="https://github.com/open-jarvis/OpenJarvis.git" target="_blank" rel="noopener noreferrer">OpenJarvis <span aria-hidden="true">↗</span></a>
+              <a class="resource" href="https://github.com/sherlock-project/sherlock" target="_blank" rel="noopener noreferrer">Sherlock <span aria-hidden="true">↗</span></a>
+            </div>
+          </section>
+
+          <!-- Metodologías -->
+          <section class="panel" id="metodologias-de-auditoria">
+            <div class="panel-head">
+              <div><span class="panel-icon">📋</span>
+                <h2>Metodologías de auditoría</h2>
+              </div>
+            </div>
+            <div class="resource-grid">
+              <span class="resource disabled" title="Contenido en preparación">Enfoque de auditoría <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Tipo de auditoría <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Metodología <small>Próximamente</small></span>
+            </div>
+          </section>
+
+          <!-- Informes -->
+          <section class="panel" id="informes">
+            <div class="panel-head">
+              <div><span class="panel-icon">📝</span>
+                <h2>Informes</h2>
+              </div>
+            </div>
+            <div class="resource-grid">
+              <span class="resource disabled" title="Contenido en preparación">Informe técnico<small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Informe ejecutivo <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Informe OSINT <small>Próximamente</small></span>
+            </div>
+          </section>
+
+          <!-- Salidas profesionales -->
+          <section class="panel" id="salidas-profesionales">
+            <div class="panel-head">
+              <div><span class="panel-icon">💼</span>
+                <h2>Salidas profesionales</h2>
+              </div>
+            </div>
+            <div class="resource-grid">
+              <span class="resource disabled" title="Contenido en preparación">Red Team <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Blue Team <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Purple Team <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Pentester junior <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Analista de vulnerabilidades <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Security Engineer junior <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Forense digital <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Analista SOC junior <small>Próximamente</small></span>
+              <span class="resource disabled" title="Contenido en preparación">Consultor de seguridad junior <small>Próximamente</small></span>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <footer>© 2026 Javier González Martín <span>·</span> Guía Ciberseguridad & IA</footer>
+
+    </div>
+
+  </div>
+</body>
+
+</html>

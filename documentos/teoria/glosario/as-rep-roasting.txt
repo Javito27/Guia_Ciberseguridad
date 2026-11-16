@@ -1,0 +1,35 @@
+Es un ataque contra Kerberos en entornos Windows Active Directory que permite obtener material de autenticación de determinados usuarios y realizar ataques de fuerza bruta o diccionario sin conexión (offline) para intentar recuperar sus contraseñas.
+
+Es una técnica habitual en auditorías de seguridad y pentesting de Active Directory.
+
+🚀 Como funciona
+
+    1️⃣ Identificar usuarios vulnerables
+
+        El atacante busca cuentas que tengan desactivada la preautenticación Kerberos.
+
+    2️⃣ Solicitar un AS-REP
+
+        Solicita al Domain Controller un mensaje de autenticación para esa cuenta.
+
+    3️⃣ Obtener el material cifrado
+
+        El servidor devuelve una respuesta AS-REP que contiene información cifrada con una clave derivada de la contraseña del usuario.
+
+    4️⃣ Ataque offline
+
+        El atacante utiliza herramientas para probar contraseñas contra ese material cifrado.
+
+    5️⃣ Recuperar la contraseña
+
+        Si consigue encontrarla, puede utilizar las credenciales para acceder al dominio, según los permisos de la cuenta.
+
+🛠️ Herramientas más utilizadas
+
+      Herramienta         Utilidad
+    ----------------------------------------------------------------------------------------------------
+      Impacket         |  Incluye herramientas para solicitar y procesar respuestas AS-REP.
+      Rubeus           |  Permite realizar operaciones Kerberos en Windows.
+      Hashcat          |  Permite intentar recuperar contraseñas mediante fuerza bruta o diccionario.
+      John the Ripper  |  Auditoría de contraseñas.
+    ----------------------------------------------------------------------------------------------------

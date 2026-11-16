@@ -1,0 +1,40 @@
+Es un identificador único que usa Windows para identificar usuarios, grupos y equipos. Windows no confía en el nombre, confía en el SID.
+
+Ejemplo de SID:
+
+    - S-1-5-21-3623811015-3361044348-30300820-1013
+
+El SID sirve para:
+
+    - Controlar permisos
+    - Gestionar accesos
+    - Aplicar políticas de seguridad
+    - Saber quién es quién realmente, aunque cambies el nombre
+
+Los SIDs se usan con: 
+
+    - Usuarios
+    - Grupos (Administradores, Usuarios, etc.)
+    - Equipos
+    - Servicios
+    - Dominios (Active Directory)
+
+Estructura básica de un SID:
+
+    S → SID
+    1 → versión
+    5 → autoridad (Windows NT)
+    21 → dominio o equipo
+    RID → identificador del usuario o grupo
+
+Ejemplos de RID importantes:
+
+    500 → Administrador
+    501 → Invitado
+    1000+ → Usuarios normales
+
+Comandos útiles
+
+    Ver tu SID → whoami /user
+    
+    Ver SIDs de usuarios → wmic useraccount get name,sid

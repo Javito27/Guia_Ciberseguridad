@@ -1,0 +1,78 @@
+Es una herramienta de ciberseguridad utilizada para analizar Active Directory y descubrir relaciones, permisos y posibles rutas de escalada de privilegios dentro de un dominio Windows.
+
+Se utiliza principalmente en auditorías de seguridad, pentesting y ejercicios Red Team.
+
+🔑 BloodHound permite identificar
+
+    · Qué usuarios pertenecen a determinados grupos.
+    · Qué equipos administra cada usuario.
+    · Quién tiene permisos sobre otros usuarios o equipos.
+    · Qué cuentas tienen privilegios elevados.
+    · Qué rutas podrían permitir llegar a Domain Admin.
+
+🛠️ Componentes que utiliza
+
+      Componente     Función
+    ------------------------------------------------------------------------------------------------------------------------------------
+      BloodHound  |  Interfaz para visualizar y analizar relaciones.
+      SharpHound  |  Recopila información de Active Directory en Windows.
+      AzureHound  |  Recopila información de entornos Microsoft Entra ID.
+      Neo4j       |  Base de datos de grafos utilizada para almacenar y consultar relaciones en determinadas versiones y despliegues.
+    ------------------------------------------------------------------------------------------------------------------------------------
+
+✨ BloodHound permite detectar posibles rutas relacionadas con:
+
+    · Kerberoasting: cuentas de servicio con SPN.
+    · AS-REP Roasting: usuarios sin preautenticación Kerberos.
+    · ACL Abuse: permisos excesivos o mal configurados.
+    · Lateral Movement: desplazamiento entre equipos.
+    · Privilege Escalation: escalada de privilegios.
+    · Domain Admin Paths: rutas que podrían conducir a privilegios de administrador del dominio.
+    
+    Importante: BloodHound identifica relaciones y posibles rutas de ataque; no significa que todas sean directamente explotables.
+
+🧪 Flujo de trabajo habitual
+
+    1️. Obtener acceso inicial a un equipo del dominio.
+    2️. Identificar el dominio y los usuarios.
+    3️. Ejecutar SharpHound para recopilar información.
+    4️. Importar los datos en BloodHound.
+    5️. Analizar las relaciones y permisos.
+    6️. Buscar posibles rutas de escalada de privilegios.
+    7️. Comprobar las rutas en el laboratorio autorizado.
+
+🚀 Instalación Neo4j y BloodHound (GUI)
+
+    1️⃣ Instalar el paquete
+
+        sudo apt update
+        sudo apt install -y bloodhound
+
+    2️⃣ Ejecutar la configuración incial 
+    
+            sudo bloodhound-setup
+
+        Se abrirá el navegador (http://localhost:7474) y solicitará que nos logemos la primera vez con neo4j:neo4j
+
+    3️⃣ Establecer una nueva contraseña de Neo4j
+
+        sudo nano /etc/bhapi/bhapi.json
+
+    4️⃣ Iniciar BloodHound 
+    
+        sudo bloodhound-start
+    
+    5️⃣ Iniciar sesión en la interfaz web
+    
+        http://localhost:8080/ui/login
+
+🔬 Opciones de uso principales de SharpHound
+
+      Opción           Descripción                                                  Ejemplo de Uso                    
+    -----------------------------------------------------------------------------------------------------------------
+      All           |  Recolecta todos los datos disponibles                     |  SharpHound.exe -c All           
+      Session       |  Recolecta sesiones activas de los usuarios                |  SharpHound.exe -c Session       
+      LocalAdmin    |  Usuarios con permisos de administrador local en máquinas  |  SharpHound.exe -c LocalAdmin    
+      Trusts        |  Recolecta relaciones de confianza entre dominios          |  SharpHound.exe -c Trusts        
+      ObjectProps   |  Recolecta permisos sobre objetos                          |  SharpHound.exe -c ObjectProps   
+    -----------------------------------------------------------------------------------------------------------------

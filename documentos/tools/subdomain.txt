@@ -1,0 +1,28 @@
+Subdomain Finder de C99 (también llamado C99 Subdomain Finder) es una herramienta en línea creada por el sitio c99.nl, usada para descubrir subdominios de un dominio principal.
+
+En términos simples: si tienes un dominio como example.com, esta herramienta busca y lista todos los subdominios relacionados, como:
+
+	> mail.example.com
+	> blog.example.com
+	> dev.example.com
+	> test.example.com
+
+¿Cómo funciona?
+
+	> Recolecta información desde motores de búsqueda, bases de datos públicas de DNS, APIs y registros históricos.
+
+	> Intenta encontrar subdominios ocultos o no indexados que normalmente no aparecen en un análisis rápido.
+
+Usos comunes
+
+	> Administradores de seguridad lo usan para auditorías (ver si hay servicios expuestos en la red).
+
+	> Pentesters y bug bounty hunters lo usan para encontrar puntos de entrada en una aplicación web.
+
+	> También puede servir para mapear infraestructura de una organización.
+
+Nota importante
+
+	> Aunque es una herramienta legítima de reconocimiento pasivo, puede usarse con fines maliciosos si alguien la emplea contra dominios ajenos sin permiso.
+
+	> Si es para seguridad propia, es totalmente válido y recomendable.

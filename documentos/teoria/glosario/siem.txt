@@ -1,0 +1,49 @@
+Es una plataforma que recopila, centraliza y analiza los registros (logs) de toda la infraestructura de una organización para detectar amenazas y facilitar la respuesta a incidentes.
+
+💡 Su función es: 
+
+    ➡️ Recolección de logs: 
+    
+        · Servidores
+        · Firewalls
+        · Routers
+        · Antivirus
+        · Aplicaciones
+        · Active Directory
+        · cloud
+        · Etc.
+    
+    ➡️ Normalización: 
+    
+        Covierte logs de formatos distintos a un formato común para poder compararlos.
+    
+    ➡️ Correlación: 
+    
+        Relaciona eventos aparentemente aislados. Por ejemplo: 
+        
+            50 intentos fallidos de login desde una IP, seguidos de un login correcto y una descarga masiva de datos → posible compromiso de cuenta.
+    
+    ➡️ Alertas: 
+    
+        Avisa cuando se cumple una regla o se detecta un comportamiento anómalo.
+   
+    ➡️ Dashboards e informes: 
+    
+        Visibilidad en tiempo real y reportes para auditorías (ISO 27001, PCI-DSS, RGPD...).
+    
+    ➡️ Retención y análisis forense: 
+    
+        Conservación de logs para investigar incidentes pasados.
+
+🛠️ Ejemplos de herramientas SIEM
+
+    · Splunk
+    · Microsoft Sentinel
+    · IBM QRadar
+    · Elastic Security (ELK)
+    · Wazuh (open source, muy usado para aprender)
+    · Graylog
+
+Es usado principalmente por el SOC (Security Operations Center). Los analistas revisan las alertas del SIEM, las clasifican (falso positivo o amenaza real) y escalan los incidentes.
+
+Es una herramienta defensiva, por lo que corresponde al Blue Team. 

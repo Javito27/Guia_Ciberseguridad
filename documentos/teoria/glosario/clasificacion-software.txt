@@ -1,0 +1,40 @@
+En informática y ciberseguridad, la clasificación de software es el proceso de categorizar programas o aplicaciones según su tipo, uso, nivel de riesgo o confiabilidad. Esta
+clasificación ayuda a organizaciones y usuarios a gestionar, controlar y proteger sus sistemas frente a posibles amenazas.
+
+¿Para qué sirve?
+
+	1. Seguridad:
+
+		> Permite identificar software que puede ser malicioso (virus, troyanos, spyware) frente a software confiable.
+		> Facilita políticas de control de acceso y permisos según la categoría del software.
+
+	2. Gestión de recursos:
+
+		> Ayuda a organizar y priorizar aplicaciones según su importancia o criticidad para la empresa.
+		> Evita instalar software innecesario que pueda consumir recursos o abrir vulnerabilidades.
+
+	3. Cumplimiento normativo:
+
+		> Algunas industrias requieren registrar y controlar qué software se usa, especialmente si maneja datos sensibles (por ejemplo, datos médicos o financieros).
+
+Tipos comunes de clasificación
+
+	1. Por función o uso:
+
+		> Productividad, diseño, comunicación, desarrollo, juegos, etc.
+
+	2. Por licencia:
+
+		> Software libre, propietario, shareware, freeware.
+
+	3. Por nivel de riesgo o seguridad:
+
+		> Confiable, sospechoso, malicioso, crítico.
+
+	4. Por criticidad o impacto:
+
+		> Software esencial para operaciones, software de soporte, software opcional.
+
+Ejemplo práctico en ciberseguridad:
+
+	Una empresa puede bloquear automáticamente la instalación de software no clasificado o sospechoso en sus computadoras para evitar malware o fugas de información.

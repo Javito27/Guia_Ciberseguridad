@@ -1,0 +1,72 @@
+Zphisher es una herramienta de phishing automatizado escrita en bash.
+
+Se utiliza en pentesting y red teaming (con fines educativos y de concienciación en seguridad) para simular ataques de phishing y así entrenar usuarios o probar defensas.
+
+Básicamente, genera páginas falsas (clonadas) de servicios populares (Facebook, Instagram, Gmail, Twitter, PayPal, Netflix, etc.) y te da un link público (mediante túneles como Ngrok, 
+Serveo o LocalXpose) para usarlos en pruebas.
+
+
+¿Para qué se usa en ciberseguridad?
+
+    > Concienciación: entrenar empleados contra ataques de phishing.
+    > Pentesting: simular campañas de phishing controladas en un test de intrusión.
+    > Educación: demostrar cómo funciona el robo de credenciales y enseñar medidas de prevención.
+
+    IMPORTANTE: Su uso en entornos reales contra personas/empresas sin consentimiento es ilegal. Solo se debe usar en entornos controlados y educativos.
+
+
+Opciones y características de Zphisher
+
+    Al ejecutarlo, te muestra un menú con las distintas opciones:
+    
+    Principales características
+    
+        > Más de 30 plantillas de phishing listas (redes sociales, correo, comercio electrónico, juegos, etc.).
+        
+        > Varios métodos de túnel para exponer el servidor local:
+        
+            - Ngrok
+            - Serveo
+            - Localhost.run
+            - LocalXpose (loclx)
+        
+        > Captura en tiempo real:
+        
+            - Dirección IP de la víctima
+            - User-Agent (navegador/sistema operativo)
+            - Credenciales introducidas
+
+
+Opciones de ejecución
+
+    Instalación (ejemplo en Linux/Kali): git clone https://github.com/htr-tech/zphisher.git
+
+    Al arrancar:
+
+        > Te mostrará un menú con servicios soportados (Facebook, Instagram, Google, Twitter, GitHub, PayPal, Netflix, etc.).
+        > Te pedirá elegir el método de túnel (Ngrok, Serveo, etc.).
+        > Luego te dará un link público que apunta a la página clonada.
+
+
+Ejemplo de uso
+
+    1. Iniciar Zphisher: bash zphisher.sh
+    
+    2. Seleccionar el servicio (ejemplo: 1 para Facebook).
+    
+    3. Seleccionar plantilla (ejemplo: "Facebook login default").
+    
+    4. Seleccionar método de túnel (ejemplo: Ngrok).
+    
+    5. Se genera un link tipo: https://abc123.ngrok.io
+    
+    6. Cuando la víctima entra y escribe credenciales, se registran en el terminal:
+    
+        [+] Username: victima@gmail.com
+        [+] Password: *********
+
+
+En resumen
+
+	Zphisher es una herramienta de simulación de phishing usada en ciberseguridad para pruebas de concienciación, entrenamientos y pentesting ético. Ofrece múltiples plantillas listas 
+	y túneles para facilitar la demostración.

@@ -1,0 +1,52 @@
+En informática y ciberseguridad, CMS significa Content Management System o Sistema de Gestión de Contenidos. Es una aplicación o plataforma que permite crear, editar, organizar y
+publicar contenido digital en sitios web sin necesidad de programar desde cero.
+
+¿Para qué sirve un CMS?
+
+	> Administrar sitios web de forma sencilla (blogs, tiendas online, portales de noticias, etc.).
+	> Separar contenido y diseño, lo que facilita que alguien sin conocimientos técnicos gestione textos, imágenes, menús y páginas.
+	> Colaboración, porque varios usuarios pueden trabajar con diferentes roles (administrador, editor, autor, etc.).
+	> Extensibilidad, ya que suelen tener plugins o módulos que agregan funciones (SEO, comercio electrónico, foros, etc.).
+
+CMS y Ciberseguridad
+
+	Los CMS (como WordPress, Joomla, Drupal, Magento) son muy populares, pero también objetivo frecuente de ataques. Los ciberdelincuentes aprovechan:
+
+		> Plugins o temas desactualizados con vulnerabilidades.
+		> Configuraciones inseguras (usuarios con demasiados permisos, contraseñas débiles).
+		> Errores en el servidor (bases de datos mal protegidas, falta de HTTPS).
+
+	Por eso, en ciberseguridad, cuando se habla de un CMS se suele enfocar en:
+
+		1. Mantenerlo actualizado (núcleo, plugins y temas).
+		2. Aplicar controles de acceso seguros (contraseñas fuertes, autenticación en dos pasos).
+		3. Monitorear y auditar para detectar intrusiones.
+		4. Reducir la superficie de ataque desactivando lo que no se use.
+
+En resumen: un CMS es una herramienta para gestionar contenidos web de forma ágil, pero en ciberseguridad se estudia porque puede ser un punto débil si no se protege correctamente.
+
+Los principales CMS y sus vulnerabilidades típicas
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| CMS       | Ventajas                                            | Desventajas                                                   | Vulnerabilidades Comunes                                         | Nivel de Riesgo (Seguridad) |
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| WordPress | Muy fácil de usar, enorme comunidad, miles de       | Muy atacado por su popularidad, plugins poco seguros.         | Plugins desactualizados, XSS, SQL Injection, fuerza bruta en     | Alto                        |
+|           | plugins/temas.                                      |                                                               | login.                                                           |                             |
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Joomla    | Flexible, buena gestión de usuarios y permisos.     | Curva de aprendizaje más alta, menos plugins que WordPress.   | Inyección SQL, XSS, errores de permisos.                         | Medio-Alto                  |
+|           |                                                     |                                                               |                                                                  |                             |
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Drupal    | Muy seguro, usado en gobiernos y empresas grandes,  | Más complejo de administrar, requiere conocimientos técnicos. | Inyecciones SQL, módulos vulnerables, fallos críticos como       | Medio                       |
+|           | altamente configurable.                             |                                                               | “Drupalgeddon”.                                                  |                             |
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Magento   | Muy potente para e-commerce, escalable, soporte     | Complejo de instalar y mantener, requiere servidor robusto.   | RCE, XSS, SQL Injection, robo de datos de tarjetas.              | Alto                        |
+|           | profesional.                                        |                                                               |                                                                  |                             |
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Typo3     | Robusto para sitios corporativos, buen manejo       | Comunidad más pequeña, menos extensiones que otros CMS.       | XSS, ejecución de código en extensiones inseguras.               | Medio-Alto                  |
+|           | multilingüe.                                        |                                                               |                                                                  |                             |
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Conclusión rápida:
+
+	> Más fáciles pero menos seguros: WordPress, Joomla.
+	> Más seguros pero complejos: Drupal, Typo3.
+	> Especializado y muy sensible: Magento (objetivo de ataques por manejar pagos).

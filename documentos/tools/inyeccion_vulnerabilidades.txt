@@ -1,0 +1,118 @@
+
+······················································································································································································
+·· sqlmap ············································································································································································	
+······················································································································································································				
+				
+> Detecta y explota vulnerabilidades de inyección SQL (SQL Injection) en aplicaciones web.
+> Python
+     |
+     |> Motores Data Bases soportados
+     |     |
+     |     |> MySQL
+     |     |> PostgreSQL
+     |     |> Oracle
+     |     |> Microsoft SQL Server
+     |     |> SQLite, entre otros
+     |	
+     |> Para que sirve	
+     |     |
+     |     |> Detectar vulnerabilidades de inyección SQL en parámetros HTTP (GET, POST, cookies, headers, etc.).
+     |     |
+     |     |> Extraer información de la base de datos, como:
+     |     |     |
+     |     |     |> Nombres de bases de datos
+     |     |     |> Tablas y columnas
+     |     |     |> Registros de usuario, contraseñas, correos, etc.
+     |     |	
+     |     |> Obtener acceso al sistema mediante funcionalidades como:
+     |     |     |
+     |     |     |> Lectura/escritura de archivos
+     |     |     |> Ejecución de comandos remotos (en algunos casos)
+     |     |	
+     |     |> Identificar tipo y versión del motor de base de datos
+     |     |	
+     |     |> Bypass de WAFs y filtros de seguridad
+     |		
+     |> Usos
+          |
+          |> SQL Injection > sqlmap -u <IP>
+          |> Abre una shell > sqlmap -u "http://<IP>/<RESOURCES>" --cookie=<COOKIE> --os-shell
+          |> Verifica si el usuario está actualmente > sqlmap -u "http://<IP>/<RESOURCES>" --cookie=<COOKIE> --current-user --is-dba
+	
+	
+······················································································································································································
+·· Tplmap ············································································································································································
+······················································································································································································	
+
+> Tplmap es una herramienta de código abierto utilizada para automatizar la detección y explotación de vulnerabilidades de Server-Side Template Injection (SSTI) — es 
+  decir, inyecciones de código en motores de plantillas del lado del servidor.
+     |	
+     |> ¿Qué es una SSTI?
+     |     |
+     |     |> Una vulnerabilidad SSTI (Server-Side Template Injection) ocurre cuando una aplicación web permite que un usuario inyecte entradas que se interpretan como 
+     |        expresiones en un motor de plantillas (como Jinja2, Twig, Velocity, Freemarker, etc.). Si no se valida adecuadamente la entrada del usuario, se pueden 
+     |        ejecutar comandos arbitrarios en el servidor.
+     |     
+     |	
+     |> ¿Qué hace Tplmap?
+     |     |
+     |     |> Tplmap automatiza el proceso de:
+     |           |
+     |           |> Detección del motor de plantillas usado por el servidor (por ejemplo, Jinja2, Mako, Tornado, etc.).
+     |           |> Ejecución de pruebas de inyección de código en campos vulnerables.
+     |           |> Ejecución de comandos remotos (RCE) si se encuentra una vulnerabilidad.
+     |           |> Obtención de una shell inversa o lectura de archivos del sistema.
+     |	
+     |	
+     |> Características clave
+     |     |
+     |     |> Compatible con múltiples motores de plantillas: Jinja2, Tornado, Mako, Django, Twig, etc.
+     |     |
+     |     |> Soporta inyección a través de:
+     |     |     |
+     |     |     |> Parámetros GET/POST
+     |     |     |> Cabeceras HTTP
+     |     |     |> Cookies
+     |     | 
+     |     |> Puede obtener una shell interactiva basada en SSTI.
+     |     |
+     |     |> Implementa varios payloads específicos para cada motor.
+     |	
+     |	
+     |> Ejemplo de uso básico
+           |     |
+           |     |> tplmap -u "http://example.com/page?name=John"
+           |
+           |> Tplmap probará si el parámetro name es vulnerable a SSTI y mostrará opciones si encuentra una vulnerabilidad.
+
+	
+······················································································································································································
+·· gtfobins/vi ·······································································································································································	
+······················································································································································································		
+
+> Repositorio colaborativo que documenta cómo ciertas herramientas del sistema Unix pueden ser utilizadas para escalar privilegios, 
+  ejecutar comandos, eludir restricciones o mantener el acceso en sistemas con configuraciones inseguras.
+     |
+     |> Shell 
+     |     |
+     |     |> vi -c ':!/bin/sh' /dev/null
+     |     |
+     |     |> vi
+     |        :set shell=/bin/sh
+     |        :shell
+     |
+     |> File write 
+     |     |
+     |     |> vi file_to_write
+     |        iDATA
+     |        ^[
+     |        w
+     |
+     |> File read
+     |     |
+     |     |> vi file_to_read
+     |
+     |> Sudo 
+           |
+           |> sudo vi -c ':!/bin/sh' /dev/null
+     
